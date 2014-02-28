@@ -9,6 +9,9 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="row">
     <div class="col-md-12">
+        <p>You're logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
+
+        @Html.Partial("_ChangeEmailPartial")
         @if (ViewBag.HasLocalPassword)
         {
             @Html.Partial("_ChangePasswordPartial")

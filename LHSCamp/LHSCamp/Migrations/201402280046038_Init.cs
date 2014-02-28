@@ -35,7 +35,7 @@ namespace LHSCamp.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         UserName = c.String(nullable: false),
-                        Email = c.String(),
+                        Email = c.String(nullable: true),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
                         IsConfirmed = c.Boolean(nullable: false),

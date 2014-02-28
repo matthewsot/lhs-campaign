@@ -56,7 +56,7 @@ namespace LHSCamp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -89,7 +89,7 @@ namespace LHSCamp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = model.Email, Email = model.Email };
+                var user = new User() { UserName = model.UserName, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -152,7 +152,7 @@ namespace LHSCamp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsConfirmedAsync(user.Id)))
                 {
                     ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
@@ -200,7 +200,7 @@ namespace LHSCamp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByNameAsync(model.UserName);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "No user found.");
@@ -253,8 +253,10 @@ namespace LHSCamp.Controllers
 
         //
         // GET: /Account/Manage
-        public ActionResult Manage(ManageMessageId? message)
+        public async Task<ActionResult> Manage(ManageMessageId? message)
         {
+            var model = new ManageUserViewModel();
+            model.Email = await UserManager.GetEmailAsync(User.Identity.GetUserId());
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -263,9 +265,26 @@ namespace LHSCamp.Controllers
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            return View(model);
         }
-
+        
+        //
+        // POST: /Account/Manage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ModifyEmail(ChangeEmailViewModel model)
+        {
+            IdentityResult result = await UserManager.SetEmailAsync(User.Identity.GetUserId(), model.Email);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Manage", new { Message = "Email set successfully!" });
+            }
+            else
+            {
+                AddErrors(result);
+            }
+            return RedirectToAction("Manage");
+        }
         //
         // POST: /Account/Manage
         [HttpPost]
@@ -353,7 +372,7 @@ namespace LHSCamp.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName, Email = loginInfo.Email });
             }
         }
 
@@ -404,7 +423,7 @@ namespace LHSCamp.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User() { UserName = model.Email, Email = model.Email };
+                var user = new User() { UserName = model.UserName, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

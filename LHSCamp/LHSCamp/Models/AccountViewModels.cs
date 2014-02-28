@@ -5,13 +5,25 @@ namespace LHSCamp.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [EmailAddress]
+        [Display(Name = "Email (optional)")]
+        public string Email { get; set; }
+    }
+    public class ChangeEmailViewModel
+    {
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
-
     public class ManageUserViewModel
     {
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
@@ -32,9 +44,8 @@ namespace LHSCamp.Models
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -48,8 +59,11 @@ namespace LHSCamp.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email (optional)")]
         public string Email { get; set; }
 
         [Required]
@@ -67,9 +81,8 @@ namespace LHSCamp.Models
     public class ResetPasswordViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
