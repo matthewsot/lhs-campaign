@@ -163,32 +163,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402280046038_Init.cs" />
+    <Compile Include="Migrations\201402280046038_Init.Designer.cs">
+      <DependentUpon>201402280046038_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Styles\Bootstrap\bootstrap.css" />
+    <Content Include="Content\Styles\Bootstrap\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Content\Scripts\Bootstrap\bootstrap.js" />
+    <Content Include="Content\Scripts\Bootstrap\bootstrap.min.js" />
+    <None Include="Content\Scripts\jQuery\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\Scripts\jQuery\jquery-1.10.2.js" />
+    <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.js" />
+    <None Include="Content\Scripts\jQuery\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jQuery\jquery.validate.js" />
+    <Content Include="Content\Scripts\jQuery\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\Modernizr\modernizr-2.6.2.js" />
+    <Content Include="Content\Scripts\Bootstrap\respond.js" />
+    <Content Include="Content\Scripts\Bootstrap\respond.min.js" />
+    <Content Include="Content\Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -203,7 +208,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
@@ -221,12 +226,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
+      <DependentUpon>201402280046038_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
