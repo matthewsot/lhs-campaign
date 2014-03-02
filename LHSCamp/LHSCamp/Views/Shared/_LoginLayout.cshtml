@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/Fonts/Quickly/Quickly-font.css")
+    @Styles.Render("~/Content/Fonts/Railway/Railway-font.css")
+    @Styles.Render("~/Content/Styles/Site/shared.less")
+    @Styles.Render("~/Content/Styles/Site/Login/shared.less")
+
+    @RenderSection("Styles", false);
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace LHSCamp.Controllers
 {
-    public class HomeController : Controller
+    public class DefaultController : Controller
     {
         public ActionResult Index()
         {

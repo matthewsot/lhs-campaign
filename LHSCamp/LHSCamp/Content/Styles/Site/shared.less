@@ -1,0 +1,28 @@
+﻿.row {
+    position:relative;
+    width:80%;
+    padding-left:10%;
+    padding-right:10%;
+    text-align:center;
+}
+
+.half-vert {
+    /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
+    top:50%;
+    /* but ewe. should use prefix-free */
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.half-horiz {
+    left:50%;
+    /* but ewe. should use prefix-free */
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}

@@ -1,0 +1,35 @@
+.blue {
+  background-color: #44a0c8;
+  color: #fff;
+}
+.white {
+  background-color: #fff;
+  color: #44a0c8;
+}
+.small-font {
+  font-size: 20px;
+}
+.medium-font {
+  font-size: 25px;
+}
+.large-font {
+  font-size: 40px;
+}
+.default-btn,
+.blue-btn {
+  background-color: #44a0c8;
+  color: #fff;
+  width: 250px;
+  height: 50px;
+  font-size: 25px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+}
+.default-btn:hover {
+  background-color: #fff;
+  color: #44a0c8;
+  border-radius: 5px;
+}
+.link {
+  cursor: pointer;
+}

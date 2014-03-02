@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -159,7 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,6 +177,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.svg" />
+    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.svg" />
+    <Content Include="Content\Fonts\Quickly\Quickly-font.css" />
+    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.svg" />
+    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.svg" />
+    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.svg" />
+    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.svg" />
+    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-bold-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-extrabold-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-extralight-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\Railway-font.css" />
+    <Content Include="Content\Fonts\Railway\railway-heavy-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-light-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-medium-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-regular-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-semibold-webfont.svg" />
+    <Content Include="Content\Fonts\Railway\railway-thin-webfont.svg" />
     <Content Include="Content\Styles\Bootstrap\bootstrap.css" />
     <Content Include="Content\Styles\Bootstrap\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -182,6 +203,54 @@
     <Content Include="Content\Styles\Site.css" />
     <Content Include="Content\Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Content\Scripts\Bootstrap\bootstrap.min.js" />
+    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.woff" />
+    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.woff" />
+    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.woff" />
+    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.woff" />
+    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.woff" />
+    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.woff" />
+    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.eot" />
+    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.ttf" />
+    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-bold-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-bold-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-bold-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-extrabold-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-extrabold-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-extrabold-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-extralight-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-extralight-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-extralight-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-heavy-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-heavy-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-heavy-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-light-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-light-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-light-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-medium-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-medium-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-medium-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-regular-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-regular-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-regular-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-semibold-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-semibold-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-semibold-webfont.woff" />
+    <Content Include="Content\Fonts\Railway\railway-thin-webfont.eot" />
+    <Content Include="Content\Fonts\Railway\railway-thin-webfont.ttf" />
+    <Content Include="Content\Fonts\Railway\railway-thin-webfont.woff" />
     <None Include="Content\Scripts\jQuery\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.js" />
@@ -204,10 +273,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\Default\About.cshtml" />
+    <Content Include="Views\Default\Contact.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -225,6 +294,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\_ChangeEmailPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
@@ -236,6 +306,8 @@
     <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Content\Styles\Site\lib.less" />
+    <Content Include="Content\Styles\Site\Login\shared.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@section Styles {
+    @Styles.Render("~/Content/Styles/Site/Login/index.less")
+}
+<div class="blue row medium-font railway" style="margin-top:100px;">
+    <div class="logo-span large-font"><b>lhs</b>|campaign</div>
+    <span style="font-size:20px;">taking the pain out of campaign</span>
+    <br /><br />
+    <button class="default-btn blue-btn link" style="margin-right:5px;">sign up</button>
+    <button class="default-btn blue-btn link" style="margin-left:5px;">login</button>
+    <br />
+    <p>
+        LHS Campaign allows you to mash together two (or more) campaign photos in a matter of seconds to support multiple candidates.
+    </p>
+    <p style="margin-bottom:0px;">
+        Centralizing all campaign facebook events and information platforms about officer candidates (Submitted by themselves) in a single location, LHS Campaign
+        <br />
+        <b>takes the pain out of campaign</b>
+    </p>
+    <img src="~/Content/Images/Default/laptop.png" style="height:400px;margin-top:0px;" />
+</div>
+
+<div class="white row medium-font railway" style="padding-bottom:50px;">
+    <div class="info-box" style="position:absolute;left:10%;top:0px;">
+        <h2>Setup.</h2>
+        <div class="blue info-bubble">
+            <img src="~/Content/Images/Default/Bubbles/gear.png" alt="Gear" />
+        </div>
+        <p class="railway-light small-font">
+            Whether you're a candidate or voter, signing and setting up with LHS Campaign is easy and quick.
+        </p>
+    </div>
+
+    <div class="info-box half-horiz" style="position:absolute;top:0px;">
+        <h2>Mash.</h2>
+        <div class="blue info-bubble">
+            <img src="~/Content/Images/Default/Bubbles/check.png" alt="Gear" />
+        </div>
+        <p class="railway-light small-font">
+            Select all the candidates you want to support, click a button, organize the pictures, and you have a picture ready to support.
+        </p>
+    </div>
+
+    <div class="info-box" style="position:absolute;right:10%;top:0px;">
+        <h2>Post.</h2>
+        <div class="blue info-bubble">
+            <img src="~/Content/Images/Default/Bubbles/facebook.png" alt="Gear" />
+        </div>
+        <p class="railway-light small-font">
+            Once you've downloaded the picture to your computer, simply set it as your profile picture and you're done.
+        </p>
+    </div>
+    <!-- Spacing -->
+    <div style="display:block;width:90%;height:550px;"><!--Hey, I do what works ;)--></div>
+    <!-- Second Row -->
+    <div class="info-box" style="display:inline-block;margin-right:350px;">
+        <h2>Read.</h2>
+        <div class="blue info-bubble">
+            <img src="~/Content/Images/Default/Bubbles/document.png" alt="Gear" />
+        </div>
+        <p class="railway-light small-font">
+            Don't know much about the candidates? You can read up each of their descriptions and campaigning summaries. Find out who's the right candidate for you!
+        </p>
+    </div>
+    <div class="info-box half-horiz" style="display:inline-block;position:absolute;padding-left:300px;">
+        <h2>Yours truly.</h2>
+        <div class="blue info-bubble">
+            <img src="~/Content/Images/Default/Bubbles/ribbon.png" alt="Ribbon" />
+        </div>
+        <p class="railway-bold small-font">
+            LHS Campaign is a small side project started by Matthew Sotoudeh, Adhiv Dhar, and William Shan. We hope you enjoy it!
+        </p>
+    </div>
+</div>
+
+<div class="blue row medium-font railway" style="padding-bottom:200px;padding-top:50px;">
+    <button class="default-btn blue-btn link" style="margin-right:5px;">sign up</button>
+    <button class="default-btn blue-btn link" style="margin-left:5px;">login</button>
+</div>

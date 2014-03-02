@@ -1,0 +1,50 @@
+﻿@blue-color: #44A0C8;
+@small-font:20px;
+@medium-font: 25px;
+@large-font: 40px;
+.blue {
+    background-color:@blue-color;
+    color:#fff;
+}
+
+.white {
+    background-color:#fff;
+    color:@blue-color;
+}
+
+.small-font {
+    font-size:@small-font;
+}
+
+.medium-font {
+    font-size:@medium-font;
+}
+
+.large-font {
+    font-size:@large-font;
+}
+
+.default-btn, .blue-btn {
+    background-color:@blue-color;
+    color:#fff;
+    width:250px;
+    height:50px;
+    font-size:@medium-font;
+    border:2px solid #fff;
+    border-radius:5px;
+}
+    .default-btn:hover {
+        background-color:#fff;
+        color:@blue-color;
+        border-radius:5px;
+    }
+
+.link {
+    cursor:pointer;
+}
+
+.circle(@size) {
+    height:@size;
+    width:@size;
+    border-radius:@size / 2;
+}
