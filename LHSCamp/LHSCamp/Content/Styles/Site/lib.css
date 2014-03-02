@@ -30,6 +30,13 @@
   color: #44a0c8;
   border-radius: 5px;
 }
+.default-input {
+  background-color: #44a0c8;
+  color: #fff;
+  border: 1px solid #fff;
+  width: 100%;
+  font-size: 25px;
+}
 .link {
   cursor: pointer;
 }

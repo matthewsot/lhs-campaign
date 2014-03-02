@@ -1,46 +1,51 @@
 ﻿@model LHSCamp.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
+<div class="blue medium-font railway" style="margin-top:100px;text-align:center;">
+    <div class="logo-span large-font"><b>lhs</b>|campaign</div>
+    <span style="font-size:20px;">taking the pain out of campaign</span>
+    <br /><br />
+    <div id="login-container" style="height:450px;">
+        <div id="local-login" style="position:absolute;left:0px;width:30%;padding-left:20px;">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <span class="large-font">Use a Password</span>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
 
-<h2>@ViewBag.Title.</h2>
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                <br />
+                @Html.TextBoxFor(m => m.UserName, new { @class = "default-input" })
+                <br />
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <br />
+                @Html.TextBoxFor(m => m.Email, new { @class = "default-input" })
+                <br />
+
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <br />
+                @Html.PasswordFor(m => m.Password, new { @class = "default-input" })
+                <br />
+
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                <br />
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "default-input" })
+                <br /><br />
+
+                <input type="submit" class="default-btn" style="cursor: pointer;" value="Register" />
+            }
+        </div>
+        <div id="extern-login" style="position:absolute;right:0px;width:60%;padding-right:20px;">
+            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+    <br />
+    <h2 class="medium-font">Already have an account?</h2>
+    <button class="default-btn blue-btn link" href="~/Account/Login">log in</button>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

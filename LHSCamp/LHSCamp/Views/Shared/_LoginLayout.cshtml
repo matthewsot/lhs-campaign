@@ -13,6 +13,7 @@
 </head>
 <body>
     @RenderBody()
+    @RenderSection("Scripts", false)
     <script type="text/javascript">
         $(".link").click(function () {
             window.location.href = $(this).attr("href");
