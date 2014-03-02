@@ -9,7 +9,12 @@
 <div class="blue row medium-font" style="margin-top:100px;">
     <div class="logo-span large-font"><b>lhs</b>|campaign</div>
     <br />
-    <div id="local-login" style="border-top:2px solid #fff;">
+    <form action="~/Account/Login" method="POST" id="login-form" style="display:none;">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="UserName" value="" id="login-usernm" />
+        <input type="hidden" name="Password" value="" id="login-pass" />
+    </form>
+    <div id="local-register" style="border-top:2px solid #fff;">
         <br />
         <span class="large-font railway-bold">signup</span>
         <div id="page-1">
@@ -18,21 +23,81 @@
             <button class="default-btn register-link" page="2" style="margin-right:5px;margin-top:20px;">voter</button>
             <button class="default-btn register-link" page="3" style="margin-left:5px;margin-top:20px;">candidate</button>
         </div>
-        <div id="page-2" class="register-page" style="display:block;">
+        <div id="page-2" class="register-page">
+            <input type="text" class="default-input standard-input" placeholder="username" id="voter-username" />
+            <br />
+            <input type="password" class="default-input standard-input" placeholder="password" id="voter-pass" />
+            <br />
+            <input type="password" class="default-input standard-input" placeholder="confirm password" id="voter-pass-conf" />
+            <br />
+            <input type="email" class="default-input standard-input" placeholder="email (optional)" id="voter-email" />
+            <br />
+            <!-- Meh. I'll fix this weird width stuff later -->
+            <button class="default-btn standard-btn voter-year-picker" val="2016" style="width:164px;">2016</button>
+            <button class="default-btn standard-btn voter-year-picker sel-btn" val="2017" style="width:164px;">2017</button>
+            <br />
+            <button class="default-btn standard-btn" id="voter-register" style="width:333px;margin-top:20px;">sign up</button>
+            <script type="text/javascript">
+                $(".voter-year-picker").click(function () {
+                    $(".voter-year-picker").removeClass("sel-btn");
+                    $(this).addClass("sel-btn");
+                });
+
+                $("#voter-register").click(function () {
+                    var username = $("#voter-username").val();
+                    var pass = $("#voter-pass").val();
+                    var conf = $("#voter-pass-conf").val();
+                    var email = $("#voter-email").val();
+                    var year = 2017;
+                    $(".voter-year-picker").each(function (index, value) {
+                        if ($(this).hasClass("sel-btn")) {
+                            year = parseInt($(this).text());
+                        }
+                    });
+                    //Someday I'll figure out jqueryval, for now I'll just do this
+                    if (pass != conf)
+                        alert("Passwords don't match!");
+                    else {
+                        $.post("/API/Account/Register", {
+                            "Username": username,
+                            "Password": pass,
+                            "Email": email,
+                            "Year": year
+                        }, function (data) {
+                            if (data.indexOf("GOOD") != -1) {
+                                $("#login-form").show();
+                                $("#login-usernm").val(username);
+                                $("#login-pass").val(pass);
+                                $("#login-form").submit();
+                            }
+                        });
+                    }
+                });
+            </script>
+        </div>
+        <div id="page-3" class="register-page">
+            <!-- So this is a copy/paste job. TODO: Don't make it a copy/paste job ;) -->
             <input type="text" class="default-input standard-input" placeholder="username" />
             <br />
             <input type="password" class="default-input standard-input" placeholder="password" />
             <br />
             <input type="email" class="default-input standard-input" placeholder="email (optional)" />
             <br />
-            <button class="default-btn standard-btn year-picker" style="width:165px;">2016</button>
-            <button class="default-btn standard-btn year-picker" style="width:165px;">2017</button>
-            <script type="text/javascript"></script>
+            <!-- Meh. I'll fix this weird width stuff later -->
+            <button class="default-btn standard-btn year-picker" val="2016" style="width:164px;">2016</button>
+            <button class="default-btn standard-btn year-picker sel-btn" val="2017" style="width:164px;">2017</button>
             <br />
-            <button class="default-btn standard-btn" style="width:333px;margin-top:20px;">sign up</button>
-        </div>
-        <div id="page-3" class="register-page">
-            CANDIDATE
+            <button class="default-btn standard-btn" id="voter-register" style="width:333px;margin-top:20px;">sign up</button>
+            <script type="text/javascript">
+                $(".year-picker").click(function () {
+                    $(".year-picker").removeClass("sel-btn");
+                    $(this).addClass("sel-btn");
+                });
+
+                $("#voter-register").click(function () {
+
+                });
+            </script>
         </div>
         <script type="text/javascript">
             $(".register-link").click(function () {
@@ -68,8 +133,4 @@
                 <input type="submit" class="default-btn" style="cursor: pointer;" value="Register" />
             }*@
     </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
 </div>

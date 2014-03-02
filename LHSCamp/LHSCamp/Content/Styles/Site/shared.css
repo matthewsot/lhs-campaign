@@ -57,6 +57,14 @@ html {
   color: #44a0c8;
   border-radius: 5px;
 }
+.white-btn {
+  background-color: #fff;
+  color: #44a0c8;
+}
+.white-btn:hover {
+  background-color: #44a0c8;
+  color: #fff;
+}
 .default-input {
   background-color: #44a0c8;
   color: #fff;
