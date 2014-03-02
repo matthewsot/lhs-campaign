@@ -1,11 +1,9 @@
-﻿.row {
-    position:relative;
-    width:80%;
-    padding-left:10%;
-    padding-right:10%;
-    text-align:center;
+﻿@import "lib.less";
+body, html {
+    width:100%;
+    margin:0px;
+    font-family:'Railway';
 }
-
 .half-vert {
     /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
     top:50%;
@@ -25,4 +23,65 @@
     -o-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
+}
+
+
+.blue {
+    background-color:@blue-color;
+    color:#fff;
+}
+
+.white {
+    background-color:#fff;
+    color:@blue-color;
+}
+
+.small-font {
+    font-size:@small-font;
+}
+
+.medium-font {
+    font-size:@medium-font;
+}
+
+.large-font {
+    font-size:@large-font;
+}
+
+.default-btn, .blue-btn {
+    background-color:@blue-color;
+    color:#fff;
+    width:250px;
+    height:50px;
+    font-size:@medium-font;
+    border:2px solid #fff;
+    border-radius:5px;
+    cursor:pointer;
+    font-family:'Railway-light';
+}
+    .default-btn:hover {
+        background-color:#fff;
+        color:@blue-color;
+        border-radius:5px;
+    }
+
+.default-input {
+    background-color:@blue-color;
+    color:#fff;
+    border: 2px solid #fff;
+    border-radius:5px;
+    width:250px;
+    height:40px;
+    .medium-font;
+}
+
+.standard-input {
+    width:325px;
+    font-family:'Railway-light';
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.link {
+    cursor:pointer;
 }

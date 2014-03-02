@@ -2,50 +2,44 @@
 
 @{
     ViewBag.Title = "Log in";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = "~/Views/Shared/_HeroLayout.cshtml";
 }
-<div class="blue medium-font railway" style="margin-top:100px;text-align:center;">
+
+@section Styles {
+    @Styles.Render("~/Content/Styles/Site/Login/login.less")
+}
+
+<div class="blue row medium-font" style="margin-top:100px;">
     <div class="logo-span large-font"><b>lhs</b>|campaign</div>
-    <span style="font-size:20px;">taking the pain out of campaign</span>
-    <br /><br />
-    <div id="login-container" style="height:300px;">
-        <div id="local-login" style="position:absolute;left:0px;width:30%;padding-left:20px;">
-            <span class="large-font">Login</span>
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { style = "list-style-type:none;" })
-                <br />
+    <br/>
+    <div id="local-login" style="border-top:2px solid #fff;">
+        <br/>
+        <span class="large-font railway-bold">login</span>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { style = "list-style-type:none;" })
+            <br />
 
-                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                <br />
-                @Html.TextBoxFor(m => m.UserName, new { @class = "default-input" })
-                <br />
-                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.UserName, new { @class = "default-input form-group standard-input", placeholder = "username" })
+            <br />
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            @Html.PasswordFor(m => m.Password, new { @class = "default-input form-group standard-input", placeholder = "password" })
+            <br />
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <br />
-                @Html.PasswordFor(m => m.Password, new { @class = "default-input" })
-                <br />
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-                <br/>
-                <br />
-                <input type="submit" value="log in" class="default-btn blue-btn" style="cursor:pointer;" />
-                @* Enable this once you have account confirmation enabled for password reset functionality
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+            <br />
+            <input type="submit" value="log in" class="default-btn blue-btn" style="cursor:pointer;margin-top:10px;" />
+            @* Enable this once you have account confirmation enabled for password reset functionality
                 <p>
                     @Html.ActionLink("Forgot your password?", "ForgotPassword")
                 </p>*@
-            }
-        </div>
-        <div id="extern-login" style="position:absolute;right:0px;width:60%;padding-right:20px;">
-            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
-        </div>
+        }
     </div>
-    <h2 class="medium-font">Don't have an account?</h2>
-    <button class="default-btn blue-btn link" href="~/Account/Register">sign up</button>
+    <br/><br/>
+    <span class="small-font">Don't have an account? <a href="~/Account/Register" class="blue" style="text-decoration:none;">Sign up.</a></span>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }

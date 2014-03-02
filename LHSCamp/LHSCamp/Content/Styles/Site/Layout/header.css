@@ -1,3 +1,9 @@
+body,
+html {
+  width: 100%;
+  margin: 0px;
+  font-family: 'Railway';
+}
 .half-vert {
   /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
   top: 50%;
@@ -43,6 +49,7 @@
   font-size: 25px;
   border: 2px solid #fff;
   border-radius: 5px;
+  cursor: pointer;
 }
 .default-btn:hover {
   background-color: #fff;
@@ -53,31 +60,28 @@
   background-color: #44a0c8;
   color: #fff;
   border: 1px solid #fff;
+  border-radius: 5px;
   width: 100%;
   font-size: 25px;
 }
 .link {
   cursor: pointer;
 }
-.info-box {
-  display: block;
-  width: 250px;
+#header {
+  height: 75px;
+  text-align: left;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  line-height: 75px;
+  background-color: #44a0c8;
+  color: #fff;
+}
+#content {
+  background-color: #fff;
+  color: #44a0c8;
+  margin-top: 75px;
   text-align: center;
-}
-div.info-bubble {
-  height: 250px;
-  width: 250px;
-  border-radius: 125px;
-}
-.info-bubble img {
-  width: 125px;
-  position: relative;
-  /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
-  top: 50%;
-  /* but ewe. should use prefix-free */
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  font-size: 25px;
 }

@@ -195,6 +195,12 @@
     <Content Include="Content\Fonts\Railway\railway-regular-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-semibold-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-thin-webfont.svg" />
+    <Content Include="Content\Images\Default\Bubbles\check.png" />
+    <Content Include="Content\Images\Default\Bubbles\document.png" />
+    <Content Include="Content\Images\Default\Bubbles\facebook.png" />
+    <Content Include="Content\Images\Default\Bubbles\gear.png" />
+    <Content Include="Content\Images\Default\Bubbles\ribbon.png" />
+    <Content Include="Content\Images\Default\laptop.png" />
     <Content Include="Content\Styles\Bootstrap\bootstrap.css" />
     <Content Include="Content\Styles\Bootstrap\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -274,8 +280,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
-    <Content Include="Views\Default\About.cshtml" />
-    <Content Include="Views\Default\Contact.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
@@ -294,7 +298,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\_ChangeEmailPartial.cshtml" />
-    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_HeroLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
@@ -307,9 +311,14 @@
     <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Content\Styles\Site\lib.less" />
-    <Content Include="Content\Styles\Site\Login\shared.less" />
+    <Content Include="Content\Styles\Site\Hero\hero.less" />
+    <Content Include="Content\Styles\Site\Login\index.less" />
+    <Content Include="Content\Styles\Site\shared.less" />
+    <Content Include="Content\Styles\Site\Layout\header.less" />
+    <Content Include="Content\Styles\Site\Layout\footer.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
