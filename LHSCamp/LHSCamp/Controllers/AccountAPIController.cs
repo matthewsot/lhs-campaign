@@ -41,7 +41,7 @@ namespace LHSCamp.Controllers
                     return Ok(string.Join(",", Errors) + ",");
 
                 var user = new User() { UserName = model.Username, Email = model.Email, Position = model.Position };
-                user.IsCandidate = (model.Position != null);
+                user.IsCandidate = (!string.IsNullOrWhiteSpace(model.Position));
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

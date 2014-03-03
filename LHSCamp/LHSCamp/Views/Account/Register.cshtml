@@ -6,7 +6,7 @@
 @section Styles {
     @Styles.Render("~/Content/Styles/Site/Login/register.less")
 }
-<div class="blue row medium-font" style="margin-top:100px;">
+<div class="blue row medium-font" style="margin-top:100px;margin-bottom:100px;">
     <div class="logo-span large-font"><b>lhs</b>|campaign</div>
     <br />
     <form action="~/Account/Login" method="POST" id="login-form" style="display:none;">
@@ -17,120 +17,91 @@
     <div id="local-register" style="border-top:2px solid #fff;">
         <br />
         <span class="large-font railway-bold">signup</span>
-        <div id="page-1">
-            <span class="railway-light" style="margin-top:20px;">This campaign season, which are you?</span>
-            <br />
-            <button class="default-btn register-link" page="2" style="margin-right:5px;margin-top:20px;">voter</button>
-            <button class="default-btn register-link" page="3" style="margin-left:5px;margin-top:20px;">candidate</button>
-        </div>
-        <div id="page-2" class="register-page">
-            <input type="text" class="default-input standard-input" placeholder="username" id="voter-username" />
-            <br />
-            <input type="password" class="default-input standard-input" placeholder="password" id="voter-pass" />
-            <br />
-            <input type="password" class="default-input standard-input" placeholder="confirm password" id="voter-pass-conf" />
-            <br />
-            <input type="email" class="default-input standard-input" placeholder="email (optional)" id="voter-email" />
-            <br />
-            <!-- Meh. I'll fix this weird width stuff later -->
-            <button class="default-btn standard-btn voter-year-picker" val="2016" style="width:164px;">2016</button>
-            <button class="default-btn standard-btn voter-year-picker sel-btn" val="2017" style="width:164px;">2017</button>
-            <br />
-            <button class="default-btn standard-btn" id="voter-register" style="width:333px;margin-top:20px;">sign up</button>
-            <script type="text/javascript">
-                $(".voter-year-picker").click(function () {
-                    $(".voter-year-picker").removeClass("sel-btn");
-                    $(this).addClass("sel-btn");
-                });
-
-                $("#voter-register").click(function () {
-                    var username = $("#voter-username").val();
-                    var pass = $("#voter-pass").val();
-                    var conf = $("#voter-pass-conf").val();
-                    var email = $("#voter-email").val();
-                    var year = 2017;
-                    $(".voter-year-picker").each(function (index, value) {
-                        if ($(this).hasClass("sel-btn")) {
-                            year = parseInt($(this).text());
-                        }
-                    });
-                    //Someday I'll figure out jqueryval, for now I'll just do this
-                    if (pass != conf)
-                        alert("Passwords don't match!");
-                    else {
-                        $.post("/API/Account/Register", {
-                            "Username": username,
-                            "Password": pass,
-                            "Email": email,
-                            "Year": year
-                        }, function (data) {
-                            if (data.indexOf("GOOD") != -1) {
-                                $("#login-form").show();
-                                $("#login-usernm").val(username);
-                                $("#login-pass").val(pass);
-                                $("#login-form").submit();
-                            }
-                        });
-                    }
-                });
-            </script>
-        </div>
-        <div id="page-3" class="register-page">
-            <!-- So this is a copy/paste job. TODO: Don't make it a copy/paste job ;) -->
-            <input type="text" class="default-input standard-input" placeholder="username" />
-            <br />
-            <input type="password" class="default-input standard-input" placeholder="password" />
-            <br />
-            <input type="email" class="default-input standard-input" placeholder="email (optional)" />
-            <br />
-            <!-- Meh. I'll fix this weird width stuff later -->
-            <button class="default-btn standard-btn year-picker" val="2016" style="width:164px;">2016</button>
-            <button class="default-btn standard-btn year-picker sel-btn" val="2017" style="width:164px;">2017</button>
-            <br />
-            <button class="default-btn standard-btn" id="voter-register" style="width:333px;margin-top:20px;">sign up</button>
-            <script type="text/javascript">
-                $(".year-picker").click(function () {
-                    $(".year-picker").removeClass("sel-btn");
-                    $(this).addClass("sel-btn");
-                });
-
-                $("#voter-register").click(function () {
-
-                });
-            </script>
-        </div>
+        <br />
+        <span class="railway-light" style="margin-top:20px;">This campaign season, which are you?</span>
+        <br />
+        <button class="default-btn register-link sel-btn" style="margin-right:5px;margin-top:20px;">voter</button>
+        <button class="default-btn register-link" style="margin-left:5px;margin-top:20px;">candidate</button>
         <script type="text/javascript">
+            var isCand = false;
             $(".register-link").click(function () {
-                $("#page-" + $(this).attr("page")).fadeIn();
+                $(".register-link").removeClass("sel-btn");
+                $(this).addClass("sel-btn");
+                if ($(this).text() == "voter") {
+                    isCand = false;
+                    $(".cand-only").fadeOut();
+                }
+                else {
+                    isCand = true;
+                    $(".cand-only").fadeIn();
+                }
             });
         </script>
-        @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <span class="large-font">Use a Password</span>
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-
-                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                <br />
-                @Html.TextBoxFor(m => m.UserName, new { @class = "default-input form-group" })
-                <br />
-
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <br />
-                @Html.TextBoxFor(m => m.Email, new { @class = "default-input form-group" })
-                <br />
-
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <br />
-                @Html.PasswordFor(m => m.Password, new { @class = "default-input form-group" })
-                <br />
-
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                <br />
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "default-input form-group" })
-                <br /><br />
-
-                <input type="submit" class="default-btn" style="cursor: pointer;" value="Register" />
-            }*@
+        <br/>
+        <input type="text" class="default-input standard-input" placeholder="username" id="voter-username" style="margin-top:20px;" />
+        <br />
+        <input type="password" class="default-input standard-input" placeholder="password" id="voter-pass" />
+        <br />
+        <input type="password" class="default-input standard-input" placeholder="confirm password" id="voter-pass-conf" />
+        <br />
+        <input type="email" class="default-input standard-input" placeholder="email (optional)" id="voter-email" />
+        <br />
+        <!-- Meh. I'll fix this weird width stuff later -->
+        <button class="default-btn standard-btn year-picker" val="2016" style="width:164px;">2016</button>
+        <button class="default-btn standard-btn year-picker sel-btn" val="2017" style="width:164px;">2017</button>
+        <br />
+        <div style="position:relative;width:333px;" class="half-horiz cand-only">
+            <select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
+                <option>Secretary</option>
+                <option>Treasurer</option>
+                <option>President</option>
+                <option>Vice President</option>
+            </select>
+            <div id="arrow-hider" style="position:absolute;width:30px;height:46px;right:2px;top:22px;background-color:#44A0C8;border-radius:2px;"></div>
+        </div>
+        <br/>
+        <button class="default-btn standard-btn" id="register" style="width:333px;margin-top:10px;">sign up</button>
+        <p class="cand-only half-horiz" style="width:400px;position:relative;">We'll send you an email activating your candidate account once we verify your campaign. This is to avoid spammers.</p>
+        <script type="text/javascript">
+            $(".year-picker").click(function () {
+                $(".year-picker").removeClass("sel-btn");
+                $(this).addClass("sel-btn");
+            });
+            $("#register").click(function () {
+                var username = $("#voter-username").val();
+                var pass = $("#voter-pass").val();
+                var conf = $("#voter-pass-conf").val();
+                var email = $("#voter-email").val();
+                var year = 2017;
+                var position = $("#position").val();
+                if (!isCand) {
+                    position = null;
+                }
+                $(".year-picker").each(function (index, value) {
+                    if ($(this).hasClass("sel-btn")) {
+                        year = parseInt($(this).text());
+                    }
+                });
+                //Someday I'll figure out jqueryval, for now I'll just do this
+                if (pass != conf)
+                    alert("Passwords don't match!");
+                else {
+                    $.post("/API/Account/Register", {
+                        "Username": username,
+                        "Password": pass,
+                        "Email": email,
+                        "Year": year,
+                        "Position": position
+                    }, function (data) {
+                        if (data.indexOf("GOOD") != -1) {
+                            $("#login-form").show();
+                            $("#login-usernm").val(username);
+                            $("#login-pass").val(pass);
+                            $("#login-form").submit();
+                        }
+                    });
+                }
+            });
+        </script>
     </div>
 </div>
