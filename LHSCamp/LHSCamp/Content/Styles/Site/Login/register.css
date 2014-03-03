@@ -97,3 +97,6 @@ html {
   background-color: #fff;
   color: #44a0c8;
 }
+.cand-only {
+  display: none;
+}

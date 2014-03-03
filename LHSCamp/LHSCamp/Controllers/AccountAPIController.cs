@@ -19,6 +19,20 @@ namespace LHSCamp.Controllers
         {
         }
         [HttpPost]
+        [Route("API/Account/CheckName")]
+        public async Task<IHttpActionResult> CheckName(UserNameModel model)
+        {
+            using(LCDB db = new LCDB())
+            {
+                bool exists = (db.Users.Count(u => u.UserName == model.Username) > 0);
+                if (exists)
+                    return Ok("exists");
+                else
+                    return Ok("new");
+            }
+        }
+        
+        [HttpPost]
         [Route("API/Account/Register")]
         public async Task<IHttpActionResult> Register(RegisterModel model)
         {

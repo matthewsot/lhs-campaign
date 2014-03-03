@@ -9,11 +9,13 @@
 <div class="blue row medium-font" style="margin-top:100px;margin-bottom:100px;">
     <div class="logo-span large-font"><b>lhs</b>|campaign</div>
     <br />
+    <!-- Background login form, to login after registration -->
     <form action="~/Account/Login" method="POST" id="login-form" style="display:none;">
         @Html.AntiForgeryToken()
         <input type="hidden" name="UserName" value="" id="login-usernm" />
         <input type="hidden" name="Password" value="" id="login-pass" />
     </form>
+    <!-- Registration Form -->
     <div id="local-register" style="border-top:2px solid #fff;">
         <br />
         <span class="large-font railway-bold">signup</span>
@@ -39,10 +41,50 @@
         </script>
         <br/>
         <input type="text" class="default-input standard-input" placeholder="username" id="voter-username" style="margin-top:20px;" />
+        <div class="medium-font railway-light" id="usernm-err" style="display:none;margin-top:10px;"></div>
+        <script type="text/javascript">
+            $("#voter-username").change(function () {
+                var nm = $(this).val();
+                if (nm != "") {
+                    $.post("/API/Account/CheckName", {
+                        Username: nm
+                    }, function (data) {
+                        if (data.toLowerCase() == 'exists') {
+                            $("#usernm-err").text("That username is already taken.");
+                            $("#usernm-err").show();
+                        }
+                        else {
+                            $("#usernm-err").hide();
+                        }
+                    });
+                }
+                else {
+                    $("#usernm-err").text("Please enter a username.");
+                    $("#usernm-err").show();
+                }
+            });
+        </script>
         <br />
         <input type="password" class="default-input standard-input" placeholder="password" id="voter-pass" />
         <br />
         <input type="password" class="default-input standard-input" placeholder="confirm password" id="voter-pass-conf" />
+        <div class="medium-font railway-light" id="password-err" style="display:none;margin-top:10px;"></div>
+        <script type="text/javascript">
+            //Thanks! http://stackoverflow.com/questions/10438369/jquery-on-change-input-text
+            $("#voter-pass,#voter-pass-conf").on('keyup', function () {
+                if ($("#voter-pass").val() != $("#voter-pass-conf").val()) {
+                    $("#password-err").html("Your password doesn't match the confirmation");
+                    $("#password-err").show();
+                }
+                else if ($("#voter-pass").val().length < 7) {
+                    $("#password-err").html("Please enter a password greater than 6 characters");
+                    $("#password-err").show();
+                }
+                else {
+                    $("#password-err").hide();
+                }
+            });
+        </script>
         <br />
         <input type="email" class="default-input standard-input" placeholder="email (optional)" id="voter-email" />
         <br />
@@ -61,7 +103,7 @@
         </div>
         <br/>
         <button class="default-btn standard-btn" id="register" style="width:333px;margin-top:10px;">sign up</button>
-        <p class="cand-only half-horiz" style="width:400px;position:relative;">We'll send you an email activating your candidate account once we verify your campaign. This is to avoid spammers.</p>
+        <p class="cand-only half-horiz" style="width:400px;position:relative;">We'll send you an email within 24 hours to activate your campaign account. This is to avoid spammers.</p>
         <script type="text/javascript">
             $(".year-picker").click(function () {
                 $(".year-picker").removeClass("sel-btn");
@@ -83,8 +125,10 @@
                     }
                 });
                 //Someday I'll figure out jqueryval, for now I'll just do this
-                if (pass != conf)
-                    alert("Passwords don't match!");
+                if (pass != conf) {
+                    $("#password-err").html("Your password doesn't match the confirmation");
+                    $("#password-err").show();
+                }
                 else {
                     $.post("/API/Account/Register", {
                         "Username": username,
@@ -98,6 +142,14 @@
                             $("#login-usernm").val(username);
                             $("#login-pass").val(pass);
                             $("#login-form").submit();
+                        }
+                        else if (data.indexOf("Username") != -1) {
+                            $("#usernm-err").text("That username is already taken.");
+                            $("#usernm-err").show();
+                        }
+                        else if (data.indexOf("Password") != -1) {
+                            $("#password-err").html("Please enter a password greater than 6 characters");
+                            $("#password-err").show();
                         }
                     });
                 }

@@ -5,6 +5,10 @@ using System.Web;
 
 namespace LHSCamp.Models
 {
+    public class UserNameModel
+    {
+        public string Username { get; set; }
+    }
     public class RegisterModel
     {
         public string Username { get; set; }
