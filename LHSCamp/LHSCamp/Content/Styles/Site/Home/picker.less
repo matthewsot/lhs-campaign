@@ -36,10 +36,54 @@
 }
 
 
-#picker-box {
+#picker-container {
     background-color:@gray-color;
     position:relative;
     width:80%;
-    height:500px;
     margin-left:10%;
+    padding-top:40px;
+    height:500px;
 }
+
+#picker-box {
+    position:relative;
+    width:90%;
+    min-height:500px;
+    margin-left:5%;
+}
+
+div.picker-item {
+    background-color:#fff;
+    position:absolute;
+    width:30%;
+}
+
+.left-item {
+    left:0px;
+}
+
+.mid-item {
+    .half-horiz;
+}
+
+.right-item {
+    right:0px;
+}
+
+img.picker-img {
+    height:250px;
+    width:100%;
+    cursor:pointer;
+}
+
+.picker-name {
+    height:50px;
+    line-height:50px;
+    width:100%;
+    cursor:pointer;
+}
+
+    .picker-name:hover {
+        background-color:@darkblue-color;
+        color:#fff;
+    }

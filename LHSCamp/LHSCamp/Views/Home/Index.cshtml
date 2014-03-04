@@ -4,6 +4,7 @@
 
 @section Styles {
     @Styles.Render("~/Content/Styles/Site/Home/picker.less")
+    @*@Scripts.Render("~/Content/Scripts/Site/Home/picker.js")*@
 }
 
 <ul id="picker-tabs">
@@ -13,22 +14,20 @@
     <li class="picker-tab" position="President"><div>PRESIDENT</div></li>
 </ul>
 
-<div id="picker-box"></div>
+<div id="picker-container">
+    <div id="picker-box">
 
+    </div>
+</div>
+<script type="text/javascript" src="~/Content/Scripts/Site/Home/picker.js"></script>
 <script type="text/javascript">
-    function switchTo(position) {
-        $.getJSON("/API/Candidates/" + position, function (data) {
-            $("#picker-box").html("");
-            for (var i = 0; i < data.length; i++) {
-                $("#picker-box").text($("#picker-box").text() + data[i].name);
-            }
+    $(function () {
+        var picker = new pickerBox("picker-box");
+        $(".picker-tab").click(function () {
+            $(".picker-tab").removeClass("sel-tab");
+            $(this).addClass("sel-tab");
+            picker.switchTo($(this).attr("position"));
         });
-    }
-    $(".picker-tab").click(function () {
-        $(".picker-tab").removeClass("sel-tab");
-        $(this).addClass("sel-tab");
-        switchTo($(this).attr("position"));
+        $(".sel-tab").click(); //load the first tab
     });
-
-    $(".sel-tab").click(); //load the first tab
 </script>
