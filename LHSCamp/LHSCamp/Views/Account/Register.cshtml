@@ -40,7 +40,7 @@
             });
         </script>
         <br/>
-        <input type="text" class="default-input standard-input" placeholder="username" id="voter-username" style="margin-top:20px;" />
+        <input type="text" class="default-input standard-input cand-only" placeholder="username" id="username" style="margin-top:20px;" />
         <div class="medium-font railway-light" id="usernm-err" style="display:none;margin-top:10px;"></div>
         <script type="text/javascript">
             $("#voter-username").change(function () {
@@ -64,19 +64,21 @@
                 }
             });
         </script>
+        <br/>
+        <input type="text" class="default-input standard-input" placeholder="full name" id="fullname" />
         <br />
-        <input type="password" class="default-input standard-input" placeholder="password" id="voter-pass" />
+        <input type="password" class="default-input standard-input" placeholder="password" id="pass" />
         <br />
-        <input type="password" class="default-input standard-input" placeholder="confirm password" id="voter-pass-conf" />
+        <input type="password" class="default-input standard-input" placeholder="confirm password" id="pass-conf" />
         <div class="medium-font railway-light" id="password-err" style="display:none;margin-top:10px;"></div>
         <script type="text/javascript">
             //Thanks! http://stackoverflow.com/questions/10438369/jquery-on-change-input-text
-            $("#voter-pass,#voter-pass-conf").on('keyup', function () {
-                if ($("#voter-pass").val() != $("#voter-pass-conf").val()) {
+            $("#pass,#pass-conf").on('keyup', function () {
+                if ($("#pass").val() != $("#pass-conf").val()) {
                     $("#password-err").html("Your password doesn't match the confirmation");
                     $("#password-err").show();
                 }
-                else if ($("#voter-pass").val().length < 7) {
+                else if ($("#pass").val().length < 7) {
                     $("#password-err").html("Please enter a password greater than 6 characters");
                     $("#password-err").show();
                 }
@@ -86,7 +88,7 @@
             });
         </script>
         <br />
-        <input type="email" class="default-input standard-input" placeholder="email (optional)" id="voter-email" />
+        <input type="email" class="default-input standard-input" placeholder="email (optional)" id="email" />
         <br />
         <!-- Meh. I'll fix this weird width stuff later -->
         <button class="default-btn standard-btn year-picker" val="2016" style="width:164px;">2016</button>
@@ -110,14 +112,16 @@
                 $(this).addClass("sel-btn");
             });
             $("#register").click(function () {
-                var username = $("#voter-username").val();
-                var pass = $("#voter-pass").val();
-                var conf = $("#voter-pass-conf").val();
-                var email = $("#voter-email").val();
+                var username = $("#username").val();
+                var pass = $("#pass").val();
+                var conf = $("#pass-conf").val();
+                var email = $("#email").val();
                 var year = 2017;
                 var position = $("#position").val();
+                var fullName = $("#fullname").val();
                 if (!isCand) {
                     position = null;
+                    fullName = null;
                 }
                 $(".year-picker").each(function (index, value) {
                     if ($(this).hasClass("sel-btn")) {
@@ -135,7 +139,8 @@
                         "Password": pass,
                         "Email": email,
                         "Year": year,
-                        "Position": position
+                        "Position": position,
+                        "FullName": fullName
                     }, function (data) {
                         if (data.indexOf("GOOD") != -1) {
                             $("#login-form").show();

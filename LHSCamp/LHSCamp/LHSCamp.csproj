@@ -189,6 +189,10 @@
     <Compile Include="Migrations\201403022207295_Positions.Designer.cs">
       <DependentUpon>201403022207295_Positions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403040121313_Candidate.cs" />
+    <Compile Include="Migrations\201403040121313_Candidate.Designer.cs">
+      <DependentUpon>201403040121313_Candidate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountAPIModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -327,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403022207295_Positions.resx">
       <DependentUpon>201403022207295_Positions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403040121313_Candidate.resx">
+      <DependentUpon>201403040121313_Candidate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

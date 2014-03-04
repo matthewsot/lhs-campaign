@@ -46,6 +46,7 @@ namespace LHSCamp.Controllers
                 if (model.Password.Length <= 6) Errors.Add("Password");
                 if (model.Year != 2016 && model.Year != 2017) Errors.Add("Year");
                 if (model.Position != null && model.Position.Length > 50) Errors.Add("Position");
+                if (model.FullName != null && model.FullName.Length > 50) Errors.Add("FullName");
                 using (LCDB db = new LCDB())
                 {
                     if (db.Users.Count(usr => usr.UserName == model.Username) > 0) Errors.Add("Username");
@@ -54,8 +55,20 @@ namespace LHSCamp.Controllers
                 if(Errors.Count > 0)
                     return Ok(string.Join(",", Errors) + ",");
 
-                var user = new User() { UserName = model.Username, Email = model.Email, Position = model.Position };
-                user.IsCandidate = (!string.IsNullOrWhiteSpace(model.Position));
+                var user = new User() { UserName = model.Username, Email = model.Email };
+                if(!string.IsNullOrWhiteSpace(model.Position))
+                {
+                    if(string.IsNullOrWhiteSpace(model.FullName))
+                        model.FullName = model.Username;
+
+                    //create candidate for user
+                    user.Candidate = new Candidate()
+                    {
+                        Owner = user,
+                        Position = model.Position,
+                        Name = model.FullName
+                    };
+                }
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -70,7 +83,7 @@ namespace LHSCamp.Controllers
                 else
                 {
                     //Errors
-                    return Ok("NOIDEA");
+                    return Ok("WOOPS");
                 }
             }
         }
