@@ -21,7 +21,7 @@ namespace LHSCamp.Controllers
         private LCDB db = new LCDB();
 
         // GET: api/Candidates/5
-        [Route("API/Candidates/{position}")]
+        [Route("API/Candidates/{Position}")]
         public IHttpActionResult GetCandidates(string Position)
         {
             var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
@@ -34,17 +34,17 @@ namespace LHSCamp.Controllers
             }));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        [Route("API/ChosenCandidates/Add")]
-        public IHttpActionResult AddChosenCandidate(AddCandidateModel model)
+        [Route("API/Chosen/Add/{Id}")]
+        public IHttpActionResult AddChosenCandidate(int Id)
         {
             if (!User.Identity.IsAuthenticated) return Unauthorized();
 
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
-            var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == model.id);
+            var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == Id);
             if (candidate == null) return NotFound();
 
             if (!currUser.ChosenCandidates.Contains(candidate))
@@ -60,17 +60,17 @@ namespace LHSCamp.Controllers
             }));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        [Route("API/ChosenCandidates/Remove")]
-        public IHttpActionResult AddChosenCandidate(AddCandidateModel model)
+        [Route("API/Chosen/Remove/{Id}")]
+        public IHttpActionResult AddChosenCandidate(int Id)
         {
             if (!User.Identity.IsAuthenticated) return Unauthorized();
 
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
-            var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == model.id);
+            var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == Id);
             if (candidate == null) return NotFound();
 
             if (currUser.ChosenCandidates.Contains(candidate))
