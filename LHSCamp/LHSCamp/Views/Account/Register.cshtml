@@ -40,7 +40,7 @@
             });
         </script>
         <br/>
-        <input type="text" class="default-input standard-input cand-only" placeholder="username" id="username" style="margin-top:20px;" />
+        <input type="text" class="default-input standard-input" placeholder="username" id="username" style="margin-top:20px;" />
         <div class="medium-font railway-light" id="usernm-err" style="display:none;margin-top:10px;"></div>
         <script type="text/javascript">
             $("#voter-username").change(function () {
@@ -64,8 +64,8 @@
                 }
             });
         </script>
-        <br/>
-        <input type="text" class="default-input standard-input" placeholder="full name" id="fullname" />
+        <br class="cand-only" />
+        <input type="text" class="default-input standard-input cand-only" placeholder="full name" id="fullname" />
         <br />
         <input type="password" class="default-input standard-input" placeholder="password" id="pass" />
         <br />
