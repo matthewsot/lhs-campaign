@@ -16,6 +16,11 @@ class pickerBox {
         row = row - 1;
         col = col - 1;
         var positionClass = "";
+        item.chosen = item.chosen.toString().toLowerCase();
+        var hoverText = "ADD";
+        if (item.chosen == "true") {
+            hoverText = "REMOVE";
+        }
         switch (col) {
             case 0:
                 positionClass = "left-item";
@@ -29,7 +34,7 @@ class pickerBox {
         }
         var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
-        newItem += '<div cand-id="' + item.id + '" cand-selected="false" class="picker-overlay">ADD</div>';
+        newItem += '<div cand-id="' + item.id + '" cand-selected="' + item.chosen.toLowerCase() + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         this.picker.html(this.picker.html() + newItem);
@@ -49,14 +54,24 @@ class pickerBox {
         });
 
         $(".picker-overlay").click(function () {
-            if ($(this).attr("cand-selected") == "false") {
+            if ($(this).attr("cand-selected") == "false") { //Add candidate to chosen list
                 $(this).attr("cand-selected", "true");
                 $(this).text("REMOVE");
+                $.getJSON("/API/Chosen/Add/" + $(this).attr("cand-id"), function (data) {
+
+                });
             }
-            else {
+            else { //Remove candidate from chosen list
                 $(this).attr("cand-selected", "false");
+                $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
+
+                });
                 $(this).text("ADD");
             }
+        });
+
+        $('[cand-selected="true"]').stop().animate({
+            opacity: 0.7
         });
     }
 

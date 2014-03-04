@@ -22,14 +22,15 @@ namespace LHSCamp.Controllers
         public string name { get; set; }
         public string position { get; set; }
         public string profilePic { get; set; }
+        public bool chosen { get; set; }
     }
     public class CandidatesController : ApiController
     {
         private LCDB db = new LCDB();
 
-        // GET: api/Candidates/5
-        [Route("API/Candidates/{Position}")]
-        public IHttpActionResult GetCandidates(string Position)
+        [AllowAnonymous]
+        [Route("API/Anon/Candidates/{Position}")]
+        public IHttpActionResult GetAnonCandidates(string Position)
         {
             var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
             return Ok(candidates.Select(cand => new CandidateModel()
@@ -39,6 +40,29 @@ namespace LHSCamp.Controllers
                 position = cand.Position,
                 profilePic = cand.ProfilePic
             }));
+        }
+
+        // GET: api/Candidates/5
+        [Authorize]
+        [Route("API/Candidates/{Position}")]
+        public IHttpActionResult GetCandidates(string Position)
+        {
+            if (!User.Identity.IsAuthenticated) return Unauthorized();
+
+            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
+            if (currUser == null) return NotFound();
+
+            var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
+
+            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
+            return Ok(candidates.Select(cand => new CandidateModel()
+            {
+                id = cand.Id,
+                name = cand.Name,
+                position = cand.Position,
+                profilePic = cand.ProfilePic,
+                chosen = chosenCandidateIds.Contains(cand.Id)
+            }).ToList());
         }
 
         [HttpGet]
@@ -51,12 +75,15 @@ namespace LHSCamp.Controllers
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
+            var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
+
             return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
             {
                 id = cand.Id,
                 name = cand.Name,
                 position = cand.Position,
-                profilePic = cand.ProfilePic
+                profilePic = cand.ProfilePic,
+                chosen = chosenCandidateIds.Contains(cand.Id)
             }));
         }
 
@@ -70,6 +97,8 @@ namespace LHSCamp.Controllers
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
+            var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
+
             var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == Id);
             if (candidate == null) return NotFound();
 
@@ -78,13 +107,15 @@ namespace LHSCamp.Controllers
                 currUser.ChosenCandidates.Add(candidate);
                 db.SaveChanges();
             }
+
             return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
             {
                 id = cand.Id,
                 name = cand.Name,
                 position = cand.Position,
-                profilePic = cand.ProfilePic
-            }));
+                profilePic = cand.ProfilePic,
+                chosen = chosenCandidateIds.Contains(cand.Id)
+            }).ToList());
         }
 
         [HttpGet]
@@ -96,6 +127,8 @@ namespace LHSCamp.Controllers
 
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
+
+            var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
 
             var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == Id);
             if (candidate == null) return NotFound();
@@ -110,7 +143,8 @@ namespace LHSCamp.Controllers
                 id = cand.Id,
                 name = cand.Name,
                 position = cand.Position,
-                profilePic = cand.ProfilePic
+                profilePic = cand.ProfilePic,
+                chosen = chosenCandidateIds.Contains(cand.Id)
             }));
         }
 
