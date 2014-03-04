@@ -63,7 +63,7 @@ namespace LHSCamp.Controllers
         [HttpGet]
         [Authorize]
         [Route("API/Chosen/Remove/{Id}")]
-        public IHttpActionResult AddChosenCandidate(int Id)
+        public IHttpActionResult RemoveChosenCandidate(int Id)
         {
             if (!User.Identity.IsAuthenticated) return Unauthorized();
 
