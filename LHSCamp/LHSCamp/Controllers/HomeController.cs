@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LHSCamp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home

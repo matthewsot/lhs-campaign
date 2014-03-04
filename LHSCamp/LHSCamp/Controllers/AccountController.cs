@@ -43,6 +43,10 @@ namespace LHSCamp.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", controllerName: "Home");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -77,6 +81,10 @@ namespace LHSCamp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", controllerName: "Home");
+            }
             return View();
         }
 
@@ -452,10 +460,23 @@ namespace LHSCamp.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        [Route("Account/LogOffReal")]
+        public ActionResult LogOffReal()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", controllerName: "Default");
+        }
+
+        [HttpGet]
+        [Route("Account/LogOff")]
+        public ActionResult LogOff()
+        {
+            try
+            {
+                AuthenticationManager.SignOut();
+            }
+            catch { }
+            return RedirectToAction("Index", controllerName: "Default");
         }
 
         //
