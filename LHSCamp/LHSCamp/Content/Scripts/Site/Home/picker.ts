@@ -1,5 +1,4 @@
 ﻿/// <reference path="../../typings/jquery/jquery.d.ts" />
-
 class pickerBox {
     pickerId: string;
     parentId: string;
@@ -30,11 +29,18 @@ class pickerBox {
         }
         var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+        newItem += '<div class="picker-overlay"></div>';
         newItem += '<br/><div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         this.picker.html(this.picker.html() + newItem);
 
         $("#" + this.parentId).css("min-height", (((row + 1) * 340) + 40) + "px");
+        $(".picker-img").unbind('mouseenter mouseleave'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
+        $(".picker-img").hover(function () {
+            $(this).next().stop().fadeIn();
+        }, function () {
+            $(this).next().stop().fadeOut();
+        });
     }
 
     switchTo(position) {
