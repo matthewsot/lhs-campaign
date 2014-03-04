@@ -176,6 +176,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountAPIController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -349,6 +350,7 @@
     <Content Include="Content\Styles\Site\Layout\footer.less" />
     <Content Include="Content\Styles\Site\Login\login.less" />
     <Content Include="Content\Styles\Site\Login\register.less" />
+    <Content Include="Content\Styles\Site\Home\picker.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

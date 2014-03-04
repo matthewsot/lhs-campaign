@@ -1,0 +1,45 @@
+﻿@import "../shared.less";
+
+#picker-tabs {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    overflow-x:visible;
+    border-collapse:collapse;
+    color:@blue-color;
+    height:50px;
+    width:80%;
+    margin-left:10%;
+    padding-top:50px;
+}
+    #picker-tabs li {
+        font-size:25px;
+        cursor:pointer;
+        /* HOLY CRAP I LOVE YOU - http://stackoverflow.com/questions/1770601/remove-spacing-between-li */
+        display:block;
+        float:left;
+        width:25%;
+        height:50px;
+    }
+
+        #picker-tabs li div {
+            font-size:25px;
+            display:inline-block;
+            height:50px;
+            line-height:50px;
+            width:100%;
+        }
+
+.sel-tab {
+    background-color:@gray-color;
+}
+
+
+#picker-box {
+    background-color:@gray-color;
+    position:relative;
+    width:80%;
+    height:500px;
+    margin-left:10%;
+}

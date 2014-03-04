@@ -1,7 +1,25 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section Styles {
+    @Styles.Render("~/Content/Styles/Site/Home/picker.less")
+}
 
+<ul id="picker-tabs">
+    <li class="picker-tab sel-tab" position="Secretary"><div>SECRETARY</div></li>
+    <li class="picker-tab" position="Treasurer"><div>TREASURER</div></li>
+    <li class="picker-tab" position="Vice President"><div>VICE-PRES.</div></li>
+    <li class="picker-tab" position="President"><div>PRESIDENT</div></li>
+</ul>
+
+<div id="picker-box"></div>
+
+<script type="text/javascript">
+    function switchTo(position) {
+    }
+    $(".picker-tab").click(function () {
+        $(".picker-tab").removeClass("sel-tab");
+        $(this).addClass("sel-tab");
+    });
+</script>
