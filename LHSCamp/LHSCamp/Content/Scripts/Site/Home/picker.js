@@ -26,17 +26,33 @@ var pickerBox = (function () {
         }
         var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
-        newItem += '<div class="picker-overlay"></div>';
-        newItem += '<br/><div class="picker-name">' + item.name + '</div>';
+        newItem += '<div cand-id="' + item.id + '" cand-selected="false" class="picker-overlay">ADD</div>';
+        newItem += '<div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         this.picker.html(this.picker.html() + newItem);
 
         $("#" + this.parentId).css("min-height", (((row + 1) * 340) + 40) + "px");
-        $(".picker-img").unbind('mouseenter mouseleave'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
-        $(".picker-img").hover(function () {
-            $(this).next().stop().fadeIn();
+        $(".picker-overlay").unbind('mouseenter mouseleave click'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
+        $(".picker-overlay").hover(function () {
+            $(this).stop().animate({
+                opacity: 0.7
+            });
         }, function () {
-            $(this).next().stop().fadeOut();
+            if ($(this).attr("cand-selected") == "false") {
+                $(this).stop().animate({
+                    opacity: 0
+                });
+            }
+        });
+
+        $(".picker-overlay").click(function () {
+            if ($(this).attr("cand-selected") == "false") {
+                $(this).attr("cand-selected", "true");
+                $(this).text("REMOVE");
+            } else {
+                $(this).attr("cand-selected", "false");
+                $(this).text("ADD");
+            }
         });
     };
 
