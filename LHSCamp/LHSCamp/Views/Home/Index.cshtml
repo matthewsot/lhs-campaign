@@ -17,9 +17,18 @@
 
 <script type="text/javascript">
     function switchTo(position) {
+        $.getJSON("/API/Candidates/" + position, function (data) {
+            $("#picker-box").html("");
+            for (var i = 0; i < data.length; i++) {
+                $("#picker-box").text($("#picker-box").text() + data[i].name);
+            }
+        });
     }
     $(".picker-tab").click(function () {
         $(".picker-tab").removeClass("sel-tab");
         $(this).addClass("sel-tab");
+        switchTo($(this).attr("position"));
     });
+
+    $(".sel-tab").click(); //load the first tab
 </script>

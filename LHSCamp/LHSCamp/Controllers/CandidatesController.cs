@@ -17,16 +17,16 @@ namespace LHSCamp.Controllers
         private LCDB db = new LCDB();
 
         // GET: api/Candidates/5
-        [ResponseType(typeof(Candidate))]
-        public IHttpActionResult GetCandidate(int id)
+        [Route("API/Candidates/{position}")]
+        public IHttpActionResult GetCandidates(string Position)
         {
-            Candidate candidate = db.Candidates.Find(id);
-            if (candidate == null)
+            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
+            return Ok(candidates.Select(cand => new
             {
-                return NotFound();
-            }
-
-            return Ok(candidate);
+                id = cand.Id,
+                name = cand.Name,
+                profilePic = cand.ProfilePic
+            }));
         }
 
         protected override void Dispose(bool disposing)
