@@ -2,10 +2,15 @@
 
 class pickerBox {
     pickerId: string;
+    parentId: string;
     picker: JQuery;
-    constructor(pickerId) {
+    constructor(pickerId, parentId = null) {
         this.pickerId = pickerId;
         this.picker = $("#" + pickerId);
+        if (parentId == null)
+            parentId = pickerId;
+
+        this.parentId = parentId;
     }
 
     addItem(item, row: number, col: number) {
@@ -23,11 +28,13 @@ class pickerBox {
                 positionClass = "right-item";
                 break;
         }
-        var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 300 + 'px;">';
+        var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
         newItem += '<br/><div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         this.picker.html(this.picker.html() + newItem);
+
+        $("#" + this.parentId).css("min-height", (((row + 1) * 340) + 40) + "px");
     }
 
     switchTo(position) {
