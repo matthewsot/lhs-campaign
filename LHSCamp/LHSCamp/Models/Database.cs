@@ -13,6 +13,10 @@ namespace LHSCamp.Models
     {
         public virtual Candidate Candidate { get; set; }
         public virtual ICollection<Candidate> ChosenCandidates { get; set; }
+        public User()
+        {
+            ChosenCandidates = new List<Candidate>();
+        }
         public bool IsCandidate 
         {
             get { return Candidate != null; }

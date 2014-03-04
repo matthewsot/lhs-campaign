@@ -16,6 +16,13 @@ namespace LHSCamp.Controllers
     {
         public int id { get; set; }
     }
+    public class CandidateModel
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string position { get; set; }
+        public string profilePic { get; set; }
+    }
     public class CandidatesController : ApiController
     {
         private LCDB db = new LCDB();
@@ -25,7 +32,26 @@ namespace LHSCamp.Controllers
         public IHttpActionResult GetCandidates(string Position)
         {
             var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
-            return Ok(candidates.Select(cand => new
+            return Ok(candidates.Select(cand => new CandidateModel()
+            {
+                id = cand.Id,
+                name = cand.Name,
+                position = cand.Position,
+                profilePic = cand.ProfilePic
+            }));
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("API/Chosen")]
+        public IHttpActionResult GetChosenCandidates()
+        {
+            if (!User.Identity.IsAuthenticated) return Unauthorized();
+
+            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
+            if (currUser == null) return NotFound();
+
+            return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
             {
                 id = cand.Id,
                 name = cand.Name,
@@ -52,7 +78,8 @@ namespace LHSCamp.Controllers
                 currUser.ChosenCandidates.Add(candidate);
                 db.SaveChanges();
             }
-            return Ok(currUser.ChosenCandidates.Select(cand => new {
+            return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
+            {
                 id = cand.Id,
                 name = cand.Name,
                 position = cand.Position,
@@ -78,7 +105,7 @@ namespace LHSCamp.Controllers
                 currUser.ChosenCandidates.Remove(candidate);
                 db.SaveChanges();
             }
-            return Ok(currUser.ChosenCandidates.Select(cand => new
+            return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
             {
                 id = cand.Id,
                 name = cand.Name,
