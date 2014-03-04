@@ -12,6 +12,10 @@ using LHSCamp.Models;
 
 namespace LHSCamp.Controllers
 {
+    public class AddCandidateModel
+    {
+        public int id { get; set; }
+    }
     public class CandidatesController : ApiController
     {
         private LCDB db = new LCDB();
@@ -25,6 +29,60 @@ namespace LHSCamp.Controllers
             {
                 id = cand.Id,
                 name = cand.Name,
+                position = cand.Position,
+                profilePic = cand.ProfilePic
+            }));
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("API/ChosenCandidates/Add")]
+        public IHttpActionResult AddChosenCandidate(AddCandidateModel model)
+        {
+            if (!User.Identity.IsAuthenticated) return Unauthorized();
+
+            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
+            if (currUser == null) return NotFound();
+
+            var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == model.id);
+            if (candidate == null) return NotFound();
+
+            if (!currUser.ChosenCandidates.Contains(candidate))
+            {
+                currUser.ChosenCandidates.Add(candidate);
+                db.SaveChanges();
+            }
+            return Ok(currUser.ChosenCandidates.Select(cand => new {
+                id = cand.Id,
+                name = cand.Name,
+                position = cand.Position,
+                profilePic = cand.ProfilePic
+            }));
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("API/ChosenCandidates/Remove")]
+        public IHttpActionResult AddChosenCandidate(AddCandidateModel model)
+        {
+            if (!User.Identity.IsAuthenticated) return Unauthorized();
+
+            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
+            if (currUser == null) return NotFound();
+
+            var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == model.id);
+            if (candidate == null) return NotFound();
+
+            if (currUser.ChosenCandidates.Contains(candidate))
+            {
+                currUser.ChosenCandidates.Remove(candidate);
+                db.SaveChanges();
+            }
+            return Ok(currUser.ChosenCandidates.Select(cand => new
+            {
+                id = cand.Id,
+                name = cand.Name,
+                position = cand.Position,
                 profilePic = cand.ProfilePic
             }));
         }
