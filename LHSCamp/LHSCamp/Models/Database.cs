@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace LHSCamp.Models
 {
@@ -11,6 +12,7 @@ namespace LHSCamp.Models
     public class User : IdentityUser
     {
         public virtual Candidate Candidate { get; set; }
+        public virtual ICollection<Candidate> ChosenCandidates { get; set; }
         public bool IsCandidate 
         {
             get { return Candidate != null; }
@@ -44,6 +46,7 @@ namespace LHSCamp.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasOptional(a => a.Candidate).WithRequired(a => a.Owner);
+            modelBuilder.Entity<User>().HasMany(a => a.ChosenCandidates).WithMany();
             base.OnModelCreating(modelBuilder);
         }
     }

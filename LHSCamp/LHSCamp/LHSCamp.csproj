@@ -196,6 +196,10 @@
     <Compile Include="Migrations\201403040121313_Candidate.Designer.cs">
       <DependentUpon>201403040121313_Candidate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403040548220_ChosenCandidates.cs" />
+    <Compile Include="Migrations\201403040548220_ChosenCandidates.Designer.cs">
+      <DependentUpon>201403040548220_ChosenCandidates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountAPIModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -228,6 +232,9 @@
     <Content Include="Content\Images\Default\Bubbles\gear.png" />
     <Content Include="Content\Images\Default\Bubbles\ribbon.png" />
     <Content Include="Content\Images\Default\laptop.png" />
+    <Content Include="Content\Scripts\Site\Home\picker.js">
+      <DependentUpon>picker.ts</DependentUpon>
+    </Content>
     <Content Include="Content\Styles\Bootstrap\bootstrap.css" />
     <Content Include="Content\Styles\Bootstrap\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -338,6 +345,9 @@
     <EmbeddedResource Include="Migrations\201403040121313_Candidate.resx">
       <DependentUpon>201403040121313_Candidate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403040548220_ChosenCandidates.resx">
+      <DependentUpon>201403040548220_ChosenCandidates.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.woff" />
@@ -353,6 +363,9 @@
     <Content Include="Content\Styles\Site\Login\login.less" />
     <Content Include="Content\Styles\Site\Login\register.less" />
     <Content Include="Content\Styles\Site\Home\picker.less" />
+    <Content Include="Content\Scripts\Site\Home\picker.js.map">
+      <DependentUpon>picker.ts</DependentUpon>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
