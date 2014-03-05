@@ -5,6 +5,7 @@ html {
   font-family: 'Railway';
 }
 .half-vert {
+  position: relative;
   /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
   top: 50%;
   /* but ewe. should use prefix-free */
@@ -15,6 +16,7 @@ html {
   transform: translateY(-50%);
 }
 .half-horiz {
+  position: relative;
   left: 50%;
   /* but ewe. should use prefix-free */
   -webkit-transform: translateX(-50%);
@@ -30,6 +32,9 @@ html {
 .white {
   background-color: #fff;
   color: #44a0c8;
+}
+.red {
+  color: #ff0000;
 }
 .small-font {
   font-size: 20px;
@@ -50,32 +55,65 @@ html {
   border: 2px solid #fff;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Railway-light';
 }
 .default-btn:hover {
   background-color: #fff;
   color: #44a0c8;
   border-radius: 5px;
 }
+.white-btn {
+  background-color: #fff;
+  color: #44a0c8;
+}
+.white-btn:hover {
+  background-color: #44a0c8;
+  color: #fff;
+}
 .default-input {
   background-color: #44a0c8;
   color: #fff;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 5px;
-  width: 100%;
+  width: 250px;
+  height: 40px;
   font-size: 25px;
+}
+.standard-input {
+  width: 325px;
+  font-family: 'Railway-light';
+  margin-bottom: 10px;
+  text-align: center;
 }
 .link {
   cursor: pointer;
+}
+.nunderline {
+  text-decoration: none;
+  color: #fff;
 }
 #footer {
   position: fixed;
   bottom: 0px;
   left: 0px;
   width: 100%;
-  height: 100px;
+  height: 80px;
+  line-height: 80px;
   background-color: #44a0c8;
   color: #fff;
 }
+#footer-cont {
+  position: relative;
+  width: 80%;
+  left: 10%;
+}
 #content {
   padding-bottom: 100px;
+}
+#footer-items {
+  display: none;
+}
+#footer-noitems {
+  width: 100%;
+  text-align: center;
 }

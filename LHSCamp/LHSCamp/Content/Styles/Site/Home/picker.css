@@ -134,7 +134,6 @@ html {
 #picker-box {
   position: relative;
   width: 90%;
-  min-height: 500px;
   margin-left: 5%;
 }
 div.picker-item {

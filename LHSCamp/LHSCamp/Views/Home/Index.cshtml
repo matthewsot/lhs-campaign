@@ -19,15 +19,29 @@
 
     </div>
 </div>
-<script type="text/javascript" src="~/Content/Scripts/Site/Home/picker.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var picker = new pickerBox("picker-box", "picker-container");
-        $(".picker-tab").click(function () {
-            $(".picker-tab").removeClass("sel-tab");
-            $(this).addClass("sel-tab");
-            picker.switchTo($(this).attr("position"));
+
+@section Footer {
+    <div id="footer-items">
+        <ul id="chosen-previews"></ul>
+        <div class="create-img-btn" id="create-cover-btn">COVER PHOTO</div>
+        <div class="create-img-btn" id="create-profile-btn">PROFILE PICTURE</div>
+    </div>
+    <div id="footer-noitems" class="medium-font">
+        Empty. Click the "+" sign to add a profile picture
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Content/Scripts/Site/Home/picker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var picker = new pickerBox("picker-box", "picker-container");
+            $(".picker-tab").click(function () {
+                $(".picker-tab").removeClass("sel-tab");
+                $(this).addClass("sel-tab");
+                picker.switchTo($(this).attr("position"));
+            });
+            $(".sel-tab").click(); //load the first tab
         });
-        $(".sel-tab").click(); //load the first tab
-    });
-</script>
+    </script>
+}
