@@ -10,7 +10,7 @@ var pickerBox = (function () {
         this.parentId = parentId;
     }
     pickerBox.prototype.addItemPreview = function (id, photo, alt) {
-        var itemPreview = '<li><img class="cand-preview" src="' + photo + '" alt="' + alt + '"></img></li>';
+        var itemPreview = '<li id="item-preview-' + id + '"><img class="cand-preview" src="' + photo + '" alt="' + alt + '"></img></li>';
 
         //TODO: let chosen-previews id be specified in the constructor
         $("#chosen-previews").html($("#chosen-previews").html() + itemPreview);
@@ -19,6 +19,10 @@ var pickerBox = (function () {
                 $("#footer-items").fadeIn();
             });
         }
+    };
+
+    pickerBox.prototype.removeItemPreview = function (id) {
+        $("#item-preview-" + id).remove();
     };
 
     pickerBox.prototype.addItem = function (item, row, col) {
@@ -74,6 +78,7 @@ var pickerBox = (function () {
                 $(this).attr("cand-selected", "false");
                 $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
                 });
+                self.removeItemPreview(parseInt($(this).attr("cand-id")));
                 $(this).text("ADD");
             }
         });
