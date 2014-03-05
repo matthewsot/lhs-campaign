@@ -12,19 +12,24 @@ class pickerBox {
         this.parentId = parentId;
     }
 
-    addItemPreview(id: number, photo: string, alt: string) {
-        var itemPreview = '<li id="item-preview-' + id + '"><img class="cand-preview" src="' + photo + '" alt="' + alt + '"></img></li>';
-        //TODO: let chosen-previews id be specified in the constructor
-        $("#chosen-previews").html($("#chosen-previews").html() + itemPreview);
-        if ($("#footer-noitems").css("display") != "none") {
-            $("#footer-noitems").fadeOut(function () {
-                $("#footer-items").fadeIn();
-            });
-        }
-    }
-
-    removeItemPreview(id: number) {
-        $("#item-preview-" + id).remove();
+    updateChosenPreviews() {
+        $.getJSON("/API/Chosen", function (data) {
+            var newChosenPreviews = "";
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                var itemPreview = '<li id="item-preview-' + item.id + '">';
+                itemPreview += '<img class="cand-preview" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+                itemPreview += '</li>';
+                //TODO: let chosen-previews id be specified in the constructor
+                newChosenPreviews += itemPreview;
+            }
+            $("#chosen-previews").html(newChosenPreviews);
+            if ($("#footer-noitems").css("display") != "none") {
+                $("#footer-noitems").fadeOut(function () {
+                    $("#footer-items").fadeIn();
+                });
+            }
+        });
     }
 
     addItem(item, row: number, col: number) {
@@ -74,14 +79,14 @@ class pickerBox {
                 $(this).attr("cand-selected", "true");
                 $(this).text("REMOVE");
                 $.getJSON("/API/Chosen/Add/" + $(this).attr("cand-id"), function (data) {
+                    self.updateChosenPreviews();
                 });
-                self.addItemPreview(parseInt($(this).attr("cand-id")), $(this).attr("cand-pic"), $(this).attr("cand-name"));
             }
             else { //Remove candidate from chosen list
                 $(this).attr("cand-selected", "false");
                 $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
+                    self.updateChosenPreviews();
                 });
-                self.removeItemPreview(parseInt($(this).attr("cand-id")));
                 $(this).text("ADD");
             }
         });
@@ -90,7 +95,6 @@ class pickerBox {
             setTimeout(function () {
                 $("#picker-overlay-" + item.id).stop().animate({ opacity: 0.7 });
             }, 50);
-            this.addItemPreview(item.id, item.profilePic, item.name);
         }
     }
 
@@ -105,5 +109,6 @@ class pickerBox {
                 self.addItem(data[i], Math.ceil((i + 1) / 3), col);
             }
         });
+        this.updateChosenPreviews();
     }
 }

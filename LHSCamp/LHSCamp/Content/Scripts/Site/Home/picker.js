@@ -9,20 +9,25 @@ var pickerBox = (function () {
 
         this.parentId = parentId;
     }
-    pickerBox.prototype.addItemPreview = function (id, photo, alt) {
-        var itemPreview = '<li id="item-preview-' + id + '"><img class="cand-preview" src="' + photo + '" alt="' + alt + '"></img></li>';
+    pickerBox.prototype.updateChosenPreviews = function () {
+        $.getJSON("/API/Chosen", function (data) {
+            var newChosenPreviews = "";
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                var itemPreview = '<li id="item-preview-' + item.id + '">';
+                itemPreview += '<img class="cand-preview" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+                itemPreview += '</li>';
 
-        //TODO: let chosen-previews id be specified in the constructor
-        $("#chosen-previews").html($("#chosen-previews").html() + itemPreview);
-        if ($("#footer-noitems").css("display") != "none") {
-            $("#footer-noitems").fadeOut(function () {
-                $("#footer-items").fadeIn();
-            });
-        }
-    };
-
-    pickerBox.prototype.removeItemPreview = function (id) {
-        $("#item-preview-" + id).remove();
+                //TODO: let chosen-previews id be specified in the constructor
+                newChosenPreviews += itemPreview;
+            }
+            $("#chosen-previews").html(newChosenPreviews);
+            if ($("#footer-noitems").css("display") != "none") {
+                $("#footer-noitems").fadeOut(function () {
+                    $("#footer-items").fadeIn();
+                });
+            }
+        });
     };
 
     pickerBox.prototype.addItem = function (item, row, col) {
@@ -72,13 +77,13 @@ var pickerBox = (function () {
                 $(this).attr("cand-selected", "true");
                 $(this).text("REMOVE");
                 $.getJSON("/API/Chosen/Add/" + $(this).attr("cand-id"), function (data) {
+                    self.updateChosenPreviews();
                 });
-                self.addItemPreview(parseInt($(this).attr("cand-id")), $(this).attr("cand-pic"), $(this).attr("cand-name"));
             } else {
                 $(this).attr("cand-selected", "false");
                 $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
+                    self.updateChosenPreviews();
                 });
-                self.removeItemPreview(parseInt($(this).attr("cand-id")));
                 $(this).text("ADD");
             }
         });
@@ -87,7 +92,6 @@ var pickerBox = (function () {
             setTimeout(function () {
                 $("#picker-overlay-" + item.id).stop().animate({ opacity: 0.7 });
             }, 50);
-            this.addItemPreview(item.id, item.profilePic, item.name);
         }
     };
 
@@ -103,6 +107,7 @@ var pickerBox = (function () {
                 self.addItem(data[i], Math.ceil((i + 1) / 3), col);
             }
         });
+        this.updateChosenPreviews();
     };
     return pickerBox;
 })();
