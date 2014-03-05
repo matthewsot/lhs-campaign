@@ -30,12 +30,6 @@ class pickerBox {
                     $("#footer-items").fadeIn();
                 });
             }
-            //$(".cand-preview").unbind("click");
-            //$(".cand-preview").click(function () {
-            //    $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
-            //        self.updateChosenPreviews();
-            //    });
-            //});
         });
     }
 
