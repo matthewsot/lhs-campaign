@@ -366,6 +366,7 @@
     <Content Include="Content\Scripts\Site\Home\picker.js.map">
       <DependentUpon>picker.ts</DependentUpon>
     </Content>
+    <Content Include="Content\Styles\Site\Home\footer.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

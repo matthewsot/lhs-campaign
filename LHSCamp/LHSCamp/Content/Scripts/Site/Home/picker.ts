@@ -13,12 +13,13 @@ class pickerBox {
     }
 
     updateChosenPreviews() {
+        //var self = this;
         $.getJSON("/API/Chosen", function (data) {
             var newChosenPreviews = "";
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
                 var itemPreview = '<li id="item-preview-' + item.id + '">';
-                itemPreview += '<img class="cand-preview" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+                itemPreview += '<img class="cand-preview" cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
                 itemPreview += '</li>';
                 //TODO: let chosen-previews id be specified in the constructor
                 newChosenPreviews += itemPreview;
@@ -29,6 +30,12 @@ class pickerBox {
                     $("#footer-items").fadeIn();
                 });
             }
+            //$(".cand-preview").unbind("click");
+            //$(".cand-preview").click(function () {
+            //    $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
+            //        self.updateChosenPreviews();
+            //    });
+            //});
         });
     }
 

@@ -11,6 +11,7 @@
     @Styles.Render("~/Content/Styles/Site/Layout/header.less")
     @Styles.Render("~/Content/Styles/Site/Layout/footer.less")
     @RenderSection("Styles", false)
+    <script type="text/javascript" src="~/Content/Scripts/Site/Home/picker.js"></script>
 </head>
 <body>
     <div id="header">
@@ -28,11 +29,28 @@
     </div>
     <div id="footer">
         <div id="footer-cont">
-            @RenderSection("Footer", false)
+            @*@RenderSection("Footer", false)*@
+            <div id="footer-items">
+                <ul id="chosen-previews"></ul>
+                <div class="create-img-btn link" href="~/CreatePhoto/Cover" id="create-cover-btn">COVER<br />PHOTO</div>
+                <div class="create-img-btn link" href="~/CreatePhoto/Profile" id="create-profile-btn">PROFILE<br />PICTURE</div>
+            </div>
+            <div id="footer-noitems" class="medium-font">
+                Empty. Click the "+" sign to add a profile picture
+            </div>
         </div>
     </div>
     @RenderSection("Scripts", false)
     <script type="text/javascript">
+        $(function () {
+            var picker = new pickerBox("picker-box", "picker-container");
+            $(".picker-tab").click(function () {
+                $(".picker-tab").removeClass("sel-tab");
+                $(this).addClass("sel-tab");
+                picker.switchTo($(this).attr("position"));
+            });
+            $(".sel-tab").click(); //load the first tab
+        });
         $(".link").click(function () {
             window.location.href = $(this).attr("href");
         });
