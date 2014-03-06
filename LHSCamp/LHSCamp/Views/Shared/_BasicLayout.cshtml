@@ -16,7 +16,7 @@
 <body>
     <div id="header">
         <div id="header-cont">
-            <span class="large-font link" href="~/Home"><b>lhs</b>|campaign</span>
+            <span class="large-font link" data-href="~/Home"><b>lhs</b>|campaign</span>
             <ul id="header-nav">
                 <li>@User.Identity.Name</li>
                 <li><a class="nunderline" href="~/Account/Manage">settings</a></li>
@@ -35,7 +35,7 @@
     @RenderSection("Scripts", false)
     <script type="text/javascript">
         $(".link").click(function () {
-            window.location.href = $(this).attr("href");
+            window.location.href = $(this).attr("data-href");
         });
     </script>
 </body>

@@ -14,7 +14,7 @@
                 $(".picker-tab").click(function () {
                     $(".picker-tab").removeClass("sel-tab");
                     $(this).addClass("sel-tab");
-                    picker.switchTo($(this).attr("position"));
+                    picker.switchTo($(this).attr("data-position"));
                 });
                 $(".sel-tab").click(); //load the first tab, if there is a first tab
             }
@@ -27,8 +27,8 @@
 @section Footer {
     <div id="footer-items">
         <ul id="chosen-previews"></ul>
-        <div class="create-img-btn link" href="~/CreatePhoto/Cover" id="create-cover-btn">COVER<br />PHOTO</div>
-        <div class="create-img-btn link" href="~/CreatePhoto/Profile" id="create-profile-btn">PROFILE<br />PICTURE</div>
+        <div class="create-img-btn link" data-href="~/CreatePhoto/Cover" id="create-cover-btn">COVER<br />PHOTO</div>
+        <div class="create-img-btn link" data-href="~/CreatePhoto/Profile" id="create-profile-btn">PROFILE<br />PICTURE</div>
     </div>
     <div id="footer-noitems" class="medium-font">
         Empty. Click the "+" sign to add a profile picture

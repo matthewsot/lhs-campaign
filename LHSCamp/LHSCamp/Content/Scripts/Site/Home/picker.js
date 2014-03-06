@@ -16,7 +16,7 @@ var pickerBox = (function () {
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
                 var itemPreview = '<li id="item-preview-' + item.id + '">';
-                itemPreview += '<img class="cand-preview" cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+                itemPreview += '<img class="cand-preview" data-cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
                 itemPreview += '</li>';
 
                 //TODO: let chosen-previews id be specified in the constructor
@@ -53,7 +53,7 @@ var pickerBox = (function () {
         }
         var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
-        newItem += '<div id="picker-overlay-' + item.id + '" cand-id="' + item.id + '" cand-pic="' + item.profilePic + '" cand-selected="' + item.chosen.toLowerCase() + '" cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
+        newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         this.picker.html(this.picker.html() + newItem);
@@ -65,7 +65,7 @@ var pickerBox = (function () {
                 opacity: 0.7
             });
         }, function () {
-            if ($(this).attr("cand-selected") == "false") {
+            if ($(this).attr("data-cand-selected") == "false") {
                 $(this).stop().animate({
                     opacity: 0
                 });
@@ -74,15 +74,15 @@ var pickerBox = (function () {
 
         var self = this;
         $(".picker-overlay").click(function () {
-            if ($(this).attr("cand-selected") == "false") {
-                $(this).attr("cand-selected", "true");
+            if ($(this).attr("data-cand-selected") == "false") {
+                $(this).attr("data-cand-selected", "true");
                 $(this).text("REMOVE");
-                $.getJSON("/API/Chosen/Add/" + $(this).attr("cand-id"), function (data) {
+                $.getJSON("/API/Chosen/Add/" + $(this).attr("data-cand-id"), function (data) {
                     self.updateChosenPreviews();
                 });
             } else {
-                $(this).attr("cand-selected", "false");
-                $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
+                $(this).attr("data-cand-selected", "false");
+                $.getJSON("/API/Chosen/Remove/" + $(this).attr("data-cand-id"), function (data) {
                     self.updateChosenPreviews();
                 });
                 $(this).text("ADD");

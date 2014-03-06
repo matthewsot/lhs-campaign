@@ -4,6 +4,7 @@ class pickerBox {
     pickerId: string;
     parentId: string;
     picker: JQuery;
+
     constructor(pickerId, parentId = null) {
         this.pickerId = pickerId;
         this.picker = $("#" + pickerId);
@@ -20,7 +21,7 @@ class pickerBox {
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
                 var itemPreview = '<li id="item-preview-' + item.id + '">';
-                itemPreview += '<img class="cand-preview" cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+                itemPreview += '<img class="cand-preview" data-cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
                 itemPreview += '</li>';
                 //TODO: let chosen-previews id be specified in the constructor
                 newChosenPreviews += itemPreview;
@@ -56,7 +57,7 @@ class pickerBox {
         }
         var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
-        newItem += '<div id="picker-overlay-' + item.id + '" cand-id="' + item.id + '" cand-pic="' + item.profilePic + '" cand-selected="' + item.chosen.toLowerCase() + '" cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
+        newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         this.picker.html(this.picker.html() + newItem);
@@ -68,7 +69,7 @@ class pickerBox {
                 opacity: 0.7
             });
         }, function () {
-            if ($(this).attr("cand-selected") == "false") { //Only fade out for unselected items
+            if ($(this).attr("data-cand-selected") == "false") { //Only fade out for unselected items
                 $(this).stop().animate({
                     opacity: 0
                 });
@@ -77,16 +78,16 @@ class pickerBox {
 
         var self = this;
         $(".picker-overlay").click(function () {
-            if ($(this).attr("cand-selected") == "false") { //Add candidate to chosen list
-                $(this).attr("cand-selected", "true");
+            if ($(this).attr("data-cand-selected") == "false") { //Add candidate to chosen list
+                $(this).attr("data-cand-selected", "true");
                 $(this).text("REMOVE");
-                $.getJSON("/API/Chosen/Add/" + $(this).attr("cand-id"), function (data) {
+                $.getJSON("/API/Chosen/Add/" + $(this).attr("data-cand-id"), function (data) {
                     self.updateChosenPreviews();
                 });
             }
             else { //Remove candidate from chosen list
-                $(this).attr("cand-selected", "false");
-                $.getJSON("/API/Chosen/Remove/" + $(this).attr("cand-id"), function (data) {
+                $(this).attr("data-cand-selected", "false");
+                $.getJSON("/API/Chosen/Remove/" + $(this).attr("data-cand-id"), function (data) {
                     self.updateChosenPreviews();
                 });
                 $(this).text("ADD");
