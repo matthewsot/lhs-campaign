@@ -24,14 +24,17 @@
         <li class="picker-tab" data-picker-page="picture"><div>PROFILE PICTURE</div></li>
     </ul>
     <div id="picker-container">
-        <div id="picker-page-points" class="picker-page" style="display:block;">
+        <div id="picker-page-points" class="picker-page sel-page" style="display:block;">
             What are some of your main campaign points?
         </div>
         <div id="picker-page-email" class="picker-page">
             Sorry, you're not a validated user yet.
         </div>
         <div id="picker-page-picture" class="picker-page">
-            Sorry, you're not a validated user yet.
+            <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" />
+                <input type="submit" value="Upload" class="default-btn standard-btn" />
+            </form>
         </div>
     </div>
 </div>
@@ -40,7 +43,10 @@
         $(".picker-tab").click(function () {
             $(".picker-tab").removeClass("sel-tab");
             $(this).addClass("sel-tab");
-
+            var page = $(this).attr("data-picker-page");
+            $(".sel-page").fadeOut();
+            $("#picker-page-" + page).fadeIn();
+            $("#picker-page-" + page).addClass("sel-page");
         });
     </script>
 }
