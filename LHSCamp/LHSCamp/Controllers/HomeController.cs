@@ -16,7 +16,8 @@ namespace LHSCamp.Controllers
         {
             using(LCDB db = new LCDB())
             {
-                var currUser = db.Users.FirstOrDefault(user => user.Id == User.Identity.GetUserId());
+                var userId = User.Identity.GetUserId();
+                var currUser = db.Users.FirstOrDefault(user => user.Id == userId);
                 if(currUser != null && currUser.IsCandidate == true && string.IsNullOrWhiteSpace(currUser.Candidate.ProfilePic))
                 {
                     return RedirectToAction("Candidate", controllerName: "Welcome");
