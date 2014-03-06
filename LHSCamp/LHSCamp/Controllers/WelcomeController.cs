@@ -12,6 +12,7 @@ using LHSCamp.Models;
 
 namespace LHSCamp.Controllers
 {
+    [Authorize]
     public class WelcomeController : Controller
     {
         // GET: Welcome
@@ -21,14 +22,13 @@ namespace LHSCamp.Controllers
         }
         //Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
         [HttpPost]
-        [Authorize]
         public ActionResult UploadProfile(HttpPostedFileBase file)
         {
             using (var db = new LCDB())
             {
                 var userId = User.Identity.GetUserId();
                 var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
-                if (!User.Identity.IsAuthenticated || !(currUser.IsCandidate/* && currUser.IsConfirmed*/))
+                if (!User.Identity.IsAuthenticated || !(currUser.IsCandidate && currUser.IsConfirmed))
                     return RedirectToAction("Index", controllerName: "Home");
 
                 // Verify that the user selected a file
