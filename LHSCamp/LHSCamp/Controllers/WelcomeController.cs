@@ -44,6 +44,9 @@ namespace LHSCamp.Controllers
 
                         if (!Directory.Exists(imagesFolder))
                             Directory.CreateDirectory(imagesFolder);
+                        
+                        if (System.IO.File.Exists(path))
+                            System.IO.File.Delete(path);
 
                         file.SaveAs(path);
                         currUser.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;
