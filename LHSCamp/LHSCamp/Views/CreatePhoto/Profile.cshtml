@@ -13,20 +13,46 @@
 <h1>Create Profile Picture</h1>
 
 <canvas id="profile-pic" style="border:2px solid #000;"></canvas>
+<button id="save-img" class="default-btn standard-btn">Save Image</button>
 
 @section Scripts {
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.0/fabric.min.js"></script>
+    <script src="~/Content/Scripts/FileSaver/Blob.js"></script>
+    <script src="~/Content/Scripts/FileSaver/canvas-toBlob.js"></script>
+    <script src="~/Content/Scripts/FileSaver/FileSaver.js"></script>
+    <script src="~/Content/Scripts/FileSaver/Modernizr.js"></script>
     <script type="text/javascript">
-        var canvas = new fabric.Canvas('profile-pic');
-        canvas.setDimensions({ width: 500, height: 500 });
+        var fab = new fabric.Canvas('profile-pic');
+        fab.setDimensions({ width: 500, height: 500 });
         //Thanks! http://stackoverflow.com/questions/15089839/fabric-js-how-to-center-canvas
         $(".canvas-container").css("margin", "0 auto");
         $.getJSON("/API/Chosen", function (data) {
             for (var i = 0; i < data.length; i++) {
                 fabric.Image.fromURL(data[i].profilePic, function (oImg) {
-                    canvas.add(oImg);
+                    fab.add(oImg);
                 });
             }
+        });
+
+
+        var canvas = document.getElementById('profile-pic');
+        var fileSaver = true;
+        function handleCompat() {
+            if ((!fileSaver || !Modernizr.canvas) && window.location.href.indexOf("bypassCompat") == -1) {
+                alert("Sorry, this probably won't work");
+            }
+        }
+        try {
+            canvas.toBlob(function (blob) {
+                fileSaver = blob != undefined;
+                handleCompat();
+            });
+        } catch (e) { fileSaver = false; handleCompat(); }
+
+        $("#save-img").click(function () {
+            canvas.toBlob(function (blob) {
+                saveAs(blob, "profile.png");
+            });
         });
     </script>
 }
