@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../typings/jquery/jquery.d.ts" />
+
 class pickerBox {
     pickerId: string;
     parentId: string;

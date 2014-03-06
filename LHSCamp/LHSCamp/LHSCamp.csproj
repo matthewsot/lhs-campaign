@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AccountAPIController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\CreatePhotoController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -313,7 +314,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\Shared\_BasicLayout.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
@@ -334,6 +335,9 @@
     <Content Include="Views\Account\_ChangeEmailPartial.cshtml" />
     <Content Include="Views\Shared\_HeroLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\CreatePhoto\Cover.cshtml" />
+    <Content Include="Views\CreatePhoto\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
@@ -371,6 +375,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default1\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\Scripts\Site\Home\picker.ts" />
