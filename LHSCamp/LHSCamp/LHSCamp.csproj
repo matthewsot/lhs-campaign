@@ -182,6 +182,7 @@
     <Compile Include="Controllers\CreatePhotoController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +234,11 @@
     <Content Include="Content\Images\Default\Bubbles\gear.png" />
     <Content Include="Content\Images\Default\Bubbles\ribbon.png" />
     <Content Include="Content\Images\Default\laptop.png" />
+    <Content Include="Content\Scripts\FileSaver\base64.js" />
+    <Content Include="Content\Scripts\FileSaver\Blob.js" />
+    <Content Include="Content\Scripts\FileSaver\canvas-toBlob.js" />
+    <Content Include="Content\Scripts\FileSaver\FileSaver.js" />
+    <Content Include="Content\Scripts\FileSaver\Modernizr.js" />
     <Content Include="Content\Scripts\Site\Home\picker.js">
       <DependentUpon>picker.ts</DependentUpon>
     </Content>
@@ -338,6 +344,7 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\CreatePhoto\Cover.cshtml" />
     <Content Include="Views\CreatePhoto\Profile.cshtml" />
+    <Content Include="Views\Welcome\Candidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
@@ -375,7 +382,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Default1\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\Scripts\Site\Home\picker.ts" />

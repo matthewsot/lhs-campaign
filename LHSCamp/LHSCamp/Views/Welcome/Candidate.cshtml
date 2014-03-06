@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Candidate";
+}
+@section Styles {
+    @Styles.Render("~/Content/Styles/Site/Home/picker.less")
+    <style type="text/css">
+        .picker-page {
+            display: none;
+        }
+    </style>
+}
+<div style="position:relative;width:80%;left:10%;">
+    <h1>Welcome to LHS Campaign!</h1>
+
+    <span>
+        We'll run through a few quick questions to get your candidate account set up.
+        Once you're verified (which may take up to 24 hours),
+        you'll be allowed to upload your profile image and be featured on LHS Campaign.
+    </span>
+
+    <ul id="picker-tabs" style="width:100%;">
+        <li class="picker-tab sel-tab" data-picker-page="points"><div>CAMPAIGN POINTS</div></li>
+        <li class="picker-tab" data-picker-page="email"><div>EMAIL</div></li>
+        <li class="picker-tab" data-picker-page="picture"><div>PROFILE PICTURE</div></li>
+    </ul>
+    <div id="picker-container">
+        <div id="picker-page-points" class="picker-page" style="display:block;">
+            What are some of your main campaign points?
+        </div>
+        <div id="picker-page-email" class="picker-page">
+            Sorry, you're not a validated user yet.
+        </div>
+        <div id="picker-page-picture" class="picker-page">
+            Sorry, you're not a validated user yet.
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(".picker-tab").click(function () {
+            $(".picker-tab").removeClass("sel-tab");
+            $(this).addClass("sel-tab");
+
+        });
+    </script>
+}

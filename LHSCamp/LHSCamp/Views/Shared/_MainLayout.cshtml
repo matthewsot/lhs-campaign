@@ -10,7 +10,7 @@
     <script type="text/javascript">
         $(function () {
             var picker = new pickerBox("picker-box", "picker-container");
-            if ($(".sel-tab").length) { //if there are tabs...
+            if ($("#picker-container").length) { //if we're on the home page
                 $(".picker-tab").click(function () {
                     $(".picker-tab").removeClass("sel-tab");
                     $(this).addClass("sel-tab");
