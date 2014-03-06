@@ -39,7 +39,12 @@ namespace LHSCamp.Controllers
                     var extension = Path.GetExtension(file.FileName);
                     if (".jpg,.png,.gif,".Contains(extension + ","))
                     {
-                        var path = Server.MapPath("~/Content/Images/Candidates/") + userId + extension;
+                        var imagesFolder = Server.MapPath("~/Content/Images/Candidates/");
+                        var path = imagesFolder + userId + extension;
+
+                        if (!Directory.Exists(imagesFolder))
+                            Directory.CreateDirectory(imagesFolder);
+
                         file.SaveAs(path);
                         currUser.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;
                         db.SaveChanges();
