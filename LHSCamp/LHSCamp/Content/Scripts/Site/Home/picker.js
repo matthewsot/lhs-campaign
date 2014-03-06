@@ -1,16 +1,8 @@
 ﻿/// <reference path="../../typings/jquery/jquery.d.ts" />
-var pickerBox = (function () {
-    function pickerBox(pickerId, parentId) {
-        if (typeof parentId === "undefined") { parentId = null; }
-        this.pickerId = pickerId;
-        this.picker = $("#" + pickerId);
-        if (parentId == null)
-            parentId = pickerId;
-
-        this.parentId = parentId;
+var picker = (function () {
+    function picker() {
     }
-    pickerBox.prototype.updateChosenPreviews = function () {
-        //var self = this;
+    picker.updateChosenPreviews = function () {
         $.getJSON("/API/Chosen", function (data) {
             var newChosenPreviews = "";
             for (var i = 0; i < data.length; i++) {
@@ -18,8 +10,6 @@ var pickerBox = (function () {
                 var itemPreview = '<li id="item-preview-' + item.id + '">';
                 itemPreview += '<img class="cand-preview" data-cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
                 itemPreview += '</li>';
-
-                //TODO: let chosen-previews id be specified in the constructor
                 newChosenPreviews += itemPreview;
             }
             $("#chosen-previews").html(newChosenPreviews);
@@ -31,7 +21,7 @@ var pickerBox = (function () {
         });
     };
 
-    pickerBox.prototype.addItem = function (item, row, col) {
+    picker.addItem = function (item, row, col) {
         row = row - 1;
         col = col - 1;
         var positionClass = "";
@@ -56,9 +46,9 @@ var pickerBox = (function () {
         newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
-        this.picker.html(this.picker.html() + newItem);
+        $("#picker-box").html($("#picker-box").html() + newItem);
 
-        $("#" + this.parentId).css("min-height", (((row + 1) * 340) + 40) + "px");
+        $("#picker-container").css("min-height", (((row + 1) * 340) + 40) + "px");
         $(".picker-overlay").unbind('mouseenter mouseleave click'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
         $(".picker-overlay").hover(function () {
             $(this).stop().animate({
@@ -72,18 +62,17 @@ var pickerBox = (function () {
             }
         });
 
-        var self = this;
         $(".picker-overlay").click(function () {
             if ($(this).attr("data-cand-selected") == "false") {
                 $(this).attr("data-cand-selected", "true");
                 $(this).text("REMOVE");
                 $.getJSON("/API/Chosen/Add/" + $(this).attr("data-cand-id"), function (data) {
-                    self.updateChosenPreviews();
+                    picker.updateChosenPreviews();
                 });
             } else {
                 $(this).attr("data-cand-selected", "false");
                 $.getJSON("/API/Chosen/Remove/" + $(this).attr("data-cand-id"), function (data) {
-                    self.updateChosenPreviews();
+                    picker.updateChosenPreviews();
                 });
                 $(this).text("ADD");
             }
@@ -96,20 +85,19 @@ var pickerBox = (function () {
         }
     };
 
-    pickerBox.prototype.switchTo = function (position) {
-        var self = this;
+    picker.switchTo = function (position) {
         $.getJSON("/API/Candidates/" + position, function (data) {
-            self.picker.html("");
+            $("#picker-box").html("");
             for (var i = 0; i < data.length; i++) {
                 var col = (i + 1) % 3;
                 if (col == 0)
                     col = 3;
 
-                self.addItem(data[i], Math.ceil((i + 1) / 3), col);
+                picker.addItem(data[i], Math.ceil((i + 1) / 3), col);
             }
         });
         this.updateChosenPreviews();
     };
-    return pickerBox;
+    return picker;
 })();
 //# sourceMappingURL=picker.js.map
