@@ -2,7 +2,13 @@
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
 @section Styles{
-    @RenderSection("Styles", false)
+    <!-- Thanks! http://stackoverflow.com/questions/6769336/how-can-i-know-if-a-non-required-rendersection-exists -->
+    @if (IsSectionDefined("Styles")) {
+        @RenderSection("Styles", false)
+    }
+    else {
+        @Styles.Render("~/Content/Styles/Bundles/layout.less")
+    }
 }
 @RenderBody()
 @section Scripts {

@@ -7,9 +7,12 @@
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/Fonts/Quickly/Quickly-font.css")
     @Styles.Render("~/Content/Fonts/Railway/Railway-font.css")
-    @*@Styles.Render("~/Content/Styles/Site/shared.less")*@
-    @Styles.Render("~/Content/Styles/Site/Hero/hero.less")
-    @RenderSection("Styles", false)
+    @if(IsSectionDefined("Styles")) {
+        @RenderSection("Styles", false)
+    }
+    else {
+        @Styles.Render("~/Content/Styles/Bundles/hero.less")
+    }
 </head>
 <body>
     @RenderBody()

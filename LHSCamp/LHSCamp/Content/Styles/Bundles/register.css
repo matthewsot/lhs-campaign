@@ -92,3 +92,31 @@ html {
   text-decoration: none;
   color: #fff;
 }
+body {
+  background-color: #44a0c8;
+  color: #fff;
+}
+.row {
+  position: relative;
+  width: 80%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: center;
+}
+.register-page {
+  display: none;
+  border-top: 2px solid #fff;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.sel-btn {
+  background-color: #fff;
+  color: #44a0c8;
+}
+.sel-btn :hover {
+  background-color: #fff;
+  color: #44a0c8;
+}
+.cand-only {
+  display: none;
+}

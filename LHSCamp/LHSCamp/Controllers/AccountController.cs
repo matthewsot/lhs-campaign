@@ -456,17 +456,6 @@ namespace LHSCamp.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("Account/LogOffReal")]
-        public ActionResult LogOffReal()
-        {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Index", controllerName: "Default");
-        }
-
         [HttpGet]
         [Route("Account/LogOff")]
         public ActionResult LogOff()
@@ -476,6 +465,17 @@ namespace LHSCamp.Controllers
                 AuthenticationManager.SignOut();
             }
             catch { }
+            return RedirectToAction("Index", controllerName: "Default");
+        }
+
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Account/LogOffReal")]
+        public ActionResult LogOffReal()
+        {
+            AuthenticationManager.SignOut();
             return RedirectToAction("Index", controllerName: "Default");
         }
 

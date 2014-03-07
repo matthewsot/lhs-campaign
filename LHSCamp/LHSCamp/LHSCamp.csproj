@@ -352,6 +352,8 @@
     <Content Include="Views\Welcome\Candidate.cshtml" />
     <Content Include="Content\Styles\Site\Layout\tab-box.less" />
     <Content Include="Content\Styles\Bundles\home.less" />
+    <Content Include="Content\Styles\Bundles\layout.less" />
+    <Content Include="Content\Styles\Bundles\index.less" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml">
       <SubType>Designer</SubType>
     </None>

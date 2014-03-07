@@ -11,3 +11,26 @@
     width:@size;
     border-radius:@size / 2;
 }
+
+.half-vert() {
+    position:relative;
+    /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
+    top:50%;
+    /* but ewe. should use prefix-free */
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.half-horiz() {
+    position:relative;
+    left:50%;
+    /* but ewe. should use prefix-free */
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
