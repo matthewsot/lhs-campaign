@@ -354,6 +354,10 @@
     <Content Include="Content\Styles\Bundles\home.less" />
     <Content Include="Content\Styles\Bundles\layout.less" />
     <Content Include="Content\Styles\Bundles\index.less" />
+    <Content Include="Content\Styles\Bundles\hero.less" />
+    <Content Include="Content\Styles\Bundles\register.less" />
+    <Content Include="Content\Styles\Bundles\login.less" />
+    <Content Include="Content\Styles\Bundles\welcome-candidate.less" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml">
       <SubType>Designer</SubType>
     </None>
