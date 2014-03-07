@@ -351,13 +351,13 @@
     <Content Include="Views\CreatePhoto\Profile.cshtml" />
     <Content Include="Views\Welcome\Candidate.cshtml" />
     <Content Include="Content\Styles\Site\Layout\tab-box.less" />
-    <Content Include="Content\Styles\Bundles\home.less" />
-    <Content Include="Content\Styles\Bundles\layout.less" />
-    <Content Include="Content\Styles\Bundles\index.less" />
-    <Content Include="Content\Styles\Bundles\hero.less" />
-    <Content Include="Content\Styles\Bundles\register.less" />
-    <Content Include="Content\Styles\Bundles\login.less" />
-    <Content Include="Content\Styles\Bundles\welcome-candidate.less" />
+    <Content Include="Content\Styles\Bundles\Home\home.less" />
+    <Content Include="Content\Styles\Bundles\Layouts\layout.less" />
+    <Content Include="Content\Styles\Bundles\Prelogin\index.less" />
+    <Content Include="Content\Styles\Bundles\Layouts\hero.less" />
+    <Content Include="Content\Styles\Bundles\Prelogin\register.less" />
+    <Content Include="Content\Styles\Bundles\Prelogin\login.less" />
+    <Content Include="Content\Styles\Bundles\Home\welcome-candidate.less" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml">
       <SubType>Designer</SubType>
     </None>
