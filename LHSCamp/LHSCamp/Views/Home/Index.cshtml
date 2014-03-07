@@ -3,19 +3,33 @@
 }
 
 @section Styles {
+    @Styles.Render("~/Content/Styles/Site/Layout/tab-box.less")
     @Styles.Render("~/Content/Styles/Site/Home/picker.less")
     @Styles.Render("~/Content/Styles/Site/Home/footer.less")
     @*@Scripts.Render("~/Content/Scripts/Site/Home/picker.js")*@
 }
 
-<ul id="picker-tabs">
-    <li class="picker-tab sel-tab" data-position="Secretary"><div>SECRETARY</div></li>
-    <li class="picker-tab" data-position="Treasurer"><div>TREASURER</div></li>
-    <li class="picker-tab" data-position="Vice President"><div>VICE-PRES.</div></li>
-    <li class="picker-tab" data-position="President"><div>PRESIDENT</div></li>
+<ul id="picker-tabs" class="tabs-list">
+    <li class="tab picker-tab sel-tab" data-position="Secretary"><div>SECRETARY</div></li>
+    <li class="tab picker-tab" data-position="Treasurer"><div>TREASURER</div></li>
+    <li class="tab picker-tab" data-position="Vice President"><div>VICE-PRES.</div></li>
+    <li class="tab picker-tab" data-position="President"><div>PRESIDENT</div></li>
 </ul>
 
-<div id="picker-container">
+<div id="picker-container" class="tab-box">
     <div id="picker-box">
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".picker-tab").click(function () {
+                $(".picker-tab").removeClass("sel-tab");
+                $(this).addClass("sel-tab");
+                picker.switchTo($(this).attr("data-position"));
+            });
+            $(".sel-tab").click(); //load the first tab
+        });
+    </script>
+}

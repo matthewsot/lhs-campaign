@@ -2,7 +2,7 @@
     ViewBag.Title = "Candidate";
 }
 @section Styles {
-    @Styles.Render("~/Content/Styles/Site/Home/picker.less")
+    @Styles.Render("~/Content/Styles/Site/Layout/tab-box.less")
     <style type="text/css">
         .picker-page {
             display: none;
@@ -18,12 +18,12 @@
         you'll be allowed to upload your profile image and be featured on LHS Campaign.
     </span>
 
-    <ul id="picker-tabs" style="width:100%;">
-        <li class="picker-tab sel-tab" data-picker-page="email"><div>1. EMAIL</div></li>
-        <li class="picker-tab" data-picker-page="points"><div>2. CAMPAIGN INFO</div></li>
-        <li class="picker-tab" data-picker-page="picture"><div>3. PROFILE PICTURE</div></li>
+    <ul class="tabs-list" style="width:100%;">
+        <li class="tab sel-tab" data-picker-page="email"><div>1. EMAIL</div></li>
+        <li class="tab" data-picker-page="points"><div>2. CAMPAIGN INFO</div></li>
+        <li class="tab" data-picker-page="picture"><div>3. PROFILE PICTURE</div></li>
     </ul>
-    <div id="picker-container">
+    <div class="tab-box">
         <div id="picker-page-email" class="picker-page sel-page" style="display:block;">
             Candidates must have a verified email before getting started.
             <br />
@@ -69,8 +69,8 @@
 </div>
 @section Scripts {
     <script type="text/javascript">
-        $(".picker-tab").click(function () {
-            $(".picker-tab").removeClass("sel-tab");
+        $(".tab").click(function () {
+            $(".tab").removeClass("sel-tab");
             $(this).addClass("sel-tab");
             var page = $(this).attr("data-picker-page");
             $(".sel-page").fadeOut(function () {
