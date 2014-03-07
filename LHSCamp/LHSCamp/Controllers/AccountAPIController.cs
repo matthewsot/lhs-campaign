@@ -20,7 +20,7 @@ namespace LHSCamp.Controllers
         }
         [HttpPost]
         [Route("API/Account/CheckName")]
-        public async Task<IHttpActionResult> CheckName(UserNameModel model)
+        public IHttpActionResult CheckName(UserNameModel model)
         {
             using(LCDB db = new LCDB())
             {
@@ -30,6 +30,24 @@ namespace LHSCamp.Controllers
                 else
                     return Ok("new");
             }
+        }
+
+        [HttpPost]
+        [Route("API/Account/SetEmail")]
+        [Authorize]
+        public IHttpActionResult SetEmail(SetEmailModel model)
+        {
+            using (LCDB db = new LCDB())
+            {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                if (user == null)
+                    return NotFound();
+
+                user.Email = model.email;
+                db.SaveChanges();
+            }
+            return Ok("set");
         }
         
         [HttpPost]

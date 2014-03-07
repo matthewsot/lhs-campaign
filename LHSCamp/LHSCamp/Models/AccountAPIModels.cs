@@ -9,6 +9,10 @@ namespace LHSCamp.Models
     {
         public string Username { get; set; }
     }
+    public class SetEmailModel
+    {
+        public string email { get; set; }
+    }
     public class RegisterModel
     {
         public string FullName { get; set; }

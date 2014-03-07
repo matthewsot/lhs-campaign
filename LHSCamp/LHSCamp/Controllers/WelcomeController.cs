@@ -26,6 +26,7 @@ namespace LHSCamp.Controllers
                     return RedirectToAction("Index", "Home");
 
                 ViewBag.Confirmed = currUser.IsConfirmed;
+                ViewBag.Email = currUser.Email;
             }
             return View();
         }
