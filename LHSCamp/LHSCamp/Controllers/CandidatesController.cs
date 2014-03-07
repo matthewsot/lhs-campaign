@@ -32,7 +32,7 @@ namespace LHSCamp.Controllers
         [Route("API/Anon/Candidates/{Position}")]
         public IHttpActionResult GetAnonCandidates(string Position)
         {
-            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
+            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower() && c.ProfilePic != null);
             return Ok(candidates.Select(cand => new CandidateModel()
             {
                 id = cand.Id,

@@ -22,6 +22,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TypeScriptToolsVersion>0.9</TypeScriptToolsVersion>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,7 +41,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-	<includesetaclproviderondestination>False</includesetaclproviderondestination>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="dotless.Core">
@@ -311,7 +313,9 @@
     <Content Include="Content\Scripts\Bootstrap\respond.js" />
     <Content Include="Content\Scripts\Bootstrap\respond.min.js" />
     <Content Include="Content\Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -346,7 +350,9 @@
     <Content Include="Views\CreatePhoto\Cover.cshtml" />
     <Content Include="Views\CreatePhoto\Profile.cshtml" />
     <Content Include="Views\Welcome\Candidate.cshtml" />
-    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">

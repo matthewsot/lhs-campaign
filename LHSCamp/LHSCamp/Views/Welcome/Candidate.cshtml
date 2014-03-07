@@ -19,25 +19,35 @@
     </span>
 
     <ul id="picker-tabs" style="width:100%;">
-        <li class="picker-tab sel-tab" data-picker-page="points"><div>CAMPAIGN POINTS</div></li>
-        <li class="picker-tab" data-picker-page="email"><div>EMAIL</div></li>
-        <li class="picker-tab" data-picker-page="picture"><div>PROFILE PICTURE</div></li>
+        <li class="picker-tab sel-tab" data-picker-page="email"><div>1. EMAIL</div></li>
+        <li class="picker-tab" data-picker-page="points"><div>2. CAMPAIGN INFO</div></li>
+        <li class="picker-tab" data-picker-page="picture"><div>3. PROFILE PICTURE</div></li>
     </ul>
     <div id="picker-container">
-        <div id="picker-page-points" class="picker-page sel-page" style="display:block;">
+        <div id="picker-page-email" class="picker-page sel-page" style="display:block;">
+            Candidates must have a verified email before getting started, please input an email below.
+            <br/>
+            <input type="email" id="email-input" class="default-input standard-input" placeholder="email" />
+            <br />
+            <input type="submit" value="Confirm" class="default-btn standard-btn" />
+            <br />
+            We'll contact you within 24 hours to confirm your email and give you a rundown of the final step before you're listed as a candidate.
+        </div>
+        <div id="picker-page-points" class="picker-page">
             What are some of your main campaign points?
             <br/>
             NOTE: This isn't implemented yet, click the PROFILE PICTURE tab to upload a picture.
         </div>
-        <div id="picker-page-email" class="picker-page">
-            Sorry, you're not a validated user yet.
-        </div>
         <div id="picker-page-picture" class="picker-page">
+            @if(ViewBag.Confirmed) {
             <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file" />
                 <br/>
                 <input type="submit" value="Upload" class="default-btn standard-btn" />
             </form>
+            } else {
+                <h2>Your account must be confirmed before you can upload a photo. You should get an email from someone on the team within 24 hours confirming your account.</h2>
+            }
         </div>
     </div>
 </div>
@@ -47,9 +57,10 @@
             $(".picker-tab").removeClass("sel-tab");
             $(this).addClass("sel-tab");
             var page = $(this).attr("data-picker-page");
-            $(".sel-page").fadeOut();
-            $("#picker-page-" + page).fadeIn();
-            $("#picker-page-" + page).addClass("sel-page");
+            $(".sel-page").fadeOut(function () {
+                $("#picker-page-" + page).fadeIn();
+                $("#picker-page-" + page).addClass("sel-page");
+            });
         });
     </script>
 }

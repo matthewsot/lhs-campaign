@@ -18,6 +18,15 @@ namespace LHSCamp.Controllers
         // GET: Welcome
         public ActionResult Candidate()
         {
+            var userId = User.Identity.GetUserId();
+            using (var db = new LCDB())
+            {
+                var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
+                if (currUser == null || !currUser.IsCandidate)
+                    return RedirectToAction("Index", "Home");
+
+                ViewBag.Confirmed = currUser.IsConfirmed;
+            }
             return View();
         }
         //Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
@@ -52,7 +61,6 @@ namespace LHSCamp.Controllers
                         currUser.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;
                         db.SaveChanges();
                     }
-                    
                 }
                 return RedirectToAction("Index", controllerName: "Home");
             }
