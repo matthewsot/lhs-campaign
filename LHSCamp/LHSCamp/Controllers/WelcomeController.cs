@@ -27,6 +27,7 @@ namespace LHSCamp.Controllers
 
                 ViewBag.Confirmed = currUser.IsConfirmed;
                 ViewBag.Email = currUser.Email;
+                ViewBag.Reasons = currUser.Candidate.Reasons ?? "";
             }
             return View();
         }

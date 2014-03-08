@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201403040548220_ChosenCandidates.Designer.cs">
       <DependentUpon>201403040548220_ChosenCandidates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403080100127_CandidateReasons.cs" />
+    <Compile Include="Migrations\201403080100127_CandidateReasons.Designer.cs">
+      <DependentUpon>201403080100127_CandidateReasons.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountAPIModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -374,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403040548220_ChosenCandidates.resx">
       <DependentUpon>201403040548220_ChosenCandidates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403080100127_CandidateReasons.resx">
+      <DependentUpon>201403080100127_CandidateReasons.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

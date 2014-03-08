@@ -26,11 +26,12 @@
     <div class="tab-box">
         <div id="picker-page-email" class="picker-page sel-page" style="display:block;">
             Candidates must have a verified email before getting started.
+            <br/>
             <br />
             @if (string.IsNullOrWhiteSpace(ViewBag.Email))
             {
                 @:Please enter an email below:
-                <br />
+                <br /><br/>
                 <input type="email" id="email-input" class="default-input standard-input" placeholder="email" style="width:400px;" />
                 <br />
                 <input type="submit" value="Confirm" id="update-email" class="default-btn standard-btn" />
@@ -38,18 +39,21 @@
             else
             {
                 @:If you want to make changes to your email, make them below:
-                <br />
+                <br /><br/>
                 <input type="email" id="email-input" class="default-input standard-input" value="@(ViewBag.Email)" style="width:400px;" />
                 <br />
                 <input type="submit" value="Update" id="update-email" class="default-btn standard-btn" />
             }
-            <br />
+            <br /><br />
             We'll contact you within 24 hours to confirm your email and give you a rundown of the final step before you're listed as a candidate.
         </div>
         <div id="picker-page-points" class="picker-page">
-            What are some of your main campaign points?
-            <br />
-            NOTE: This isn't implemented yet, click the PROFILE PICTURE tab to upload a picture.
+            What are some of your main campaign points? Please enter a paragraph or two below explaining why you're the best candidate.
+            <br /><br/>
+            <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
+            <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align:left;width:90%;height:300px;white-space:pre-wrap;">@ViewBag.Reasons</textarea>
+            <br/>
+            <button class="default-btn standard-btn" id="save-reasons">Save</button>
         </div>
         <div id="picker-page-picture" class="picker-page">
             @if (ViewBag.Confirmed)
@@ -73,10 +77,9 @@
             $(".tab").removeClass("sel-tab");
             $(this).addClass("sel-tab");
             var page = $(this).attr("data-picker-page");
-            $(".sel-page").fadeOut(function () {
-                $("#picker-page-" + page).fadeIn();
-                $("#picker-page-" + page).addClass("sel-page");
-            });
+            $(".sel-page").fadeOut();
+            $("#picker-page-" + page).fadeIn();
+            $("#picker-page-" + page).addClass("sel-page");
         });
 
         $("#update-email").click(function () {
@@ -86,6 +89,17 @@
             }, function (data) {
                 if (data == "set") {
                     $("[data-picker-page=points]").click();
+                }
+            });
+        });
+
+        $("#save-reasons").click(function () {
+            var reasons = $("#campaign-reasons").val();
+            $.post("/API/Account/SetReasons", {
+                "reasons": reasons
+            }, function (data) {
+                if (data == "set") {
+                    $("[data-picker-page=picture]").click();
                 }
             });
         });
