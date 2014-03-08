@@ -53,8 +53,9 @@ namespace LHSCamp.Controllers
             if (currUser == null) return NotFound();
 
             var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
+            //Thanks! http://stackoverflow.com/questions/654906/linq-to-entities-random-order
+            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower()).OrderBy(b => Guid.NewGuid());
 
-            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower());
             return Ok(candidates.Select(cand => new CandidateModel()
             {
                 id = cand.Id,
