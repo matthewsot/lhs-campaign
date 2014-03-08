@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/Fonts/Quickly/Quickly-font.css")
-    @Styles.Render("~/Content/Fonts/Railway/Railway-font.css")
-    @if(IsSectionDefined("Styles")) {
+    @Styles.Render("~/bundles/fonts")
+    @if (IsSectionDefined("Styles"))
+    {
         @RenderSection("Styles", false)
     }
-    else {
+    else
+    {
         @Styles.Render("~/Content/Styles/Bundles/Layouts/hero.less")
     }
 </head>
