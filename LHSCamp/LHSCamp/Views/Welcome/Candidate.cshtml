@@ -17,13 +17,14 @@
 }
 <div style="position:relative;width:80%;left:10%;">
     <h1>Welcome to LHS Campaign!</h1>
-
-    <span>
-        We'll run through a few quick questions to get your candidate account set up.
-        Once you're verified (which may take up to 24 hours),
-        you'll be allowed to upload your profile image and be featured on LHS Campaign.
-    </span>
-
+    @if (ViewBag.Confirmed)
+    {
+        <span>
+            We'll run through a few quick questions to get your candidate account set up.
+            Once you're verified (which may take up to 24 hours),
+            you'll be allowed to upload your profile image and be featured on LHS Campaign.
+        </span>
+    }
     <ul class="tabs-list">
         <li class="tab sel-tab" data-picker-page="email"><div>1. EMAIL</div></li>
         <li class="tab" data-picker-page="points"><div>2. CAMPAIGN INFO</div></li>
@@ -65,7 +66,7 @@
             @if (ViewBag.Confirmed)
             {
                 @:Please be aware that your profile picture must be less than 2MB in size.
-                <br/><br/>
+                <br /><br />
                 @:If your picture is larger than that (or if you have any other problems), please don't hesitate to contact vip@lhscampaign.com and we'll make it work.
                 <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" />
