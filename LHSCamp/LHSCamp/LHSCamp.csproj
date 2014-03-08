@@ -404,7 +404,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Candidates\" />
   </ItemGroup>
   <ItemGroup>
