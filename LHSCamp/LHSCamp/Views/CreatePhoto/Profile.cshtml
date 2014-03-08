@@ -3,7 +3,7 @@
 }
 
 @section Styles {
-    @Styles.Render("~/Content/Styles/Bundles/layout.less")
+    @Styles.Render("~/Content/Styles/Bundles/Layouts/layout.less")
     <style type="text/css">
         .canvas-container {
             margin: 0 auto;
@@ -30,6 +30,8 @@
         $.getJSON("/API/Chosen", function (data) {
             for (var i = 0; i < data.length; i++) {
                 fabric.Image.fromURL(data[i].profilePic, function (oImg) {
+                    oImg.scaleToWidth(250);
+                    oImg.setLeft(250 * ((i + 1) % 2));
                     fab.add(oImg);
                 });
             }
@@ -51,6 +53,7 @@
         } catch (e) { fileSaver = false; handleCompat(); }
 
         $("#save-img").click(function () {
+            fab.discardActiveObject();
             canvas.toBlob(function (blob) {
                 saveAs(blob, "profile.png");
             });
