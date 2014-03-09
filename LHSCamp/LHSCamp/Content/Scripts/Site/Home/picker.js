@@ -24,7 +24,11 @@ var picker = (function () {
     picker.showWedge = function (id) {
         $.getJSON("/API/Candidate/Details/" + id, function (data) {
             $("#cand-wedge-img").attr("src", data.profilePic);
-
+            if (data.reasons != null && data.reasons.length > 0) {
+                $("#cand-wedge-reasons").text(data.reasons);
+            } else {
+                $("#cand-wedge-reasons").text("This candidate hasn't filled in his or her campaign summary!");
+            }
             initWedge("cand-wedge", '', 'div', false, 0.7);
         });
     };
@@ -57,7 +61,7 @@ var picker = (function () {
         newItem += '<button class="picker-info-btn picker-add-btn" ';
         newItem += 'data-cand-id="' + item.id + '" data-cand-selected="' + item.chosen.toLowerCase() + '"';
         newItem += '>' + hoverText + ' </button>';
-        newItem += '<button class="picker-info-btn picker-read-btn">read more</button>';
+        newItem += '<button class="picker-info-btn picker-read-btn" data-cand-id="' + item.id + '">read more</button>';
         newItem += '<div class="picker-name half-vert">' + item.name.toUpperCase() + '</div>';
         newItem += '</div>';
         newItem += '</div>';
@@ -92,7 +96,7 @@ var picker = (function () {
         var self = this;
         $(".picker-read-btn").unbind("click");
         $(".picker-read-btn").click(function () {
-            self.showWedge(1);
+            self.showWedge($(this).attr("data-cand-id"));
         });
 
         if (item.chosen == "true") {
