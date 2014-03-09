@@ -22,12 +22,15 @@ var picker = (function () {
         });
     };
     picker.showWedge = function (id) {
-        var newDiv = new HTMLDivElement();
+        var newDiv = document.createElement("div");
         newDiv.id = "wedge-target";
         newDiv.textContent = "HEYA";
         newDiv.style.display = "none";
         newDiv.style.color = "#fff";
-        document.appendChild(newDiv);
+        newDiv.style.backgroundColor = "#fff";
+        newDiv.style.width = "700px";
+        newDiv.style.height = "800px";
+        $("body").append(newDiv);
         initWedge("wedge-target", '', 'div');
     };
 

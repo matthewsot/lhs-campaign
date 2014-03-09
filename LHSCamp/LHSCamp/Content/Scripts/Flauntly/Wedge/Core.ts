@@ -8,15 +8,22 @@
  */
 function initWedge(link, title, type, opacity = 0.9, allowExit = true) {
     /*
-	 * Shows the overlay
-	 */
+     * Shows the overlay
+     */
+
     $("body").append('<div id="lightOverlay" style="overflow:hidden;top:0px;left:0px;position:fixed;z-index:2147483630;opacity:' + opacity.toString() + ';background-color:#000000;display:none;" />');
     $("#lightOverlay").css("height", window.innerHeight);
     $("#lightOverlay").css("width", window.innerWidth);
     $("#lightOverlay").fadeIn("slow");
+
     if (allowExit) {
         $("#lightOverlay").click("slow", function () {
-            $("#lightContent").fadeOut(function () {
+            var goodMarginLeft = $("#lightContent").css("margin-left");
+            var toGoLeft = (parseInt(goodMarginLeft.replace('px', '')) - 50);
+            $("#lightContent").animate({
+                opacity: 0,
+                marginLeft: toGoLeft
+            }, function () {
                 if (type == "div") {
                     $("#" + link).appendTo($("body"));
                     $("#" + link).hide();
@@ -28,11 +35,10 @@ function initWedge(link, title, type, opacity = 0.9, allowExit = true) {
             });
         });
     }
-
     /*
-	 * Shows the content
-	 */
-    $("body").append('<div id="lightContent" style="text-align:center;z-index:2147483641;display:none;position:fixed;">');
+     * Shows the content
+     */
+    $("body").append('<div id="lightContent" style="text-align:center;z-index:2147483641;opacity:0;position:fixed;">');
     switch (type) {
         case "youtube":
             $("#lightContent").append('<iframe id="youtubeFrame" width="853" height="480" src="' + link.replace("/watch?v=", "/embed/").replace(/&.*/, "") + '" frameborder="0" allowfullscreen></iframe><h3 style="color:#A0A0A0;">' + title + '</h3>');
@@ -45,5 +51,10 @@ function initWedge(link, title, type, opacity = 0.9, allowExit = true) {
             $("#lightContent").append($("#" + link));
     }
     $("#lightContent").css({ top: '50%', left: '50%', margin: '-' + ($('#lightContent').height() / 2) + 'px 0 0 -' + ($('#lightContent').width() / 2) + 'px' }); //courtesy of http://archive.plugins.jquery.com/project/autocenter
-    $("#lightContent").fadeIn("slow");
+    var goodMarginLeft = $("#lightContent").css("margin-left");
+    $("#lightContent").css("margin-left", (parseInt(goodMarginLeft.replace('px', '')) - 50) + "px");
+    $("#lightContent").animate({
+        "opacity": 1,
+        marginLeft: goodMarginLeft
+    }, "slow");
 }
