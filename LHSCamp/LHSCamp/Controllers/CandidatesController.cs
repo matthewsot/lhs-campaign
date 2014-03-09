@@ -67,6 +67,24 @@ namespace LHSCamp.Controllers
         }
 
         [HttpGet]
+        [Route("API/Candidate/Details/{Id}")]
+        public IHttpActionResult GetCandidateDetails(int Id)
+        {
+            var candidate = db.Candidates.Where(cand => cand.Id == Id).Select(cand => new
+            {
+                reasons = cand.Reasons,
+                name = cand.Name,
+                position = cand.Position,
+                profilePic = cand.ProfilePic
+            }).FirstOrDefault();
+
+            if (candidate == null)
+                return NotFound();
+
+            return Ok(candidate);
+        }
+
+        [HttpGet]
         [Authorize]
         [Route("API/Chosen")]
         public IHttpActionResult GetChosenCandidates()

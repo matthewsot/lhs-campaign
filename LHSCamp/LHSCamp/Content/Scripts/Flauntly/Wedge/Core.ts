@@ -6,7 +6,7 @@
  * title: Text displayed below the content
  * type: The type of link provided - youtube or pic
  */
-function initWedge(link, title, type, opacity = 0.9, allowExit = true) {
+function initWedge(link, title, type, doAutoPosition = true, opacity = 0.9, allowExit = true) {
     /*
      * Shows the overlay
      */
@@ -50,7 +50,9 @@ function initWedge(link, title, type, opacity = 0.9, allowExit = true) {
             $("#" + link).show();
             $("#lightContent").append($("#" + link));
     }
-    $("#lightContent").css({ top: '50%', left: '50%', margin: '-' + ($('#lightContent').height() / 2) + 'px 0 0 -' + ($('#lightContent').width() / 2) + 'px' }); //courtesy of http://archive.plugins.jquery.com/project/autocenter
+    if (doAutoPosition) {
+        $("#lightContent").css({ top: '50%', left: '50%', margin: '-' + ($('#lightContent').height() / 2) + 'px 0 0 -' + ($('#lightContent').width() / 2) + 'px' }); //courtesy of http://archive.plugins.jquery.com/project/autocenter
+    }
     var goodMarginLeft = $("#lightContent").css("margin-left");
     $("#lightContent").css("margin-left", (parseInt(goodMarginLeft.replace('px', '')) - 50) + "px");
     $("#lightContent").animate({

@@ -5,10 +5,11 @@
 * title: Text displayed below the content
 * type: The type of link provided - youtube or pic
 */
-function initWedge(link, title, type, opacity, allowExit) {
+function initWedge(link, title, type, doAutoPosition, opacity, allowExit) {
     /*
     * Shows the overlay
     */
+    if (typeof doAutoPosition === "undefined") { doAutoPosition = true; }
     if (typeof opacity === "undefined") { opacity = 0.9; }
     if (typeof allowExit === "undefined") { allowExit = true; }
     $("body").append('<div id="lightOverlay" style="overflow:hidden;top:0px;left:0px;position:fixed;z-index:2147483630;opacity:' + opacity.toString() + ';background-color:#000000;display:none;" />');
@@ -51,7 +52,9 @@ function initWedge(link, title, type, opacity, allowExit) {
             $("#" + link).show();
             $("#lightContent").append($("#" + link));
     }
-    $("#lightContent").css({ top: '50%', left: '50%', margin: '-' + ($('#lightContent').height() / 2) + 'px 0 0 -' + ($('#lightContent').width() / 2) + 'px' }); //courtesy of http://archive.plugins.jquery.com/project/autocenter
+    if (doAutoPosition) {
+        $("#lightContent").css({ top: '50%', left: '50%', margin: '-' + ($('#lightContent').height() / 2) + 'px 0 0 -' + ($('#lightContent').width() / 2) + 'px' }); //courtesy of http://archive.plugins.jquery.com/project/autocenter
+    }
     var goodMarginLeft = $("#lightContent").css("margin-left");
     $("#lightContent").css("margin-left", (parseInt(goodMarginLeft.replace('px', '')) - 50) + "px");
     $("#lightContent").animate({

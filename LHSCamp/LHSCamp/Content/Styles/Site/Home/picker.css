@@ -183,3 +183,54 @@ img.picker-img {
   left: 10px;
   top: 15px;
 }
+#lightContent {
+  width: 700px;
+  /* but ewe. should use prefix-free */
+  position: relative;
+  left: 50%;
+  /* but ewe. should use prefix-free */
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  height: 80%;
+  max-height: 80%;
+  top: 10%;
+  overflow-x: hidden;
+  background-color: #44a0c8;
+  color: #fff;
+}
+#cand-wedge {
+  display: none;
+  width: 700px;
+  height: 100%;
+}
+#cand-wedge-img {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 200px;
+  height: 200px;
+}
+#cand-wedge-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 30px;
+  font-family: 'Railway-Bold';
+  cursor: pointer;
+}
+#cand-wedge-content {
+  position: absolute;
+  top: 225px;
+  text-align: center;
+  width: 100%;
+}
+#cand-wedge-reasons {
+  width: 80%;
+  margin-left: 10%;
+  text-align: left;
+  font-size: 20px;
+  white-space: pre-wrap;
+}

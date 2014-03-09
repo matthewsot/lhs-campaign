@@ -18,6 +18,16 @@
     <div id="picker-box">
     </div>
 </div>
+<div id="cand-wedge" class="blue">
+    <div id="cand-wedge-close">X</div>
+    <img id="cand-wedge-img" />
+    <div id="cand-wedge-content">
+        <h2 class="railway-bold">WHY YOU SHOULD VOTE</h2>
+        <p id="cand-wedge-reasons">I'm da best wooo Vote for me! Vote for me for XYZ.
+        
+        I come from a rough tough family. I'm quite the best can't you see? Vote for me and we'll run this year happily. Let's get into ASB. I'm da best wooo Vote for me!I'm da best wooo Vote for me! Vote for me for XYZ. I come from a rough tough family. I'm quite the best can't you see? Vote for me and we'll run this year happily. Let's get into ASB. I'm da best wooo Vote for me!I'm da best wooo Vote for me! Vote for me for XYZ. I come from a rough tough family. I'm quite the best can't you see? Vote for me and we'll run this year happily. Let's get into ASB. I'm da best wooo Vote for me!I'm da best wooo Vote for me! Vote for me for XYZ. I come from a rough tough family. I'm quite the best can't you see? Vote for me and we'll run this year happily. Let's get into ASB. I'm da best wooo Vote for me!I'm da best wooo Vote for me! Vote for me for XYZ. I come from a rough tough family. I'm quite the best can't you see? Vote for me and we'll run this year happily. Let's get into ASB. I'm da best wooo Vote for me!I'm da best wooo Vote for me! Vote for me for XYZ. I come from a rough tough family. I'm quite the best can't you see? Vote for me and we'll run this year happily. Let's get into ASB. I'm da best wooo Vote for me!</p>
+    </div>
+</div>
 
 @section Scripts {
     <script type="text/javascript">
@@ -28,6 +38,9 @@
                 picker.switchTo($(this).attr("data-position"));
             });
             $(".sel-tab").click(); //load the first tab
+            $("#cand-wedge-close").click(function () {
+                $("#lightOverlay").click();
+            });
         });
     </script>
 }
