@@ -71,6 +71,28 @@ namespace LHSCamp.Controllers
             }
             return Ok("set");
         }
+
+        [HttpPost]
+        [Route("API/Account/SetSocial")]
+        [Authorize]
+        public IHttpActionResult SetSocial(SetSocialModel model)
+        {
+            using (LCDB db = new LCDB())
+            {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                if (user == null)
+                    return NotFound();
+
+                var candidate = user.Candidate;
+                if (candidate == null)
+                    return Unauthorized();
+
+                candidate.Facebook = model.facebook;
+                db.SaveChanges();
+            }
+            return Ok("set");
+        }
         
         [HttpPost]
         [Route("API/Account/Register")]

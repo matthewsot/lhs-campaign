@@ -42,7 +42,7 @@
                 <br /><br />
                 <input type="email" id="email-input" class="default-input standard-input" placeholder="email" style="width:400px;" />
                 <br />
-                <input type="submit" value="Confirm" id="update-email" class="default-btn standard-btn" />
+                <button type="submit" id="update-email" class="default-btn standard-btn">Confirm</button>
             }
             else
             {
@@ -50,7 +50,7 @@
                 <br /><br />
                 <input type="email" id="email-input" class="default-input standard-input" value="@(ViewBag.Email)" style="width:400px;" />
                 <br />
-                <input type="submit" value="Update" id="update-email" class="default-btn standard-btn" />
+                <button id="update-email" class="default-btn standard-btn">Update</button>
             }
             <br /><br />
             We'll contact you within 24 hours to confirm your email and give you a rundown of the final step before you're listed as a candidate.
@@ -63,8 +63,13 @@
             <br />
             <button class="default-btn standard-btn" id="save-reasons">Save</button>
         </div>
-        <div id="picker-page-social" class="picture-page">
-            This doesn't work yet
+        <div id="picker-page-social" class="picker-page">
+            Facebook Link:<br/>
+            <input type="text" id="campaign-social" class="default-input standard-input" style="width:400px;" placeholder="http://facebook.com/example..." />
+            <br/>
+            <button class="default-btn standard-btn" id="save-social">Save</button>
+            <br/><br/>
+            If you don't have a Facebook page or event, just click on 'Save' to continue.
         </div>
         <div id="picker-page-picture" class="picker-page">
             @if (ViewBag.Confirmed)
@@ -118,6 +123,17 @@
             }, function (data) {
                 if (data == "set") {
                     $("[data-picker-page=social]").click();
+                }
+            });
+        });
+
+        $("#save-social").click(function () {
+            var fb = $("#campaign-social").val();
+            $.post("/API/Account/SetSocial", {
+                "facebook": fb
+            }, function (data) {
+                if (data == "set") {
+                    $("[data-picker-page=picture]").click();
                 }
             });
         });

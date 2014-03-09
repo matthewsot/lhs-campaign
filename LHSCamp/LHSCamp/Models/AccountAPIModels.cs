@@ -17,6 +17,10 @@ namespace LHSCamp.Models
     {
         public string reasons { get; set; }
     }
+    public class SetSocialModel
+    {
+        public string facebook { get; set; }
+    }
     public class RegisterModel
     {
         public string FullName { get; set; }
