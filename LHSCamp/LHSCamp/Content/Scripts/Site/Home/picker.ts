@@ -21,16 +21,11 @@ class picker {
         });
     }
     static showWedge(id) {
-        var newDiv = document.createElement("div");
-        newDiv.id = "wedge-target";
-        newDiv.textContent = "HEYA";
-        newDiv.style.display = "none";
-        newDiv.style.color = "#fff";
-        newDiv.style.backgroundColor = "#fff";
-        newDiv.style.width = "700px";
-        newDiv.style.height = "800px";
-        $("body").append(newDiv);
-        initWedge("wedge-target", '', 'div');
+        $.getJSON("/API/Candidate/Details/" + id, function (data) {
+            $("#cand-wedge-img").attr("src", data.profilePic);
+
+            initWedge("cand-wedge", '', 'div', false, 0.7);
+        });
     }
 
     static addItem(item, row: number, col: number) {
@@ -64,7 +59,7 @@ class picker {
         newItem += '<div class="picker-name half-vert">' + item.name.toUpperCase() + '</div>';
         newItem += '</div>';
         newItem += '</div>';
-        $("#picker-box").html($("#picker-box").html() + newItem);
+        $("#picker-box").append(newItem);
 
         $("#picker-container").css("min-height", (((row + 1) * 340) + 40) + "px");
 
