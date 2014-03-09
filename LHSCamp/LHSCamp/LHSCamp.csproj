@@ -240,6 +240,7 @@
     <Content Include="Content\Images\Default\Bubbles\facebook.png" />
     <Content Include="Content\Images\Default\Bubbles\gear.png" />
     <Content Include="Content\Images\Default\Bubbles\ribbon.png" />
+    <Content Include="Content\Images\Default\GPlus.jpg" />
     <Content Include="Content\Images\Default\laptop.png" />
     <Content Include="Content\Scripts\FileSaver\base64.js" />
     <Content Include="Content\Scripts\FileSaver\Blob.js" />
@@ -371,6 +372,7 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Default\GPlus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">

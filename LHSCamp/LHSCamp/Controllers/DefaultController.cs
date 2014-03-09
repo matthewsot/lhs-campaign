@@ -16,5 +16,10 @@ namespace LHSCamp.Controllers
             }
             return View();
         }
+        [Route("GPlus")]
+        public ActionResult GPlus()
+        {
+            return View();
+        }
     }
 }

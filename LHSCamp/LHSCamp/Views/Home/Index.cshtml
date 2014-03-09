@@ -19,7 +19,16 @@
     </div>
 </div>
 <div id="cand-wedge" class="blue">
-    <div id="cand-wedge-close">X</div>
+    <div id="cand-wedge-btns">
+        <div id="cand-wedge-close">X</div>
+        <div class="cand-wedge-circle" id="gplus-btn">
+            <img src="~/Content/Images/Buttons/GooglePlus.png" class="cand-wedge-social" />
+        </div>
+        <br />
+        <div class="cand-wedge-circle" id="facebook-btn">
+            <img src="~/Content/Images/Buttons/Facebook.png" class="cand-wedge-social" />
+        </div>
+    </div>
     <img id="cand-wedge-img" />
     <h2 id="cand-wedge-name"></h2>
     <div id="cand-wedge-position"></div>
@@ -40,6 +49,11 @@
             $(".sel-tab").click(); //load the first tab
             $("#cand-wedge-close").click(function () {
                 $("#lightOverlay").click();
+            });
+            $("#gplus-btn").click(function () {
+                window.open("/GPlus");
+            });
+            $("#facebook-btn").click(function () {
             });
         });
     </script>
