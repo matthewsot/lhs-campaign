@@ -221,6 +221,13 @@ img.picker-img {
   font-family: 'Railway-Bold';
   cursor: pointer;
 }
+#cand-wedge-name {
+  position: absolute;
+  left: 240px;
+  top: 20px;
+  font-family: 'Railway-Bold';
+  font-size: 25px;
+}
 #cand-wedge-content {
   position: absolute;
   top: 225px;
