@@ -235,6 +235,8 @@
     <Content Include="Content\Fonts\Railway\railway-regular-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-semibold-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-thin-webfont.svg" />
+    <Content Include="Content\Images\Buttons\Facebook.png" />
+    <Content Include="Content\Images\Buttons\GooglePlus.png" />
     <Content Include="Content\Images\Default\Bubbles\check.png" />
     <Content Include="Content\Images\Default\Bubbles\document.png" />
     <Content Include="Content\Images\Default\Bubbles\facebook.png" />
