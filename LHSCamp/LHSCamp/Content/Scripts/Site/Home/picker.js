@@ -25,6 +25,7 @@ var picker = (function () {
         $.getJSON("/API/Candidate/Details/" + id, function (data) {
             $("#cand-wedge-img").attr("src", data.profilePic);
             $("#cand-wedge-name").text(data.name);
+            $("#cand-wedge-position").text(data.position);
             if (data.reasons != null && data.reasons.length > 0) {
                 $("#cand-wedge-reasons").text(data.reasons);
             } else {
