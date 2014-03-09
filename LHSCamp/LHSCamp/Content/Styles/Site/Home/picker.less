@@ -29,11 +29,11 @@ div.picker-item {
 img.picker-img {
     height:250px;
     width:100%;
-    cursor:pointer;
+    /*cursor:pointer;*/
     z-index:1;
 }
 
-div.picker-overlay {
+/*div.picker-overlay {
     background-color:@item-hover-blue;
     z-index:10;
     opacity:0;
@@ -44,20 +44,29 @@ div.picker-overlay {
     width:100%;
     cursor:pointer;
     color:#fff;
-}
+}*/
 
-.picker-name {
-    height:50px;
-    line-height:50px;
+.picker-info {
+    height:75px;
     width:100%;
-    cursor:pointer;
-    margin-top:-6px; //Q&D fix here TODO: rewrite
+    /*cursor:pointer;*/
     position:absolute;
-    bottom:-50px;
+    bottom:-75px;
     .blue;
 }
 
-    .picker-name:hover {
-        background-color:@darkblue-color;
-        color:#fff;
+    .picker-info:hover {
+        /*background-color:@darkblue-color;
+        color:#fff;*/
     }
+
+.picker-info-btn {
+    position:absolute;
+    top:5px;
+    left:5px;
+    .default-btn;
+    width:70px;
+    height:30px;
+    padding:0px;
+    font-size:15px;
+}
