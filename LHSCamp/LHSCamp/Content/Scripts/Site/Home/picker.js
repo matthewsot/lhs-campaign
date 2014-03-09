@@ -26,9 +26,9 @@ var picker = (function () {
         col = col - 1;
         var positionClass = "";
         item.chosen = item.chosen.toString().toLowerCase();
-        var hoverText = "Select";
+        var hoverText = "add picture";
         if (item.chosen == "true") {
-            hoverText = "Unselect";
+            hoverText = "remove picture";
         }
         switch (col) {
             case 0:
@@ -46,10 +46,11 @@ var picker = (function () {
 
         //newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-info">';
-        newItem += '<button class="picker-info-btn" ';
+        newItem += '<button class="picker-info-btn picker-add-btn" ';
         newItem += 'data-cand-id="' + item.id + '" data-cand-selected="' + item.chosen.toLowerCase() + '"';
-        newItem += '>' + hoverText + ' </button > ';
-        newItem += '<div class="picker-name half-vert">' + item.name + '</div>';
+        newItem += '>' + hoverText + ' </button>';
+        newItem += '<button class="picker-info-btn picker-read-btn">read more</button>';
+        newItem += '<div class="picker-name half-vert">' + item.name.toUpperCase() + '</div>';
         newItem += '</div>';
         newItem += '</div>';
         $("#picker-box").html($("#picker-box").html() + newItem);
@@ -58,17 +59,17 @@ var picker = (function () {
 
         $(".picker-item").unbind('mouseenter mouseleave'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
         $(".picker-item").hover(function () {
-            $(this).children().first().next().stop().animate({ bottom: 0 }, 100);
+            $(this).children().first().next().stop().animate({ bottom: 0 }, 200);
             $(this).children().first().stop().animate({ marginTop: -75 }, 300);
         }, function () {
-            $(this).children().first().next().stop().animate({ bottom: -75 }, 500);
+            $(this).children().first().next().stop().animate({ bottom: -100 }, 500);
             $(this).children().first().stop().animate({ marginTop: 0 }, 300);
         });
         $(".picker-info-btn").unbind("click");
-        $(".picker-info-btn").click(function () {
+        $(".picker-add-btn").click(function () {
             if ($(this).attr("data-cand-selected") == "false") {
                 $(this).attr("data-cand-selected", "true");
-                $(this).text("Unselect");
+                $(this).text("remove picture");
                 $.getJSON("/API/Chosen/Add/" + $(this).attr("data-cand-id"), function (data) {
                     picker.updateChosenPreviews();
                 });
@@ -77,7 +78,7 @@ var picker = (function () {
                 $.getJSON("/API/Chosen/Remove/" + $(this).attr("data-cand-id"), function (data) {
                     picker.updateChosenPreviews();
                 });
-                $(this).text("Select");
+                $(this).text("add picture");
             }
         });
 
