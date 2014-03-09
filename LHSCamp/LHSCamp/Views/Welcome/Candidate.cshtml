@@ -64,11 +64,11 @@
             <button class="default-btn standard-btn" id="save-reasons">Save</button>
         </div>
         <div id="picker-page-social" class="picker-page">
-            Facebook Link:<br/>
+            Facebook Link:<br /><br/>
             <input type="text" id="campaign-social" class="default-input standard-input" style="width:400px;" placeholder="http://facebook.com/example..." />
-            <br/>
+            <br />
             <button class="default-btn standard-btn" id="save-social">Save</button>
-            <br/><br/>
+            <br /><br />
             If you don't have a Facebook page or event, just click on 'Save' to continue.
         </div>
         <div id="picker-page-picture" class="picker-page">
@@ -128,7 +128,14 @@
         });
 
         $("#save-social").click(function () {
-            var fb = $("#campaign-social").val();
+            var fb = $("#campaign-social").val().trim().toLowerCase();
+            if (fb == $("#campaign-social").attr("placeholder")) {
+                fb = '';
+            }
+            if (fb != '' && fb.indexOf('http') != 0) {
+                fb = 'https://' + fb;
+            }
+            $("#campaign-social").val(fb);
             $.post("/API/Account/SetSocial", {
                 "facebook": fb
             }, function (data) {

@@ -77,8 +77,12 @@ namespace LHSCamp.Controllers
         [Authorize]
         public IHttpActionResult SetSocial(SetSocialModel model)
         {
+            model.facebook = model.facebook.Trim();
             using (LCDB db = new LCDB())
             {
+                if (model.facebook == "")
+                    model.facebook = null;
+
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
                 if (user == null)
