@@ -43,41 +43,50 @@ var picker = (function () {
         }
         var newItem = '<div class="picker-item ' + positionClass + '" id="picker-item-' + item.id + '" style="margin-top:' + row * 340 + 'px;">';
         newItem += '<img class="picker-img" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
-        newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
+
+        //newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-name">' + item.name + '</div>';
         newItem += '</div>';
         $("#picker-box").html($("#picker-box").html() + newItem);
 
         $("#picker-container").css("min-height", (((row + 1) * 340) + 40) + "px");
-        $(".picker-overlay").unbind('mouseenter mouseleave click'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
-        $(".picker-overlay").hover(function () {
-            $(this).stop().animate({
-                opacity: 0.7
-            });
+
+        $(".picker-item").hover(function () {
+            $(this).children().first().next().stop().animate({ bottom: 0 }, 100);
+            $(this).children().first().stop().animate({ marginTop: -50 }, 300);
         }, function () {
-            if ($(this).attr("data-cand-selected") == "false") {
-                $(this).stop().animate({
-                    opacity: 0
-                });
-            }
+            $(this).children().first().next().stop().animate({ bottom: -50 }, 500);
+            $(this).children().first().stop().animate({ marginTop: 0 }, 300);
         });
 
-        $(".picker-overlay").click(function () {
-            if ($(this).attr("data-cand-selected") == "false") {
-                $(this).attr("data-cand-selected", "true");
-                $(this).text("REMOVE");
-                $.getJSON("/API/Chosen/Add/" + $(this).attr("data-cand-id"), function (data) {
-                    picker.updateChosenPreviews();
-                });
-            } else {
-                $(this).attr("data-cand-selected", "false");
-                $.getJSON("/API/Chosen/Remove/" + $(this).attr("data-cand-id"), function (data) {
-                    picker.updateChosenPreviews();
-                });
-                $(this).text("ADD");
-            }
-        });
-
+        //$(".picker-overlay").unbind('mouseenter mouseleave click'); //Thanks! http://stackoverflow.com/questions/805133/how-do-i-unbind-hover-in-jquery
+        //$(".picker-overlay").hover(function () {
+        //    $(this).stop().animate({
+        //        opacity: 0.7
+        //    });
+        //}, function () {
+        //    if ($(this).attr("data-cand-selected") == "false") { //Only fade out for unselected items
+        //        $(this).stop().animate({
+        //            opacity: 0
+        //        });
+        //    }
+        //});
+        //$(".picker-overlay").click(function () {
+        //    if ($(this).attr("data-cand-selected") == "false") { //Add candidate to chosen list
+        //        $(this).attr("data-cand-selected", "true");
+        //        $(this).text("REMOVE");
+        //        $.getJSON("/API/Chosen/Add/" + $(this).attr("data-cand-id"), function (data) {
+        //            picker.updateChosenPreviews();
+        //        });
+        //    }
+        //    else { //Remove candidate from chosen list
+        //        $(this).attr("data-cand-selected", "false");
+        //        $.getJSON("/API/Chosen/Remove/" + $(this).attr("data-cand-id"), function (data) {
+        //            picker.updateChosenPreviews();
+        //        });
+        //        $(this).text("ADD");
+        //    }
+        //});
         if (item.chosen == "true") {
             setTimeout(function () {
                 $("#picker-overlay-" + item.id).stop().animate({ opacity: 0.7 });

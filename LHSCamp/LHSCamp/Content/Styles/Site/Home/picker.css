@@ -4,6 +4,16 @@ html {
   margin: 0px;
   font-family: 'Railway';
 }
+.half-horiz {
+  position: relative;
+  left: 50%;
+  /* but ewe. should use prefix-free */
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 .half-vert {
   position: relative;
   /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
@@ -14,16 +24,6 @@ html {
   -o-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
-.half-horiz {
-  position: relative;
-  left: 50%;
-  /* but ewe. should use prefix-free */
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
 }
 .blue {
   background-color: #44a0c8;
@@ -101,11 +101,14 @@ div.picker-item {
   background-color: #fff;
   position: absolute;
   width: 30%;
+  height: 250px;
+  overflow: hidden;
 }
 .left-item {
   left: 0px;
 }
 .mid-item {
+  /* but ewe. should use prefix-free */
   position: relative;
   left: 50%;
   /* but ewe. should use prefix-free */
@@ -142,6 +145,10 @@ div.picker-overlay {
   width: 100%;
   cursor: pointer;
   margin-top: -6px;
+  position: absolute;
+  bottom: -50px;
+  background-color: #44a0c8;
+  color: #fff;
 }
 .picker-name:hover {
   background-color: #40809c;
