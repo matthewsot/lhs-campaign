@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../typings/jquery/jquery.d.ts" />
+/// <reference path="../../Flauntly/Wedge/Core.ts" />
 
 class picker {
     static updateChosenPreviews() {
@@ -18,6 +19,15 @@ class picker {
                 });
             }
         });
+    }
+    static showWedge(id) {
+        var newDiv = new HTMLDivElement();
+        newDiv.id = "wedge-target";
+        newDiv.textContent = "HEYA";
+        newDiv.style.display = "none";
+        newDiv.style.color = "#fff";
+        document.appendChild(newDiv);
+        initWedge("wedge-target", '', 'div');
     }
 
     static addItem(item, row: number, col: number) {
@@ -63,7 +73,7 @@ class picker {
                 $(this).children().first().next().stop().animate({ bottom: -100 }, 500);
                 $(this).children().first().stop().animate({ marginTop: 0 }, 300);
             });
-        $(".picker-info-btn").unbind("click");
+        $(".picker-add-btn").unbind("click");
         $(".picker-add-btn").click(function () {
             if ($(this).attr("data-cand-selected") == "false") { //Add candidate to chosen list
                 $(this).attr("data-cand-selected", "true");
@@ -79,6 +89,11 @@ class picker {
                 });
                 $(this).text("add picture");
             }
+        });
+        var self = this;
+        $(".picker-read-btn").unbind("click");
+        $(".picker-read-btn").click(function () {
+            self.showWedge(1);
         });
 
         if (item.chosen == "true") {

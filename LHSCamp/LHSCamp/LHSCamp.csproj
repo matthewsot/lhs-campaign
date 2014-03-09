@@ -246,6 +246,8 @@
     <Content Include="Content\Scripts\FileSaver\canvas-toBlob.js" />
     <Content Include="Content\Scripts\FileSaver\FileSaver.js" />
     <Content Include="Content\Scripts\FileSaver\Modernizr.js" />
+    <Content Include="Content\Scripts\Flauntly\Core.js" />
+    <Content Include="Content\Scripts\Flauntly\Wedge\Core.js" />
     <Content Include="Content\Scripts\GSAP\CSSPlugin.min.js" />
     <Content Include="Content\Scripts\GSAP\EasePack.min.js" />
     <Content Include="Content\Scripts\GSAP\jquery.gsap.min.js" />
@@ -411,6 +413,8 @@
     <Folder Include="Content\Images\Candidates\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Content\Scripts\Flauntly\Core.ts" />
+    <TypeScriptCompile Include="Content\Scripts\Flauntly\Wedge\Core.ts" />
     <TypeScriptCompile Include="Content\Scripts\Site\Home\picker.ts" />
     <TypeScriptCompile Include="Content\Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>

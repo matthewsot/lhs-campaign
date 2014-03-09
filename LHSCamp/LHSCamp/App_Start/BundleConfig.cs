@@ -19,6 +19,11 @@ namespace LHSCamp
                 "~/Content/Scripts/GSAP/jquery.gsap.min.js"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/wedge").Include(
+                //"~/Content/Scripts/Flauntly/Core.js",
+                "~/Content/Scripts/Flauntly/Wedge/Core.js"
+                ));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Content/Scripts/jQuery/jquery.validate*"));
         }
