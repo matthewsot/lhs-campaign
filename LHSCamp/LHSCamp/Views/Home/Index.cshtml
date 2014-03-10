@@ -32,6 +32,10 @@
     <img id="cand-wedge-img" />
     <h2 id="cand-wedge-name"></h2>
     <div id="cand-wedge-position"></div>
+    <div id="cand-wedge-actions">
+        <button class="standard-btn default-btn" id="cand-wedge-fb">facebook event</button><br/><br />
+        <button class="standard-btn default-btn" id="cand-wedge-download">download prof. pic</button>
+    </div>
     <div id="cand-wedge-content">
         <h2 class="railway-bold">WHY YOU SHOULD VOTE</h2>
         <p id="cand-wedge-reasons"></p>
@@ -54,6 +58,9 @@
                 window.open("/GPlus");
             });
             $("#facebook-btn").click(function () {
+            });
+            $("#cand-wedge-download").click(function () {
+                window.open($("#cand-wedge-img").attr("src"));
             });
         });
     </script>

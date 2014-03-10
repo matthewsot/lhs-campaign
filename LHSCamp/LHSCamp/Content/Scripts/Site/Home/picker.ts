@@ -25,6 +25,15 @@ class picker {
             $("#cand-wedge-img").attr("src", data.profilePic);
             $("#cand-wedge-name").text(data.name);
             $("#cand-wedge-position").text(data.position);
+            if (data.facebook == null) {
+                $("#cand-wedge-fb").hide();
+            }
+            else {
+                $("#cand-wedge-fb").unbind("click");
+                $("#cand-wedge-fb").click(function () {
+                    window.open(data.facebook);
+                });
+            }
             if (data.reasons != null && data.reasons.length > 0) {
                 $("#cand-wedge-reasons").text(data.reasons);
             } else {
