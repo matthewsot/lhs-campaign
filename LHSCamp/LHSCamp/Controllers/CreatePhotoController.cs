@@ -10,22 +10,12 @@ namespace LHSCamp.Controllers
     {
         public ActionResult Cover()
         {
-            ViewBag.Creating = "Cover Photo";
-            ViewBag.Width = 1106.3; //851
-            ViewBag.Height = 409.5; //315
-            ViewBag.Grid = 25;
-            ViewBag.PerLine = 4;
-            return View("Creator");
+            return View();
         }
 
         public ActionResult Profile()
         {
-            ViewBag.Creating = "Profile Picture";
-            ViewBag.Width = 500;
-            ViewBag.Height = 500;
-            ViewBag.Grid = 25;
-            ViewBag.PerLine = 2;
-            return View("Creator");
+            return View();
         }
     }
 }

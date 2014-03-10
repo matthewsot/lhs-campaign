@@ -364,7 +364,6 @@
     <Content Include="Views\Shared\_HeroLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
-    <Content Include="Views\CreatePhoto\Creator.cshtml" />
     <Content Include="Views\Welcome\Candidate.cshtml" />
     <Content Include="Content\Styles\Site\Layout\tab-box.less" />
     <Content Include="Content\Styles\Bundles\Home\home.less" />
@@ -378,6 +377,8 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Default\GPlus.cshtml" />
+    <Content Include="Views\CreatePhoto\Cover.cshtml" />
+    <Content Include="Views\CreatePhoto\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
