@@ -11,7 +11,7 @@
     </style>
 }
 
-<h1>Create Profile Picture</h1>
+<h1>Create @ViewBag.Creating</h1>
 
 <canvas id="profile-pic" style="border:2px solid #000;"></canvas>
 <button id="save-img" class="default-btn standard-btn" style="margin-top:10px;">Download Image</button><br/>
@@ -29,9 +29,9 @@
             return this.indexOf(suffix, this.length - suffix.length) !== -1;
         };
         var fab = new fabric.Canvas('profile-pic');
-        fab.setDimensions({ width: 500, height: 500 });
+        fab.setDimensions({ width: @(ViewBag.Width), height: @(ViewBag.Height) });
         //Thanks! http://stackoverflow.com/questions/21385398/canvas-rectangles-snap-to-grid-snap-to-objects
-        var grid = 25;
+        var grid = @ViewBag.Grid;
         //Snap to Grid
         fab.on('object:moving', function (options) {
             options.target.set({
