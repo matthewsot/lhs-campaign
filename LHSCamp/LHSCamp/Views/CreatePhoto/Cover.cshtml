@@ -31,6 +31,11 @@
         };
         var fab = new fabric.Canvas('profile-pic');
         fab.setDimensions({ width: 851, height: 315 });
+        fab.on('mouse:down', function (options) {
+            if (options.target) {
+                fab.bringToFront(options.target);
+            }
+        });
         //Thanks! http://stackoverflow.com/questions/21385398/canvas-rectangles-snap-to-grid-snap-to-objects
         var grid = 17.02;
         //Snap to Grid
