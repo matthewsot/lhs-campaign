@@ -21,6 +21,11 @@ namespace LHSCamp.Models
     {
         public string facebook { get; set; }
     }
+    public class SetPassModel
+    {
+        public string currPass { get; set; }
+        public string newPass { get; set; }
+    }
     public class RegisterModel
     {
         public string FullName { get; set; }

@@ -1,32 +1,59 @@
 ﻿@using LHSCamp.Models;
 @using Microsoft.AspNet.Identity;
+@model ManageUserViewModel
 @{
-    ViewBag.Title = "Manage Account";
+    ViewBag.Title = "Account Settings";
 }
 
-<h2>@ViewBag.Title.</h2>
-
+<h2>@ViewBag.Title</h2>
+<h3>Email</h3>
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-12">
-        <p>You're logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
-
-        @Html.Partial("_ChangeEmailPartial")
-        @if (ViewBag.HasLocalPassword)
-        {
-            @Html.Partial("_ChangePasswordPartial")
-        }
-        else
-        {
-            @Html.Partial("_SetPasswordPartial")
-        }
-
-        <section id="externalLogins">
-            @Html.Action("RemoveAccountList")
-            @Html.Partial("_ExternalLoginsListPartial", new { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+<input id="email" type="email" class="default-input standard-input" placeholder="email" value="@Model.Email" />
+<br />
+<button id="save-email" class="standard-btn default-btn">Update Email</button>
+<br /><br />
+<h3>Password</h3>
+<input type="password" id="curr-pass" class="default-input standard-input" placeholder="current password" /><br />
+<input type="password" id="new-pass" class="default-input standard-input" placeholder="new password" /><br />
+<input type="password" id="conf-pass" class="default-input standard-input" placeholder="confirm new password" /><br />
+<button id="change-pass" class="standard-btn default-btn">Change Password</button>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $("#save-email").click(function () {
+            var email = $("#email").val();
+
+            $.post("/API/Account/SetEmail", {
+                "email": email
+            }, function (data) {
+                if (data == "set") {
+                    //Somehow we need to indicate that something happened, I guess this works for now
+                    window.location.reload(true);
+                }
+            });
+        });
+
+        $("#change-pass").click(function () {
+            var currPass = $("#curr-pas").val();
+            var newPass = $("#new-pass").val();
+            var confPass = $("#conf-pass").val();
+
+            if (newPass != confPass) {
+                alert("Confirmation didn't match!");
+            }
+            else {
+                $.post("/API/Account/SetPass", {
+                    "currPass": currPass,
+                    "newPass": newPass
+                }, function (data) {
+                    if (data == "set") {
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert("Current password is incorrect.");
+                    }
+                });
+            }
+        });
+    </script>
 }

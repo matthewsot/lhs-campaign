@@ -3,15 +3,9 @@
 @using (Html.BeginForm("ModifyEmail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Change Email Form</h4>
-    <hr />
+    <h4>Change Email</h4>
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control default-input standard-input", placeholder = "email" })
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

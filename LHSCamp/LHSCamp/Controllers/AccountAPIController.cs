@@ -97,7 +97,24 @@ namespace LHSCamp.Controllers
             }
             return Ok("set");
         }
-        
+
+        [HttpPost]
+        [Authorize]
+        [Route("API/Account/SetPass")]
+        public async Task<IHttpActionResult> SetPass(SetPassModel model)
+        {
+            using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(
+                        new LCDB())))
+            {
+                var result = UserManager.ChangePassword(User.Identity.GetUserId(), model.currPass, model.newPass);
+                if (result.Succeeded)
+                    return Ok("set");
+                else
+                    return Ok("nope");
+            }
+        }
+
         [HttpPost]
         [Route("API/Account/Register")]
         public async Task<IHttpActionResult> Register(RegisterModel model)
