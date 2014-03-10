@@ -5,16 +5,20 @@ var picker = (function () {
     }
     picker.updateChosenPreviews = function () {
         $.getJSON("/API/Chosen", function (data) {
-            var newChosenPreviews = "";
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-                var itemPreview = '<li id="item-preview-' + item.id + '">';
-                itemPreview += '<img class="cand-preview" data-cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
-                itemPreview += '</li>';
-                newChosenPreviews += itemPreview;
-            }
-            $("#chosen-previews").html(newChosenPreviews);
-            if ($("#footer-noitems").css("display") != "none") {
+            if (data.length == 0) {
+                $("#footer-items").fadeOut(function () {
+                    $("#footer-noitems").fadeIn();
+                });
+            } else {
+                var newChosenPreviews = "";
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var itemPreview = '<li id="item-preview-' + item.id + '">';
+                    itemPreview += '<img class="cand-preview" data-cand-id="' + item.id + '" src="' + item.profilePic + '" alt="' + item.name + '"></img>';
+                    itemPreview += '</li>';
+                    newChosenPreviews += itemPreview;
+                }
+                $("#chosen-previews").html(newChosenPreviews);
                 $("#footer-noitems").fadeOut(function () {
                     $("#footer-items").fadeIn();
                 });
