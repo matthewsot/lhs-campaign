@@ -124,6 +124,7 @@ namespace LHSCamp.Controllers
 
         [HttpPost]
         [Route("API/Account/Register")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterModel model)
         {
             using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
