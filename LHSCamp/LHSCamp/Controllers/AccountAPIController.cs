@@ -51,6 +51,26 @@ namespace LHSCamp.Controllers
         }
 
         [HttpPost]
+        [Route("API/Account/SetPosition")]
+        [Authorize]
+        public IHttpActionResult SetPosition(SetPositionModel model)
+        {
+            using (LCDB db = new LCDB())
+            {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                if (user == null)
+                    return NotFound();
+                if (user.Candidate != null) //or .IsCandidate, but now I'm scared to use that XD Best to be sure anyway
+                {
+                    user.Candidate.Position = model.position;
+                    db.SaveChanges();
+                }
+            }
+            return Ok("set");
+        }
+
+        [HttpPost]
         [Route("API/Account/SetReasons")]
         [Authorize]
         public IHttpActionResult SetReasons(SetReasonsModel model)
@@ -77,6 +97,7 @@ namespace LHSCamp.Controllers
         [Authorize]
         public IHttpActionResult SetSocial(SetSocialModel model)
         {
+            model.facebook = model.facebook ?? "";
             model.facebook = model.facebook.Trim();
             using (LCDB db = new LCDB())
             {
@@ -101,7 +122,7 @@ namespace LHSCamp.Controllers
         [HttpPost]
         [Authorize]
         [Route("API/Account/SetPass")]
-        public async Task<IHttpActionResult> SetPass(SetPassModel model)
+        public IHttpActionResult SetPass(SetPassModel model)
         {
             using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
                     new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(

@@ -11,7 +11,7 @@
         }
 
         .tabs-list li {
-            width: 25%;
+            width: 20%;
         }
     </style>
 }
@@ -26,10 +26,11 @@
         </span>
     }
     <ul class="tabs-list">
-        <li class="tab sel-tab" data-picker-page="email"><div>1. EMAIL</div></li>
-        <li class="tab" data-picker-page="points"><div>2. REASONS</div></li>
-        <li class="tab" data-picker-page="social"><div>3. SOCIAL</div></li>
-        <li class="tab" data-picker-page="picture"><div>4. PROFILE PICTURE</div></li>
+        <li class="tab sel-tab" data-picker-page="email"><div>EMAIL</div></li>
+        <li class="tab" data-picker-page="position"><div>POSITION</div></li>
+        <li class="tab" data-picker-page="campaign"><div>CAMPAIGN</div></li>
+        <li class="tab" data-picker-page="social"><div>SOCIAL</div></li>
+        <li class="tab" data-picker-page="picture"><div>PICTURE</div></li>
     </ul>
     <div class="tab-box">
         <div id="picker-page-email" class="picker-page sel-page" style="display:block;">
@@ -39,32 +40,46 @@
             @if (string.IsNullOrWhiteSpace(ViewBag.Email))
             {
                 @:Please enter an email below:
-                <br /><br />
-                <input type="email" id="email-input" class="default-input standard-input" placeholder="email" style="width:400px;" />
-                <br />
-                <button type="submit" id="update-email" class="default-btn standard-btn">Confirm</button>
             }
             else
             {
                 @:If you want to make changes to your email, make them below:
-                <br /><br />
-                <input type="email" id="email-input" class="default-input standard-input" value="@(ViewBag.Email)" style="width:400px;" />
-                <br />
-                <button id="update-email" class="default-btn standard-btn">Update</button>
             }
+            <br /><br />
+            <input type="email" id="email-input" class="default-input standard-input" value="@(ViewBag.Email)" style="width:400px;" />
+            <br />
+            <button id="update-email" class="default-btn standard-btn">Save</button>
             <br /><br />
             We'll contact you within 24 hours to confirm your email and give you a rundown of the final step before you're listed as a candidate.
         </div>
-        <div id="picker-page-points" class="picker-page">
-            What are some of your main campaign points? Please enter a paragraph or two below explaining why you're the best candidate.
+        <div id="picker-page-position" class="picker-page">
+            What position are you running for?
+            <br />
+            <div style="position:relative;width:333px;" class="half-horiz">
+                <select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
+                    @foreach(var pos in new string[] { "Secretary", "Treasurer", "President", "Vice President" }) {
+                        if(pos == ViewBag.Position) {
+                        <option selected>@pos</option>
+                        }
+                        else {
+                        <option>@pos</option>
+                        }
+                    }
+                </select>
+                <div id="arrow-hider" style="position:absolute;width:30px;height:46px;right:2px;top:22px;background-color:#44A0C8;border-radius:2px;"></div>
+            </div>
+            <button class="default-btn standard-btn" id="save-position">Confirm Position</button>
+        </div>
+        <div id="picker-page-campaign" class="picker-page">
+            Why should voters vote for you? Please enter a paragraph or two below explaining why you're the best candidate.
             <br /><br />
             <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
             <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align:left;width:90%;height:300px;white-space:pre-wrap;">@ViewBag.Reasons</textarea>
             <br />
-            <button class="default-btn standard-btn" id="save-reasons">Save</button>
+            <button class="default-btn standard-btn" id="save-reasons">Save Reasons</button>
         </div>
         <div id="picker-page-social" class="picker-page">
-            Facebook Link:<br /><br/>
+            Facebook Link:<br /><br />
             <input type="text" id="campaign-social" class="default-input standard-input" style="width:400px;" placeholder="http://facebook.com/example..." />
             <br />
             <button class="default-btn standard-btn" id="save-social">Save</button>
@@ -111,7 +126,18 @@
                 "email": email
             }, function (data) {
                 if (data == "set") {
-                    $("[data-picker-page=points]").click();
+                    $("[data-picker-page=position]").click();
+                }
+            });
+        });
+
+        $("#save-position").click(function () {
+            var position = $("#position").val();
+            $.post("/API/Account/SetPosition", {
+                "position": position
+            }, function (data) {
+                if (data == "set") {
+                    $("[data-picker-page=campaign]").click();
                 }
             });
         });

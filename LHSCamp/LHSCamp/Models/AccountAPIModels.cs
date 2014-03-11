@@ -13,6 +13,10 @@ namespace LHSCamp.Models
     {
         public string email { get; set; }
     }
+    public class SetPositionModel
+    {
+        public string position { get; set; }
+    }
     public class SetReasonsModel
     {
         public string reasons { get; set; }
