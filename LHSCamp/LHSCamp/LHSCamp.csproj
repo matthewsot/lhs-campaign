@@ -221,14 +221,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.svg" />
-    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.svg" />
-    <Content Include="Content\Fonts\Quickly\Quickly-font.css" />
-    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.svg" />
-    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.svg" />
-    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.svg" />
-    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.svg" />
-    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-bold-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-extrabold-webfont.svg" />
     <Content Include="Content\Fonts\Railway\railway-extralight-webfont.svg" />
@@ -253,8 +245,12 @@
     <Content Include="Content\Scripts\FileSaver\canvas-toBlob.js" />
     <Content Include="Content\Scripts\FileSaver\FileSaver.js" />
     <Content Include="Content\Scripts\FileSaver\Modernizr.js" />
-    <Content Include="Content\Scripts\Flauntly\Core.js" />
-    <Content Include="Content\Scripts\Flauntly\Wedge\Core.js" />
+    <Content Include="Content\Scripts\Flauntly\Core.js">
+      <DependentUpon>Core.ts</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\Flauntly\Wedge\Core.js">
+      <DependentUpon>Core.ts</DependentUpon>
+    </Content>
     <Content Include="Content\Scripts\GSAP\CSSPlugin.min.js" />
     <Content Include="Content\Scripts\GSAP\EasePack.min.js" />
     <Content Include="Content\Scripts\GSAP\jquery.gsap.min.js" />
@@ -262,35 +258,9 @@
     <Content Include="Content\Scripts\Site\Home\picker.js">
       <DependentUpon>picker.ts</DependentUpon>
     </Content>
-    <Content Include="Content\Styles\Bootstrap\bootstrap.css" />
-    <Content Include="Content\Styles\Bootstrap\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Styles\Site.css" />
-    <Content Include="Content\Scripts\Bootstrap\bootstrap.js" />
-    <Content Include="Content\Scripts\Bootstrap\bootstrap.min.js" />
-    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly-bold-webfont.woff" />
-    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly-bolditalic-webfont.woff" />
-    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly-italic-webfont.woff" />
-    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly-light-webfont.woff" />
-    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly-lightitalic-webfont.woff" />
-    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly-regular-webfont.woff" />
-    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.eot" />
-    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.ttf" />
-    <Content Include="Content\Fonts\Quickly\quickly_dash-webfont.woff" />
     <Content Include="Content\Fonts\Railway\railway-bold-webfont.eot" />
     <Content Include="Content\Fonts\Railway\railway-bold-webfont.ttf" />
     <Content Include="Content\Fonts\Railway\railway-bold-webfont.woff" />
@@ -321,14 +291,11 @@
     <None Include="Content\Scripts\jQuery\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.js" />
-    <None Include="Content\Scripts\jQuery\jquery.validate-vsdoc.js" />
-    <Content Include="Content\Scripts\jQuery\jquery.validate.js" />
-    <Content Include="Content\Scripts\jQuery\jquery.validate.min.js" />
-    <Content Include="Content\Scripts\jQuery\jquery.validate.unobtrusive.js" />
-    <Content Include="Content\Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Content\Scripts\Modernizr\modernizr-2.6.2.js" />
-    <Content Include="Content\Scripts\Bootstrap\respond.js" />
-    <Content Include="Content\Scripts\Bootstrap\respond.min.js" />
+    <None Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate.js" />
+    <Content Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -401,9 +368,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\Fonts\Glyphicons\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Content\Styles\Site\lib.less" />
     <Content Include="Content\Styles\Site\Hero\hero.less" />
