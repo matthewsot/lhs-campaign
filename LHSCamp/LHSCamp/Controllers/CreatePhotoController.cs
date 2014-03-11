@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LHSCamp.Controllers
 {
+    [Authorize]
     public class CreatePhotoController : Controller
     {
         public ActionResult Cover()
@@ -13,7 +14,8 @@ namespace LHSCamp.Controllers
             return View();
         }
 
-        public ActionResult Profile()
+        [Route("CreatePhoto/Profile")]
+        public ActionResult CreateProfile()
         {
             return View();
         }
