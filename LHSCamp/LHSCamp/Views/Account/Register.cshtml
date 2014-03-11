@@ -43,7 +43,7 @@
         <input type="text" class="default-input standard-input" placeholder="username" id="username" style="margin-top:20px;" />
         <div class="medium-font railway-light" id="usernm-err" style="display:none;margin-top:10px;"></div>
         <script type="text/javascript">
-            $("#voter-username").change(function () {
+            $("#username").change(function () {
                 var nm = $(this).val();
                 if (nm != "") {
                     $.post("/API/Account/CheckName", {
