@@ -13,15 +13,17 @@ using Owin;
 
 namespace LHSCamp.Controllers
 {
+    [Authorize]
     public class AccountAPIController : ApiController
     {
         private LCDB db = new LCDB();
 
         [HttpPost]
         [Route("API/Account/CheckName")]
+        [AllowAnonymous]
         public IHttpActionResult CheckName(UserNameModel model)
         {
-            bool exists = (db.Users.Count(u => u.UserName == model.Username) > 0);
+            bool exists = (db.Users.FirstOrDefault(u => u.UserName == model.Username) != null);
             if (exists)
                 return Ok("exists");
             else
@@ -30,13 +32,13 @@ namespace LHSCamp.Controllers
 
         [HttpPost]
         [Route("API/Account/SetEmail")]
-        [Authorize]
         public IHttpActionResult SetEmail(SetEmailModel model)
         {
             var userId = User.Identity.GetUserId();
             var user = db.Users.Find(userId);
+
             if (user == null)
-                return NotFound();
+                return Ok("no user");
 
             user.Email = model.email;
             db.SaveChanges();
@@ -45,14 +47,15 @@ namespace LHSCamp.Controllers
 
         [HttpPost]
         [Route("API/Account/SetPosition")]
-        [Authorize]
         public IHttpActionResult SetPosition(SetPositionModel model)
         {
             var userId = User.Identity.GetUserId();
             var user = db.Users.Find(userId);
+
             if (user == null)
-                return NotFound();
-            if (user.Candidate != null) //or .IsCandidate, but now I'm scared to use that XD Best to be sure anyway
+                return Ok("no user");
+
+            if (user.IsCandidate)
             {
                 user.Candidate.Position = model.position;
                 db.SaveChanges();
@@ -62,17 +65,17 @@ namespace LHSCamp.Controllers
 
         [HttpPost]
         [Route("API/Account/SetReasons")]
-        [Authorize]
         public IHttpActionResult SetReasons(SetReasonsModel model)
         {
             var userId = User.Identity.GetUserId();
+            
             var user = db.Users.Find(userId);
             if (user == null)
-                return NotFound();
+                return Ok("no user");
 
             var candidate = user.Candidate;
             if (candidate == null)
-                return Unauthorized();
+                return Ok("not candidate");
 
             candidate.Reasons = model.reasons;
             db.SaveChanges();
@@ -81,22 +84,23 @@ namespace LHSCamp.Controllers
 
         [HttpPost]
         [Route("API/Account/SetSocial")]
-        [Authorize]
         public IHttpActionResult SetSocial(SetSocialModel model)
         {
-            model.facebook = model.facebook ?? "";
-            model.facebook = model.facebook.Trim();
+            if (model.facebook != null)
+                model.facebook = model.facebook.Trim();
+
             if (model.facebook == "")
                 model.facebook = null;
 
             var userId = User.Identity.GetUserId();
+
             var user = db.Users.Find(userId);
             if (user == null)
-                return NotFound();
+                return Ok("no user");
 
             var candidate = user.Candidate;
             if (candidate == null)
-                return Unauthorized();
+                return Ok("no candidate");
 
             candidate.Facebook = model.facebook;
             db.SaveChanges();
@@ -104,7 +108,6 @@ namespace LHSCamp.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [Route("API/Account/SetPass")]
         public IHttpActionResult SetPass(SetPassModel model)
         {
