@@ -12,18 +12,7 @@ using LHSCamp.Models;
 
 namespace LHSCamp.Controllers
 {
-    public class AddCandidateModel
-    {
-        public int id { get; set; }
-    }
-    public class CandidateModel
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string position { get; set; }
-        public string profilePic { get; set; }
-        public bool chosen { get; set; }
-    }
+    [Authorize]
     public class CandidatesController : ApiController
     {
         private LCDB db = new LCDB();
@@ -43,12 +32,9 @@ namespace LHSCamp.Controllers
         }
 
         // GET: api/Candidates/5
-        [Authorize]
         [Route("API/Candidates/{Position}")]
         public IHttpActionResult GetCandidates(string Position)
         {
-            if (!User.Identity.IsAuthenticated) return Unauthorized();
-
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
@@ -67,6 +53,7 @@ namespace LHSCamp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("API/Candidate/Details/{Id}")]
         public IHttpActionResult GetCandidateDetails(int Id)
         {
@@ -86,12 +73,9 @@ namespace LHSCamp.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("API/Chosen")]
         public IHttpActionResult GetChosenCandidates()
         {
-            if (!User.Identity.IsAuthenticated) return Unauthorized();
-
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
@@ -108,12 +92,9 @@ namespace LHSCamp.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("API/Chosen/Add/{Id}")]
         public IHttpActionResult AddChosenCandidate(int Id)
         {
-            if (!User.Identity.IsAuthenticated) return Unauthorized();
-
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
@@ -139,12 +120,9 @@ namespace LHSCamp.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("API/Chosen/Remove/{Id}")]
         public IHttpActionResult RemoveChosenCandidate(int Id)
         {
-            if (!User.Identity.IsAuthenticated) return Unauthorized();
-
             var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             if (currUser == null) return NotFound();
 
