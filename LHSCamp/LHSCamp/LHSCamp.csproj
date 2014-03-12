@@ -241,6 +241,7 @@
     <Content Include="Content\Images\Default\Bubbles\ribbon.png" />
     <Content Include="Content\Images\Default\GPlus.jpg" />
     <Content Include="Content\Images\Default\laptop.png" />
+    <Content Include="Content\Images\Errors\RememberWhen.png" />
     <Content Include="Content\Images\Errors\TooBig.png" />
     <Content Include="Content\Scripts\FileSaver\base64.js" />
     <Content Include="Content\Scripts\FileSaver\Blob.js" />
@@ -261,6 +262,7 @@
       <DependentUpon>picker.ts</DependentUpon>
     </Content>
     <Content Include="Error\NotFound.html" />
+    <Content Include="Error\Weird.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Styles\Site.css" />
