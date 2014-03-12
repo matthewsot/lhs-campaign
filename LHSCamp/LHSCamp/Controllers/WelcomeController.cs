@@ -40,25 +40,30 @@ namespace LHSCamp.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
-                if (!User.Identity.IsAuthenticated || !(currUser.IsCandidate && currUser.IsConfirmed))
+
+                if (!currUser.IsCandidate)
                     return RedirectToAction("Index", controllerName: "Home");
 
                 // Verify that the user selected a file
                 if (file != null && file.ContentLength > 0)
                 {
-                    // extract only the filename
-                    var fileName = Path.GetFileName(file.FileName);
                     var extension = Path.GetExtension(file.FileName);
-                    if (".jpg,.png,.gif,".Contains(extension + ","))
+                    var allowedExts = new string[] { ".jpg", ".png", ".gif" };
+                    if (allowedExts.Contains(extension))
                     {
                         var imagesFolder = Server.MapPath("~/Content/Images/Candidates/");
                         var path = imagesFolder + userId + extension;
 
                         if (!Directory.Exists(imagesFolder))
                             Directory.CreateDirectory(imagesFolder);
-                        
-                        if (System.IO.File.Exists(path))
-                            System.IO.File.Delete(path);
+
+                        //Remove the existing picture
+                        if (currUser.Candidate.ProfilePic != null)
+                        {
+                            var oldPic = Server.MapPath("~" + currUser.Candidate.ProfilePic);
+                            if (System.IO.File.Exists(oldPic))
+                                System.IO.File.Delete(oldPic);
+                        }
 
                         file.SaveAs(path);
                         currUser.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;

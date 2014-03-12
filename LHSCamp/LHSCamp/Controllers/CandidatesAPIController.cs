@@ -13,7 +13,7 @@ using LHSCamp.Models;
 namespace LHSCamp.Controllers
 {
     [Authorize]
-    public class CandidatesController : ApiController
+    public class CandidatesAPIController : ApiController
     {
         private LCDB db = new LCDB();
 
