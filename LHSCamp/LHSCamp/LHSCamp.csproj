@@ -241,6 +241,7 @@
     <Content Include="Content\Images\Default\Bubbles\ribbon.png" />
     <Content Include="Content\Images\Default\GPlus.jpg" />
     <Content Include="Content\Images\Default\laptop.png" />
+    <Content Include="Content\Images\Errors\TooBig.png" />
     <Content Include="Content\Scripts\FileSaver\base64.js" />
     <Content Include="Content\Scripts\FileSaver\Blob.js" />
     <Content Include="Content\Scripts\FileSaver\canvas-toBlob.js" />
@@ -298,6 +299,7 @@
     <Content Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Scripts\jQuery\Plugins\jquery.validate\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\Scripts\_references.js" />
+    <Content Include="UploadSize.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -344,6 +346,7 @@
     <Content Include="Views\Default\GPlus.cshtml" />
     <Content Include="Views\CreatePhoto\Cover.cshtml" />
     <Content Include="Views\CreatePhoto\Profile.cshtml" />
+    <Content Include="Error\UploadSize.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
