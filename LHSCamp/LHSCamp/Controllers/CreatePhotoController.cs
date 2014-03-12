@@ -17,7 +17,7 @@ namespace LHSCamp.Controllers
         [Route("CreatePhoto/Profile")]
         public ActionResult CreateProfile()
         {
-            return View();
+            return View("Profile");
         }
     }
 }
