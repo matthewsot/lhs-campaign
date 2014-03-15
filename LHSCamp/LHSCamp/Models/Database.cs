@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LHSCamp.Models
 {
@@ -41,9 +42,18 @@ namespace LHSCamp.Models
         public string Facebook { get; set; }
     }
 
+    public class Setting
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Key { get; set; }
+        public string Value { get; set; }
+    }
+
     public class LCDB : IdentityDbContext<User>
     {
         public DbSet<Candidate> Candidates { get; set; }
+        public DbSet<Setting> Config { get; set; }
         public LCDB()
             : base("LCDB")
         {

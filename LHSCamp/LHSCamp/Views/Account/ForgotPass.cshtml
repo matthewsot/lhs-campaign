@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Reset Your Password";
+    Layout = "~/Views/Shared/_HeroLayout.cshtml";
+}
+
+
+<div class="blue row medium-font" style="margin-top:100px;">
+    <div class="logo-span large-font"><b>lhs</b>|campaign</div>
+    <br />
+    <div style="border-top:2px solid #fff;">
+        <br />
+        <div id="reset-form">
+            <span class="large-font railway-bold">reset password</span>
+            <br />
+            <div id="reset-info">
+                You can reset your password if you signed up with an email.
+                <br /><br />If you don't have an email associated with your account, please contact support@lhscampaign.com for help.
+            </div>
+            <div id="reset-error" style="display:none;">
+                That username either doesn't exist, or doesn't have an email associated with it.
+                <br/><br/>Please try again, or contact support@lhscampaign.com for help.
+            </div>
+            <br /><br />
+            <input type="text" id="username" placeholder="username" class="default-input standard-input" />
+            <br /><br />
+            <button id="reset-pass" class="default-btn default-btn">reset password</button>
+        </div>
+        <div id="reset-success" style="display:none;">
+            <h1>Please check your email for the next step.</h1>
+            If you didn't get an email, try again or contact support@lhscampaign.com and we'll help you out.
+        </div>
+        <script type="text/javascript">
+            $("#reset-pass").click(function () {
+                var username = $("#username").val();
+                $.post("API/Account/StartResetPass", {
+                    "username": username
+                }, function (data) {
+                    if (data == "sent") {
+                        $("#reset-form").fadeOut(function () {
+                            $("#reset-success").fadeIn();
+                        });
+                    }
+                    else {
+                        $("#reset-info").fadeOut(function () {
+                            $("#reset-error").fadeIn();
+                        });
+                    }
+                });
+            });
+        </script>
+    </div>
+</div>

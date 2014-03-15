@@ -1,7 +1,9 @@
 ﻿using LHSCamp.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -22,6 +24,51 @@ namespace LHSCamp.Controllers
                 return Ok("exists");
             else
                 return Ok("new");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("API/Account/StartResetPass")]
+        public IHttpActionResult StartResetPassword(UserNameModel model)
+        {
+            using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
+            {
+                var user = db.Users.FirstOrDefault(u => u.UserName == model.Username);
+                if (user != null && !string.IsNullOrWhiteSpace(user.Email))
+                {
+                    //Thanks! http://csharp.net-informations.com/communications/csharp-smtp-mail.htm
+                    var Settings = Config.GetValues(new string[] { "SMTP Server", "SMTP Port", "SMTP User", "SMTP Pass" });
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient(Settings["SMTP Server"]);
+                    mail.From = new MailAddress("vip@lhscampaign.com", "LHS|Campaign");
+                    var userName = User.Identity.GetUserName();
+                    mail.To.Add(new MailAddress(user.Email, userName));
+                    mail.Subject = "Reset Your Password";
+                    mail.Body = "Please visit http://lhscampaign.com/Account/ResetPass?token=";
+                    mail.Body += UserManager.GetPasswordResetToken(User.Identity.GetUserId()) + "&userId=" + user.Id;
+                    mail.Body += " to reset your LHS|Campaign password.";
+
+                    SmtpServer.Port = Int32.Parse(Settings["SMTP Port"]);
+                    SmtpServer.Credentials = new System.Net.NetworkCredential(Settings["SMTP User"], Settings["SMTP Pass"]);
+
+                    SmtpServer.Send(mail);
+                    return Ok("sent");
+                }
+            }
+            return Ok("problem");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("API/Account/ResetPass")]
+        public IHttpActionResult ResetPassword(UserNameModel model)
+        {
+            using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
+            {
+            }
+            return Ok("problem");
         }
 
         [HttpPost]
