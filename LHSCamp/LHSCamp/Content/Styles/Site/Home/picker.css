@@ -181,6 +181,7 @@ img.picker-img {
   left: 10px;
   top: 15px;
 }
+/* LIGHTBOX */
 #lightContent {
   width: 700px;
   /* but ewe. should use prefix-free */
@@ -211,6 +212,7 @@ img.picker-img {
   width: 200px;
   height: 200px;
 }
+/* LIGHTBOX BUTTONS */
 #cand-wedge-btns {
   position: absolute;
   right: 20px;
@@ -218,7 +220,6 @@ img.picker-img {
 }
 #cand-wedge-close {
   font-size: 30px;
-  font-family: 'Railway-Bold';
   cursor: pointer;
 }
 .cand-wedge-circle {
@@ -231,7 +232,7 @@ img.picker-img {
 .cand-wedge-circle:hover {
   background-color: #fff;
 }
-.cand-wedge-social {
+img.cand-wedge-social {
   width: 40px;
   /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
   /* but ewe. should use prefix-free */
@@ -245,34 +246,13 @@ img.picker-img {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-#cand-wedge-name {
+#cand-wedge-info {
   position: absolute;
-  margin-top: 0px;
   left: 240px;
   top: 20px;
-  font-family: 'Railway-Bold';
-  font-size: 25px;
-}
-#cand-wedge-position {
-  position: absolute;
-  left: 240px;
-  top: 45px;
-  font-family: 'Railway';
   font-size: 20px;
-}
-#cand-wedge-email {
-  position: absolute;
-  left: 240px;
-  top: 65px;
   font-family: 'Railway';
-  font-size: 20px;
-}
-#cand-wedge-actions {
-  position: absolute;
-  left: 240px;
-  top: 100px;
   text-align: left;
-  width: 250px;
 }
 #cand-wedge-content {
   position: absolute;
@@ -284,6 +264,5 @@ img.picker-img {
   width: 80%;
   margin-left: 10%;
   text-align: left;
-  font-size: 20px;
   white-space: pre-wrap;
 }
