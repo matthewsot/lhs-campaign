@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
+using LHSCamp.Models;
+using System.Data.Entity;
 
 namespace LHSCamp
 {
@@ -18,6 +20,7 @@ namespace LHSCamp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //Database.SetInitializer<LCDB>(new MigrateDatabaseToLatestVersion<LCDB, Migrations.Configuration>()); 
         }
     }
 }

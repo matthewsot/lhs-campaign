@@ -12,6 +12,8 @@ namespace LHSCamp
 {
     public partial class Startup
     {
+        internal static IDataProtectionProvider DataProtectionProvider { get; private set; }
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -24,7 +26,6 @@ namespace LHSCamp
                     OnCreate = ApplicationUserManager.Create
                 }
             });
-
             // Enable the application to use a cookie to store information for the signed in user
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -54,6 +55,7 @@ namespace LHSCamp
             //   appSecret: "");
 
             //app.UseGoogleAuthentication();
+            DataProtectionProvider = app.GetDataProtectionProvider();
         }
     }
 }

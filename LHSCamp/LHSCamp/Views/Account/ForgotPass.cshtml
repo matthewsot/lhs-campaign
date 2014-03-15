@@ -32,7 +32,7 @@
         <script type="text/javascript">
             $("#reset-pass").click(function () {
                 var username = $("#username").val();
-                $.post("API/Account/StartResetPass", {
+                $.post("/API/Account/StartResetPass", {
                     "username": username
                 }, function (data) {
                     if (data == "sent") {

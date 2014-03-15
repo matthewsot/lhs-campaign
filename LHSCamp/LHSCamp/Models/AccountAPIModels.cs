@@ -7,7 +7,7 @@ namespace LHSCamp.Models
 {
     public class UserNameModel
     {
-        public string Username { get; set; }
+        public string username { get; set; }
     }
     public class ResetPassModel
     {

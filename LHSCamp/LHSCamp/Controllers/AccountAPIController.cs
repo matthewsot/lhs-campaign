@@ -1,10 +1,12 @@
 ﻿using LHSCamp.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace LHSCamp.Controllers
@@ -19,7 +21,7 @@ namespace LHSCamp.Controllers
         [AllowAnonymous]
         public IHttpActionResult CheckName(UserNameModel model)
         {
-            bool exists = (db.Users.FirstOrDefault(u => u.UserName == model.Username) != null);
+            bool exists = (db.Users.FirstOrDefault(u => u.UserName == model.username) != null);
             if (exists)
                 return Ok("exists");
             else
@@ -34,19 +36,26 @@ namespace LHSCamp.Controllers
             using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
                     new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
             {
-                var user = db.Users.FirstOrDefault(u => u.UserName == model.Username);
+                //Thanks! http://stackoverflow.com/questions/19539579/how-to-implement-a-tokenprovider-in-asp-net-identity-1-1-nightly-build
+                if (Startup.DataProtectionProvider != null)
+                {
+                    UserManager.PasswordResetTokens = new DataProtectorTokenProvider(Startup.DataProtectionProvider.Create("PasswordReset"));
+                    UserManager.UserConfirmationTokens = new DataProtectorTokenProvider(Startup.DataProtectionProvider.Create("ConfirmUser"));
+                }
+                var user = db.Users.FirstOrDefault(u => u.UserName == model.username);
                 if (user != null && !string.IsNullOrWhiteSpace(user.Email))
                 {
                     //Thanks! http://csharp.net-informations.com/communications/csharp-smtp-mail.htm
                     var Settings = Config.GetValues(new string[] { "SMTP Server", "SMTP Port", "SMTP User", "SMTP Pass" });
                     MailMessage mail = new MailMessage();
                     SmtpClient SmtpServer = new SmtpClient(Settings["SMTP Server"]);
-                    mail.From = new MailAddress("vip@lhscampaign.com", "LHS|Campaign");
+                    mail.From = new MailAddress("postmaster@lhscampaign.com", "LHS|Campaign");
                     var userName = User.Identity.GetUserName();
                     mail.To.Add(new MailAddress(user.Email, userName));
                     mail.Subject = "Reset Your Password";
                     mail.Body = "Please visit http://lhscampaign.com/Account/ResetPass?token=";
-                    mail.Body += UserManager.GetPasswordResetToken(User.Identity.GetUserId()) + "&userId=" + user.Id;
+                    var token = UserManager.GetPasswordResetToken(user.Id);
+                    mail.Body += HttpUtility.UrlEncode(token) + "&userId=" + user.Id;
                     mail.Body += " to reset your LHS|Campaign password.";
 
                     SmtpServer.Port = Int32.Parse(Settings["SMTP Port"]);
@@ -109,7 +118,7 @@ namespace LHSCamp.Controllers
         public IHttpActionResult SetReasons(SetReasonsModel model)
         {
             var userId = User.Identity.GetUserId();
-            
+
             var user = db.Users.Find(userId);
             if (user == null)
                 return Ok("no user");

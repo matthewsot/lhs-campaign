@@ -50,7 +50,7 @@
                 var nm = $(this).val();
                 if (nm != "") {
                     $.post("/API/Account/CheckName", {
-                        Username: nm
+                        username: nm
                     }, function (data) {
                         if (data.toLowerCase() == 'exists') {
                             $("#usernm-err").text("That username is already taken.");
