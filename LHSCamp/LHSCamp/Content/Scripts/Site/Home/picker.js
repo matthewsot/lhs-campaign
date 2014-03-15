@@ -19,6 +19,18 @@ var picker = (function () {
                     newChosenPreviews += itemPreview;
                 }
                 $("#chosen-previews").html(newChosenPreviews);
+                $(".cand-preview").unbind("click");
+                $(".cand-preview").click(function () {
+                    var id = $(this).attr("data-cand-id");
+                    $.get("/API/Chosen/Remove/" + id, function (data) {
+                        picker.updateChosenPreviews();
+                        var pickerBoxButton = $("[data-cand-id=" + id + "]");
+                        if (pickerBoxButton.length > 0) {
+                            pickerBoxButton.attr("data-cand-selected", "false");
+                            pickerBoxButton.text("add picture");
+                        }
+                    });
+                });
                 $("#footer-noitems").fadeOut(function () {
                     $("#footer-items").fadeIn();
                 });

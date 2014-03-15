@@ -136,14 +136,15 @@ namespace LHSCamp.Controllers
                 currUser.ChosenCandidates.Remove(candidate);
                 db.SaveChanges();
             }
-            return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
-            {
-                id = cand.Id,
-                name = cand.Name,
-                position = cand.Position,
-                profilePic = cand.ProfilePic,
-                chosen = chosenCandidateIds.Contains(cand.Id)
-            }));
+            return Ok("removed");
+            //return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
+            //{
+            //    id = cand.Id,
+            //    name = cand.Name,
+            //    position = cand.Position,
+            //    profilePic = cand.ProfilePic,
+            //    chosen = chosenCandidateIds.Contains(cand.Id)
+            //}));
         }
 
         protected override void Dispose(bool disposing)
