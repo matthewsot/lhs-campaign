@@ -91,3 +91,11 @@ body, html {
     text-decoration:none;
     color:#fff;
 }
+
+//Thanks! http://davidwalsh.name/html5-placeholder-css
+
+::-webkit-input-placeholder { color:#fff; }
+::-moz-placeholder { color:#fff; } /* firefox 19+ */
+:-ms-input-placeholder { color:#fff; } /* ie */
+//Nightly seems to recognize this, but it still shows it as gray -.-
+input::-moz-placeholder { color: #fff; }
