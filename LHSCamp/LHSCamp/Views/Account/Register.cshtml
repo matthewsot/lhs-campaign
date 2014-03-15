@@ -32,9 +32,12 @@
                 if ($(this).text() == "voter") {
                     isCand = false;
                     $(".cand-only").fadeOut();
+                    $("#email-err").fadeOut();
+                    $("#email").attr("placeholder", "email (optional)");
                 }
                 else {
                     isCand = true;
+                    $("#email").attr("placeholder", "email");
                     $(".cand-only").fadeIn();
                 }
             });
@@ -89,6 +92,7 @@
         </script>
         <br />
         <input type="email" class="default-input standard-input" placeholder="email (optional)" id="email" />
+        <div class="medium-font railway-light" id="email-err" style="display:none;margin-top:10px;"></div>
         <br />
         <!-- Meh. I'll fix this weird width stuff later -->
         <button class="default-btn standard-btn year-picker" val="2016" style="width:164px;">2016</button>
@@ -132,6 +136,10 @@
                 if (pass != conf) {
                     $("#password-err").html("Your password doesn't match the confirmation");
                     $("#password-err").show();
+                }
+                else if (isCand && (email == null || email.trim() == "")) {
+                    $("#email-err").html("An email is required for candidates");
+                    $("#email-err").show();
                 }
                 else {
                     $.post("/API/Account/Register", {
