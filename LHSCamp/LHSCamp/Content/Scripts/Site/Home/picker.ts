@@ -42,6 +42,7 @@ class picker {
             $("#cand-wedge-img").attr("src", data.profilePic);
             $("#cand-wedge-name").text(data.name);
             $("#cand-wedge-position").text(data.position);
+            $("#facebook-btn").attr("data-cand-id", id);
             if (data.facebook == null) {
                 $("#cand-wedge-fb").hide();
             }
