@@ -94,6 +94,7 @@ namespace LHSCamp.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult ResetPass(string token, string userId)
         {

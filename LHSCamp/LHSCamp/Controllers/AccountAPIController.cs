@@ -71,11 +71,22 @@ namespace LHSCamp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("API/Account/ResetPass")]
-        public IHttpActionResult ResetPassword(UserNameModel model)
+        public IHttpActionResult ResetPassword(ResetPassModel model)
         {
             using (var UserManager = new Microsoft.AspNet.Identity.UserManager<User>(
                     new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
             {
+                //Thanks! http://stackoverflow.com/questions/19539579/how-to-implement-a-tokenprovider-in-asp-net-identity-1-1-nightly-build
+                if (Startup.DataProtectionProvider != null)
+                {
+                    UserManager.PasswordResetTokens = new DataProtectorTokenProvider(Startup.DataProtectionProvider.Create("PasswordReset"));
+                    UserManager.UserConfirmationTokens = new DataProtectorTokenProvider(Startup.DataProtectionProvider.Create("ConfirmUser"));
+                }
+                var result = UserManager.ResetPassword(model.userId, model.token, model.password);
+                if (result.Succeeded)
+                {
+                    return Ok("set");
+                }
             }
             return Ok("problem");
         }

@@ -63,13 +63,17 @@
                     $("#password-err").show();
                 }
                 else {
-                    $.post("API/Account/ResetPass", {
+                    $.post("/API/Account/ResetPass", {
+                        "userId": userId,
                         "token": token,
                         "password": pass
                     }, function (data) {
                         if (data == "set") {
                             $("#reset-form").fadeOut(function () {
                                 $("#reset-success").fadeIn();
+                                settimeout(function () {
+                                    window.location.href = "/Account/Login";
+                                }, 1000);
                             });
                         }
                         else {
