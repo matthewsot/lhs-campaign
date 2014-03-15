@@ -62,6 +62,12 @@
             $("#cand-wedge-download").click(function () {
                 window.open($("#cand-wedge-img").attr("src"));
             });
+            if (window.location.href.indexOf('candidate=') != -1) {
+                var candId = window.location.href.split('candidate=')[1].split('&')[0];
+                if (candId != null && candId.length > 0) {
+                    picker.showWedge(candId);
+                }
+            }
         });
     </script>
 }
