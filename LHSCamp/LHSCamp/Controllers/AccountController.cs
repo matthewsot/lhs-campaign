@@ -79,12 +79,13 @@ namespace LHSCamp.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", controllerName: "Home");
             }
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 

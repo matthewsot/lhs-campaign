@@ -10,11 +10,12 @@
     <div class="logo-span large-font"><b>lhs</b>|campaign</div>
     <br />
     <!-- Background login form, to login after registration -->
-    <form action="~/Account/Login" method="POST" id="login-form" style="display:none;">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", id = "login-form", style = "display:none;" }))
+    {
         @Html.AntiForgeryToken()
         <input type="hidden" name="UserName" value="" id="login-usernm" />
         <input type="hidden" name="Password" value="" id="login-pass" />
-    </form>
+    }
     <!-- Registration Form -->
     <div id="local-register" style="border-top:2px solid #fff;">
         <br />
@@ -42,7 +43,7 @@
                 }
             });
         </script>
-        <br/>
+        <br />
         <input type="text" class="default-input standard-input" placeholder="username" id="username" style="margin-top:20px;" />
         <div class="medium-font railway-light" id="usernm-err" style="display:none;margin-top:10px;"></div>
         <script type="text/javascript">
@@ -107,7 +108,7 @@
             </select>
             <div id="arrow-hider" style="position:absolute;width:30px;height:46px;right:2px;top:22px;background-color:#44A0C8;border-radius:2px;"></div>
         </div>
-        <br/>
+        <br />
         <button class="default-btn standard-btn" id="register" style="width:333px;margin-top:10px;">sign up</button>
         <p class="cand-only half-horiz" style="width:400px;position:relative;">We'll send you an email within 24 hours to activate your campaign account. This is to avoid spammers.</p>
         <script type="text/javascript">
