@@ -40,7 +40,9 @@ namespace LHSCamp.Controllers
 
             var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
             //Thanks! http://stackoverflow.com/questions/654906/linq-to-entities-random-order
-            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower() && c.ProfilePic != null && c.Owner.Year == currUser.Year && c.Owner.IsConfirmed).OrderBy(b => Guid.NewGuid());
+            var candidates = db.Candidates.Where(c => c.Owner.Year == currUser.Year && c.Owner.IsConfirmed
+                && c.Position.ToLower() == Position.ToLower() && c.ProfilePic != null)
+                .OrderBy(b => Guid.NewGuid());
 
             return Ok(candidates.Select(cand => new CandidateModel()
             {
@@ -49,7 +51,7 @@ namespace LHSCamp.Controllers
                 position = cand.Position,
                 profilePic = cand.ProfilePic,
                 chosen = chosenCandidateIds.Contains(cand.Id)
-            }).ToList());
+            }));
         }
 
         [HttpGet]
@@ -57,21 +59,21 @@ namespace LHSCamp.Controllers
         [Route("API/Candidate/Details/{Id}")]
         public IHttpActionResult GetCandidateDetails(int Id)
         {
-            var candidate = db.Candidates.Where(cand => cand.Id == Id).Select(cand => new
-            {
-                reasons = cand.Reasons,
-                name = cand.Name,
-                position = cand.Position,
-                profilePic = cand.ProfilePic,
-                facebook = cand.Facebook,
-                email = cand.Owner.Email,
-                coverPhoto = cand.CoverPhoto
-            }).FirstOrDefault();
+            var candidate = db.Candidates.Find(Id);
 
             if (candidate == null)
                 return NotFound();
 
-            return Ok(candidate);
+            return Ok(new
+            {
+                reasons = candidate.Reasons,
+                name = candidate.Name,
+                position = candidate.Position,
+                profilePic = candidate.ProfilePic,
+                facebook = candidate.Facebook,
+                email = candidate.Owner.Email,
+                coverPhoto = candidate.CoverPhoto
+            });
         }
 
         [HttpGet]
@@ -111,15 +113,7 @@ namespace LHSCamp.Controllers
                 currUser.ChosenCandidates.Add(candidate);
                 db.SaveChanges();
             }
-
-            return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
-            {
-                id = cand.Id,
-                name = cand.Name,
-                position = cand.Position,
-                profilePic = cand.ProfilePic,
-                chosen = chosenCandidateIds.Contains(cand.Id)
-            }).ToList());
+            return Ok("added");
         }
 
         [HttpGet]
@@ -140,14 +134,6 @@ namespace LHSCamp.Controllers
                 db.SaveChanges();
             }
             return Ok("removed");
-            //return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel()
-            //{
-            //    id = cand.Id,
-            //    name = cand.Name,
-            //    position = cand.Position,
-            //    profilePic = cand.ProfilePic,
-            //    chosen = chosenCandidateIds.Contains(cand.Id)
-            //}));
         }
 
         protected override void Dispose(bool disposing)
