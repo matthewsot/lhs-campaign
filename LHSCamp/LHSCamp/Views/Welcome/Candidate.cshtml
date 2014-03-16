@@ -143,7 +143,7 @@
             $.cookie("cand-page", page);
         });
 
-        $("[data-picker-page=" + $.cookie("cand-page")).click();
+        $('[data-picker-page="' + $.cookie("cand-page") + '"]').click();
 
         $("#update-email").click(function () {
             var email = $("#email-input").val();

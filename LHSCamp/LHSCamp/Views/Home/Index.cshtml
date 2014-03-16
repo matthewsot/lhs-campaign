@@ -47,13 +47,23 @@
 </div>
 
 @section Scripts {
+<script type="text/javascript" src="~/Content/Scripts/jQuery/Plugins/jquery.cookie.js"></script>
     <script type="text/javascript">
         $(function () {
+            if ($.cookie("picker-page") == null) {
+                $.cookie("picker-page", "Secretary");
+            }
+
             $(".picker-tab").click(function () {
                 $(".picker-tab").removeClass("sel-tab");
                 $(this).addClass("sel-tab");
-                picker.switchTo($(this).attr("data-position"));
+                var pos = $(this).attr("data-position");
+                picker.switchTo(pos);
+                $.cookie("picker-page", pos);
             });
+
+            $('[data-position="' + $.cookie("picker-page") + '"]').click();
+
             $(".sel-tab").click(); //load the first tab
             $("#cand-wedge-close").click(function () {
                 $("#lightOverlay").click();
