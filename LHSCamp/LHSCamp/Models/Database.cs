@@ -13,6 +13,7 @@ namespace LHSCamp.Models
     public class User : IdentityUser
     {
         public virtual Candidate Candidate { get; set; }
+        public int Year { get; set; }
         public virtual ICollection<Candidate> ChosenCandidates { get; set; }
         public User()
         {

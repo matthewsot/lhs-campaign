@@ -203,7 +203,7 @@ namespace LHSCamp.Controllers
                 if (Errors.Count > 0)
                     return Ok(string.Join(",", Errors) + ",");
 
-                var user = new User() { UserName = model.Username, Email = model.Email };
+                var user = new User() { UserName = model.Username, Email = model.Email, Year = model.Year };
                 if (!string.IsNullOrWhiteSpace(model.Position))
                 {
                     if (string.IsNullOrWhiteSpace(model.FullName))
