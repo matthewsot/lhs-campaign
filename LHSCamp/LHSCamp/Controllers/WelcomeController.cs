@@ -70,7 +70,48 @@ namespace LHSCamp.Controllers
                         db.SaveChanges();
                     }
                 }
-                return RedirectToAction("Index", controllerName: "Home");
+                return RedirectToAction("Candidate", controllerName: "Welcome");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UploadCover(HttpPostedFileBase file)
+        {
+            using (var db = new LCDB())
+            {
+                var userId = User.Identity.GetUserId();
+                var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (!currUser.IsCandidate)
+                    return RedirectToAction("Index", controllerName: "Home");
+
+                // Verify that the user selected a file
+                if (file != null && file.ContentLength > 0)
+                {
+                    var extension = Path.GetExtension(file.FileName);
+                    var allowedExts = new string[] { ".jpg", ".png", ".gif" };
+                    if (allowedExts.Contains(extension))
+                    {
+                        var imagesFolder = Server.MapPath("~/Content/Images/Candidates/");
+                        var path = imagesFolder + userId + extension;
+
+                        if (!Directory.Exists(imagesFolder))
+                            Directory.CreateDirectory(imagesFolder);
+
+                        //Remove the existing picture
+                        if (currUser.Candidate.ProfilePic != null)
+                        {
+                            var oldPic = Server.MapPath("~" + currUser.Candidate.ProfilePic);
+                            if (System.IO.File.Exists(oldPic))
+                                System.IO.File.Delete(oldPic);
+                        }
+
+                        file.SaveAs(path);
+                        currUser.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("Candidate", controllerName: "Welcome");
             }
         }
     }

@@ -89,10 +89,17 @@
         <div id="picker-page-picture" class="picker-page">
             @if (ViewBag.Confirmed)
             {
-                @:Please be aware that your profile picture must be less than 4MB in size and have a .jpg, .png, or .gif extension.
+                @:Pictures must be less than 4MB in size and have a .jpg, .png, or .gif extension.
                 <br /><br />
-                @:If your picture doesn't fit the requirements (or if you have any other problems), please don't hesitate to contact vip@lhscampaign.com and we'll make it work.
+                @:If you have any problems, please don't hesitate to contact vip@lhscampaign.com and we'll make it work.
+                <h2>Profile Picture:</h2>
                 <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" />
+                    <br />
+                    <input type="submit" value="Upload" class="default-btn standard-btn" />
+                </form>
+                <h2>Cover Photo:</h2>
+                <form action="~/Welcome/UploadCover" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" />
                     <br />
                     <input type="submit" value="Upload" class="default-btn standard-btn" />
@@ -110,7 +117,12 @@
     </div>
 </div>
 @section Scripts {
+    <script type="text/javascript" src="~/Content/Scripts/jQuery/Plugins/jquery.cookie.js"></script>
     <script type="text/javascript">
+        if ($.cookie("cand-page") == null) {
+            $.cookie("cand-page", "email");
+        }
+
         $(".tab").click(function () {
             $(".tab").removeClass("sel-tab");
             $(this).addClass("sel-tab");
@@ -118,7 +130,10 @@
             $(".sel-page").fadeOut();
             $("#picker-page-" + page).fadeIn();
             $("#picker-page-" + page).addClass("sel-page");
+            $.cookie("cand-page", page);
         });
+
+        $("[data-picker-page=" + $.cookie("cand-page")).click();
 
         $("#update-email").click(function () {
             var email = $("#email-input").val();

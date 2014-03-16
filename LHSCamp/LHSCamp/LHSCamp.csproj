@@ -263,6 +263,7 @@
     <Content Include="Content\Scripts\GSAP\EasePack.min.js" />
     <Content Include="Content\Scripts\GSAP\jquery.gsap.min.js" />
     <Content Include="Content\Scripts\GSAP\TweenLite.min.js" />
+    <Content Include="Content\Scripts\jQuery\Plugins\jquery.cookie.js" />
     <Content Include="Content\Scripts\Site\Home\picker.js">
       <DependentUpon>picker.ts</DependentUpon>
     </Content>
