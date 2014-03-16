@@ -264,6 +264,7 @@
     <Content Include="Content\Images\Default\laptop.png" />
     <Content Include="Content\Images\Errors\RememberWhen.png" />
     <Content Include="Content\Images\Errors\TooBig.png" />
+    <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Scripts\FileSaver\base64.js" />
     <Content Include="Content\Scripts\FileSaver\Blob.js" />
     <Content Include="Content\Scripts\FileSaver\canvas-toBlob.js" />
