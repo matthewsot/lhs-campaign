@@ -204,6 +204,12 @@ namespace LHSCamp.Controllers
                     return Ok(string.Join(",", Errors) + ",");
 
                 var user = new User() { UserName = model.Username, Email = model.Email, Year = model.Year };
+                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email.ToLower());
+                if(preConf != null)
+                {
+                    user.IsConfirmed = true;
+                    db.PreConfs.Remove(preConf);
+                }
                 if (!string.IsNullOrWhiteSpace(model.Position))
                 {
                     if (string.IsNullOrWhiteSpace(model.FullName))

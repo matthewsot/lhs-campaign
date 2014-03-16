@@ -59,11 +59,18 @@ namespace LHSCamp.Models
         public string Entry { get; set; }
     }
 
+    public class PreConfirmation
+    {
+        public int Id { get; set; }
+        public string Email { get; set; }
+    }
+
     public class LCDB : IdentityDbContext<User>
     {
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Setting> Config { get; set; }
         public DbSet<LogEntry> Log { get; set; }
+        public DbSet<PreConfirmation> PreConfs { get; set; }
         public LCDB()
             : base("LCDB")
         {
