@@ -89,7 +89,8 @@ namespace LHSCamp.Controllers
                 name = cand.Name,
                 position = cand.Position,
                 profilePic = cand.ProfilePic,
-                chosen = chosenCandidateIds.Contains(cand.Id)
+                chosen = chosenCandidateIds.Contains(cand.Id),
+                coverPhoto = cand.CoverPhoto
             }));
         }
 

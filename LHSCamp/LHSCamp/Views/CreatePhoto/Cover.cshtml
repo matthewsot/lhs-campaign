@@ -53,30 +53,39 @@
         $("#reset-img").click(function () {
             $.getJSON("/API/Chosen", function (data) {
                 fab.clear();
-                for (var i = 0; i < data.length; i++) {
-                    fabric.Image.fromURL(data[i].profilePic, function (oImg) {
-                        var index = 0;
-                        for (var z = 0; z < data.length; z++) {
-                            if (oImg.getSrc().endsWith(data[z].profilePic)) {
-                                index = z;
-                                break;
-                            }
-                        }
-                        oImg.setWidth(170.6);
-                        oImg.setHeight(170.6);
-                        oImg.setLeft(170.6 * (index % 5));
-                        //0 -> 0 (0 * .5 = 0, rounds down to 0)
-                        //1 -> 0 (1 * .5 = .5, rounds down to 0)
-                        //2 -> 1 (2 * .5 = 1, rounds down to 1)
-                        //3 -> 1 (3 * .5 = 1.5, rounds down to 1)
-                        //4 -> 2, etc.
-                        oImg.setTop(170.6 * Math.floor(index * .2));
-                        if (index >= 10) { //just layer all other images in the center
-                            oImg.setTop(157.5);
-                            oImg.setLeft(425.5);
-                        }
+                if (data.length == 1 && data[0].coverPhoto != null) {
+                    fabric.Image.fromURL(data[0].coverPhoto, function (oImg) {
+                        oImg.setWidth(851);
+                        oImg.setHeight(315);
                         fab.add(oImg);
                     });
+                }
+                else {
+                    for (var i = 0; i < data.length; i++) {
+                        fabric.Image.fromURL(data[i].profilePic, function (oImg) {
+                            var index = 0;
+                            for (var z = 0; z < data.length; z++) {
+                                if (oImg.getSrc().endsWith(data[z].profilePic)) {
+                                    index = z;
+                                    break;
+                                }
+                            }
+                            oImg.setWidth(170.6);
+                            oImg.setHeight(170.6);
+                            oImg.setLeft(170.6 * (index % 5));
+                            //0 -> 0 (0 * .5 = 0, rounds down to 0)
+                            //1 -> 0 (1 * .5 = .5, rounds down to 0)
+                            //2 -> 1 (2 * .5 = 1, rounds down to 1)
+                            //3 -> 1 (3 * .5 = 1.5, rounds down to 1)
+                            //4 -> 2, etc.
+                            oImg.setTop(170.6 * Math.floor(index * .2));
+                            if (index >= 10) { //just layer all other images in the center
+                                oImg.setTop(157.5);
+                                oImg.setLeft(425.5);
+                            }
+                            fab.add(oImg);
+                        });
+                    }
                 }
             });
         });
