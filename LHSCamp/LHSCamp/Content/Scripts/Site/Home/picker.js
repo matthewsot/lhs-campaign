@@ -100,10 +100,10 @@ var picker = (function () {
 
         //newItem += '<div id="picker-overlay-' + item.id + '" data-cand-id="' + item.id + '" data-cand-pic="' + item.profilePic + '" data-cand-selected="' + item.chosen.toLowerCase() + '" data-cand-name="' + item.name + '" class="picker-overlay">' + hoverText + '</div>';
         newItem += '<div class="picker-info">';
-        newItem += '<button class="picker-info-btn picker-add-btn" ';
+        newItem += '<button class="default-btn picker-info-btn picker-add-btn" ';
         newItem += 'data-cand-id="' + item.id + '" data-cand-selected="' + item.chosen.toLowerCase() + '"';
         newItem += '>' + hoverText + ' </button>';
-        newItem += '<button class="picker-info-btn picker-read-btn" data-cand-id="' + item.id + '">read more</button>';
+        newItem += '<button class="default-btn picker-info-btn picker-read-btn" data-cand-id="' + item.id + '">read more</button>';
         newItem += '<div class="picker-name half-vert">' + item.name.toUpperCase() + '</div>';
         newItem += '</div>';
         newItem += '</div>';
