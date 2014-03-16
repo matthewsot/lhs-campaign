@@ -40,7 +40,7 @@ namespace LHSCamp.Controllers
 
             var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
             //Thanks! http://stackoverflow.com/questions/654906/linq-to-entities-random-order
-            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower() && c.ProfilePic != null && c.Owner.Year == currUser.Year).OrderBy(b => Guid.NewGuid());
+            var candidates = db.Candidates.Where(c => c.Position.ToLower() == Position.ToLower() && c.ProfilePic != null && c.Owner.Year == currUser.Year && c.Owner.IsConfirmed).OrderBy(b => Guid.NewGuid());
 
             return Ok(candidates.Select(cand => new CandidateModel()
             {
