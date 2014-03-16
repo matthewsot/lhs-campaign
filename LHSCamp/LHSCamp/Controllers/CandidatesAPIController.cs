@@ -64,7 +64,8 @@ namespace LHSCamp.Controllers
                 position = cand.Position,
                 profilePic = cand.ProfilePic,
                 facebook = cand.Facebook,
-                email = cand.Owner.Email
+                email = cand.Owner.Email,
+                coverPhoto = cand.CoverPhoto
             }).FirstOrDefault();
 
             if (candidate == null)

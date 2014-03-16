@@ -57,6 +57,17 @@ class picker {
                 $("#cand-wedge-fb").click(function () {
                     window.open(data.facebook);
                 });
+                $("#cand-wedge-fb").show();
+            }
+            if (data.coverPhoto == null) {
+                $("#cand-wedge-cover").hide();
+            }
+            else {
+                $("#cand-wedge-cover").unbind("click");
+                $("#cand-wedge-cover").click(function () {
+                    window.open(data.coverPhoto);
+                });
+                $("#cand-wedge-cover").show();
             }
             if (data.reasons != null && data.reasons.length > 0) {
                 $("#cand-wedge-reasons").text(data.reasons);
