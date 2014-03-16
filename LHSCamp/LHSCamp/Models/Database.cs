@@ -38,6 +38,7 @@ namespace LHSCamp.Models
         public string Name { get; set; }
         public string Position { get; set; }
         public string ProfilePic { get; set; }
+        public string CoverPhoto { get; set; }
         public string Reasons { get; set; }
         public string Facebook { get; set; }
     }

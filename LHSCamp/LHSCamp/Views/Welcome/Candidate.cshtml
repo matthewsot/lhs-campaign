@@ -1,4 +1,4 @@
-﻿@{
+﻿    @{
     ViewBag.Title = "Candidate Settings";
 }
 @section Styles {
@@ -17,12 +17,18 @@
 }
 <div style="position:relative;width:80%;left:10%;">
     <h1>Welcome to LHS Campaign!</h1>
-    @if (ViewBag.Confirmed)
+    @if (!ViewBag.Confirmed)
     {
         <span>
             We'll run through a few quick questions to get your candidate account set up.
             Once you're verified (which may take up to 24 hours),
             you'll be allowed to upload your profile image and be featured on LHS Campaign.
+        </span>
+    }
+    @if (ViewBag.Uploaded != null && ViewBag.Uploaded == true)
+    {
+        <span>
+            Image uploaded!
         </span>
     }
     <ul class="tabs-list">
@@ -92,15 +98,19 @@
                 @:Pictures must be less than 4MB in size and have a .jpg, .png, or .gif extension.
                 <br /><br />
                 @:If you have any problems, please don't hesitate to contact vip@lhscampaign.com and we'll make it work.
-                <h2>Profile Picture:</h2>
+                <h2 style="margin-bottom:0px;">Profile Picture:</h2>
                 <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file" />
+                    <span>Square image - Required</span>
+                    <br />
+                    <input type="file" name="file" style="margin-bottom:5px;" />
                     <br />
                     <input type="submit" value="Upload" class="default-btn standard-btn" />
                 </form>
-                <h2>Cover Photo:</h2>
+                <h2 style="margin-bottom:0px;">Cover Photo:</h2>
                 <form action="~/Welcome/UploadCover" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file" />
+                    <span>815x351 px image - Optional</span>
+                    <br />
+                    <input type="file" name="file" style="margin-bottom:5px;" />
                     <br />
                     <input type="submit" value="Upload" class="default-btn standard-btn" />
                 </form>
