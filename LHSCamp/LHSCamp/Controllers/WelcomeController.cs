@@ -67,6 +67,17 @@ namespace LHSCamp.Controllers
                         var oldPic = Server.MapPath("~" + currUser.Candidate.ProfilePic);
                         if (System.IO.File.Exists(oldPic))
                             System.IO.File.Delete(oldPic);
+
+                        var entry = currUser.Candidate.ProfilePic.ToString();
+                        var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
+                        if (currLog == null)
+                        {
+                            db.Log.Add(new LogEntry() //So I can refresh the image in Cloudflare, if necessary
+                            {
+                                Type = "Image Changed/Removed",
+                                Entry = entry
+                            });
+                        }
                     }
 
                     file.SaveAs(path);
@@ -105,6 +116,17 @@ namespace LHSCamp.Controllers
                         var oldPic = Server.MapPath("~" + currUser.Candidate.CoverPhoto);
                         if (System.IO.File.Exists(oldPic))
                             System.IO.File.Delete(oldPic);
+
+                        var entry = currUser.Candidate.ProfilePic.ToString();
+                        var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
+                        if (currLog == null)
+                        {
+                            db.Log.Add(new LogEntry() //So I can refresh the image in Cloudflare, if necessary
+                            {
+                                Type = "Image Changed/Removed",
+                                Entry = entry
+                            });
+                        }
                     }
 
                     file.SaveAs(path);

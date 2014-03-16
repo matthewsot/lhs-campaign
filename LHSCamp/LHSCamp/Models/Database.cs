@@ -52,10 +52,18 @@ namespace LHSCamp.Models
         public string Value { get; set; }
     }
 
+    public class LogEntry
+    {
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public string Entry { get; set; }
+    }
+
     public class LCDB : IdentityDbContext<User>
     {
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Setting> Config { get; set; }
+        public DbSet<LogEntry> Log { get; set; }
         public LCDB()
             : base("LCDB")
         {
