@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace LHSCamp.Models
 {
@@ -15,9 +16,11 @@ namespace LHSCamp.Models
         public virtual Candidate Candidate { get; set; }
         public int Year { get; set; }
         public virtual ICollection<Candidate> ChosenCandidates { get; set; }
+        public DateTime? SignupDate { get; set; }
         public User()
         {
             ChosenCandidates = new List<Candidate>();
+            SignupDate = DateTime.Now;
         }
         public bool IsCandidate 
         {

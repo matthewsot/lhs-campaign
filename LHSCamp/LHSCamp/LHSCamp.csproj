@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201403160708074_PreConfs.Designer.cs">
       <DependentUpon>201403160708074_PreConfs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403170058455_SignupDate.cs" />
+    <Compile Include="Migrations\201403170058455_SignupDate.Designer.cs">
+      <DependentUpon>201403170058455_SignupDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountAPIModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -404,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403160708074_PreConfs.resx">
       <DependentUpon>201403160708074_PreConfs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403170058455_SignupDate.resx">
+      <DependentUpon>201403170058455_SignupDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

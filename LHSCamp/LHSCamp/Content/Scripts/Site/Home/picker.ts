@@ -39,6 +39,8 @@ class picker {
     }
     static showWedge(id) {
         $.getJSON("/API/Candidate/Details/" + id, function (data) {
+            
+
             $("#cand-wedge-img").attr("src", data.profilePic);
             $("#cand-wedge-name").text(data.name);
             $("#cand-wedge-position").text(data.position);
