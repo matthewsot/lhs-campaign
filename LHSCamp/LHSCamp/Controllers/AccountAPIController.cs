@@ -237,7 +237,7 @@ namespace LHSCamp.Controllers
                 else
                 {
                     //Errors
-                    return Ok("WOOPS");
+                    return Ok(string.Join(",", Errors));
                 }
             }
         }
