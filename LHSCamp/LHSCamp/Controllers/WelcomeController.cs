@@ -52,7 +52,7 @@ namespace LHSCamp.Controllers
             // Verify that the user selected a file
             if (file != null && file.ContentLength > 0)
             {
-                var extension = Path.GetExtension(file.FileName);
+                var extension = Path.GetExtension(file.FileName).ToLower();
                 if (allowedExts.Contains(extension))
                 {
                     var imagesFolder = Server.MapPath("~/Content/Images/Candidates/");
