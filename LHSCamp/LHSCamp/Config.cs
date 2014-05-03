@@ -6,33 +6,21 @@ namespace LHSCamp
 {
     public class Config
     {
-        public static string GetValue(string Key, string Default = "")
+        public static string GetValue(string key, string defaultValue = "")
         {
-            using (LCDB db = new LCDB())
+            using (var db = new LCDB())
             {
-                var val = db.Config.FirstOrDefault(a => a.Key == Key).Value;
-                if (val == null)
-                {
-                    return Default;
-                }
-                return val;
+                var val = db.Config.FirstOrDefault(a => a.Key == key);
+                return (val == null) ? defaultValue : val.Value;
             }
         }
 
-        public static Dictionary<string, string> GetValues(string[] Keys)
+        public static Dictionary<string, string> GetValues(string[] keys)
         {
-            using (LCDB db = new LCDB())
+            using (var db = new LCDB())
             {
-                var gotten = db.Config.Where(a => Keys.Contains(a.Key));
-                Dictionary<string, string> Resp = new Dictionary<string, string>();
-                foreach (var Got in gotten)
-                {
-                    if (Got != null)
-                    {
-                        Resp.Add(Got.Key, Got.Value);
-                    }
-                }
-                return Resp;
+                var gotten = db.Config.Where(a => keys.Contains(a.Key));
+                return gotten.Where(got => got != null).ToDictionary(got => got.Key, got => got.Value);
             }
         }
     }

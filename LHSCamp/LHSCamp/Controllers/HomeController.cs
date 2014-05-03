@@ -1,10 +1,6 @@
 ﻿using LHSCamp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace LHSCamp.Controllers
 {
@@ -14,11 +10,11 @@ namespace LHSCamp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            using(LCDB db = new LCDB())
+            using(var db = new LCDB())
             {
                 var userId = User.Identity.GetUserId();
-                var currUser = db.Users.FirstOrDefault(user => user.Id == userId);
-                if(currUser != null && currUser.IsCandidate == true && string.IsNullOrWhiteSpace(currUser.Candidate.ProfilePic))
+                var currUser = db.Users.Find(userId);
+                if(currUser != null && currUser.IsCandidate && string.IsNullOrWhiteSpace(currUser.Candidate.ProfilePic))
                 {
                     return RedirectToAction("Candidate", controllerName: "Welcome");
                 }

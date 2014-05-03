@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Web.Http.Results;
+using LHSCamp.Models;
+using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using Owin;
-using LHSCamp.Models;
 
 namespace LHSCamp.Controllers
 {
@@ -20,14 +16,14 @@ namespace LHSCamp.Controllers
         public ActionResult Candidate()
         {
             var userId = User.Identity.GetUserId();
-            var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
-            if (currUser == null || !currUser.IsCandidate)
+            var user = db.Users.Find(userId);
+            if (user == null || !user.IsCandidate)
                 return RedirectToAction("Index", "Home");
 
-            ViewBag.Confirmed = currUser.IsConfirmed;
-            ViewBag.Email = currUser.Email;
-            ViewBag.Position = currUser.Candidate.Position;
-            ViewBag.Reasons = currUser.Candidate.Reasons ?? "";
+            ViewBag.Confirmed = user.IsConfirmed;
+            ViewBag.Email = user.Email;
+            ViewBag.Position = user.Candidate.Position;
+            ViewBag.Reasons = user.Candidate.Reasons ?? "";
             if (TempData.ContainsKey("Uploaded"))
             {
                 ViewBag.Uploaded = ((bool)TempData["Uploaded"]);
@@ -38,15 +34,21 @@ namespace LHSCamp.Controllers
             }
             return View();
         }
-        string[] allowedExts = new string[] { ".jpg", ".png", ".gif" };
+
+        readonly string[] allowedExts = { ".jpg", ".png", ".gif" };
+
         //Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
         [HttpPost]
         public ActionResult UploadProfile(HttpPostedFileBase file)
         {
             var userId = User.Identity.GetUserId();
-            var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
+            var user = db.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
 
-            if (!currUser.IsCandidate)
+            if (!user.IsCandidate)
                 return RedirectToAction("Index", controllerName: "Home");
 
             // Verify that the user selected a file
@@ -62,13 +64,13 @@ namespace LHSCamp.Controllers
                         Directory.CreateDirectory(imagesFolder);
 
                     //Remove the existing picture
-                    if (currUser.Candidate.ProfilePic != null)
+                    if (user.Candidate.ProfilePic != null)
                     {
-                        var oldPic = Server.MapPath("~" + currUser.Candidate.ProfilePic);
+                        var oldPic = Server.MapPath("~" + user.Candidate.ProfilePic);
                         if (System.IO.File.Exists(oldPic))
                             System.IO.File.Delete(oldPic);
 
-                        var entry = currUser.Candidate.ProfilePic.ToString();
+                        var entry = user.Candidate.ProfilePic.ToString();
                         var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
                         if (currLog == null)
                         {
@@ -81,7 +83,7 @@ namespace LHSCamp.Controllers
                     }
 
                     file.SaveAs(path);
-                    currUser.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;
+                    user.Candidate.ProfilePic = "/Content/Images/Candidates/" + userId + extension;
                     db.SaveChanges();
                 }
             }
@@ -93,9 +95,9 @@ namespace LHSCamp.Controllers
         public ActionResult UploadCover(HttpPostedFileBase file)
         {
             var userId = User.Identity.GetUserId();
-            var currUser = db.Users.FirstOrDefault(u => u.Id == userId);
+            var user = db.Users.Find(userId);
 
-            if (!currUser.IsCandidate)
+            if (!user.IsCandidate)
                 return RedirectToAction("Index", controllerName: "Home");
 
             // Verify that the user selected a file
@@ -111,13 +113,13 @@ namespace LHSCamp.Controllers
                         Directory.CreateDirectory(imagesFolder);
 
                     //Remove the existing picture
-                    if (currUser.Candidate.CoverPhoto != null)
+                    if (user.Candidate.CoverPhoto != null)
                     {
-                        var oldPic = Server.MapPath("~" + currUser.Candidate.CoverPhoto);
+                        var oldPic = Server.MapPath("~" + user.Candidate.CoverPhoto);
                         if (System.IO.File.Exists(oldPic))
                             System.IO.File.Delete(oldPic);
 
-                        var entry = currUser.Candidate.ProfilePic.ToString();
+                        var entry = user.Candidate.ProfilePic.ToString();
                         var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
                         if (currLog == null)
                         {
@@ -130,7 +132,7 @@ namespace LHSCamp.Controllers
                     }
 
                     file.SaveAs(path);
-                    currUser.Candidate.CoverPhoto = "/Content/Images/Covers/" + userId + extension;
+                    user.Candidate.CoverPhoto = "/Content/Images/Covers/" + userId + extension;
                     db.SaveChanges();
                 }
             }
