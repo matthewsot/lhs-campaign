@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using LHSCamp.Models;
+using Microsoft.AspNet.Identity;
 
 namespace LHSCamp.Controllers
 {
@@ -28,12 +29,16 @@ namespace LHSCamp.Controllers
         [Route("API/Candidates/{position}")]
         public IHttpActionResult GetCandidates(string position)
         {
-            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
-            if (currUser == null) return NotFound();
+            var user = db.Users.Find(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-            var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
-            //Thanks! http://stackoverflow.com/questions/654906/linq-to-entities-random-order
-            var candidates = db.Candidates.Where(c => c.Owner.Year == currUser.Year && c.Owner.IsConfirmed
+            var chosenCandidateIds = user.ChosenCandidates.Select(cand => cand.Id);
+
+            // Thanks! http://stackoverflow.com/questions/654906/linq-to-entities-random-order
+            var candidates = db.Candidates.Where(c => c.Owner.Year == user.Year && c.Owner.IsConfirmed
                 && c.Position.ToLower() == position.ToLower() && c.ProfilePic != null)
                 .OrderBy(b => Guid.NewGuid());
 
@@ -53,9 +58,10 @@ namespace LHSCamp.Controllers
         public IHttpActionResult GetCandidateDetails(int id)
         {
             var candidate = db.Candidates.Find(id);
-
             if (candidate == null)
+            {
                 return NotFound();
+            }
 
             return Ok(new
             {
@@ -73,12 +79,15 @@ namespace LHSCamp.Controllers
         [Route("API/Chosen")]
         public IHttpActionResult GetChosenCandidates()
         {
-            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
-            if (currUser == null) return NotFound();
+            var user = db.Users.Find(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-            var chosenCandidateIds = currUser.ChosenCandidates.Select(cand => cand.Id);
+            var chosenCandidateIds = user.ChosenCandidates.Select(cand => cand.Id);
 
-            return Ok(currUser.ChosenCandidates.Select(cand => new CandidateModel
+            return Ok(user.ChosenCandidates.Select(cand => new CandidateModel
             {
                 id = cand.Id,
                 name = cand.Name,
@@ -93,16 +102,19 @@ namespace LHSCamp.Controllers
         [Route("API/Chosen/Add/{id}")]
         public IHttpActionResult AddChosenCandidate(int id)
         {
-            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
-            if (currUser == null) return NotFound();
-
+            var user = db.Users.Find(User.Identity.GetUserId());
             var candidate = db.Candidates.FirstOrDefault(cand => cand.Id == id);
-            if (candidate == null) return NotFound();
+            if (user == null || candidate == null)
+            {
+                return NotFound();
+            }
 
-            if (currUser.ChosenCandidates.Contains(candidate)) return Ok("added");
+            if (!user.ChosenCandidates.Contains(candidate))
+            {
+                user.ChosenCandidates.Add(candidate);
+                db.SaveChanges();
+            }
 
-            currUser.ChosenCandidates.Add(candidate);
-            db.SaveChanges();
             return Ok("added");
         }
 
@@ -110,15 +122,19 @@ namespace LHSCamp.Controllers
         [Route("API/Chosen/Remove/{id}")]
         public IHttpActionResult RemoveChosenCandidate(int id)
         {
-            var currUser = db.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
-            if (currUser == null) return NotFound();
-
+            var user = db.Users.Find(User.Identity.GetUserId());
             var candidate = db.Candidates.Find(id);
-            if (candidate == null) return NotFound();
+            if (user == null || candidate == null)
+            {
+                return NotFound();
+            }
 
-            if (!currUser.ChosenCandidates.Contains(candidate)) return Ok("removed");
-            currUser.ChosenCandidates.Remove(candidate);
-            db.SaveChanges();
+            if (user.ChosenCandidates.Contains(candidate))
+            {
+                user.ChosenCandidates.Remove(candidate);
+                db.SaveChanges();
+            }
+
             return Ok("removed");
         }
 
@@ -129,11 +145,6 @@ namespace LHSCamp.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool CandidateExists(int id)
-        {
-            return db.Candidates.Count(e => e.Id == id) > 0;
         }
     }
 }
