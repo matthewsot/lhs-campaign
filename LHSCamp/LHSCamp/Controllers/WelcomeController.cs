@@ -36,6 +36,7 @@ namespace LHSCamp.Controllers
             return View();
         }
 
+        // Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
         private bool UploadPicture(HttpPostedFileBase file, User user, string folderPath)
         {
             var allowedExts = new[] { ".jpg", ".png", ".gif" };
@@ -81,7 +82,6 @@ namespace LHSCamp.Controllers
             return true;
         }
 
-        // Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
         [HttpPost]
         public ActionResult UploadProfile(HttpPostedFileBase file)
         {

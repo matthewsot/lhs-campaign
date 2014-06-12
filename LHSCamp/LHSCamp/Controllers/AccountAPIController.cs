@@ -59,7 +59,7 @@ namespace LHSCamp.Controllers
                 mail.Body += HttpUtility.UrlEncode(token) + "&userId=" + user.Id;
                 mail.Body += " to reset your LHS|Campaign password.";
 
-                smtpServer.Port = Int32.Parse(settings["SMTP Port"]);
+                smtpServer.Port = int.Parse(settings["SMTP Port"]);
                 smtpServer.Credentials = new System.Net.NetworkCredential(settings["SMTP User"], settings["SMTP Pass"]);
 
                 smtpServer.Send(mail);
@@ -75,12 +75,13 @@ namespace LHSCamp.Controllers
             using (var userManager = new UserManager<User>(
                     new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
             {
-                //Thanks! http://stackoverflow.com/questions/19539579/how-to-implement-a-tokenprovider-in-asp-net-identity-1-1-nightly-build
+                // Thanks! http://stackoverflow.com/questions/19539579/how-to-implement-a-tokenprovider-in-asp-net-identity-1-1-nightly-build
                 if (Startup.DataProtectionProvider != null)
                 {
                     userManager.PasswordResetTokens = new DataProtectorTokenProvider(Startup.DataProtectionProvider.Create("PasswordReset"));
                     userManager.UserConfirmationTokens = new DataProtectorTokenProvider(Startup.DataProtectionProvider.Create("ConfirmUser"));
                 }
+
                 var result = userManager.ResetPassword(model.userId, model.token, model.password);
                 if (result.Succeeded)
                 {
@@ -98,7 +99,9 @@ namespace LHSCamp.Controllers
             var user = db.Users.Find(userId);
 
             if (user == null)
+            {
                 return Ok("no user");
+            }
 
             user.Email = model.email;
             db.SaveChanges();
@@ -113,9 +116,14 @@ namespace LHSCamp.Controllers
             var user = db.Users.Find(userId);
 
             if (user == null)
+            {
                 return Ok("no user");
+            }
 
-            if (!user.IsCandidate) return Ok("set");
+            if (!user.IsCandidate)
+            {
+                return Ok("set");
+            }
             user.Candidate.Position = model.position;
             db.SaveChanges();
             return Ok("set");
@@ -129,11 +137,15 @@ namespace LHSCamp.Controllers
 
             var user = db.Users.Find(userId);
             if (user == null)
+            {
                 return Ok("no user");
+            }
 
             var candidate = user.Candidate;
             if (candidate == null)
+            {
                 return Ok("not candidate");
+            }
 
             candidate.Reasons = model.reasons;
             db.SaveChanges();
@@ -144,21 +156,19 @@ namespace LHSCamp.Controllers
         [Route("API/Account/SetSocial")]
         public IHttpActionResult SetSocial(SetSocialModel model)
         {
-            if (model.facebook != null)
-                model.facebook = model.facebook.Trim();
+            model.facebook = string.IsNullOrWhiteSpace(model.facebook) ? null : model.facebook.Trim();
 
-            if (model.facebook == "")
-                model.facebook = null;
-
-            var userId = User.Identity.GetUserId();
-
-            var user = db.Users.Find(userId);
+            var user = db.Users.Find(User.Identity.GetUserId());
             if (user == null)
+            {
                 return Ok("no user");
+            }
 
             var candidate = user.Candidate;
             if (candidate == null)
+            {
                 return Ok("no candidate");
+            }
 
             candidate.Facebook = model.facebook;
             db.SaveChanges();
@@ -187,7 +197,7 @@ namespace LHSCamp.Controllers
             {
                 var errors = new List<string>();
 
-                //TODO: Should be validating with ModelState
+                // TODO: Should be validating with ModelState
                 if (model.Password.Length <= 6) errors.Add("Password");
                 if (!(model.Year <= 2017 && model.Year >= 2015)) errors.Add("Year");
                 if (model.Position != null && model.Position.Length > 50) errors.Add("Position");
@@ -195,7 +205,9 @@ namespace LHSCamp.Controllers
                 if (db.Users.Count(usr => usr.UserName == model.Username) > 0) errors.Add("Username");
 
                 if (errors.Count > 0)
+                {
                     return Ok(string.Join(",", errors) + ",");
+                }
 
                 var user = new User { UserName = model.Username, Email = model.Email, Year = model.Year };
                 var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email.ToLower());
@@ -207,9 +219,11 @@ namespace LHSCamp.Controllers
                 if (!string.IsNullOrWhiteSpace(model.Position))
                 {
                     if (string.IsNullOrWhiteSpace(model.FullName))
+                    {
                         model.FullName = model.Username;
+                    }
 
-                    //create candidate for user
+                    // create candidate for user
                     user.Candidate = new Candidate
                     {
                         Owner = user,
@@ -219,17 +233,7 @@ namespace LHSCamp.Controllers
                 }
 
                 var result = await userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GetConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmUser", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                    return Ok("GOOD");
-                }
-                //Errors
-                return Ok(string.Join(",", errors));
+                return Ok(result.Succeeded ? "GOOD" : string.Join(",", errors));
             }
         }
 
