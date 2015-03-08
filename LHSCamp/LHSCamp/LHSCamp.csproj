@@ -274,20 +274,14 @@
     <Content Include="Content\Scripts\FileSaver\canvas-toBlob.js" />
     <Content Include="Content\Scripts\FileSaver\FileSaver.js" />
     <Content Include="Content\Scripts\FileSaver\Modernizr.js" />
-    <Content Include="Content\Scripts\Flauntly\Core.js">
-      <DependentUpon>Core.ts</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Flauntly\Wedge\Core.js">
-      <DependentUpon>Core.ts</DependentUpon>
-    </Content>
+    <Content Include="Content\Scripts\Flauntly\Core.js" />
+    <Content Include="Content\Scripts\Flauntly\Wedge\Core.js" />
     <Content Include="Content\Scripts\GSAP\CSSPlugin.min.js" />
     <Content Include="Content\Scripts\GSAP\EasePack.min.js" />
     <Content Include="Content\Scripts\GSAP\jquery.gsap.min.js" />
     <Content Include="Content\Scripts\GSAP\TweenLite.min.js" />
     <Content Include="Content\Scripts\jQuery\Plugins\jquery.cookie.js" />
-    <Content Include="Content\Scripts\Site\Home\picker.js">
-      <DependentUpon>picker.ts</DependentUpon>
-    </Content>
+    <Content Include="Content\Scripts\Site\Home\picker.js" />
     <Content Include="Error\NotFound.html" />
     <Content Include="Error\Weird.html" />
     <Content Include="favicon.ico" />
@@ -426,20 +420,11 @@
     <Content Include="Content\Styles\Site\Login\login.less" />
     <Content Include="Content\Styles\Site\Login\register.less" />
     <Content Include="Content\Styles\Site\Home\picker.less" />
-    <Content Include="Content\Scripts\Site\Home\picker.js.map">
-      <DependentUpon>picker.ts</DependentUpon>
-    </Content>
     <Content Include="Content\Styles\Site\Home\footer.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\Candidates\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Content\Scripts\Flauntly\Core.ts" />
-    <TypeScriptCompile Include="Content\Scripts\Flauntly\Wedge\Core.ts" />
-    <TypeScriptCompile Include="Content\Scripts\Site\Home\picker.ts" />
-    <TypeScriptCompile Include="Content\Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
