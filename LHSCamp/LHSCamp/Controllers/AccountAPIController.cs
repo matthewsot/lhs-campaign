@@ -50,11 +50,11 @@ namespace LHSCamp.Controllers
                 var settings = Config.GetValues(new[] { "SMTP Server", "SMTP Port", "SMTP User", "SMTP Pass" });
                 var mail = new MailMessage();
                 var smtpServer = new SmtpClient(settings["SMTP Server"]);
-                mail.From = new MailAddress("postmaster@mawteam.com", "LHS|Campaign");
+                mail.From = new MailAddress("postmaster@lhscampaign.cf", "LHS|Campaign");
                 var userName = User.Identity.GetUserName();
                 mail.To.Add(new MailAddress(user.Email, userName));
                 mail.Subject = "Reset Your Password";
-                mail.Body = "Please visit http://lhscampaign.mawteam.com/Account/ResetPass?token=";
+                mail.Body = "Please visit http://lhscampaign.cf/Account/ResetPass?token=";
                 var token = userManager.GetPasswordResetToken(user.Id);
                 mail.Body += HttpUtility.UrlEncode(token) + "&userId=" + user.Id;
                 mail.Body += " to reset your LHS|Campaign password.";
