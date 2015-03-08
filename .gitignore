@@ -9,6 +9,8 @@ LHSCamp/LHSCamp/Content/Images/Candidates/*.gif
 [Bb]in/
 [Oo]bj/
 
+*.sln.ide/*
+
 # mstest test results
 TestResults
 
