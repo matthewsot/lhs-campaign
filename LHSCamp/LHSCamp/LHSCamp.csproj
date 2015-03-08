@@ -337,6 +337,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -374,6 +375,7 @@
     <Content Include="Views\CreatePhoto\Profile.cshtml" />
     <Content Include="Error\UploadSize.html" />
     <Content Include="Views\Account\ForgotPass.cshtml" />
+    <None Include="Properties\PublishProfiles\lhscampaign.com - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402280046038_Init.resx">
