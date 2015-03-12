@@ -1,89 +1,60 @@
-﻿@{
-    ViewBag.Title = "LHSCampaign";
+﻿@model Dictionary<string, List<LHSCamp.Models.Candidate>>
+@{
+    Layout = null;
 }
 
-@section Styles {
-    @Styles.Render("~/Content/Styles/Bundles/Home/home.less")
-    <script type="text/javascript" src="~/Content/Scripts/Flauntly/Wedge/Core.js"></script>
-}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LHSCampaign</title>
+        <link href="~/Content/Styles/Site/home.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo"/>
+            <a href="~/SignUp">about</a>
+            <a href="~/SignUp">candidate sign in</a>
+            <a href="~/SignUp">candidate? sign up</a>
+        </header>
 
-<ul id="picker-tabs" class="tabs-list">
-    <li class="tab picker-tab sel-tab" data-position="Secretary"><div>SECRETARY</div></li>
-    <li class="tab picker-tab" data-position="Treasurer"><div>TREASURER</div></li>
-    <li class="tab picker-tab" data-position="Vice President"><div>VICE-PRES.</div></li>
-    <li class="tab picker-tab" data-position="President"><div>PRESIDENT</div></li>
-</ul>
+        <ul id="position-tabs">
+            <li class="selected">idc rep</li>
+            <li>social manager</li>
+            <li>secretary</li>
+            <li>treasurer</li>
+            <li>vp</li>
+            <li>pres</li>
+        </ul>
 
-<div id="picker-container" class="tab-box">
-    <div id="picker-box">
-    </div>
-</div>
-<div id="cand-wedge" class="blue">
-    <div id="cand-wedge-btns"> <!-- Top-left corner -->
-        <div id="cand-wedge-close" class="railway-bold">X</div>
-        <div class="cand-wedge-circle" id="gplus-btn">
-            <img src="~/Content/Images/Buttons/GooglePlus.png" class="cand-wedge-social" />
-        </div>
-        <br />
-        <div class="cand-wedge-circle" id="facebook-btn">
-            <img src="~/Content/Images/Buttons/Facebook.png" class="cand-wedge-social" />
-        </div>
-    </div>
-    <img id="cand-wedge-img" />
-    <div id="cand-wedge-info">
-        <div id="cand-wedge-name" class="railway-bold medium-font"></div>
-        <div id="cand-wedge-position"></div>
-        <div id="cand-wedge-email"></div>
-        <div id="cand-wedge-actions" style="margin-top:0px;width:250px;">
-            <button class="standard-btn default-btn" id="cand-wedge-fb" style="margin-bottom:5px;height:40px;">facebook event</button>
-            <button class="standard-btn default-btn" id="cand-wedge-cover" style="margin-bottom:5px;height:40px;">download cover pic</button>
-            <button class="standard-btn default-btn" id="cand-wedge-download" style="height:40px;">download prof. pic</button>
-        </div>
-    </div>
-    <div id="cand-wedge-content">
-        <h2 class="railway-bold">WHY YOU SHOULD VOTE</h2>
-        <p id="cand-wedge-reasons" class="small-font"></p>
-    </div>
-</div>
+        @foreach (var position in Model)
+        {
+            <div class="tab-content" data-tab="@position.Key">
+                @foreach (var candidate in position.Value)
+                {
+                    <article class="candidate" data-id="@candidate.Id">
+                        <div class="hover-container">
+                            <img src="~/Content/Images/Candidates/@(candidate.ProfilePic)" />
 
-@section Scripts {
-<script type="text/javascript" src="~/Content/Scripts/jQuery/Plugins/jquery.cookie.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            if ($.cookie("picker-page") == null) {
-                $.cookie("picker-page", "Secretary");
-            }
+                            <div class="overlay">
+                                <a href="#platform">platform info</a>
+                                <a href="#add">(+) add picture</a>
+                            </div>
+                        </div>
 
-            $(".picker-tab").click(function () {
-                $(".picker-tab").removeClass("sel-tab");
-                $(this).addClass("sel-tab");
-                var pos = $(this).attr("data-position");
-                picker.switchTo(pos);
-                $.cookie("picker-page", pos);
-            });
+                        <p>
+                            @candidate.Reasons
+                        </p>
 
-            $('[data-position="' + $.cookie("picker-page") + '"]').click();
-
-            $(".sel-tab").click(); //load the first tab
-            $("#cand-wedge-close").click(function () {
-                $("#lightOverlay").click();
-            });
-            $("#gplus-btn").click(function () {
-                window.open("/GPlus");
-            });
-            $("#facebook-btn").click(function () {
-                var candId = $(this).attr("data-cand-id");
-                window.open("https://facebook.com/sharer.php?u=" + encodeURIComponent("http://lhscampaign.cf/Home?candidate=" + candId), '_new', 'toolbar=0,status=0,width=626,height=436');
-            });
-            $("#cand-wedge-download").click(function () {
-                window.open($("#cand-wedge-img").attr("src"));
-            });
-            if (window.location.href.indexOf('candidate=') != -1) {
-                var candId = window.location.href.split('candidate=')[1].split('&')[0];
-                if (candId != null && candId.length > 0) {
-                    picker.showWedge(candId);
+                        <h1>@candidate.Name</h1>
+                    </article>
                 }
-            }
-        });
-    </script>
-}
+            </div>
+        }
+
+        <footer>
+            <div id="selected-people"></div>
+            <a href="~/Profile">profile picture</a>
+            <a href="~/Cover">cover photo</a>
+        </footer>
+    </body>
+</html>

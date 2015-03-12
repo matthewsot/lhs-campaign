@@ -1,25 +1,45 @@
-﻿using LHSCamp.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using LHSCamp.Models;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 
 namespace LHSCamp.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home
         public ActionResult Index()
         {
-            using(var db = new LCDB())
+            using (var db = new LCDB())
             {
-                var userId = User.Identity.GetUserId();
-                var currUser = db.Users.Find(userId);
-                if(currUser != null && currUser.IsCandidate && string.IsNullOrWhiteSpace(currUser.Candidate.ProfilePic))
+                var positions = db.Users
+                                    .Where(user => user.IsConfirmed && user.Candidate != null)
+                                    .Select(user => user.Candidate)
+                                    .GroupBy(cand => cand.Position.ToLower())
+                                    .ToDictionary(c => c.Key, c => c.ToList());
+
+                var finalPositions = new Dictionary<string, List<Candidate>>();
+
+                foreach (var position in positions)
                 {
-                    return RedirectToAction("Candidate", controllerName: "Welcome");
+                    if (
+                        !(new[] {"idc rep", "social manager", "secretary", "treasurer", "vp", "pres"}.Contains(
+                            position.Key)))
+                    {
+                        continue;
+                    }
+
+                    var candidates = position.Value.Where(candidate => candidate.ProfilePic != null).ToList();
+                    foreach (var cand in candidates)
+                    {
+                        cand.ToString();
+                    }
+                    finalPositions.Add(position.Key, candidates);
                 }
+
+                return View(finalPositions);
             }
-            return View();
         }
     }
 }
