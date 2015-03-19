@@ -284,6 +284,7 @@
     <Content Include="Content\Scripts\jQuery\Plugins\jquery.cookie.js" />
     <Content Include="Content\Scripts\Site\Home\picker.js" />
     <Content Include="Content\Styles\Site\home.css" />
+    <Content Include="Content\Styles\Site\Login\register.css" />
     <Content Include="Error\NotFound.html" />
     <Content Include="Error\Weird.html" />
     <Content Include="favicon.ico" />
@@ -417,7 +418,6 @@
     <Content Include="Content\Styles\Site\Login\index.less" />
     <Content Include="Content\Styles\Site\shared.less" />
     <Content Include="Content\Styles\Site\Login\login.less" />
-    <Content Include="Content\Styles\Site\Login\register.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

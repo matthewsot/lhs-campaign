@@ -74,16 +74,25 @@
         <div class="medium-font railway-light" id="email-err" style="display:none;margin-top:10px;"></div>
         <br />
         <!-- Meh. I'll fix this weird width stuff later -->
-        <button class="default-btn standard-btn year-picker" val="2016">2015</button>
+        @*<button class="default-btn standard-btn year-picker" val="2016">2015</button>
         <button class="default-btn standard-btn year-picker" val="2016">2016</button>
-        <button class="default-btn standard-btn year-picker sel-btn" val="2017">2017</button>
+        <button class="default-btn standard-btn year-picker sel-btn" val="2017">2017</button>*@
+        <button class="default-btn standard-btn year-picker sel-btn" val="0">ASB</button>
         <br />
         <div style="position:relative;width:333px;" class="half-horiz">
-            <select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
+            @*<select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
                 <option>Secretary</option>
                 <option>Treasurer</option>
                 <option>President</option>
                 <option>Vice President</option>
+            </select>*@
+            <select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
+                <option>IDC Rep</option>
+                <option>Social Manager</option>
+                <option>Secretary</option>
+                <option>Treasurer</option>
+                <option>Vice President</option>
+                <option>President</option>
             </select>
             <div id="arrow-hider" style="position:absolute;width:30px;height:46px;right:2px;top:22px;background-color:#44A0C8;border-radius:2px;"></div>
         </div>
@@ -100,8 +109,8 @@
                 var pass = $("#pass").val();
                 var conf = $("#pass-conf").val();
                 var email = $("#email").val();
-                var year = 2017;
-                var position = $("#position").val();
+                var year = 0;
+                var position = $("#position").val().toLowerCase();
                 var fullName = $("#fullname").val();
                 $(".year-picker").each(function (index, value) {
                     if ($(this).hasClass("sel-btn")) {

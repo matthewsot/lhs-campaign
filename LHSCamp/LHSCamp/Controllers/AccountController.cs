@@ -45,7 +45,7 @@ namespace LHSCamp.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", controllerName: "Home");
+                return RedirectToAction("Candidate", controllerName: "Welcome");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();

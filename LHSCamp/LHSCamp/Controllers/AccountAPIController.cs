@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
 
 namespace LHSCamp.Controllers
@@ -199,9 +200,11 @@ namespace LHSCamp.Controllers
 
                 // TODO: Should be validating with ModelState
                 if (model.Password.Length <= 6) errors.Add("Password");
-                if (!(model.Year <= 2017 && model.Year >= 2015)) errors.Add("Year");
-                if (model.Position != null && model.Position.Length > 50) errors.Add("Position");
-                if (model.FullName != null && model.FullName.Length > 50) errors.Add("FullName");
+                //if (!(model.Year <= 2017 && model.Year >= 2015)) errors.Add("Year");
+                model.Year = 0;
+                if (model.Position == null || model.Position.Length > 50) errors.Add("Position");
+                model.Position = model.Position.ToLower();
+                if (model.FullName == null || model.FullName.Length > 50) errors.Add("FullName");
                 if (db.Users.Count(usr => usr.UserName == model.Username) > 0) errors.Add("Username");
 
                 if (errors.Count > 0)
