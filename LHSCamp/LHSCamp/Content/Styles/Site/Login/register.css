@@ -1,29 +1,17 @@
-body,
-html {
-  width: 100%;
-  margin: 0px;
-  font-family: 'Railway';
+body, html {
+    width: 100%;
+    margin: 0px;
+    font-family: 'Railway';
 }
 .half-horiz {
-  position: relative;
-  left: 50%;
-  /* but ewe. should use prefix-free */
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
-.half-vert {
-  position: relative;
-  /* Thanks! http://creative-punch.net/2014/01/center-vertically-horizontally-using-css3-transform/ */
-  top: 50%;
-  /* but ewe. should use prefix-free */
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    position: relative;
+    left: 50%;
+    /* but ewe. should use prefix-free */
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 .blue {
   background-color: #44a0c8;
@@ -92,20 +80,18 @@ html {
   text-decoration: none;
   color: #fff;
 }
-::-webkit-input-placeholder {
+body {
+  background-color: #44a0c8;
   color: #fff;
 }
-::-moz-placeholder {
-  color: #fff;
+.row {
+  position: relative;
+  width: 80%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: center;
 }
-/* firefox 19+ */
-:-ms-input-placeholder {
-  color: #fff;
-}
-/* ie */
-input::-moz-placeholder {
-  color: #fff;
-}
+
 .register-page {
   display: none;
   border-top: 2px solid #fff;
@@ -122,7 +108,4 @@ input::-moz-placeholder {
 }
 .cand-only {
   display: none;
-}
-.year-picker {
-  width: 107px;
 }

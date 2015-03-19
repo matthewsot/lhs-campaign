@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_HeroLayout.cshtml";
 }
 @section Styles {
-    @Styles.Render("~/Content/Styles/Bundles/Prelogin/register.less")
+    @Styles.Render("~/Content/Styles/Site/Login/register.css")
 }
 <div class="blue row medium-font" style="margin-top:100px;margin-bottom:100px;">
     <div class="logo-span large-font"><b>lhs</b>|campaign</div>
@@ -21,28 +21,6 @@
         <br />
         <span class="large-font railway-bold">signup</span>
         <br />
-        <span class="railway-light" style="margin-top:20px;">This campaign season, which are you?</span>
-        <br />
-        <button class="default-btn register-link sel-btn" style="margin-right:5px;margin-top:20px;">voter</button>
-        <button class="default-btn register-link" style="margin-left:5px;margin-top:20px;">candidate</button>
-        <script type="text/javascript">
-            var isCand = false;
-            $(".register-link").click(function () {
-                $(".register-link").removeClass("sel-btn");
-                $(this).addClass("sel-btn");
-                if ($(this).text() == "voter") {
-                    isCand = false;
-                    $(".cand-only").fadeOut();
-                    $("#email-err").fadeOut();
-                    $("#email").attr("placeholder", "email (optional)");
-                }
-                else {
-                    isCand = true;
-                    $("#email").attr("placeholder", "email");
-                    $(".cand-only").fadeIn();
-                }
-            });
-        </script>
         <br />
         <input type="text" class="default-input standard-input" placeholder="username" id="username" style="margin-top:20px;" />
         <div class="medium-font railway-light" id="usernm-err" style="display:none;margin-top:10px;"></div>
@@ -68,8 +46,8 @@
                 }
             });
         </script>
-        <br class="cand-only" />
-        <input type="text" class="default-input standard-input cand-only" placeholder="full name" id="fullname" />
+        <br />
+        <input type="text" class="default-input standard-input" placeholder="full name" id="fullname" />
         <br />
         <input type="password" class="default-input standard-input" placeholder="password" id="pass" />
         <br />
@@ -92,7 +70,7 @@
             });
         </script>
         <br />
-        <input type="email" class="default-input standard-input" placeholder="email (optional)" id="email" />
+        <input type="email" class="default-input standard-input" placeholder="email" id="email" />
         <div class="medium-font railway-light" id="email-err" style="display:none;margin-top:10px;"></div>
         <br />
         <!-- Meh. I'll fix this weird width stuff later -->
@@ -100,7 +78,7 @@
         <button class="default-btn standard-btn year-picker" val="2016">2016</button>
         <button class="default-btn standard-btn year-picker sel-btn" val="2017">2017</button>
         <br />
-        <div style="position:relative;width:333px;" class="half-horiz cand-only">
+        <div style="position:relative;width:333px;" class="half-horiz">
             <select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
                 <option>Secretary</option>
                 <option>Treasurer</option>
@@ -111,7 +89,7 @@
         </div>
         <br />
         <button class="default-btn standard-btn" id="register" style="width:333px;margin-top:10px;">sign up</button>
-        <p class="cand-only half-horiz" style="width:400px;position:relative;">We'll send you an email within 24 hours to activate your campaign account. This is to avoid spammers.</p>
+        <p class="half-horiz" style="width:400px;position:relative;">We'll send you an email within 24 hours to activate your campaign account. This is to avoid spammers.</p>
         <script type="text/javascript">
             $(".year-picker").click(function () {
                 $(".year-picker").removeClass("sel-btn");
@@ -125,21 +103,17 @@
                 var year = 2017;
                 var position = $("#position").val();
                 var fullName = $("#fullname").val();
-                if (!isCand) {
-                    position = null;
-                    fullName = null;
-                }
                 $(".year-picker").each(function (index, value) {
                     if ($(this).hasClass("sel-btn")) {
                         year = parseInt($(this).text());
                     }
                 });
-                //Someday I'll figure out jqueryval, for now I'll just do this
+
                 if (pass != conf) {
                     $("#password-err").html("Your password doesn't match the confirmation");
                     $("#password-err").show();
                 }
-                else if (isCand && (email == null || email.trim() == "")) {
+                else if (email == null || email.trim() == "") {
                     $("#email-err").html("An email is required for candidates");
                     $("#email-err").show();
                 }

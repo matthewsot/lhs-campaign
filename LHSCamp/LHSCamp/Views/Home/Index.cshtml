@@ -12,9 +12,9 @@
     <body>
         <header>
             <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo"/>
-            <a href="~/SignUp">about</a>
-            <a href="~/SignUp">candidate sign in</a>
-            <a href="~/SignUp">candidate? sign up</a>
+            @*<a href="~/SignUp">about</a>*@
+            <a href="~/Account/Login">candidate sign in</a>
+            <a href="~/Account/Register">candidate? sign up</a>
         </header>
 
         <ul id="position-tabs">
@@ -37,7 +37,7 @@
 
                             <div class="overlay">
                                 <a href="#platform">platform info</a>
-                                <a href="#add">(+) add picture</a>
+                                <a href="#add" class="add-pic-button">(+) add picture</a>
                             </div>
                         </div>
 
@@ -56,5 +56,9 @@
             <a href="~/Profile">profile picture</a>
             <a href="~/Cover">cover photo</a>
         </footer>
+
+        <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="~/Content/Scripts/home.js"></script>
     </body>
 </html>
