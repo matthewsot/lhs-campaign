@@ -31,13 +31,13 @@
             <div class="tab-content" data-tab="@position.Key">
                 @foreach (var candidate in position.Value)
                 {
-                    <article class="candidate" data-id="@candidate.Id">
+                    <article class="candidate" data-id="@candidate.Id" data-cover="@(candidate.CoverPhoto ?? "")" data-fb="@(candidate.Facebook ?? "")">
                         <div class="hover-container">
-                            <img src="~/Content/Images/Candidates/@(candidate.ProfilePic)" />
+                            <img src="@(candidate.ProfilePic)" />
 
                             <div class="overlay">
-                                <a href="#platform">platform info</a>
-                                <a href="#add" class="add-pic-button">(+) add picture</a>
+                                <a href="#cand=@(candidate.Id)" class="platform-button">platform info</a>
+                                <a class="add-pic-button">(+) add picture</a>
                             </div>
                         </div>
 
@@ -53,12 +53,43 @@
 
         <footer>
             <div id="selected-people"></div>
-            <a href="~/Profile">profile picture</a>
-            <a href="~/Cover">cover photo</a>
+            <a href="~/CreatePhoto/Profile">profile picture</a>
+            <a href="~/CreatePhoto/Cover">cover photo</a>
         </footer>
+
+
+        <div id="cand-wedge" class="blue">
+            <div id="cand-wedge-btns">
+                <!-- Top-left corner -->
+                <div id="cand-wedge-close" class="railway-bold">X</div>
+                <div class="cand-wedge-circle" id="gplus-btn">
+                    <img src="~/Content/Images/Buttons/GooglePlus.png" class="cand-wedge-social" />
+                </div>
+                <br />
+                @*<div class="cand-wedge-circle" id="facebook-btn">
+                    <img src="~/Content/Images/Buttons/Facebook.png" class="cand-wedge-social" />
+                </div>*@
+            </div>
+            <img id="cand-wedge-img" />
+            <div id="cand-wedge-info">
+                <div id="cand-wedge-name" class="railway-bold medium-font"></div>
+                <div id="cand-wedge-position"></div>
+                <div id="cand-wedge-email"></div>
+                <div id="cand-wedge-actions" style="margin-top:0px;width:250px;">
+                    <button class="standard-btn default-btn" id="cand-wedge-fb" style="margin-bottom:5px;height:40px;">facebook event</button>
+                    <button class="standard-btn default-btn" id="cand-wedge-cover" style="margin-bottom:5px;height:40px;">download cover pic</button>
+                    <button class="standard-btn default-btn" id="cand-wedge-download" style="height:40px;">download prof. pic</button>
+                </div>
+            </div>
+            <div id="cand-wedge-content">
+                <h2 class="railway-bold">WHY YOU SHOULD VOTE</h2>
+                <p id="cand-wedge-reasons" class="small-font"></p>
+            </div>
+        </div>
 
         <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/matthewsot/wedge/64fac6093b2a954c08d2bfa01e50bbb05e76354d/wedge.min.js"></script>
         <script src="~/Content/Scripts/home.js"></script>
     </body>
 </html>

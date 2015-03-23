@@ -1,142 +1,147 @@
-﻿    @{
-    ViewBag.Title = "Candidate Settings";
+﻿@{
+    Layout = null;
 }
-@section Styles {
-    @Styles.Render("~/Content/Styles/Bundles/Home/welcome-candidate.less")
-    <style type="text/css">
-        .picker-page {
-            display: none;
-            width: 90%;
-            margin-left: 5%;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LHSCampaign</title>
+    <link href="~/Content/Styles/Site/home.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" />
+        <a href="~/Account/LogOff">log out</a>
+    </header>
+    <div style="position: relative; width: 800px; margin: 0 auto;">
+        <h1>Welcome to LHS Campaign!</h1>
+        @if (!ViewBag.Confirmed)
+        {
+            <span>
+                We'll run through a few quick questions to get your candidate account set up.
+                Once you're verified (which may take up to 24 hours),
+                you'll be allowed to upload your profile image and be featured on LHS Campaign.
+            </span>
+        }
+        @if (ViewBag.Uploaded != null && ViewBag.Uploaded == true)
+        {
+            <span>
+                Image uploaded!
+            </span>
         }
 
-        .tabs-list li {
-            width: 20%;
-        }
-    </style>
-}
-<div style="position:relative;width:80%;left:10%;">
-    <h1>Welcome to LHS Campaign!</h1>
-    @if (!ViewBag.Confirmed)
-    {
-        <span>
-            We'll run through a few quick questions to get your candidate account set up.
-            Once you're verified (which may take up to 24 hours),
-            you'll be allowed to upload your profile image and be featured on LHS Campaign.
-        </span>
-    }
-    @if (ViewBag.Uploaded != null && ViewBag.Uploaded == true)
-    {
-        <span>
-            Image uploaded!
-        </span>
-    }
-    <ul class="tabs-list">
-        <li class="tab sel-tab" data-picker-page="email"><div>EMAIL</div></li>
-        <li class="tab" data-picker-page="position"><div>POSITION</div></li>
-        <li class="tab" data-picker-page="campaign"><div>CAMPAIGN</div></li>
-        <li class="tab" data-picker-page="social"><div>SOCIAL</div></li>
-        <li class="tab" data-picker-page="picture"><div>PICTURE</div></li>
-    </ul>
-    <div class="tab-box">
-        <div id="picker-page-email" class="picker-page sel-page" style="display:block;">
+        <ul id="position-tabs">
+            <li class="selected">email</li>
+            <li>position</li>
+            <li>campaign</li>
+            <li>social</li>
+            <li>picture</li>
+        </ul>
+
+        <div class="tab-content" data-tab="email">
             Voters will be able to see this email, so think twice before using a personal address.
-            <br /><br />
-            <input type="email" id="email-input" class="default-input standard-input" placeholder="email" value="@(ViewBag.Email)" style="width:400px;" />
-            <br />
+            <br/><br/>
+            <input type="email" id="email-input" class="default-input standard-input" placeholder="email" value="@(ViewBag.Email)" style="width: 400px;"/>
+            <br/>
             <button id="update-email" class="default-btn standard-btn">Save</button>
-            <br /><br />
-            @if(!ViewBag.Confirmed) {
+            <br/><br/>
+            @if (!ViewBag.Confirmed)
+            {
                 @:We'll contact you within 24 hours to confirm your email and give you a rundown of the final step before you're listed as a candidate.
             }
         </div>
-        <div id="picker-page-position" class="picker-page">
+
+        <div class="tab-content" data-tab="position">
             What position are you running for?
-            <br />
-            <div style="position:relative;width:333px;" class="half-horiz">
-                <select id="position" class="default-input standard-input" style="margin-top:20px;width:333px;height:50px;padding-right:-50px;">
+            <br/>
+            <div style="position: relative; width: 333px;" class="half-horiz">
+                <select id="position" class="default-input standard-input" style="margin-top: 20px; width: 333px; height: 50px; padding-right: -50px;">
                     @*@foreach(var pos in new string[] { "Secretary", "Treasurer", "President", "Vice President" }) {*@
-                    @foreach(var pos in new string[] { "IDC Rep", "Social Manager", "Secretary", "Treasurer", "Vice President", "President" }) {
-                        if(pos == ViewBag.Position) {
-                        <option selected>@pos</option>
+                    @foreach (var pos in new string[] {"IDC Rep", "Social Manager", "Secretary", "Treasurer", "Vice President", "President"})
+                    {
+                        if (pos == ViewBag.Position)
+                        {
+                            <option selected>@pos</option>
                         }
-                        else {
-                        <option>@pos</option>
+                        else
+                        {
+                            <option>@pos</option>
                         }
                     }
                 </select>
-                <div id="arrow-hider" style="position:absolute;width:30px;height:46px;right:2px;top:22px;background-color:#44A0C8;border-radius:2px;"></div>
+                <div id="arrow-hider" style="position: absolute; width: 30px; height: 46px; right: 2px; top: 22px; background-color: #44A0C8; border-radius: 2px;"></div>
             </div>
             <button class="default-btn standard-btn" id="save-position">Confirm Position</button>
         </div>
-        <div id="picker-page-campaign" class="picker-page">
+
+        <div class="tab-content" data-tab="campaign">
             Why should voters vote for you? Please enter a paragraph or two below explaining why you're the best candidate.
-            <br /><br />
+            <br/><br/>
             <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
-            <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align:left;width:90%;height:300px;white-space:pre-wrap;">@ViewBag.Reasons</textarea>
-            <br />
+            <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align: left; width: 90%; height: 300px; white-space: pre-wrap;">@ViewBag.Reasons</textarea>
+            <br/>
             <button class="default-btn standard-btn" id="save-reasons">Save Reasons</button>
         </div>
-        <div id="picker-page-social" class="picker-page">
-            Facebook Link:<br /><br />
-            <input type="text" id="campaign-social" class="default-input standard-input" style="width:400px;" placeholder="http://facebook.com/example..." />
-            <br />
+
+        <div class="tab-content" data-tab="social">
+            Facebook Link:<br/><br/>
+            <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..."/>
+            <br/>
             <button class="default-btn standard-btn" id="save-social">Save</button>
-            <br /><br />
+            <br/><br/>
             If you don't have a Facebook page or event, just click on 'Save' to continue.
         </div>
-        <div id="picker-page-picture" class="picker-page">
+
+        <div class="tab-content" data-tab="picture">
             @if (ViewBag.Confirmed)
             {
                 @:Pictures must be less than 4MB in size and have a .jpg, .png, or .gif extension.
-                <br /><br />
+                <br/><br/>
                 @:If you have any problems, please don't hesitate to contact vip@lhscampaign.cf and we'll make it work.
-                <h2 style="margin-bottom:0px;">Profile Picture:</h2>
+                <h2 style="margin-bottom: 0px;">Profile Picture:</h2>
                 <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
                     <span>Square image - Required</span>
-                    <br />
-                    <input type="file" name="file" style="margin-bottom:5px;" />
-                    <br />
-                    <input type="submit" value="Upload" class="default-btn standard-btn" />
+                    <br/>
+                    <input type="file" name="file" style="margin-bottom: 5px;"/>
+                    <br/>
+                    <input type="submit" value="Upload" class="default-btn standard-btn"/>
                 </form>
-                <h2 style="margin-bottom:0px;">Cover Photo:</h2>
+                <h2 style="margin-bottom: 0px;">Cover Photo:</h2>
                 <form action="~/Welcome/UploadCover" method="POST" enctype="multipart/form-data">
                     <span>851x315 px image - Optional</span>
-                    <br />
-                    <input type="file" name="file" style="margin-bottom:5px;" />
-                    <br />
-                    <input type="submit" value="Upload" class="default-btn standard-btn" />
+                    <br/>
+                    <input type="file" name="file" style="margin-bottom: 5px;"/>
+                    <br/>
+                    <input type="submit" value="Upload" class="default-btn standard-btn"/>
                 </form>
             }
             else
             {
                 @:Your account must be confirmed before you can upload a photo and be listed as an official candidate.
-                <br /><br />
+                <br/><br/>
                 @:You should get an email from someone on the LHS Campaign team within 24 hours to confirm your account.
-                <br /><br />
+                <br/><br/>
                 @:If you have any problems, feel free to email vip@lhscampaign.cf for personal help.
             }
         </div>
     </div>
-</div>
-@section Scripts {
-    <script type="text/javascript" src="~/Content/Scripts/jQuery/Plugins/jquery.cookie.js"></script>
+
+    <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript">
+        $("body").on("click", "#position-tabs li", function () {
+            $(this).addClass("selected").siblings(".selected").removeClass("selected");
+            $(".tab-content").hide();
+            $(".tab-content[data-tab=\"" + $(this).text().trim() + "\"]").show();
+        });
+        $("#position-tabs li").first().click();
+
+        function cont() {
+            $("#position-tabs li.selected").next().click();
+        }
+
         if ($.cookie("cand-page") == null) {
             $.cookie("cand-page", "email");
         }
-
-        $(".tab").click(function () {
-            $(".tab").removeClass("sel-tab");
-            $(this).addClass("sel-tab");
-            var page = $(this).attr("data-picker-page");
-            $(".sel-page").fadeOut();
-            $("#picker-page-" + page).fadeIn();
-            $("#picker-page-" + page).addClass("sel-page");
-            $.cookie("cand-page", page);
-        });
-
-        $('[data-picker-page="' + $.cookie("cand-page") + '"]').click();
 
         $("#update-email").click(function () {
             var email = $("#email-input").val();
@@ -144,7 +149,7 @@
                 "email": email
             }, function (data) {
                 if (data == "set") {
-                    $("[data-picker-page=position]").click();
+                    cont();
                 }
             });
         });
@@ -155,7 +160,7 @@
                 "position": position
             }, function (data) {
                 if (data == "set") {
-                    $("[data-picker-page=campaign]").click();
+                    cont();
                 }
             });
         });
@@ -166,7 +171,7 @@
                 "reasons": reasons
             }, function (data) {
                 if (data == "set") {
-                    $("[data-picker-page=social]").click();
+                    cont();
                 }
             });
         });
@@ -184,9 +189,10 @@
                 "facebook": fb
             }, function (data) {
                 if (data == "set") {
-                    $("[data-picker-page=picture]").click();
+                    cont();
                 }
             });
         });
     </script>
-}
+    </body>
+</html>

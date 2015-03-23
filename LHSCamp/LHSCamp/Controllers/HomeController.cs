@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LHSCamp.Models;
 using Microsoft.AspNet.Identity;
@@ -29,8 +30,8 @@ namespace LHSCamp.Controllers
                     {
                         continue;
                     }
-
-                    var candidates = position.Value.Where(candidate => candidate.ProfilePic != null).ToList();
+                    var rand = new Random();
+                    var candidates = position.Value.Where(candidate => candidate.ProfilePic != null).OrderBy(a => rand.Next()).ToList();
                     foreach (var cand in candidates)
                     {
                         cand.ToString();

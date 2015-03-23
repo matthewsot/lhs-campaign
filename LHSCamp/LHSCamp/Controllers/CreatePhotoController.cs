@@ -2,7 +2,6 @@
 
 namespace LHSCamp.Controllers
 {
-    [Authorize]
     public class CreatePhotoController : Controller
     {
         public ActionResult Cover()

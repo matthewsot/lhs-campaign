@@ -8,9 +8,9 @@ namespace LHSCamp.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", controllerName: "Home");
+                return RedirectToAction("Candidate", controllerName: "Welcome");
             }
-            return View();
+            return RedirectToAction("Index", controllerName: "Home");
         }
         [Route("GPlus")]
         public ActionResult GPlus()

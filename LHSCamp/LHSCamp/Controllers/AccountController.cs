@@ -124,7 +124,7 @@ namespace LHSCamp.Controllers
                 AuthenticationManager.SignOut();
             }
             catch { }
-            return RedirectToAction("Index", controllerName: "Default");
+            return RedirectToAction("Index", controllerName: "Home");
         }
 
         //
