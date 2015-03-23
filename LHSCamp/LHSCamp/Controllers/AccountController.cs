@@ -64,7 +64,7 @@ namespace LHSCamp.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Candidate", controllerName: "Welcome");
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace LHSCamp.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", controllerName: "Home");
+                return RedirectToAction("Candidate", controllerName: "Welcome");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
