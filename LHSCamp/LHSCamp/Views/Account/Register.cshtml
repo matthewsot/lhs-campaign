@@ -105,14 +105,16 @@
             var pass = $("#pass").val();
             var conf = $("#pass-conf").val();
             var email = $("#email").val();
-            var year = 0;
+            var year = $("#year-picker .selected");
+            if (year.length == 0) {
+                alert("Please select a class!");
+                return;
+            } else {
+                year = parseInt(year.attr("data-year"));
+            }
+
             var position = "secretary";
             var fullName = $("#fullname").val();
-            $(".year-picker").each(function (index, value) {
-                if ($(this).hasClass("sel-btn")) {
-                    year = parseInt($(this).text());
-                }
-            });
 
             if (pass != conf) {
                 $("#password-err").html("Your password doesn't match the confirmation");
@@ -142,7 +144,7 @@
                         $("#usernm-err").show();
                     }
                     else if (data.indexOf("Password") != -1) {
-                        $("#password-err").html("Please enter a password greater than 6 characters");
+                        $("#password-err").text("Please enter a password greater than 6 characters");
                         $("#password-err").show();
                     }
                 });
