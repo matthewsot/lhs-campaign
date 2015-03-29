@@ -287,6 +287,7 @@
     <Content Include="Content\Scripts\Site\Home\picker.js" />
     <Content Include="Content\Styles\Site\home.css" />
     <Content Include="Content\Styles\Site\Login\register.css" />
+    <Content Include="Content\Styles\Site\register.css" />
     <Content Include="Error\NotFound.html" />
     <Content Include="Error\Weird.html" />
     <Content Include="favicon.ico" />
@@ -415,10 +416,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Content\Styles\Site\lib.less" />
-    <Content Include="Content\Styles\Site\Hero\hero.less" />
     <Content Include="Content\Styles\Site\Login\index.less" />
-    <Content Include="Content\Styles\Site\shared.less" />
     <Content Include="Content\Styles\Site\Login\login.less" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
