@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountAPIController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CandidatesAPIController.cs" />
+    <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\CreatePhotoController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -422,6 +423,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\Candidates\" />
+    <Folder Include="Views\Candidates\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
