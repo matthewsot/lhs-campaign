@@ -1,53 +1,43 @@
 ﻿@model LHSCamp.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "LHSCampaign - Login";
-    Layout = "~/Views/Shared/_HeroLayout.cshtml";
+    ViewBag.Title = "LHSCampaign - Register";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Styles/Site/register.css" />
+    <title>LHSCampaign - Register</title>
+    <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" />
+    </header>
 
-@section Styles {
-    @Styles.Render("~/Content/Styles/Bundles/Prelogin/login.less")
-    <style type="text/css">
-        #val-sum ul {
-            list-style-type: none;
-        }
-    </style>
-}
+    <main>
+        <h2>candidate sign up</h2>
 
-<div class="blue row medium-font" style="margin-top:100px;">
-    <div class="logo-span large-font"><b>lhs</b>|campaign</div>
-    <br />
-    <div id="local-login" style="border-top:2px solid #fff;">
-        <br />
-        <span class="large-font railway-bold">login</span>
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { id = "val-sum" })
-            <br />
+            
+            <label for="username">username</label>
+            @Html.TextBoxFor(m => m.UserName, new { id = "username" })
+            @Html.ValidationMessageFor(m => m.UserName, "", new { id = "usernm-err" })
 
-            @Html.TextBoxFor(m => m.UserName, new { @class = "default-input form-group standard-input", placeholder = "username" })
-            <br />
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-            @Html.PasswordFor(m => m.Password, new { @class = "default-input form-group standard-input", placeholder = "password" })
-            <br />
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            <label for="pass">password</label>
+            @Html.PasswordFor(m => m.Password, new { id = "pass" })
+            
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "err-text", id = "password-err" })
 
+            <label>remember me?</label>
             @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe)
-            <br />
-            <input type="submit" value="log in" class="default-btn blue-btn" style="cursor:pointer;margin-top:10px;" />
-            @* Enable this once you have account confirmation enabled for password reset functionality
-                <p>
-                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                </p>*@
+            
+            <button id="register">SIGN IN</button>
         }
-    </div>
-    <br /><br />
-    <span class="small-font">Don't have an account? <a href="~/Account/Register?ReturnUrl=@(HttpUtility.UrlEncode((ViewBag.ReturnUrl as string)))" class="blue" style="text-decoration:none;">Sign up.</a></span>
-    <br /><br />
-    <span class="small-font">Forgot your password? <a href="~/Account/ForgotPass" class="blue" style="text-decoration:none;">Click here.</a></span>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-</div>
+    </main>
+</body>
+</html>
