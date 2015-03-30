@@ -10,12 +10,14 @@ namespace LHSCamp.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int @class = 2017)
         {
+            ViewBag.Year = @class;
+
             using (var db = new LCDB())
             {
                 var positions = db.Users
-                                    .Where(user => user.IsConfirmed && user.Candidate != null)
+                                    .Where(user => user.IsConfirmed && user.Candidate != null && user.Year == @class)
                                     .Select(user => user.Candidate)
                                     .GroupBy(cand => cand.Position.ToLower())
                                     .ToDictionary(c => c.Key, c => c.ToList());
@@ -25,7 +27,7 @@ namespace LHSCamp.Controllers
                 foreach (var position in positions)
                 {
                     if (
-                        !(new[] {"idc rep", "social manager", "secretary", "treasurer", "vp", "pres"}.Contains(
+                        !(new[] {"secretary", "treasurer", "vice president", "president"}.Contains(
                             position.Key)))
                     {
                         continue;

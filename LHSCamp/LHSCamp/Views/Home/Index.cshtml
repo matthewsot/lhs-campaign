@@ -12,15 +12,28 @@
     <body>
         <header>
             <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo"/>
+
+            <ul id="class-picker" data-selected="@(ViewBag.Year)">
+                @for (var i = 2018; i >= 2016; i--)
+                {
+                    if (ViewBag.Year == i)
+                    {
+                        <li class="selected"><a href="/Home?class=@(i)">@(i)</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Home?class=@(i)">@(i)</a></li>
+                    }
+                }
+            </ul>
+
             @*<a href="~/SignUp">about</a>*@
             <a href="~/Account/Login">candidate sign in</a>
             <a href="~/Account/Register">candidate? sign up</a>
         </header>
 
         <ul id="position-tabs">
-            <li class="selected">idc rep</li>
-            <li>social manager</li>
-            <li>secretary</li>
+            <li class="selected">secretary</li>
             <li>treasurer</li>
             <li>vice president</li>
             <li>president</li>
