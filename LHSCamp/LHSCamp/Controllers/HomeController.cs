@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using LHSCamp.Models;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
@@ -10,9 +11,25 @@ namespace LHSCamp.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index(int @class = 2017)
+        public ActionResult Index(int? @class)
         {
+            var cookie = Request.Cookies["selected-class"];
+            if (cookie != null && @class == null)
+            {
+                @class = int.Parse(cookie.Value);
+            }
+            else if (@class == null)
+            {
+                @class = 2017;
+            }
+
+            @class = (int)Math.Floor((decimal)@class);
+            if (@class < 2016 || @class > 2018)
+            {
+                @class = 2017;
+            }
             ViewBag.Year = @class;
+            Response.Cookies.Set(new HttpCookie("selected-class", @class.ToString()));
 
             using (var db = new LCDB())
             {

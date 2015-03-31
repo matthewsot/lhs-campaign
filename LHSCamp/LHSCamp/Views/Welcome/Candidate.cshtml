@@ -5,12 +5,14 @@
 <html>
 <head>
     <title>LHSCampaign</title>
-    <link href="~/Content/Styles/Site/home.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Site/setup.css" rel="stylesheet" />
 </head>
 <body>
     <header>
         <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" />
+
         <a href="~/Account/LogOff">log out</a>
+        <a target="_blank" href="~/Candidates/@(ViewBag.Id)">view your profile</a>
     </header>
     <div style="position: relative; width: 800px; margin: 0 auto;">
         <h1>Welcome to LHS Campaign!</h1>
@@ -28,8 +30,9 @@
                 Image uploaded!
             </span>
         }
-
-        <ul id="position-tabs">
+        <br />
+        <br />
+        <ul id="tabs">
             <li class="selected">email</li>
             <li>position</li>
             <li>campaign</li>
@@ -38,12 +41,12 @@
         </ul>
 
         <div class="tab-content" data-tab="email">
-            Voters will be able to see this email, so think twice before using a personal address.
-            <br/><br/>
-            <input type="email" id="email-input" class="default-input standard-input" placeholder="email" value="@(ViewBag.Email)" style="width: 400px;"/>
-            <br/>
-            <button id="update-email" class="default-btn standard-btn">Save</button>
-            <br/><br/>
+            <h2>Voters will be able to see this email, so think twice before using a personal address.</h2>
+
+            <input type="email" id="email-input" placeholder="email" value="@(ViewBag.Email)" />
+
+            <button id="update-email">Save</button>
+
             @if (!ViewBag.Confirmed)
             {
                 @:We'll contact you within 24 hours to confirm your email and give you a rundown of the final step before you're listed as a candidate.
@@ -52,41 +55,38 @@
 
         <div class="tab-content" data-tab="position">
             What position are you running for?
-            <br/>
-            <div style="position: relative; width: 333px;" class="half-horiz">
-                <select id="position" class="default-input standard-input" style="margin-top: 20px; width: 333px; height: 50px; padding-right: -50px;">
-                    @foreach (var pos in new string[] {"Secretary", "Treasurer", "Vice President", "President"})
+            <br />
+            <select id="position" class="default-input standard-input" style="margin-top: 20px; width: 333px; height: 50px; padding-right: -50px;">
+                @foreach (var pos in new string[] { "Secretary", "Treasurer", "Vice President", "President" })
+                {
+                    if (pos == ViewBag.Position)
                     {
-                        if (pos == ViewBag.Position)
-                        {
-                            <option selected>@pos</option>
-                        }
-                        else
-                        {
-                            <option>@pos</option>
-                        }
+                        <option selected>@pos</option>
                     }
-                </select>
-                <div id="arrow-hider" style="position: absolute; width: 30px; height: 46px; right: 2px; top: 22px; background-color: #44A0C8; border-radius: 2px;"></div>
-            </div>
+                    else
+                    {
+                        <option>@pos</option>
+                    }
+                }
+            </select>
             <button class="default-btn standard-btn" id="save-position">Confirm Position</button>
         </div>
 
         <div class="tab-content" data-tab="campaign">
             Why should voters vote for you? Please enter a paragraph or two below explaining why you're the best candidate.
-            <br/><br/>
+            <br /><br />
             <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
             <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align: left; width: 90%; height: 300px; white-space: pre-wrap;">@ViewBag.Reasons</textarea>
-            <br/>
+            <br />
             <button class="default-btn standard-btn" id="save-reasons">Save Reasons</button>
         </div>
 
         <div class="tab-content" data-tab="social">
-            Facebook Link:<br/><br/>
-            <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..."/>
-            <br/>
+            Facebook Link:<br /><br />
+            <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..." />
+            <br />
             <button class="default-btn standard-btn" id="save-social">Save</button>
-            <br/><br/>
+            <br /><br />
             If you don't have a Facebook page or event, just click on 'Save' to continue.
         </div>
 
@@ -94,31 +94,31 @@
             @if (ViewBag.Confirmed)
             {
                 @:Pictures must be less than 4MB in size and have a .jpg, .png, or .gif extension.
-                <br/><br/>
+                <br /><br />
                 @:If you have any problems, please don't hesitate to contact vip@lhscampaign.cf and we'll make it work.
                 <h2 style="margin-bottom: 0px;">Profile Picture:</h2>
                 <form action="~/Welcome/UploadProfile" method="POST" enctype="multipart/form-data">
                     <span>Square image - Required</span>
-                    <br/>
-                    <input type="file" name="file" style="margin-bottom: 5px;"/>
-                    <br/>
-                    <input type="submit" value="Upload" class="default-btn standard-btn"/>
+                    <br />
+                    <input type="file" name="file" style="margin-bottom: 5px;" />
+                    <br />
+                    <input type="submit" value="Upload" class="default-btn standard-btn" />
                 </form>
                 <h2 style="margin-bottom: 0px;">Cover Photo:</h2>
                 <form action="~/Welcome/UploadCover" method="POST" enctype="multipart/form-data">
                     <span>851x315 px image - Optional</span>
-                    <br/>
-                    <input type="file" name="file" style="margin-bottom: 5px;"/>
-                    <br/>
-                    <input type="submit" value="Upload" class="default-btn standard-btn"/>
+                    <br />
+                    <input type="file" name="file" style="margin-bottom: 5px;" />
+                    <br />
+                    <input type="submit" value="Upload" class="default-btn standard-btn" />
                 </form>
             }
             else
             {
                 @:Your account must be confirmed before you can upload a photo and be listed as an official candidate.
-                <br/><br/>
+                <br /><br />
                 @:You should get an email from someone on the LHS Campaign team within 24 hours to confirm your account.
-                <br/><br/>
+                <br /><br />
                 @:If you have any problems, feel free to email vip@lhscampaign.cf for personal help.
             }
         </div>
@@ -127,15 +127,15 @@
     <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript">
-        $("body").on("click", "#position-tabs li", function () {
+        $("body").on("click", "#tabs li", function () {
             $(this).addClass("selected").siblings(".selected").removeClass("selected");
             $(".tab-content").hide();
             $(".tab-content[data-tab=\"" + $(this).text().trim() + "\"]").show();
         });
-        $("#position-tabs li").first().click();
+        $("#tabs li").first().click();
 
         function cont() {
-            $("#position-tabs li.selected").next().click();
+            $("#tabs li.selected").next().click();
         }
 
         if ($.cookie("cand-page") == null) {
@@ -193,5 +193,5 @@
             });
         });
     </script>
-    </body>
+</body>
 </html>

@@ -1,0 +1,90 @@
+﻿@using Microsoft.Ajax.Utilities
+@model LHSCamp.Models.Candidate
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@(Model.Name) | LHSCampaign</title>
+        <link href="~/Content/Styles/Site/candidate.css" rel="stylesheet" />
+    </head>
+<body>
+    <header>
+        <a href="~/"><img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" /></a>
+
+        <ul id="tabs">
+            <li class="selected">PLATFORM</li>
+            <li>QUESTIONS</li>
+            <li>SHARE</li>
+        </ul>
+    </header>
+
+    <main>
+        <div id="info">
+            <h1>@(Model.Name)</h1>
+            <h2>@(Model.Owner.Year) @(Model.Position)</h2>
+
+            <img height="175" src="@(Model.ProfilePic)" alt="@(Model.Name)" />
+
+            @if (!string.IsNullOrWhiteSpace(Model.Facebook))
+            {
+                <a href="@(Model.Facebook)">VIEW FB EVENT</a>
+            }
+            <a href="@(Model.ProfilePic)" target="_blank" download>DOWNLOAD PROFILE PICTURE</a>
+            @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
+            {
+                <a href="@(Model.CoverPhoto)" target="_blank" download>DOWNLOAD COVER PICTURE</a>
+            }
+        </div>
+
+        <div class="selected tab" id="platform">
+            <p>
+                @if (!string.IsNullOrWhiteSpace(Model.Reasons))
+                {
+                    @(Model.Reasons)
+                }
+                else
+                {
+                    @:Sorry, this candidate hasn't uploaded their platform yet.
+                    <br/><br/>
+                    @:Click the "Questions" tab to discuss!
+                }
+                </p>
+            </div>
+
+            <div class="tab" id="questions">
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'lhscampaign';
+                    var disqus_identifier = "candidateid:@(Model.Id)";
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function () {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+
+            <div class="tab" id="share">share</div>
+        </main>
+        <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            $("#tabs li").click(function () {
+                $("#tabs li").removeClass("selected");
+                $(this).addClass("selected");
+
+                $(".tab.selected").removeClass("selected");
+                $(".tab#" + $(this).text().toLowerCase().trim()).addClass("selected");
+            })
+        </script>
+    </body>
+
+</html>

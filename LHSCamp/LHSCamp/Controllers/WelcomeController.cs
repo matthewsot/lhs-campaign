@@ -20,6 +20,8 @@ namespace LHSCamp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            ViewBag.Id = user.Candidate.Id;
+
             ViewBag.Confirmed = user.IsConfirmed;
             ViewBag.Email = user.Email;
             ViewBag.Position = user.Candidate.Position;
