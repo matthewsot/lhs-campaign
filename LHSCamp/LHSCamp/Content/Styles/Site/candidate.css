@@ -94,6 +94,7 @@ main {
             margin-top: 10px;
             transition: background-color 0.1s linear;
             cursor: pointer;
+            float: right;
         }
             main #info a:hover {
                 background-color: #137ec8;
