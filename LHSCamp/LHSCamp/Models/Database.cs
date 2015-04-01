@@ -45,6 +45,7 @@ namespace LHSCamp.Models
         public string CoverPhoto { get; set; }
         public string Reasons { get; set; }
         public string Facebook { get; set; }
+        public int ViewCount { get; set; }
     }
 
     public class Setting

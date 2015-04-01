@@ -77,20 +77,32 @@ header {
         color: #dadada;
         cursor: pointer;
         padding: 10px 0;
+        position: relative;
     }
         #position-tabs .selected {
             color: #1394ee;
+        }
+        #position-tabs div span {
+            display: inline-block;
+            margin: 0;
+            position: absolute;
+            bottom: -25px;
+            left:0;
+            width: 100%;
         }
 
 
 .tab-content {
     width: 800px;
-    margin: 25px auto;
+    margin: 30px auto;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     /*display: none;*/
 }
+    .tab-content[data-tab="no-peeps"] h1 {
+        margin-top: 75px;
+    }
     .tab-content:first-child,
     .tab-content.selected {
         display: block;

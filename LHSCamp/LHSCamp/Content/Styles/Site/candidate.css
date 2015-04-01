@@ -75,6 +75,15 @@ main {
             display: block;
             float: right;
         }
+        main #info #cover-photo {
+            height: auto;
+            width: 175px;
+            margin-top: 10px;
+        }
+        main #info .fb-share-button {
+            width: 100%;
+            margin-top: 10px;
+        }
         main #info a {
             display: inline-block;
             clear: both;

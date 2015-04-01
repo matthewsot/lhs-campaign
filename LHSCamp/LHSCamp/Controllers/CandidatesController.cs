@@ -21,8 +21,13 @@ namespace LHSCamp.Controllers
             using (LCDB db = new LCDB())
             {
                 var candidate = db.Candidates.Find(id);
+
                 candidate.ToString();
                 candidate.Owner.Year.ToString();
+
+                candidate.ViewCount = candidate.ViewCount + 1;
+                db.SaveChanges();
+
                 return View(candidate);
             }
         }

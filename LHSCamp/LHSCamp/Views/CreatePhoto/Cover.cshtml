@@ -68,7 +68,7 @@
             
             fab.clear();
             if (selected.length === 1 && selected[0]["cover"] != null) {
-                fabric.Image.fromURL(data[0]["cover"], function (oImg) {
+                fabric.Image.fromURL(selected[0]["cover"], function (oImg) {
                     oImg.setWidth(851);
                     oImg.setHeight(315);
                     fab.add(oImg);

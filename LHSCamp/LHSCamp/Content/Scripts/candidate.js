@@ -30,7 +30,7 @@ function refreshSelected() {
     for (var i = 0; i < selected.length; i++) {
         var person = selected[i];
         if (person["id"].toString() == $("main").attr("data-id").toString()) {
-            $("#add-pic-button").text("RM PROFILE PIC");
+            $("#add-pic-button").text("REMOVE PROFILE PIC");
         }
         $("#selected-people").append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"]));
     }
