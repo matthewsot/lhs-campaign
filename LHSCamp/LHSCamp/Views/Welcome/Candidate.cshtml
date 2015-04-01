@@ -27,17 +27,27 @@
         @if (ViewBag.Uploaded != null && ViewBag.Uploaded == true)
         {
             <span>
-                Image uploaded!
+                Image uploaded! Click <a target="_blank" href="~/Candidates/@(ViewBag.Id)">here</a> to view your profile.
             </span>
+            <script type="text/javascript">
+                window.open("/Candidates/@(ViewBag.Id)");
+            </script>
         }
         <br />
         <br />
         <ul id="tabs">
-            <li class="selected">email</li>
+            <li class="@((ViewBag.Uploaded != null && ViewBag.Uploaded == true) ? "" : "selected")">email</li>
             <li>position</li>
             <li>campaign</li>
             <li>social</li>
-            <li>picture</li>
+            @if (ViewBag.Uploaded != null && ViewBag.Uploaded == true)
+            {
+                <li class="selected">picture</li>
+            }
+            else
+            {
+                <li>picture</li>
+            }
         </ul>
 
         <div class="tab-content" data-tab="email">
@@ -132,7 +142,7 @@
             $(".tab-content").hide();
             $(".tab-content[data-tab=\"" + $(this).text().trim() + "\"]").show();
         });
-        $("#tabs li").first().click();
+        $("#tabs li.selected").first().click();
 
         function cont() {
             $("#tabs li.selected").next().click();

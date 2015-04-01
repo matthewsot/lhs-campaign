@@ -39,7 +39,7 @@ namespace LHSCamp.Controllers
         }
 
         // Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
-        private bool UploadPicture(HttpPostedFileBase file, User user, string folderPath)
+        private bool UploadPicture(HttpPostedFileBase file, User user, string folderPath, bool isProfile)
         {
             var allowedExts = new[] { ".jpg", ".png", ".gif" };
 
@@ -61,7 +61,7 @@ namespace LHSCamp.Controllers
             Directory.CreateDirectory(imagesFolder);
 
             // Remove the existing picture and log an image change
-            if (user.Candidate.ProfilePic != null)
+            if (isProfile && user.Candidate.ProfilePic != null)
             {
                 var oldPic = Server.MapPath("~" + user.Candidate.ProfilePic);
                 System.IO.File.Delete(oldPic);
@@ -77,9 +77,32 @@ namespace LHSCamp.Controllers
                     });
                 }
             }
+            else if (!isProfile && user.Candidate.CoverPhoto != null)
+            {
+                var oldPic = Server.MapPath("~" + user.Candidate.CoverPhoto);
+                System.IO.File.Delete(oldPic);
+
+                var entry = user.Candidate.CoverPhoto;
+                var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
+                if (currLog == null)
+                {
+                    db.Log.Add(new LogEntry() // So I can refresh the image in Cloudflare, if necessary
+                    {
+                        Type = "Image Changed/Removed",
+                        Entry = entry
+                    });
+                }
+            }
 
             file.SaveAs(path); // Upload the new pic
-            user.Candidate.ProfilePic = "/Content/Images/Candidates/" + user.Id + extension;
+            if (isProfile)
+            {
+                user.Candidate.ProfilePic = "/Content/Images/Candidates/" + user.Id + extension;
+            }
+            else
+            {
+                user.Candidate.CoverPhoto = "/Content/Images/Covers/" + user.Id + extension;
+            }
             db.SaveChanges();
             return true;
         }
@@ -98,7 +121,7 @@ namespace LHSCamp.Controllers
                 return RedirectToAction("Index", controllerName: "Home");
             }
 
-            this.UploadPicture(file, user, "~/Content/Images/Candidates/");
+            this.UploadPicture(file, user, "~/Content/Images/Candidates/", true);
 
             TempData["Uploaded"] = true; // Not the best way to do this, but it'll do for now
             return RedirectToAction("Candidate", controllerName: "Welcome");
@@ -115,7 +138,7 @@ namespace LHSCamp.Controllers
                 return RedirectToAction("Index", controllerName: "Home");
             }
 
-            this.UploadPicture(file, user, "~/Content/Images/Covers/");
+            this.UploadPicture(file, user, "~/Content/Images/Covers/", false);
 
             TempData["Uploaded"] = true;
             return RedirectToAction("Candidate", controllerName: "Welcome");

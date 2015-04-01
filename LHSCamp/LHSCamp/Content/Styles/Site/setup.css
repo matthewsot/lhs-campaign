@@ -64,7 +64,7 @@ header {
     width: 800px;
     margin: 0 auto;
     display: flex;
-    padding: 10px 0;
+    padding: 0;
     border-top: 2px solid #dadada;
     border-bottom: 2px solid #dadada;
 }
@@ -74,11 +74,23 @@ header {
         text-align: center;
         color: #dadada;
         cursor: pointer;
+        padding: 10px 0;
     }
         #tabs li.selected {
             color: #1394ee;
         }
 
+body > div > h1 {
+    font-size: 25px;
+    font-weight: 400;
+}
+body > div > span {
+    font-size: 20px;
+}
+    body > div > span a {
+        color: #1394ee;
+        text-decoration: none;
+    }
 
 .tab-content {
     width: 800px;

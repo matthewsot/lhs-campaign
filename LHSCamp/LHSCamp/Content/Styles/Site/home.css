@@ -64,7 +64,7 @@ header {
     width: 800px;
     margin: 0 auto;
     display: flex;
-    padding: 10px 0;
+    padding: 0;
     border-top: 2px solid #dadada;
     border-bottom: 2px solid #dadada;
 }
@@ -74,6 +74,7 @@ header {
         text-align: center;
         color: #dadada;
         cursor: pointer;
+        padding: 10px 0;
     }
         #position-tabs li.selected {
             color: #1394ee;

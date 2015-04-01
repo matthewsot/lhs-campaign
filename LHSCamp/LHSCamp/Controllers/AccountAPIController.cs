@@ -200,8 +200,7 @@ namespace LHSCamp.Controllers
 
                 // TODO: Should be validating with ModelState
                 if (model.Password.Length <= 6) errors.Add("Password");
-                //if (!(model.Year <= 2017 && model.Year >= 2015)) errors.Add("Year");
-                model.Year = 0;
+                if (!(model.Year <= 2018 && model.Year >= 2016)) errors.Add("Year");
                 if (model.Position == null || model.Position.Length > 50) errors.Add("Position");
                 model.Position = model.Position.ToLower();
                 if (model.FullName == null || model.FullName.Length > 50) errors.Add("FullName");
