@@ -1,9 +1,33 @@
-﻿$("body").on("click", "#position-tabs div", function (e) {
+﻿var unopposedTimeout = null;
+
+$("body").on("click", "#position-tabs div", function (e) {
     $(this).addClass("selected").siblings(".selected").removeClass("selected");
     $(".tab-content").hide();
     $(".tab-content[data-tab=\"" + $(this).text().trim() + "\"]").show();
+
+    if(unopposedTimeout != null) {
+        clearTimeout(unopposedTimeout);
+    }
+    $("#unopposed-popup").hide();
     if ($(".tab-content[data-tab=\"" + $(this).text().trim() + "\"]").children("article").length == 1) {
         //Celebrate!
+        $('[class*=confetti]').remove();
+        $('html').confetti({
+            x: $(this).offset().left + $(this).width() / 2,
+            y: $(this).offset().top + $(this).height() / 2,
+            complate: function () {
+            }
+        });
+
+        $("#unopposed-popup").css({
+            position: "absolute",
+            left: $(this).offset().left + $(this).width() / 2 - 85,
+            top: $(this).offset().top + $(this).height() / 2 - 35
+        }).fadeIn();
+
+        unopposedTimeout = setTimeout(function () {
+            $("#unopposed-popup").fadeOut();
+        }, 3000);
     }
 });
 $("#position-tabs div").first().click();

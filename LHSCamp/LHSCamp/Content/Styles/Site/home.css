@@ -68,6 +68,7 @@ header {
     padding: 0;
     border-top: 2px solid #dadada;
     border-bottom: 2px solid #dadada;
+    margin-top: 10px;
 }
     #position-tabs div {
         flex: 1;
@@ -204,3 +205,44 @@ footer {
             background-color: #1394ee;
             color: #fff;
         }
+
+#unopposed-popup {
+    display: none;
+}
+
+        
+[class*=confetti] {
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    opacity: 0.4;
+    -webkit-animation-iteration-count: infinite;
+}
+[class*=confetti]:nth-child(odd) {
+    -webkit-animation-duration: 0.4s;
+    -webkit-animation-name: confetti1;
+}
+[class*=confetti]:nth-child(even) {
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-name: confetti2;
+}
+@-webkit-keyframes confetti1 {
+    0% {
+    }
+    50% {
+        -webkit-transform: translateX(3px) rotateX(90deg) rotateY(45deg);
+    }
+    100% {
+        -webkit-transform: rotateX(180deg) rotateY(45deg);
+    }
+}
+@-webkit-keyframes confetti2 {
+    0% {
+    }
+    50% {
+        -webkit-transform: translateX(-3px) rotateY(90deg) rotateX(45deg);
+    }
+    100% {
+        -webkit-transform:rotateY(180deg) rotateX(45deg);
+    }
+}

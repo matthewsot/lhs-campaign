@@ -100,3 +100,31 @@ main {
         main p {
             color: #888888;
         }
+
+footer {
+    width: 100%;
+    height: 75px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid #dadada;
+    background-color: #fff;
+}
+    body {
+        padding-bottom: 75px;
+    }
+    #selected-people img {
+        height: 60px;
+        margin-top: 7.5px;
+        float: left;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    footer a {
+        float: right;
+        height: 75px;
+        line-height: 75px;
+        margin-right: 15px;
+        text-decoration: none;
+        color: #1394ee;
+    }

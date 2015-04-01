@@ -29,13 +29,14 @@
         </ul>
     </header>
 
-    <main>
+    <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
         <div id="info">
             <h1>@(Model.Name)</h1>
             <h2>@(Model.Owner.Year) @(Model.Position)</h2>
 
-            <img height="175" src="@(Model.ProfilePic)" alt="@(Model.Name)" />
+            <img height="175" src="@(Model.ProfilePic)" alt="@(Model.Name)"/>
 
+            <a id="add-pic-button">ADD PROFILE PIC</a>
             @if (!string.IsNullOrWhiteSpace(Model.Facebook))
             {
                 <a href="@(Model.Facebook)">VIEW FB EVENT</a>
@@ -59,42 +60,41 @@
                     <br/><br/>
                     @:Click the "Questions" tab to discuss!
                 }
-                </p>
-            </div>
+            </p>
+        </div>
 
-            <div class="tab" id="questions">
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    if (window.location.href.indexOf("localhost") == -1) {
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = 'lhscampaign';
-                        var disqus_identifier = "candidateid:@(Model.Id)";
+        <div class="tab" id="questions">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                if (window.location.href.indexOf("localhost") == -1) {
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'lhscampaign';
+                    var disqus_identifier = "candidateid:@(Model.Id)";
 
-                        /* * * DON'T EDIT BELOW THIS LINE * * */
-                        (function () {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-                    }
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            </div>
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                }
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
 
-            <div class="tab" id="share">share</div>
-        </main>
-        <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript">
-            $("#tabs li a").click(function(e) {
-                e.stopPropagation();
-            });
-            $("#tabs li").click(function() {
-                $("#tabs li").removeClass("selected");
-                $(this).addClass("selected");
+        <div class="tab" id="share">share</div>
+    </main>
 
-                $(".tab.selected").removeClass("selected");
-                $(".tab#" + $(this).text().toLowerCase().trim()).addClass("selected");
-            });
-        </script>
+    <footer>
+        <div id="selected-people"></div>
+        <a href="~/CreatePhoto/Profile">profile picture</a>
+        <a href="~/CreatePhoto/Cover">cover photo</a>
+    </footer>
+
+    <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="~/Content/Scripts/candidate.js"></script>
     </body>
 </html>
