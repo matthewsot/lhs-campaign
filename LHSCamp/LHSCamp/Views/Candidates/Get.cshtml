@@ -1,6 +1,8 @@
 ﻿@using Microsoft.Ajax.Utilities
 @model LHSCamp.Models.Candidate
 @{
+    ViewBag.Description = (Model.Reasons ?? "See " + Model.Name + "'s profile on LHSCampaign!");
+    ViewBag.Description = ViewBag.Description.Substring(0, Math.Min(ViewBag.Description.Length, 300));
     Layout = null;
 }
 
@@ -10,7 +12,11 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>@(Model.Name) | LHSCampaign</title>
-        <link href="~/Content/Styles/Site/candidate.css" rel="stylesheet" />
+        <link href="~/Content/Styles/Site/candidate.css" rel="stylesheet"/>
+        <meta property="og:title" content="@(Model.Name) on LHSCampaign" />
+        <meta property="og:image" content="@(Model.ProfilePic)" />
+        <meta property="og:description"
+              content="@(ViewBag.Description)" />
     </head>
 <body>
     <header>
@@ -19,7 +25,7 @@
         <ul id="tabs">
             <li class="selected">PLATFORM</li>
             <li>QUESTIONS</li>
-            <li>SHARE</li>
+            <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lhscampaign.cf/Candidates/@(Model.Id)">SHARE</a></li>
         </ul>
     </header>
 
@@ -77,14 +83,16 @@
         </main>
         <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
-            $("#tabs li").click(function () {
+            $("#tabs li a").click(function(e) {
+                e.stopPropagation();
+            });
+            $("#tabs li").click(function() {
                 $("#tabs li").removeClass("selected");
                 $(this).addClass("selected");
 
                 $(".tab.selected").removeClass("selected");
                 $(".tab#" + $(this).text().toLowerCase().trim()).addClass("selected");
-            })
+            });
         </script>
     </body>
-
 </html>
