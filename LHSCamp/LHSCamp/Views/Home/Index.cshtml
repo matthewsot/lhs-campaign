@@ -7,7 +7,8 @@
 <html>
     <head>
         <title>LHSCampaign</title>
-        <link href="~/Content/Styles/Site/home.css" rel="stylesheet" />
+        <link href="~/Content/Styles/Site/home.css" rel="stylesheet"/>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     </head>
     <body>
         <header>
@@ -32,12 +33,12 @@
             <a href="~/Account/Register">candidate? sign up</a>
         </header>
 
-        <ul id="position-tabs">
-            <li class="selected">secretary</li>
-            <li>treasurer</li>
-            <li>vice president</li>
-            <li>president</li>
-        </ul>
+        <div id="position-tabs">
+            <div class="selected">secretary</div>
+            <div>treasurer</div>
+            <div>vice president</div>
+            <div>president</div>
+        </div>
 
         @foreach (var position in Model)
         {
@@ -65,6 +66,25 @@
             <a href="~/CreatePhoto/Profile">profile picture</a>
             <a href="~/CreatePhoto/Cover">cover photo</a>
         </footer>
+
+        <div id="welcome-popup">
+            <h1>Welcome!</h1>
+
+            <p>
+                LHS Campaign is a centralized platform for voters to compare candidates on. We hope this creates a more equitable election atmosphere.
+            </p>
+            <p>
+                Have any questions or concerns? Reach out to us at lhscampaign@mawteam.com
+            </p>
+
+            <div id="class-options">
+                <a data-href="/Home?class=2018">2018</a>
+                <a data-href="/Home?class=2017">2017</a>
+                <a data-href="/Home?class=2016">2016</a>
+            </div>
+
+            @*<a id="close-wedge">Let's go!</a>*@
+        </div>
 
         <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>

@@ -63,12 +63,13 @@ header {
     margin: 0;
     width: 800px;
     margin: 0 auto;
+    display: flexbox;
     display: flex;
     padding: 0;
     border-top: 2px solid #dadada;
     border-bottom: 2px solid #dadada;
 }
-    #position-tabs li {
+    #position-tabs div {
         flex: 1;
         font-size: 15px;
         text-align: center;
@@ -76,7 +77,7 @@ header {
         cursor: pointer;
         padding: 10px 0;
     }
-        #position-tabs li.selected {
+        #position-tabs .selected {
             color: #1394ee;
         }
 
@@ -165,3 +166,41 @@ footer {
         text-decoration: none;
         color: #1394ee;
     }
+
+#welcome-popup {
+    background-color: #fff;
+    width: 600px;
+    padding: 30px;
+    display: none;
+}
+    #welcome-popup h1 {
+        margin: 0;
+        font-weight: 400;
+    }
+    #welcome-popup a {
+        width: 150px;
+        padding: 15px 0;
+        margin: 5px 0;
+        display: inline-block;
+        background-color: #1394ee;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.1s linear;
+    }
+        #welcome-popup a:hover {
+            background-color: #1683cf;
+        }
+
+    #class-options a {
+        padding: 10px 0;
+        width: 100px;
+        margin: 10px 10px 25px;
+        border: 1px solid #1394ee;
+        background-color: #fff;
+        color: #1394ee;
+    }
+        #class-options a:hover {
+            background-color: #1394ee;
+            color: #fff;
+        }

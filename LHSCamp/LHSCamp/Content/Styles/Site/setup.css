@@ -68,7 +68,7 @@ header {
     border-top: 2px solid #dadada;
     border-bottom: 2px solid #dadada;
 }
-    #tabs li {
+    #tabs div {
         flex: 1;
         font-size: 15px;
         text-align: center;
@@ -76,7 +76,7 @@ header {
         cursor: pointer;
         padding: 10px 0;
     }
-        #tabs li.selected {
+        #tabs .selected {
             color: #1394ee;
         }
 

@@ -35,20 +35,20 @@
         }
         <br />
         <br />
-        <ul id="tabs">
-            <li class="@((ViewBag.Uploaded != null && ViewBag.Uploaded == true) ? "" : "selected")">email</li>
-            <li>position</li>
-            <li>campaign</li>
-            <li>social</li>
+        <div id="tabs">
+            <div class="@((ViewBag.Uploaded != null && ViewBag.Uploaded == true) ? "" : "selected")">email</div>
+            <div>position</div>
+            <div>campaign</div>
+            <div>social</div>
             @if (ViewBag.Uploaded != null && ViewBag.Uploaded == true)
             {
-                <li class="selected">picture</li>
+                <div class="selected">picture</div>
             }
             else
             {
-                <li>picture</li>
+                <div>picture</div>
             }
-        </ul>
+        </div>
 
         <div class="tab-content" data-tab="email">
             <h2>Voters will be able to see this email, so think twice before using a personal address.</h2>
@@ -137,15 +137,15 @@
     <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript">
-        $("body").on("click", "#tabs li", function () {
+        $("body").on("click", "#tabs div", function () {
             $(this).addClass("selected").siblings(".selected").removeClass("selected");
             $(".tab-content").hide();
             $(".tab-content[data-tab=\"" + $(this).text().trim() + "\"]").show();
         });
-        $("#tabs li.selected").first().click();
+        $("#tabs div.selected").first().click();
 
         function cont() {
-            $("#tabs li.selected").next().click();
+            $("#tabs div.selected").next().click();
         }
 
         if ($.cookie("cand-page") == null) {
