@@ -44,6 +44,12 @@
     <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
     </Reference>
@@ -274,6 +280,7 @@
     <Content Include="Content\Images\Default\laptop.png" />
     <Content Include="Content\Images\Errors\RememberWhen.png" />
     <Content Include="Content\Images\Errors\TooBig.png" />
+    <Content Include="Content\Images\facebook.preview.jpg" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\logo.blue.png" />
     <Content Include="Content\Scripts\FileSaver\base64.js" />
@@ -367,13 +374,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Welcome\Candidate.cshtml" />
-    <Content Include="Content\Styles\Bundles\Home\home.less" />
-    <Content Include="Content\Styles\Bundles\Layouts\layout.less" />
-    <Content Include="Content\Styles\Bundles\Prelogin\index.less" />
-    <Content Include="Content\Styles\Bundles\Layouts\hero.less" />
-    <Content Include="Content\Styles\Bundles\Prelogin\register.less" />
-    <Content Include="Content\Styles\Bundles\Prelogin\login.less" />
-    <Content Include="Content\Styles\Bundles\Home\welcome-candidate.less" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml">
       <SubType>Designer</SubType>
     </None>
@@ -464,6 +464,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -15,7 +15,10 @@ namespace LHSCamp.Controllers
         [Route("API/Anon/Candidates/{position}")]
         public IHttpActionResult GetAnonCandidates(string position)
         {
-            var candidates = db.Candidates.Where(c => c.Position.Equals(position, StringComparison.CurrentCultureIgnoreCase) && c.ProfilePic != null);
+            var candidates = db.Users.Where(c =>
+                c.Position.Equals(position, StringComparison.CurrentCultureIgnoreCase)
+                && c.ProfilePicture != null);
+
             return Ok(candidates.Select(cand => new CandidateModel
             {
                 id = cand.Id,
@@ -38,7 +41,7 @@ namespace LHSCamp.Controllers
             var chosenCandidateIds = user.ChosenCandidates.Select(cand => cand.Id);
 
             // Thanks! http://stackoverflow.com/questions/654906/linq-to-entities-random-order
-            var candidates = db.Candidates.Where(c => c.Owner.Year == user.Year && c.Owner.IsConfirmed
+            var candidates = db.Candidates.Where(c => c.Owner.Year == user.GraduationYear && c.Owner.IsConfirmed
                 && c.Position.ToLower() == position.ToLower() && c.ProfilePic != null)
                 .OrderBy(b => Guid.NewGuid());
 

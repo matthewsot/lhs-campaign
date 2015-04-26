@@ -222,6 +222,16 @@ footer {
     display: none;
 }
 
+#totally-unopposed {
+    margin-top: 75px;
+    display: block;
+    text-align: center;
+}
+    #totally-unopposed ul {
+        text-align: left;
+        width: 210px;
+        margin: 25px auto;
+    }
         
 [class*=confetti] {
     position: absolute;

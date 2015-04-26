@@ -13,6 +13,18 @@ namespace LHSCamp.Controllers
         // GET: Home
         public ActionResult Index(int? @class)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                using (var db = new LCDB())
+                {
+                    var user = db.Users.Find(User.Identity.GetUserId());
+                    if (user.IsCandidate || user.Candidate != null)
+                    {
+                        return RedirectToAction("Candidate", "Welcome");
+                    }
+                }
+            }
+
             var cookie = Request.Cookies["selected-class"];
             if (cookie != null && @class == null)
             {
@@ -34,7 +46,7 @@ namespace LHSCamp.Controllers
             using (var db = new LCDB())
             {
                 var positions = db.Users
-                                    .Where(user => user.IsConfirmed && user.Candidate != null && user.Year == @class)
+                                    .Where(user => user.IsConfirmed && user.Candidate != null && user.GraduationYear == @class)
                                     .Select(user => user.Candidate)
                                     .GroupBy(cand => cand.Position.ToLower())
                                     .ToDictionary(c => c.Key, c => c.ToList());

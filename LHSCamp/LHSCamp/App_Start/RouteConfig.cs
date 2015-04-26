@@ -17,8 +17,8 @@ namespace LHSCamp
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Default", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{graduationYear}",
+                defaults: new { controller = "Candidates", action = "GetClass", graduationYear = UrlParameter.Optional }
             );
         }
     }

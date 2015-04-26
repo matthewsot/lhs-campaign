@@ -1,4 +1,5 @@
-﻿@using Microsoft.Ajax.Utilities
+﻿@using System.Text.RegularExpressions
+@using Microsoft.Ajax.Utilities
 @model LHSCamp.Models.Candidate
 @{
     ViewBag.Description = (Model.Reasons ?? "See " + Model.Name + "'s profile on LHSCampaign!");
@@ -17,64 +18,71 @@
         <meta property="og:image" content="@(Model.ProfilePic)" />
         <meta property="og:description"
               content="@(ViewBag.Description)" />
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     </head>
-    <body>
-        <div id="fb-root"></div>
-        <script>
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=660289007448450&version=v2.3";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-        <header>
-            <a href="~/"><img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo"/></a>
+<body>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=660289007448450&version=v2.3";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <header>
+        <a href="~/"><img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" /></a>
 
-            <ul id="tabs">
-                <li class="selected">PLATFORM</li>
-                <li>QUESTIONS</li>
-                @*<li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lhscampaign.cf/Candidates/@(Model.Id)">SHARE</a></li>*@
-            </ul>
-        </header>
+        <ul id="tabs">
+            <li class="selected">PLATFORM</li>
+            <li>QUESTIONS</li>
+            <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lhscampaign.cf/Candidates/@(Model.Id)">SHARE</a></li>
+        </ul>
+    </header>
 
-        <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
-            <div id="info">
-                <h1>@(Model.Name)</h1>
-                <h2>@(Model.Owner.Year) @(Model.Position)</h2>
+    <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
+        <div id="info">
+            <h1>@(Model.Name)</h1>
+            <h2>@(Model.Owner.GraduationYear) @(Model.Position)</h2>
 
-                <img height="175" src="@(Model.ProfilePic)" alt="@(Model.Name)"/>
+            <img height="175" src="@(Model.ProfilePic)" alt="@(Model.Name)" />
 
-                @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
+            @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
+            {
+                <img id="cover-photo" width="175" src="@(Model.CoverPhoto)" alt="@(Model.Name)" />
+            }
+
+            <div class="fb-share-button" data-href="http://lhscampaign.cf/Candidates/@(Model.Id)" data-layout="button_count"></div>
+
+            <a id="add-pic-button">ADD PROFILE PIC</a>
+            @if (!string.IsNullOrWhiteSpace(Model.Facebook))
+            {
+                <a target="_blank" href="@(Model.Facebook)">VIEW FB EVENT</a>
+            }
+            <a href="@(Model.ProfilePic)" target="_blank" download>DOWNLOAD PROFILE PICTURE</a>
+            @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
+            {
+                <a href="@(Model.CoverPhoto)" target="_blank" download>DOWNLOAD COVER PICTURE</a>
+            }
+        </div>
+
+        <div class="selected tab" id="platform">
+            <p>
+                @if (!string.IsNullOrWhiteSpace(Model.Reasons))
                 {
-                    <img id="cover-photo" width="175" src="@(Model.CoverPhoto)" alt="@(Model.Name)" />
-                }
-
-                @*<div class="fb-share-button" data-href="http://lhscampaign.cf/Candidates/@(Model.Id)" data-layout="button_count"></div>*@
-
-                <a id="add-pic-button">ADD PROFILE PIC</a>
-                @if (!string.IsNullOrWhiteSpace(Model.Facebook))
-                {
-                    <a href="@(Model.Facebook)">VIEW FB EVENT</a>
-                }
-                <a href="@(Model.ProfilePic)" target="_blank" download>DOWNLOAD PROFILE PICTURE</a>
-                @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
-                {
-                    <a href="@(Model.CoverPhoto)" target="_blank" download>DOWNLOAD COVER PICTURE</a>
-                }
-            </div>
-
-            <div class="selected tab" id="platform">
-                <p>
-                    @if (!string.IsNullOrWhiteSpace(Model.Reasons))
+                    var platformLines = Regex.Split(Model.Reasons, "(\r\n|\n|\r)").Select(str => str.Trim()).Where(line => !string.IsNullOrWhiteSpace(line));
+                    foreach (var line in platformLines)
                     {
-                        @(Model.Reasons)
+                        <p>
+                            @line
+                        </p>
                     }
-                    else
-                    {
-                        @:Sorry, this candidate hasn't uploaded their platform yet.
-                        <br/><br/>
-                        @:Click the "Questions" tab to discuss!
+                }
+                else
+                {
+                    @:Sorry, this candidate hasn't uploaded their platform yet.
+                    <br /><br />
+                    @:Click the "Questions" tab to discuss!
                     }
                 </p>
             </div>
@@ -88,7 +96,7 @@
                         var disqus_identifier = "candidateid:@(Model.Id)";
 
                         /* * * DON'T EDIT BELOW THIS LINE * * */
-                        (function() {
+                        (function () {
                             var dsq = document.createElement('script');
                             dsq.type = 'text/javascript';
                             dsq.async = true;

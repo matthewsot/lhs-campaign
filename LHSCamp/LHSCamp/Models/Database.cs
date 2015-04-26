@@ -6,27 +6,24 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System;
 
 namespace LHSCamp.Models
 {
-    // You can add profile data for the user by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class User : IdentityUser
+    // You can add profile data for the user by adding more properties to your Candidate class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    public class Candidate : IdentityUser
     {
-        public virtual Candidate Candidate { get; set; }
-        public int Year { get; set; }
-        public virtual ICollection<Candidate> ChosenCandidates { get; set; }
-        public DateTime? SignupDate { get; set; }
-        public User()
-        {
-            ChosenCandidates = new List<Candidate>();
-            SignupDate = DateTime.Now;
-        }
-        public bool IsCandidate 
-        {
-            get { return Candidate != null; }
-        }
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
+        public int GraduationYear { get; set; }
+        public string Name { get; set; }
+        public string Position { get; set; }
+        
+        public string ProfilePicture { get; set; }
+        public string CoverPhoto { get; set; }
+
+        public string Platform { get; set; }
+        public ICollection<ExternalLink> ExternalLinks { get; set; }
+        public int ViewCount { get; set; }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Candidate> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -35,17 +32,11 @@ namespace LHSCamp.Models
         }
     }
 
-    public class Candidate
+    public class ExternalLink
     {
-        public virtual User Owner { get; set; }
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Position { get; set; }
-        public string ProfilePic { get; set; }
-        public string CoverPhoto { get; set; }
-        public string Reasons { get; set; }
-        public string Facebook { get; set; }
-        public int ViewCount { get; set; }
+        public string Label { get; set; }
+        public string Link { get; set; }
     }
 
     public class Setting
@@ -69,37 +60,30 @@ namespace LHSCamp.Models
         public string Email { get; set; }
     }
 
-    public class LCDB : IdentityDbContext<User>
+    public class LCDB : IdentityDbContext<Candidate>
     {
-        public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Setting> Config { get; set; }
         public DbSet<LogEntry> Log { get; set; }
         public DbSet<PreConfirmation> PreConfs { get; set; }
+
         public LCDB()
             : base("LCDB")
         {
         }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasOptional(a => a.Candidate).WithRequired(a => a.Owner);
-            modelBuilder.Entity<User>().HasMany(a => a.ChosenCandidates).WithMany();
-            base.OnModelCreating(modelBuilder);
-        }
     }
 
-    public class ApplicationUserManager : UserManager<User>
+    public class ApplicationUserManager : UserManager<Candidate>
     {
-        public ApplicationUserManager(IUserStore<User> store)
+        public ApplicationUserManager(IUserStore<Candidate> store)
             : base(store)
         {
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options)
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(new LCDB()));
+            var manager = new ApplicationUserManager(new UserStore<Candidate>(new LCDB()));
             // Configure the application user manager
-            manager.UserValidator = new UserValidator<User>(manager)
+            manager.UserValidator = new UserValidator<Candidate>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = false

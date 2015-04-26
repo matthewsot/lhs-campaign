@@ -39,11 +39,11 @@ namespace LHSCamp.Controllers
         }
 
         // Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
-        private bool UploadPicture(HttpPostedFileBase file, User user, string folderPath, bool isProfile)
+        private bool UploadPicture(HttpPostedFileBase file, Candidate candidate, string folderPath, bool isProfile)
         {
             var allowedExts = new[] { ".jpg", ".png", ".gif" };
 
-            // Verify that the user selected a file
+            // Verify that the Candidate selected a file
             if (file == null || file.FileName == null || file.ContentLength <= 0)
             {
                 return false;
@@ -56,17 +56,17 @@ namespace LHSCamp.Controllers
             }
 
             var imagesFolder = Server.MapPath(folderPath);
-            var path = imagesFolder + user.Id + extension;
+            var path = imagesFolder + candidate.Id + extension;
 
             Directory.CreateDirectory(imagesFolder);
 
             // Remove the existing picture and log an image change
-            if (isProfile && user.Candidate.ProfilePic != null)
+            if (isProfile && candidate.Candidate.ProfilePic != null)
             {
-                var oldPic = Server.MapPath("~" + user.Candidate.ProfilePic);
+                var oldPic = Server.MapPath("~" + candidate.Candidate.ProfilePic);
                 System.IO.File.Delete(oldPic);
 
-                var entry = user.Candidate.ProfilePic;
+                var entry = candidate.Candidate.ProfilePic;
                 var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
                 if (currLog == null)
                 {
@@ -77,12 +77,12 @@ namespace LHSCamp.Controllers
                     });
                 }
             }
-            else if (!isProfile && user.Candidate.CoverPhoto != null)
+            else if (!isProfile && candidate.Candidate.CoverPhoto != null)
             {
-                var oldPic = Server.MapPath("~" + user.Candidate.CoverPhoto);
+                var oldPic = Server.MapPath("~" + candidate.Candidate.CoverPhoto);
                 System.IO.File.Delete(oldPic);
 
-                var entry = user.Candidate.CoverPhoto;
+                var entry = candidate.Candidate.CoverPhoto;
                 var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
                 if (currLog == null)
                 {
@@ -97,11 +97,11 @@ namespace LHSCamp.Controllers
             file.SaveAs(path); // Upload the new pic
             if (isProfile)
             {
-                user.Candidate.ProfilePic = "/Content/Images/Candidates/" + user.Id + extension;
+                candidate.Candidate.ProfilePic = "/Content/Images/Candidates/" + candidate.Id + extension;
             }
             else
             {
-                user.Candidate.CoverPhoto = "/Content/Images/Covers/" + user.Id + extension;
+                candidate.Candidate.CoverPhoto = "/Content/Images/Covers/" + candidate.Id + extension;
             }
             db.SaveChanges();
             return true;

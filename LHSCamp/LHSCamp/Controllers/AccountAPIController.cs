@@ -31,8 +31,8 @@ namespace LHSCamp.Controllers
         [Route("API/Account/StartResetPass")]
         public IHttpActionResult StartResetPassword(UserNameModel model)
         {
-            using (var userManager = new UserManager<User>(
-                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
+            using (var userManager = new UserManager<Candidate>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<Candidate>(db)))
             {
                 //Thanks! http://stackoverflow.com/questions/19539579/how-to-implement-a-tokenprovider-in-asp-net-identity-1-1-nightly-build
                 if (Startup.DataProtectionProvider != null)
@@ -73,8 +73,8 @@ namespace LHSCamp.Controllers
         [Route("API/Account/ResetPass")]
         public IHttpActionResult ResetPassword(ResetPassModel model)
         {
-            using (var userManager = new UserManager<User>(
-                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
+            using (var userManager = new UserManager<Candidate>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<Candidate>(db)))
             {
                 // Thanks! http://stackoverflow.com/questions/19539579/how-to-implement-a-tokenprovider-in-asp-net-identity-1-1-nightly-build
                 if (Startup.DataProtectionProvider != null)
@@ -180,8 +180,8 @@ namespace LHSCamp.Controllers
         [Route("API/Account/SetPass")]
         public IHttpActionResult SetPass(SetPassModel model)
         {
-            using (var userManager = new UserManager<User>(
-                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
+            using (var userManager = new UserManager<Candidate>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<Candidate>(db)))
             {
                 var result = userManager.ChangePassword(User.Identity.GetUserId(), model.currPass, model.newPass);
                 return Ok(result.Succeeded ? "set" : "nope");
@@ -193,8 +193,8 @@ namespace LHSCamp.Controllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterModel model)
         {
-            using (var userManager = new UserManager<User>(
-                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<User>(db)))
+            using (var userManager = new UserManager<Candidate>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<Candidate>(db)))
             {
                 var errors = new List<string>();
 
@@ -211,7 +211,7 @@ namespace LHSCamp.Controllers
                     return Ok(string.Join(",", errors) + ",");
                 }
 
-                var user = new User { UserName = model.Username, Email = model.Email, Year = model.Year };
+                var user = new Candidate { UserName = model.Username, Email = model.Email, GraduationYear = model.Year };
                 var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email.ToLower());
                 if(preConf != null)
                 {
