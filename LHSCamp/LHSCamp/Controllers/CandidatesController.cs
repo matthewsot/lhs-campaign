@@ -10,6 +10,8 @@ namespace LHSCamp.Controllers
 {
     public class CandidatesController : Controller
     {
+        public LCDB db = new LCDB();
+
         [Route("Candidates/Class/{graduationYear}")]
         public ActionResult GetClass(int? graduationYear)
         {
@@ -32,56 +34,57 @@ namespace LHSCamp.Controllers
             model.GraduationYear = graduationYear.Value;
             Response.Cookies.Set(new HttpCookie("selected-class", graduationYear.ToString()));
 
-            using (var db = new LCDB())
+            var positions = db.Users
+                .Where(user => user.IsConfirmed && user.GraduationYear == graduationYear)
+                .GroupBy(cand => cand.Position.ToLower())
+                .ToDictionary(c => c.Key, c => c.ToList());
+
+            foreach (var position in positions)
             {
-                var positions = db.Users
-                    .Where(user => user.IsConfirmed && user.GraduationYear == graduationYear)
-                    .GroupBy(cand => cand.Position.ToLower())
-                    .ToDictionary(c => c.Key, c => c.ToList());
-
-                foreach (var position in positions)
+                if (!(new[] {"secretary", "treasurer", "vice president", "president"}.Contains(
+                    position.Key)))
                 {
-                    if (!(new[] {"secretary", "treasurer", "vice president", "president"}.Contains(
-                            position.Key)))
-                    {
-                        continue;
-                    }
-
-                    var positionModel = new PositionViewModel { Name = position.Key };
-
-                    var rand = new Random();
-                    var candidates = position.Value
-                                        .Where(candidate => candidate.ProfilePicture != null)
-                                            .OrderBy(a => rand.Next())
-                                            .ToList();
-
-                    foreach (var cand in candidates)
-                    {
-                        cand.ToString();
-                    }
-
-                    positionModel.Candidates = Mapper.Map<List<Candidate>, List<CandidateViewModel>>(candidates);
+                    continue;
                 }
 
-                return View();
+                var positionModel = new PositionViewModel {Name = position.Key};
+
+                var rand = new Random();
+                var candidates = position.Value
+                    .Where(candidate => candidate.ProfilePicture != null)
+                    .OrderBy(a => rand.Next())
+                    .ToList();
+
+                foreach (var cand in candidates)
+                {
+                    cand.ToString();
+                }
+
+                positionModel.Candidates = Mapper.Map<List<Candidate>, List<CandidateViewModel>>(candidates);
+                model.Positions.Add(positionModel);
             }
+
+            return View();
         }
 
         [Route("Candidates/{id}")]
-        public ActionResult Get(int id)
+        public ActionResult GetCandidate(int id)
         {
-            using (LCDB db = new LCDB())
-            {
-                var candidate = db.Candidates.Find(id);
+            var candidate = db.Users.Find(id);
 
-                candidate.ToString();
-                candidate.Owner.Year.ToString();
+            candidate.ToString();
 
-                candidate.ViewCount = candidate.ViewCount + 1;
-                db.SaveChanges();
+            candidate.ViewCount = candidate.ViewCount + 1;
+            db.SaveChanges();
 
-                return View(candidate);
-            }
+            var model = Mapper.Map<Candidate, CandidateViewModel>(candidate);
+
+            return View(model);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
         }
     }
 }

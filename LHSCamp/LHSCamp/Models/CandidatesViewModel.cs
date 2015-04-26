@@ -5,7 +5,7 @@ namespace LHSCamp.Models
     public class CandidatesViewModel
     {
         public int GraduationYear { get; set; }
-        public IEnumerable<PositionViewModel> Positions { get; set; }
+        public ICollection<PositionViewModel> Positions { get; set; }
 
         public CandidatesViewModel()
         {
