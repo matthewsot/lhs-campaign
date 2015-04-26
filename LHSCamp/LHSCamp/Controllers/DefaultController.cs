@@ -6,12 +6,11 @@ namespace LHSCamp.Controllers
     {
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Candidate", controllerName: "Welcome");
-            }
-            return RedirectToAction("Index", controllerName: "Home");
+            return User.Identity.IsAuthenticated ?
+                RedirectToAction("Candidate", controllerName: "Welcome") :
+                RedirectToAction("GetClass", controllerName: "Candidates");
         }
+
         [Route("GPlus")]
         public ActionResult GPlus()
         {
