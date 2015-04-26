@@ -1,7 +1,9 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using LHSCamp.Models;
 using Microsoft.AspNet.Identity;
 
@@ -14,18 +16,13 @@ namespace LHSCamp.Controllers
 
         public ActionResult Candidate()
         {
-            var user = db.Users.Find(User.Identity.GetUserId());
-            if (user == null)
+            var candidate = db.Users.Find(User.Identity.GetUserId());
+            if (candidate == null)
             {
                 return RedirectToAction("GetClass", "Candidates");
             }
 
-            ViewBag.Id = user.Id;
-
-            ViewBag.Confirmed = user.IsConfirmed;
-            ViewBag.Email = user.Email;
-            ViewBag.Position = user.Position;
-            ViewBag.Reasons = user.Platform ?? string.Empty;
+            var model = Mapper.Map<Candidate, CandidateViewModel>(candidate);
 
             if (TempData.ContainsKey("Uploaded"))
             {
@@ -36,7 +33,7 @@ namespace LHSCamp.Controllers
                 ViewBag.Uploaded = false;
             }
 
-            return View();
+            return View(model);
         }
 
         // Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0

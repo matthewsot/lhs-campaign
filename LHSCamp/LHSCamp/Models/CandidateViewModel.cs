@@ -18,5 +18,8 @@ namespace LHSCamp.Models
 
         public string Platform { get; set; }
         public ICollection<ExternalLink> ExternalLinks { get; set; }
+
+        public bool IsConfirmed { get; set; }
+        public string Email { get; set; }
     }
 }
