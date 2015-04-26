@@ -247,10 +247,13 @@
     <Compile Include="Migrations\201504010544026_viewcount.Designer.cs">
       <DependentUpon>201504010544026_viewcount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504261833454_TotalReorganization.cs" />
+    <Compile Include="Migrations\201504261833454_TotalReorganization.Designer.cs">
+      <DependentUpon>201504261833454_TotalReorganization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountAPIModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CandidateAPIModels.cs" />
     <Compile Include="Models\CandidatesViewModel.cs" />
     <Compile Include="Models\CandidateViewModel.cs" />
     <Compile Include="Models\Database.cs" />
@@ -359,7 +362,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\ConfirmUser.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -420,6 +422,9 @@
     <EmbeddedResource Include="Migrations\201504010544026_viewcount.resx">
       <DependentUpon>201504010544026_viewcount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261833454_TotalReorganization.resx">
+      <DependentUpon>201504261833454_TotalReorganization.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -429,7 +434,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\Candidates\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
