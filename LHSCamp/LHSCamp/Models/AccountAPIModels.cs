@@ -4,33 +4,27 @@
     {
         public string username { get; set; }
     }
-    public class ResetPassModel
-    {
-        public string userId { get; set; }
-        public string token { get; set; }
-        public string password { get; set; }
-    }
+
     public class SetEmailModel
     {
         public string email { get; set; }
     }
+
     public class SetPositionModel
     {
         public string position { get; set; }
     }
+
     public class SetReasonsModel
     {
         public string reasons { get; set; }
     }
+
     public class SetSocialModel
     {
         public string facebook { get; set; }
     }
-    public class SetPassModel
-    {
-        public string currPass { get; set; }
-        public string newPass { get; set; }
-    }
+
     public class RegisterModel
     {
         public string FullName { get; set; }
