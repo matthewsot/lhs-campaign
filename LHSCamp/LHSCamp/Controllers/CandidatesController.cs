@@ -60,7 +60,9 @@ namespace LHSCamp.Controllers
                     cand.ToString();
                 }
 
+                Mapper.CreateMap<Candidate, CandidateViewModel>();
                 positionModel.Candidates = Mapper.Map<List<Candidate>, List<CandidateViewModel>>(candidates);
+
                 model.Positions.Add(positionModel);
             }
 
@@ -77,6 +79,7 @@ namespace LHSCamp.Controllers
             candidate.ViewCount = candidate.ViewCount + 1;
             db.SaveChanges();
 
+            Mapper.CreateMap<Candidate, CandidateViewModel>();
             var model = Mapper.Map<Candidate, CandidateViewModel>(candidate);
 
             return View(model);

@@ -22,6 +22,7 @@ namespace LHSCamp.Controllers
                 return RedirectToAction("GetClass", "Candidates");
             }
 
+            Mapper.CreateMap<Candidate, CandidateViewModel>();
             var model = Mapper.Map<Candidate, CandidateViewModel>(candidate);
 
             if (TempData.ContainsKey("Uploaded"))
