@@ -15,17 +15,18 @@ namespace LHSCamp.Controllers
         public ActionResult Candidate()
         {
             var user = db.Users.Find(User.Identity.GetUserId());
-            if (user == null || !user.IsCandidate)
+            if (user == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetClass", "Candidates");
             }
 
-            ViewBag.Id = user.Candidate.Id;
+            ViewBag.Id = user.Id;
 
             ViewBag.Confirmed = user.IsConfirmed;
             ViewBag.Email = user.Email;
-            ViewBag.Position = user.Candidate.Position;
-            ViewBag.Reasons = user.Candidate.Reasons ?? string.Empty;
+            ViewBag.Position = user.Position;
+            ViewBag.Reasons = user.Platform ?? string.Empty;
+
             if (TempData.ContainsKey("Uploaded"))
             {
                 ViewBag.Uploaded = (bool)TempData["Uploaded"];
@@ -61,12 +62,12 @@ namespace LHSCamp.Controllers
             Directory.CreateDirectory(imagesFolder);
 
             // Remove the existing picture and log an image change
-            if (isProfile && candidate.Candidate.ProfilePic != null)
+            if (isProfile && candidate.ProfilePicture != null)
             {
-                var oldPic = Server.MapPath("~" + candidate.Candidate.ProfilePic);
+                var oldPic = Server.MapPath("~" + candidate.ProfilePicture);
                 System.IO.File.Delete(oldPic);
 
-                var entry = candidate.Candidate.ProfilePic;
+                var entry = candidate.ProfilePicture;
                 var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
                 if (currLog == null)
                 {
@@ -77,12 +78,12 @@ namespace LHSCamp.Controllers
                     });
                 }
             }
-            else if (!isProfile && candidate.Candidate.CoverPhoto != null)
+            else if (!isProfile && candidate.CoverPhoto != null)
             {
-                var oldPic = Server.MapPath("~" + candidate.Candidate.CoverPhoto);
+                var oldPic = Server.MapPath("~" + candidate.CoverPhoto);
                 System.IO.File.Delete(oldPic);
 
-                var entry = candidate.Candidate.CoverPhoto;
+                var entry = candidate.CoverPhoto;
                 var currLog = db.Log.FirstOrDefault(log => log.Type == "Image Changed/Removed" && log.Entry == entry);
                 if (currLog == null)
                 {
@@ -97,11 +98,11 @@ namespace LHSCamp.Controllers
             file.SaveAs(path); // Upload the new pic
             if (isProfile)
             {
-                candidate.Candidate.ProfilePic = "/Content/Images/Candidates/" + candidate.Id + extension;
+                candidate.ProfilePicture = "/Content/Images/Candidates/" + candidate.Id + extension;
             }
             else
             {
-                candidate.Candidate.CoverPhoto = "/Content/Images/Covers/" + candidate.Id + extension;
+                candidate.CoverPhoto = "/Content/Images/Covers/" + candidate.Id + extension;
             }
             db.SaveChanges();
             return true;
@@ -116,12 +117,7 @@ namespace LHSCamp.Controllers
                 return HttpNotFound();
             }
 
-            if (!user.IsCandidate)
-            { // Only candidates can upload profile pictures
-                return RedirectToAction("Index", controllerName: "Home");
-            }
-
-            this.UploadPicture(file, user, "~/Content/Images/Candidates/", true);
+            UploadPicture(file, user, "~/Content/Images/Candidates/", true);
 
             TempData["Uploaded"] = true; // Not the best way to do this, but it'll do for now
             return RedirectToAction("Candidate", controllerName: "Welcome");
@@ -130,15 +126,9 @@ namespace LHSCamp.Controllers
         [HttpPost]
         public ActionResult UploadCover(HttpPostedFileBase file)
         {
-            var userId = User.Identity.GetUserId();
-            var user = db.Users.Find(userId);
+            var user = db.Users.Find(User.Identity.GetUserId());
 
-            if (!user.IsCandidate)
-            {
-                return RedirectToAction("Index", controllerName: "Home");
-            }
-
-            this.UploadPicture(file, user, "~/Content/Images/Covers/", false);
+            UploadPicture(file, user, "~/Content/Images/Covers/", false);
 
             TempData["Uploaded"] = true;
             return RedirectToAction("Candidate", controllerName: "Welcome");
