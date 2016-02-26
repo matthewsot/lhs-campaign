@@ -294,7 +294,7 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Candidates\GetClass.cshtml" />
+    <Content Include="Views\Candidates\Class.cshtml" />
     <Content Include="Views\Candidates\GetCandidate.cshtml" />
   </ItemGroup>
   <ItemGroup>

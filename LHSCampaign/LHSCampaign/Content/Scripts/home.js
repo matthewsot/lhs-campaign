@@ -25,10 +25,10 @@ $("body").on("click", "#position-tabs div", function (e) {
         var isUnopposed = numCandidates == 1;
         if (thisFirstText == "vice president") {
             switch ($("#class-picker .selected").text().trim()) {
-            case "2016":
+            case "2017":
                 isUnopposed = numCandidates > 0 && numCandidates <= 3;
                 break;
-            case "2017":
+            case "2018":
                 isUnopposed = numCandidates > 0 && numCandidates <= 2;
                 break;
             }

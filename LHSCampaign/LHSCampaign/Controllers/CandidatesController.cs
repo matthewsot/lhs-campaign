@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,8 +11,8 @@ namespace LHSCampaign.Controllers
     {
         public LCDb db = new LCDb();
 
-        [Route("Candidates/Class/{graduationYear}")]
-        public ActionResult GetClass(int? graduationYear)
+        [Route("Candidates")]
+        public ActionResult Class(int? classOf)
         {
             var model = new CandidatesViewModel();
 
@@ -20,20 +21,21 @@ namespace LHSCampaign.Controllers
                 return RedirectToAction("Candidate", "Welcome");
             }
 
-            graduationYear = graduationYear ??
+            classOf = classOf ??
                 (Request.Cookies.AllKeys.Contains("selected-class") ?
                 int.Parse(Request.Cookies["selected-class"].Value) : 2017);
 
-            if (graduationYear < 2016 || graduationYear > 2018)
+            if (classOf < 2017 || classOf > 2019)
             {
-                graduationYear = 2017;
+                classOf = 2017;
             }
 
-            model.GraduationYear = graduationYear.Value;
-            Response.Cookies.Set(new HttpCookie("selected-class", graduationYear.ToString()));
+            model.GraduationYear = classOf.Value;
+            model.Positions = new List<PositionViewModel>();
+            Response.Cookies.Set(new HttpCookie("selected-class", classOf.ToString()));
 
             var positions = db.Users
-                .Where(user => user.IsConfirmed && user.GraduationYear == graduationYear)
+                .Where(user => user.IsConfirmed && user.GraduationYear == classOf)
                 .GroupBy(cand => cand.Position.ToLower())
                 .ToDictionary(c => c.Key, c => c.ToList());
 
@@ -63,7 +65,7 @@ namespace LHSCampaign.Controllers
                 model.Positions.Add(positionModel);
             }
 
-            return View();
+            return View(model);
         }
 
         [Route("Candidates/{id}")]

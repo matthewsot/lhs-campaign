@@ -8,7 +8,7 @@ namespace LHSCampaign.Controllers
         {
             return User.Identity.IsAuthenticated ?
                 RedirectToAction("Home", controllerName: "Welcome") :
-                RedirectToAction("GetClass", controllerName: "Candidates");
+                RedirectToAction("Class", controllerName: "Candidates");
         }
 
         [Route("GPlus")]

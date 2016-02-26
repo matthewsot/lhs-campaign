@@ -19,15 +19,15 @@
         <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" />
 
         <ul id="class-picker" data-selected="@(ViewBag.Year)">
-            @for (var i = 2018; i >= 2016; i--)
+            @for (var i = 2019; i >= 2017; i--)
             {
                 if (Model.GraduationYear == i)
                 {
-                    <li class="selected"><a href="/Candidates/Class/@(i)">@(i)</a></li>
+                    <li class="selected"><a href="/Candidates?classOf=@(i)">@(i)</a></li>
                 }
                 else
                 {
-                    <li><a href="/Candidates/Class/@(i)">@(i)</a></li>
+                    <li><a href="/Candidates?classOf=@(i)">@(i)</a></li>
                 }
             }
         </ul>
@@ -42,13 +42,13 @@
         <div>treasurer</div>
         <div>
             vice president
-            @if (Model.GraduationYear == 2016)
+            @if (Model.GraduationYear == 2017)
             {
                 <span>
                     3 VPs will be elected
                 </span>
             }
-            @if (Model.GraduationYear == 2017)
+            @if (Model.GraduationYear == 2018)
             {
                 <span>
                     2 VPs will be elected
@@ -62,23 +62,7 @@
         <h1>No one has signed up for this position yet.</h1>
     </div>
 
-    @if (Model.GraduationYear == 2016)
-    {
-        <div id="totally-unopposed" class="tab-content">
-            2016 is unopposed this year.
-            <br /><br />
-            Your senior class officers:
-            <ul>
-                <li>President: Sally Wan</li>
-                <li>Vice President: Kenny Yuan</li>
-                <li>Vice President: Elin Chee</li>
-                <li>Vice President: Valerie Tan</li>
-                <li>Secretary: Raaghav Minocha</li>
-                <li>Treasurer: Ethan Chee</li>
-            </ul>
-        </div>
-    }
-    else
+    @if (true)
     {
         foreach (var position in Model.Positions)
         {
@@ -125,9 +109,9 @@
         </p>
 
         <div id="class-options">
-            <a data-href="/Candidates/Class/2018">2018</a>
-            <a data-href="/Candidates/Class/2017">2017</a>
-            <a data-href="/Candidates/Class/2016">2016</a>
+            <a data-href="/Candidates?classOf=2019">2019</a>
+            <a data-href="/Candidates?classOf=2018">2018</a>
+            <a data-href="/Candidates?classOf=2017">2017</a>
         </div>
 
         @*<a id="close-wedge">Let's go!</a>*@
