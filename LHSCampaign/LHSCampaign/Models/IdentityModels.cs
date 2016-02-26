@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -62,8 +63,12 @@ namespace LHSCampaign.Models
 
     public class LCDb : IdentityDbContext<Candidate>
     {
+        public DbSet<Setting> Config { get; set; }
+        public DbSet<LogEntry> Log { get; set; }
+        public DbSet<PreConfirmation> PreConfs { get; set; }
+
         public LCDb()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("LCDb", throwIfV1Schema: false)
         {
         }
 
