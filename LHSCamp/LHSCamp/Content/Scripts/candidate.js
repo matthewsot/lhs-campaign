@@ -76,3 +76,7 @@ $("#add-pic-button").click(function () {
     setSelected(selected);
     refreshSelected();
 });
+
+if (window.location.href.indexOf("?tab=questions")) {
+    $("#tabs li[nth-child=2]").click();
+}
