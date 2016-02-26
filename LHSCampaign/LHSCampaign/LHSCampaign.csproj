@@ -196,11 +196,26 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Content\Styles\Site\candidate.css" />
+    <Content Include="Content\Styles\Site\create.css" />
+    <Content Include="Content\Styles\Site\home.css" />
+    <Content Include="Content\Styles\Site\lib.css" />
+    <Content Include="Content\Styles\Site\Login\default.css" />
+    <Content Include="Content\Styles\Site\Login\index.css" />
+    <Content Include="Content\Styles\Site\Login\login.css" />
+    <Content Include="Content\Styles\Site\Login\register.css" />
+    <Content Include="Content\Styles\Site\Login\shared.css" />
+    <Content Include="Content\Styles\Site\register.css" />
+    <Content Include="Content\Styles\Site\setup.css" />
+    <Content Include="Content\Styles\Site\shared.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Styles\Site\Login\index.less" />
+    <Content Include="Content\Styles\Site\Login\login.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
