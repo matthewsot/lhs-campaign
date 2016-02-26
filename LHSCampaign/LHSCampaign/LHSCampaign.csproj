@@ -238,10 +238,11 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Candidates\GetClass.cshtml" />
+    <Content Include="Views\Candidates\GetCandidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Candidates\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Manage\" />
   </ItemGroup>
