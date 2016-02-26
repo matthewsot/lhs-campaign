@@ -28,6 +28,7 @@ namespace LHSCampaign.Models
         public string Platform { get; set; }
         public ICollection<ExternalLink> ExternalLinks { get; set; }
         public int ViewCount { get; set; }
+        public bool IsConfirmed { get; internal set; }
     }
 
 
