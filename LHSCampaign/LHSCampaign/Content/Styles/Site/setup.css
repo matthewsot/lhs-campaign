@@ -125,3 +125,17 @@ body > div > span {
         margin: 25px auto;
         cursor: pointer;
     }
+
+input, textarea, select {
+    width: 300px;
+    height: 40px;
+    box-sizing: border-box;
+    display: block;
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #1394ee;
+    margin: 0 auto;
+    font: inherit;
+    font-size: 19px;
+    padding: 5px;
+}
