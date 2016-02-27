@@ -1,6 +1,7 @@
 ﻿@model LHSCampaign.Models.CandidatesViewModel
 @{
     Layout = null;
+    var ASB = true;
 }
 
 <!DOCTYPE html>
@@ -19,19 +20,22 @@
     <header>
         <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" />
 
-        <ul id="class-picker" data-selected="@(ViewBag.Year)">
-            @for (var i = 2019; i >= 2017; i--)
-            {
-                if (Model.GraduationYear == i)
+        @if (!ASB)
+        {
+            <ul id="class-picker" data-selected="@(ViewBag.Year)">
+                @for (var i = 2019; i >= 2017; i--)
                 {
-                    <li class="selected"><a href="/Candidates?classOf=@(i)">@(i)</a></li>
+                    if (Model.GraduationYear == i)
+                    {
+                        <li class="selected"><a href="/Candidates?classOf=@(i)">@(i)</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Candidates?classOf=@(i)">@(i)</a></li>
+                    }
                 }
-                else
-                {
-                    <li><a href="/Candidates?classOf=@(i)">@(i)</a></li>
-                }
-            }
-        </ul>
+            </ul>
+        }
 
         <a href="~/Account/Register">click here if you're a candidate</a>
     </header>
@@ -39,6 +43,11 @@
     <div id="position-tabs">
         <div class="selected">secretary</div>
         <div>treasurer</div>
+        @if (ASB)
+        {
+            <div>idc rep.</div>
+            <div>social manager</div>
+        }
         <div>
             vice president
             @if (Model.GraduationYear == 2017)
@@ -108,14 +117,21 @@
         </p>
 
         <div id="class-options">
-            <a data-href="/Candidates?classOf=2019">2019</a>
-            <a data-href="/Candidates?classOf=2018">2018</a>
-            <a data-href="/Candidates?classOf=2017">2017</a>
+            @if (ASB)
+            {
+                <a data-href="/Candidates">Get Started</a>
+            }
+            else
+            {
+                <a data-href="/Candidates?classOf=2019">2019</a>
+                <a data-href="/Candidates?classOf=2018">2018</a>
+                <a data-href="/Candidates?classOf=2017">2017</a>
+            }
         </div>
 
         @*<a id="close-wedge">Let's go!</a>*@
     </div>
-    
+
     <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/matthewsot/wedge/64fac6093b2a954c08d2bfa01e50bbb05e76354d/wedge.min.js"></script>

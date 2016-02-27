@@ -5,6 +5,7 @@ $("body").on("click", "#position-tabs div", function (e) {
     $(".tab-content").hide();
 
     var thisFirstText = $(this).clone().children().remove().end().text().trim(); //Thanks! http://viralpatel.net/blogs/jquery-get-text-element-without-child-element/
+    thisFirstText = thisFirstText.replace("rep.", "representative");
     if ($(".tab-content[data-tab=\"" + thisFirstText + "\"]").length > 0 && $(".tab-content[data-tab=\"" + thisFirstText + "\"]").children("article").length > 0) {
         $(".tab-content[data-tab=\"" + thisFirstText + "\"]").show();
     } else {

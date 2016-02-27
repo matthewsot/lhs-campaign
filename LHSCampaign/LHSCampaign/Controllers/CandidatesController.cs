@@ -14,6 +14,7 @@ namespace LHSCampaign.Controllers
         [Route("Candidates")]
         public ActionResult Class(int? classOf)
         {
+            classOf = 0; //0 = ASB
             var model = new CandidatesViewModel();
 
             if (User.Identity.IsAuthenticated)
@@ -25,17 +26,17 @@ namespace LHSCampaign.Controllers
                 (Request.Cookies.AllKeys.Contains("selected-class") ?
                 int.Parse(Request.Cookies["selected-class"].Value) : 2017);
 
-            if (classOf < 2017 || classOf > 2019)
-            {
-                classOf = 2017;
-            }
+            //if (classOf < 2017 || classOf > 2019)
+            //{
+            //    classOf = 2017;
+            //}
 
             model.GraduationYear = classOf.Value;
             model.Positions = new List<PositionViewModel>();
-            Response.Cookies.Set(new HttpCookie("selected-class", classOf.ToString()));
+            //Response.Cookies.Set(new HttpCookie("selected-class", classOf.ToString()));
 
             var positions = db.Users
-                .Where(user => user.IsConfirmed && user.GraduationYear == classOf)
+                .Where(user => user.IsConfirmed /*&& user.GraduationYear == classOf*/)
                 .GroupBy(cand => cand.Position.ToLower())
                 .ToDictionary(c => c.Key, c => c.ToList());
 
@@ -43,7 +44,7 @@ namespace LHSCampaign.Controllers
             foreach (var position in positions)
             {
                 if (!(new[] { "secretary", "treasurer", "vice president", "president", "idc representative", "social manager" }.Contains(
-                    position.Key)))
+                    position.Key.ToLower())))
                 {
                     continue;
                 }
