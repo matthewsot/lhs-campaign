@@ -33,6 +33,7 @@ function refreshSelected() {
     $(".add-pic-button").text("(+) add picture");
     for (var i = 0; i < selected.length; i++) {
         var person = selected[i];
+        console.log(person);
         $(".candidate[data-id=\"" + person["id"] + "\"]").find(".add-pic-button").text("(-) rm. picture");
         $("#selected-people").append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"]));
     }
@@ -56,7 +57,7 @@ $("body").on("click", "#selected-people img", function () {
 
 $("body").on("click", ".add-pic-button", function() {
     var selected = getSelected();
-    var thisId = parseInt($(this).closest(".candidate").attr("data-id"));
+    var thisId = $(this).closest(".candidate").attr("data-id");
 
     var foundId = -1;
     for (var i = 0; i < selected.length; i++) {

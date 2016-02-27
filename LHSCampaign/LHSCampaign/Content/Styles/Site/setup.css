@@ -139,3 +139,13 @@ input, textarea, select {
     font-size: 19px;
     padding: 5px;
 }
+    input[type="submit"] {
+        background-color: #1394ee;
+        color: #fff;
+        transition: all 0.05s linear;
+        cursor: pointer;
+    }
+        input[type="submit"]:hover {
+            color: #1394ee;
+            background-color: #fff;
+        }
