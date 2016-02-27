@@ -42,7 +42,7 @@ namespace LHSCampaign.Controllers
             var rand = new Random();
             foreach (var position in positions)
             {
-                if (!(new[] { "secretary", "treasurer", "vice president", "president" }.Contains(
+                if (!(new[] { "secretary", "treasurer", "vice president", "president", "idc representative", "social manager" }.Contains(
                     position.Key)))
                 {
                     continue;
@@ -69,7 +69,7 @@ namespace LHSCampaign.Controllers
         }
 
         [Route("Candidates/{id}")]
-        public ActionResult GetCandidate(int id)
+        public ActionResult GetCandidate(string id)
         {
             var candidate = db.Users.Find(id);
 

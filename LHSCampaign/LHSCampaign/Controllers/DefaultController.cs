@@ -7,7 +7,7 @@ namespace LHSCampaign.Controllers
         public ActionResult Index()
         {
             return User.Identity.IsAuthenticated ?
-                RedirectToAction("Home", controllerName: "Welcome") :
+                RedirectToAction("Candidate", controllerName: "Manage") :
                 RedirectToAction("Class", controllerName: "Candidates");
         }
 

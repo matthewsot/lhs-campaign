@@ -298,11 +298,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Candidates\Class.cshtml" />
     <Content Include="Views\Candidates\GetCandidate.cshtml" />
+    <Content Include="Views\Manage\Candidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

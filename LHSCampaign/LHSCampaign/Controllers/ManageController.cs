@@ -17,7 +17,7 @@ namespace LHSCampaign.Controllers
             var candidate = db.Users.Find(User.Identity.GetUserId());
             if (candidate == null)
             {
-                return RedirectToAction("GetClass", "Candidates");
+                return RedirectToAction("Class", "Candidates");
             }
             
             var model = new CandidateViewModel(candidate);
@@ -115,7 +115,7 @@ namespace LHSCampaign.Controllers
             UploadPicture(file, user, "~/Content/Images/Candidates/", true);
 
             TempData["Uploaded"] = true; // Not the best way to do this, but it'll do for now
-            return RedirectToAction("Candidate", controllerName: "Welcome");
+            return RedirectToAction("Candidate", controllerName: "Manage");
         }
 
         [HttpPost]
@@ -126,7 +126,7 @@ namespace LHSCampaign.Controllers
             UploadPicture(file, user, "~/Content/Images/Covers/", false);
 
             TempData["Uploaded"] = true;
-            return RedirectToAction("Candidate", controllerName: "Welcome");
+            return RedirectToAction("Candidate", controllerName: "Manage");
         }
 
         protected override void Dispose(bool disposing)

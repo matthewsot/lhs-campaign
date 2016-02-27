@@ -89,11 +89,14 @@ namespace LHSCampaign.Controllers
                 candidate.ExternalLinks.Remove(existingFacebook);
             }
 
-            candidate.ExternalLinks.Add(new ExternalLink()
+            if (model.facebook != null)
             {
-                Label = "VIEW FB EVENT",
-                Link = model.facebook
-            });
+                candidate.ExternalLinks.Add(new ExternalLink()
+                {
+                    Label = "VIEW FB EVENT",
+                    Link = model.facebook
+                });
+            }
             db.SaveChanges();
 
             return Ok("set");
