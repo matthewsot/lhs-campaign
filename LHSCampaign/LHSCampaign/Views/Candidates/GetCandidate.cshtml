@@ -36,14 +36,14 @@
         <ul id="tabs">
             <li class="selected">PLATFORM</li>
             <li>QUESTIONS</li>
-            <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lhscampaign.cf/Candidates/@(Model.Id)">SHARE</a></li>
+            @*<li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://lhscampaign.cf/Candidates/@(Model.Id)">SHARE</a></li>*@
         </ul>
     </header>
 
     <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
         <div id="info">
             <h1>@(Model.Name)</h1>
-            <h2>@(Model.GraduationYear) @(Model.Position)</h2>
+            <h2>for @(Model.GraduationYear) @(Model.Position)</h2>
 
             <img height="175" src="@(Model.ProfilePicture)" alt="@(Model.Name)" />
 
@@ -52,7 +52,7 @@
                 <img id="cover-photo" width="175" src="@(Model.CoverPhoto)" alt="@(Model.Name)" />
             }
 
-            <div class="fb-share-button" data-href="http://lhscampaign.cf/Candidates/@(Model.Id)" data-layout="button_count"></div>
+            <div class="fb-share-button" data-href="http://lhscampaign.cf/Candidates/@(Model.Id)" data-layout="button"></div>
 
             <a id="add-pic-button">ADD PROFILE PIC</a>
             @foreach (var externalLink in Model.ExternalLinks)

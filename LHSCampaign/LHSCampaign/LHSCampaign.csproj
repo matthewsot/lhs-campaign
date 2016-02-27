@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AccountAPIController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\CreatePhotoController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -300,6 +301,8 @@
     <Content Include="Views\Candidates\Class.cshtml" />
     <Content Include="Views\Candidates\GetCandidate.cshtml" />
     <Content Include="Views\Manage\Candidate.cshtml" />
+    <Content Include="Views\CreatePhoto\Cover.cshtml" />
+    <Content Include="Views\CreatePhoto\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
