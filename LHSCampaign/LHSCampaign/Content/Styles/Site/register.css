@@ -23,7 +23,15 @@ main {
 }
     main h2 {
         font-weight: 300;
+        margin-bottom: 10px;
     }
+
+#sign-up {
+    color: #1394ee;
+    text-decoration: none;
+    margin-bottom: 15px;
+    display: inline-block;
+}
 
 label {
     width: 150px;
@@ -49,6 +57,24 @@ input {
     font-size: 19px;
     padding: 5px;
 }
+    input[type="checkbox"] {
+        width: auto;
+        height: auto;
+    }
+
+#remember-container {
+    position: relative;
+    height: 30px;
+}
+    #remember-container label {
+        position: absolute;
+        left: 0;
+    }
+    #remember-container input {
+        position: absolute;
+        left: 175px;
+        top: 13px;
+    }
 
 #year-picker {
     float: right;

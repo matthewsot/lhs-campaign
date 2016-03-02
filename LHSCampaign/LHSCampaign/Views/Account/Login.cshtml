@@ -19,6 +19,8 @@
     <main>
         <h2>candidate sign up</h2>
 
+        <a href="~/Account/Register" id="sign-up">need an account? sign up</a>
+
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -33,8 +35,10 @@
 
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "err-text", id = "password-err" })
 
-            <label>remember me?</label>
-            @Html.CheckBoxFor(m => m.RememberMe)
+            <div id="remember-container">
+                <label>remember me?</label>
+                @Html.CheckBoxFor(m => m.RememberMe)
+            </div>
 
             <button id="register">SIGN IN</button>
         }
