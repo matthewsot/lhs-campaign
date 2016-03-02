@@ -449,7 +449,7 @@ namespace LHSCampaign.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Defaults");
+            return RedirectToAction("Index", "Default");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

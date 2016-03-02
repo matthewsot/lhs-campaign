@@ -43,7 +43,7 @@
     <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
         <div id="info">
             <h1>@(Model.Name)</h1>
-            <h2>for @(Model.GraduationYear) @(Model.Position)</h2>
+            <h2>for @*@(Model.GraduationYear) *@ASB @(Model.Position)</h2>
 
             <img height="175" src="@(Model.ProfilePicture)" alt="@(Model.Name)" />
 
@@ -85,29 +85,27 @@
                     </p>
                     }
                 }
-                </p>
-            </div>
+            </p>
+        </div>
 
-            <div class="tab" id="questions">
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    if (window.location.href.indexOf("localhost") == -1) {
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = 'lhscampaign';
-                        var disqus_identifier = "candidateid:@(Model.Id)";
+        <div class="tab" id="questions">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'lhscampaign';
+                    var disqus_identifier = "candidateid:@(Model.Id)";
 
-                        /* * * DON'T EDIT BELOW THIS LINE * * */
-                        (function () {
-                            var dsq = document.createElement('script');
-                            dsq.type = 'text/javascript';
-                            dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-                    }
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-            </div>
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function () {
+                        var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
         </main>
 
         <footer>

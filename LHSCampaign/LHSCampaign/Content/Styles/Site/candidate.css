@@ -28,6 +28,7 @@ header {
         line-height: 75px;
         float: right;
         margin: 0 25px 0 0;
+        display: none;
     }
         header ul li {
             float: left;
@@ -53,7 +54,7 @@ header {
         }
 
 main {
-    width: 900px;
+    width: 98%;
     margin: 15px auto 0;
     display: flex;
     justify-content: space-between;
@@ -104,8 +105,9 @@ main {
             }
 
     main > .tab {
-        display: none;
+        /*display: none;*/
         width: 550px;
+        margin-left: 10px;
     }
         main > .tab.selected {
             display: block;
