@@ -26,28 +26,29 @@ function getSelected() {
 function refreshSelected() {
     $("#selected-people").html("");
     var selected = getSelected();
-    $("#add-pic-button").text("ADD PROFILE PIC");
+    $("#add-pic-button").text("MASH PICTURE");
     for (var i = 0; i < selected.length; i++) {
         var person = selected[i];
         try {
             if (person["id"].toString() == $("main").attr("data-id").toString()) {
-                $("#add-pic-button").text("REMOVE PROFILE PIC");
+                $("#add-pic-button").text("UNMASH PICTURE");
             }
         } catch (e) { }
-        $("#selected-people").append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"]));
+        $("#selected-people").append($("<div></div>").append($("<span>x</span>")).append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"])));
     }
 }
 
 refreshSelected();
 
-$("body").on("click", "#selected-people img", function () {
+$("body").on("click", "#selected-people div", function () {
+    var img = $(this).first("img");
     var foundIndex = -1;
     var selected = getSelected();
     for (var i = 0; i < selected.length; i++) {
-            if (selected[i]["id"] === $(this).attr("data-id")) {
-                foundIndex = i;
-                break;
-            }
+        if (selected[i]["id"] === $(img).attr("data-id")) {
+            foundIndex = i;
+            break;
+        }
     }
     selected.splice(foundIndex, 1);
     setSelected(selected);

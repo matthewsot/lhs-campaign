@@ -70,9 +70,16 @@ main {
         }
         main #info h2 {
             margin-top: 5px;
+            margin-bottom: 0;
             font-weight: 300;
             color: #1394ee;
             font-size: 25px;
+        }
+        main #info h3 {
+            margin: 5px 0 10px;
+            font-weight: 300;
+            color: #222;
+            font-size: 20px;
         }
         main #info img {
             height: 175px;
@@ -80,6 +87,32 @@ main {
             display: block;
             float: right;
         }
+        main #info #image-container {
+            position: relative;
+            height: 175px;
+            width: 175px;
+            display: block;
+            float: right;
+        }
+        main #info #image-container a {
+            opacity: 0;
+
+            background-color: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            height: 175px;
+            width: 175px;
+            line-height: 175px;
+
+            transition: all 0.1s linear;
+        }
+            main #info #image-container:hover a {
+                opacity: 1;
+            }
         main #info #cover-photo {
             height: auto;
             width: 175px;
