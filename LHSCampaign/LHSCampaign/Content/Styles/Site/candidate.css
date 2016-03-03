@@ -54,7 +54,7 @@ header {
         }
 
 main {
-    width: 98%;
+    width: 90%;
     margin: 15px auto 0;
     display: flex;
     justify-content: space-between;
@@ -66,6 +66,7 @@ main {
         main #info h1 {
             font-weight: 400;
             margin-bottom: 0;
+            margin-top: 0;
         }
         main #info h2 {
             margin-top: 5px;
@@ -105,8 +106,6 @@ main {
             }
 
     main > .tab {
-        /*display: none;*/
-        width: 550px;
         margin-left: 10px;
     }
         main > .tab.selected {
@@ -114,4 +113,13 @@ main {
         }
         main p {
             color: #888888;
+        }
+    main #platform {
+        width: calc(100% - 325px);
+    }
+        main #platform h1:first-child {
+            margin-top: 5px;
+        }
+        main #platform h1 {
+            font-size: 25px;
         }

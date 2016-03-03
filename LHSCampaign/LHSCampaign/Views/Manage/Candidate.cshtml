@@ -31,7 +31,7 @@
                 Image uploaded! Click <a target="_blank" href="~/Candidates/@(Model.Id)">here</a> to view your profile.
             </span>
             <script type="text/javascript">
-                window.open("/Candidates/@(Model.Id)");
+                window.location.href = "/Candidates/@(Model.Id)";
             </script>
         }
         <br />

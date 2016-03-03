@@ -31,11 +31,11 @@ function getSelected() {
 function refreshSelected() {
     $("#selected-people").html("");
     var selected = getSelected();
-    $(".add-pic-button").text("(+) add picture");
+    $(".add-pic-button").text("add picture");
     for (var i = 0; i < selected.length; i++) {
         var person = selected[i];
         console.log(person);
-        $(".candidate[data-id=\"" + person["id"] + "\"]").find(".add-pic-button").text("(-) rm. picture");
+        $(".candidate[data-id=\"" + person["id"] + "\"]").find(".add-pic-button").text("remove picture");
         $("#selected-people").append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"]));
     }
 }

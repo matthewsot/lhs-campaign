@@ -135,14 +135,17 @@ header {
         }
         .overlay a {
             width: 150px;
-            padding: 15px 0;
-            margin: 5px 0;
+            padding: 10px 0;
+            margin: 6px 0;
             display: inline-block;
             background-color: #fff;
             color: #1394ee;
             text-decoration: none;
             cursor: pointer;
         }
+            .overlay a:first-child {
+                margin-top: 13px;
+            }
 
         .tab-content p {
             display: none;

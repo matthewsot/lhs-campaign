@@ -41,13 +41,18 @@
     </header>
 
     <div id="position-tabs">
-        <div class="selected">secretary</div>
-        <div>treasurer</div>
         @if (ASB)
         {
-            <div>idc rep.</div>
+            <div class="selected" style="padding-right: 20px;">
+                idc representative
+                <span style="left: -12px;">
+                    2 will be elected
+                </span>
+            </div>
             <div>social manager</div>
         }
+        <div>treasurer</div>
+        <div>secretary</div>
         <div>
             vice president
             @if (Model.GraduationYear == 2017)
@@ -82,9 +87,8 @@
                             <img height="175" src="@(candidate.ProfilePicture)" alt="@(candidate.Name)" />
 
                             <div class="overlay">
-                                <a href="/Candidates/@(candidate.Id)">platform info</a>
-                                <a class="add-pic-button">(+) add picture</a>
-                                <a href="/Candidates/@(candidate.Id)?tab=questions">ask a ?</a>
+                                <a href="/Candidates/@(candidate.Id)">platform/q&a</a>
+                                <a class="add-pic-button">add picture</a>
                             </div>
                         </div>
 
