@@ -47,16 +47,17 @@
             <h2>for@* @(Model.GraduationYear) *@ @(ASBText)@(Model.Position)</h2>
             <h3>graduates in @(Model.GraduationYear)</h3>
 
-            <div id="image-container">
+            <div class="image-container">
                 <img height="175" src="@(Model.ProfilePicture)" alt="@(Model.Name)" />
-                <a href="@(Model.ProfilePicture)" target="_blank" download id="download-pic-link">DOWNLOAD</a>
+                <a href="@(Model.ProfilePicture)" target="_blank" download>DOWNLOAD</a>
             </div>
 
             @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
             {
-                <a href="@(Model.CoverPhoto)" target="_blank" download style="border: none;">
+                <div class="image-container" id="cover-container">
                     <img id="cover-photo" width="175" src="@(Model.CoverPhoto)" alt="@(Model.Name)" />
-                </a>
+                    <a href="@(Model.CoverPhoto)" target="_blank" download>DOWNLOAD</a>
+                </div>
             }
 
             <div class="fb-share-button" data-href="http://lhscampaign.cf/Candidates/@(Model.Id)" data-layout="button"></div>

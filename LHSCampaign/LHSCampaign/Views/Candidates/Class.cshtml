@@ -72,13 +72,15 @@
     </div>
 
     <div class="tab-content" data-tab="no-peeps">
-        <h1>No one has signed up for this position yet.</h1>
+        @*<h1>No one has signed up for this position yet.</h1>*@
+        <h1>Campaigning hasn't started yet!</h1>
     </div>
 
     @if (true)
     {
         foreach (var position in Model.Positions)
         {
+            continue;
             <div class="tab-content" data-tab="@position.Name">
                 @foreach (var candidate in position.Candidates)
                     {

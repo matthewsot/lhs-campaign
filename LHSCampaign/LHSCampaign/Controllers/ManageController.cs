@@ -21,7 +21,7 @@ namespace LHSCampaign.Controllers
             }
             
             var model = new CandidateViewModel(candidate);
-            var existingFacebook = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "VIEW FB EVENT")?.Link;
+            var existingFacebook = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "FB EVENT")?.Link;
             ViewBag.SocialLink = string.IsNullOrWhiteSpace(existingFacebook) ? "" : existingFacebook;
 
             if (TempData.ContainsKey("Uploaded"))

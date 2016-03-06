@@ -83,7 +83,7 @@ namespace LHSCampaign.Controllers
                 return Ok("no user");
             }
 
-            var existingFacebook = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "VIEW FB EVENT");
+            var existingFacebook = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "FB EVENT");
             if (existingFacebook != null)
             {
                 candidate.ExternalLinks.Remove(existingFacebook);
@@ -93,7 +93,7 @@ namespace LHSCampaign.Controllers
             {
                 candidate.ExternalLinks.Add(new ExternalLink()
                 {
-                    Label = "VIEW FB EVENT",
+                    Label = "FB EVENT",
                     Link = model.facebook
                 });
             }

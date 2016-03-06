@@ -52,7 +52,7 @@
         </div>
 
         <div class="tab-content" data-tab="email">
-            <h2>Voters will be able to see this email.</h2>
+            <h2>Your email (voters won't be able to see this).</h2>
 
             <input type="email" id="email-input" placeholder="email" value="@(Model.Email)" />
 
@@ -85,7 +85,7 @@
         </div>
 
         <div class="tab-content" data-tab="campaign">
-            Why should voters vote for you? Please enter a paragraph or two below explaining why you're the best candidate.
+            Why should voters vote for you? Please enter your platform below explaining why you're the best candidate.
             <br /><br />
             <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
             <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align: left; width: 90%; height: 300px; white-space: pre-wrap;">@Model.Platform</textarea>
@@ -98,8 +98,10 @@
             <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..." value="" />
             <br />
             <button class="default-btn standard-btn" id="save-social">Save</button>
-            <br /><br />
+            <br />
             If you don't have a Facebook page or event, just click on 'Save' to continue.
+            <br/><br/>
+            If you have other links (ask.fm, YouTube, Snapchat, etc.) contact <a style="color: #1394ee;text-decoration: none;" href="mailto:vip@lhscampaign.cf">vip@lhscampaign.cf</a> &amp; we'll get them on your profile ASAP :)
         </div>
 
         <div class="tab-content" data-tab="picture">

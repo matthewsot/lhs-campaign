@@ -18,7 +18,7 @@ header {
     border-bottom: 1px solid #dadada;
 }
     header img {
-        margin-left: 25px;
+        margin-left: calc(5% + 35px);
         height: 40px;
         margin-top: 15px;
         float: left;
@@ -87,37 +87,43 @@ main {
             display: block;
             float: right;
         }
-        main #info #image-container {
+        main #info .image-container {
             position: relative;
             height: 175px;
             width: 175px;
             display: block;
             float: right;
         }
-        main #info #image-container a {
-            opacity: 0;
-
-            background-color: rgba(0, 0, 0, 0.4);
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-            height: 175px;
-            width: 175px;
-            line-height: 175px;
-
-            transition: all 0.1s linear;
-        }
-            main #info #image-container:hover a {
-                opacity: 1;
+            main #info #cover-container {
+                height: auto;
+                margin-top: 10px;
             }
-        main #info #cover-photo {
-            height: auto;
-            width: 175px;
-            margin-top: 10px;
-        }
+                main #info #cover-photo {
+                    height: auto;
+                    width: 175px;
+                }
+                main #info .image-container#cover-container a {
+                    line-height: 5;
+                }
+            main #info .image-container a {
+                opacity: 0;
+
+                background-color: rgba(0, 0, 0, 0.4) !important;
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 0;
+                margin: 0;
+                text-align: center;
+                height: 100%;
+                width: 175px;
+                line-height: 175px;
+
+                transition: all 0.1s linear;
+            }
+                main #info .image-container:hover a {
+                    opacity: 1;
+                }
         main #info .fb-share-button {
             width: 100%;
             margin-top: 10px;
