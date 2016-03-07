@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LHSCampaign.Models
 {
@@ -8,6 +9,7 @@ namespace LHSCampaign.Models
 
         public int GraduationYear { get; set; }
         public string Name { get; set; }
+        public string Initials { get; set; }
 
         public string ProfilePicture { get; set; }
         public string CoverPhoto { get; set; }
@@ -31,6 +33,9 @@ namespace LHSCampaign.Models
             ExternalLinks = candidate.ExternalLinks;
             IsConfirmed = candidate.IsConfirmed;
             Email = candidate.Email;
+
+            var splitName = Name.Trim().Split(' ');
+            Initials = splitName.First().ToUpper()[0].ToString() + splitName.Last().ToUpper()[0].ToString();
         }
     }
 }

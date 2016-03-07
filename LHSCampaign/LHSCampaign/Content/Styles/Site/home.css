@@ -117,6 +117,11 @@ header {
             width: 100%;
             display: block;
             height: 175px;
+
+            line-height: 175px;
+            font-size: 50px;
+            background-color: #d5d5d5;
+            color: #1394ee;
         }
         .tab-content .overlay {
             position: absolute;
@@ -165,28 +170,26 @@ header {
         margin: 0;
         font-weight: 400;
     }
-    #welcome-popup a {
-        width: 150px;
-        padding: 15px 0;
-        margin: 5px 0;
-        display: inline-block;
-        background-color: #1394ee;
-        color: #fff;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.1s linear;
+    #welcome-popup ol {
+        margin: 0 auto;
+        width: 460px;
+        text-align: left;
     }
-        #welcome-popup a:hover {
-            background-color: #1683cf;
-        }
+    #welcome-popup a {
+        color: #1394ee;
+        cursor: pointer;
+        text-decoration: none;
+    }
 
     #class-options a {
+        display: inline-block;
         padding: 10px 0;
         width: 100px;
         margin: 10px 10px 25px;
         border: 1px solid #1394ee;
         background-color: #fff;
         color: #1394ee;
+        transition: background-color 0.1s linear;
     }
         #class-options a:hover {
             background-color: #1394ee;

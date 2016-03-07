@@ -52,12 +52,13 @@ namespace LHSCampaign.Controllers
                 var positionModel = new PositionViewModel { Name = position.Key };
 
                 var candidates = position.Value
-                    .Where(candidate => candidate.ProfilePicture != null)
+                    //.Where(candidate => candidate.ProfilePicture != null)
                     .OrderBy(a => rand.Next())
                     .ToList();
 
                 foreach (var cand in candidates)
                 {
+                    cand.ProfilePicture = cand.ProfilePicture ?? "";
                     cand.ToString();
                 }
                 

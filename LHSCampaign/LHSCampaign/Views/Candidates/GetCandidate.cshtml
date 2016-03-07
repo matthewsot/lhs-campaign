@@ -47,10 +47,13 @@
             <h2>for@* @(Model.GraduationYear) *@ @(ASBText)@(Model.Position)</h2>
             <h3>graduates in @(Model.GraduationYear)</h3>
 
-            <div class="image-container">
-                <img height="175" src="@(Model.ProfilePicture)" alt="@(Model.Name)" />
-                <a href="@(Model.ProfilePicture)" target="_blank" download>DOWNLOAD</a>
-            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.ProfilePicture))
+            {
+                <div class="image-container">
+                    <img height="175" src="@(Model.ProfilePicture)" alt="@(Model.Name)" />
+                    <a href="@(Model.ProfilePicture)" target="_blank" download>DOWNLOAD</a>
+                </div>
+            }
 
             @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
             {
