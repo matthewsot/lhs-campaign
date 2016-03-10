@@ -34,9 +34,12 @@ function refreshSelected() {
     $(".add-pic-button").text("mash picture");
     for (var i = 0; i < selected.length; i++) {
         var person = selected[i];
+        if (person["initials"] == null) {
+            person["initials"] = "";
+        }
         console.log(person);
         $(".candidate[data-id=\"" + person["id"] + "\"]").find(".add-pic-button").text("unmash picture");
-        $("#selected-people").append($("<div></div>").append($("<span>x</span>")).append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"])));
+        $("#selected-people").append($("<div></div>").append($("<span>x</span>")).append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"]).attr("alt", person["initials"])));
     }
 }
 
@@ -70,7 +73,7 @@ $("body").on("click", ".add-pic-button", function() {
     }
 
     if (foundId === -1) {
-        var toPush = { "id": thisId, "img": $(this).closest(".candidate").find("img").attr("src") };
+        var toPush = { "id": thisId, "img": $(this).closest(".candidate").find("img").attr("src"), "initials": $(this).closest(".candidate").find("img").attr("alt") };
         if ($(this).closest(".candidate").attr("data-cover").trim().length > 0) {
             toPush["cover"] = $(this).closest(".candidate").attr("data-cover");
         }

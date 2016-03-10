@@ -26,6 +26,13 @@ namespace LHSCampaign
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/filesaver").Include(
+                 "~/Content/Scripts/FileSaver/Blob.js",
+                 "~/Content/Scripts/FileSaver/canvas-toBlob.js",
+                 "~/Content/Scripts/FileSaver/FileSaver.js",
+                 "~/Content/Scripts/FileSaver/Modernizr.js"
+            ));
         }
     }
 }

@@ -23,7 +23,7 @@
 
     <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.13/fabric.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
     <script src="~/bundles/filesaver"></script>
     <script type="text/javascript">
         //Thanks! http://stackoverflow.com/questions/280634/endswith-in-javascript
@@ -31,7 +31,7 @@
             return this.indexOf(suffix, this.length - suffix.length) !== -1;
         };
         var fab = new fabric.Canvas('profile-pic');
-        var size = 400;
+        var size = 800;
         fab.setDimensions({ width: size, height: size });
         fab.on('mouse:down', function(options) {
             if (options.target) {
@@ -66,41 +66,73 @@
             return selected;
         }
 
+        var resizeType = "bilinear";
+        var lanczosLobes = 4;
         $("#reset-img").click(function () {
             var selected = getSelected();
             fab.clear();
+            var resizeType = "bilinear";
+            var lanczosLobes = 4;
 
             if (selected.length === 1) {
-                fabric.Image.fromURL(selected[0]["img"], function (oImg) {
-                    oImg.setWidth(size);
-                    oImg.setHeight(size);
-                    fab.add(oImg);
-                });
-            } else {
-                for (var i = 0; i < selected.length; i++) {
-                    fabric.Image.fromURL(selected[i]["img"], function (oImg) {
-                        var index = 0;
-                        for (var z = 0; z < selected.length; z++) {
-                            if (oImg.getSrc().endsWith(selected[z]["img"])) {
-                                index = z;
-                                break;
-                            }
-                        }
-                        oImg.setWidth(size / 2);
-                        oImg.setHeight(size / 2);
-                        oImg.setLeft((size / 2) * (index % 2));
-                        //0 -> 0 (0 * .5 = 0, rounds down to 0)
-                        //1 -> 0 (1 * .5 = .5, rounds down to 0)
-                        //2 -> 1 (2 * .5 = 1, rounds down to 1)
-                        //3 -> 1 (3 * .5 = 1.5, rounds down to 1)
-                        //4 -> 2, etc.
-                        oImg.setTop((size / 2) * Math.floor(index * .5));
-                        if (index >= 4) { //just layer all other images in the center
-                            oImg.setTop((size - (size / 2)) / 2);
-                            oImg.setLeft((size - (size / 2)) / 2);
-                        }
+                if (selected[0]["img"] != "") {
+                    fabric.Image.fromURL(selected[0]["img"], function (oImg) {
+                        oImg.resizeFilters.push(new fabric.Image.filters.Resize({ resizeType: resizeType, lanczosLobes: lanczosLobes }));
+                        oImg.setWidth(size);
+                        oImg.setHeight(size);
                         fab.add(oImg);
                     });
+                } else {
+                    var text = new fabric.Text(selected[0]["initials"], {
+                        fontFamily: 'Railway, Open Sans, Arial',
+                        fill: "#1394ee",
+                        fontSize: 75
+                    });
+                    fab.add(text);
+                    text.setLeft((size / 2) - (text.getBoundingRectWidth() / 2));
+                    text.setTop((size / 2) - (text.getBoundingRectHeight() / 2));
+                    fab.renderAll();
+                }
+            } else {
+                for (var i = 0; i < selected.length; i++) {
+                    if (selected[i]["img"] != "") {
+                        (function (index) {
+                            fabric.Image.fromURL(selected[i]["img"], function (oImg) {
+                                oImg.resizeFilters.push(new fabric.Image.filters.Resize({ resizeType: resizeType, lanczosLobes: lanczosLobes }));
+                                oImg.setWidth(size / 2);
+                                oImg.setHeight(size / 2);
+                                oImg.setLeft((size / 2) * (index % 2));
+                                //0 -> 0 (0 * .5 = 0, rounds down to 0)
+                                //1 -> 0 (1 * .5 = .5, rounds down to 0)
+                                //2 -> 1 (2 * .5 = 1, rounds down to 1)
+                                //3 -> 1 (3 * .5 = 1.5, rounds down to 1)
+                                //4 -> 2, etc.
+                                oImg.setTop((size / 2) * Math.floor(index * .5));
+                                if (index >= 4) { //just layer all other images in the center
+                                    oImg.setTop((size - (size / 2)) / 2);
+                                    oImg.setLeft((size - (size / 2)) / 2);
+                                }
+                                fab.add(oImg);
+                            });
+                        })(i);
+                    } else {
+                        var text = new fabric.Text(selected[i]["initials"], {
+                            fontFamily: 'Railway, Open Sans, Arial',
+                            fill: "#1394ee",
+                            fontSize: 125
+                        });
+
+                        fab.add(text);
+
+                        text.setLeft(((size / 2) * (i % 2)) + (text.getBoundingRectWidth()) + 10);
+                        text.setTop(((size / 2) * Math.floor(i * .5)) + (text.getBoundingRectHeight()) + 10);
+                        if (i >= 4) {
+                            text.setTop(((size - (size / 2)) / 2) - (text.getBoundingRectWidth() / 2));
+                            text.setLeft(((size - (size / 2)) / 2) - (text.getBoundingRectHeight() / 2));
+                        }
+
+                        fab.renderAll();
+                    }
                 }
             }
         });
@@ -110,7 +142,7 @@
 
         function handleCompat() {
             if ((!fileSaver || !Modernizr.canvas) && window.location.href.indexOf("bypassCompat") == -1) {
-                alert("Sorry, this probably won't work");
+                //alert("Sorry, this probably won't work");
             }
         }
 
@@ -130,6 +162,17 @@
                 saveAs(blob, "profile.png");
             });
         });
+    </script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74831565-1', 'auto');
+  ga('send', 'pageview');
+
     </script>
 </body>
 </html>

@@ -34,7 +34,7 @@ function refreshSelected() {
                 $("#add-pic-button").text("UNMASH PICTURE");
             }
         } catch (e) { }
-        $("#selected-people").append($("<div></div>").append($("<span>x</span>")).append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"])));
+        $("#selected-people").append($("<div></div>").append($("<span>x</span>")).append($("<img></img>").attr("src", person["img"]).attr("data-id", person["id"]).attr("alt", person["initials"])));
     }
 }
 
@@ -68,7 +68,7 @@ $("#add-pic-button").click(function () {
     }
 
     if (foundId === -1) {
-        var toPush = { "id": thisId, "img": $(this).closest("#info").find("img").attr("src") };
+        var toPush = { "id": thisId, "img": $(this).closest("#info").find("#profile-image").attr("src"), "initials": $(this).closest("#info").find("#profile-image").attr("alt") };
         if ($(this).closest("main").attr("data-cover").trim().length > 0) {
             toPush["cover"] = $(this).closest("main").attr("data-cover");
         }

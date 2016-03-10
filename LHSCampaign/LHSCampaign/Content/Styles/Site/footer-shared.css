@@ -23,6 +23,13 @@ footer {
             height: 60px;
             float: left;
             cursor: pointer;
+
+            line-height: 65px;
+            font-size: 27px;
+            background-color: #d5d5d5;
+            color: #1394ee;
+            min-width: 60px;
+            text-align: center;
         }
         #selected-people span {
             content: 'x';

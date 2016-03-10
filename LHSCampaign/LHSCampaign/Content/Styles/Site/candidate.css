@@ -162,3 +162,29 @@ main {
         main #platform h1 {
             font-size: 25px;
         }
+
+@media all and (max-width: 800px) {
+    main {
+        display: block;
+    }
+    main > div {
+        width: 100% !important;
+        text-align: center !important;
+        display: block !important;
+    }
+    main #info .image-container {
+        margin: 0 auto;
+        float: none;
+    }
+            main #platform h1:first-child {
+                margin-top: 20px;
+            }
+
+    header {
+        text-align: center;
+    }
+        header #logo {
+            margin: 18px auto 0;
+            float: none;
+        }
+}

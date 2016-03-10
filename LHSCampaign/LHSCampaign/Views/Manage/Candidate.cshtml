@@ -10,19 +10,19 @@
 </head>
 <body>
     <header>
-        <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" />
+        <a href="~/Candidates" style="border: none;"><img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" id="logo" /></a>
 
         <a href="~/Account/LogOff">log out</a>
         <a target="_blank" href="~/Candidates/@(Model.Id)">view your profile</a>
     </header>
     <div style="position: relative; width: 800px; margin: 0 auto;">
-        <h1>Welcome to LHS Campaign!</h1>
+        <h1>Welcome Candidate!</h1>
         @if (!Model.IsConfirmed)
         {
             <span>
-                We'll run through a few quick questions to get your candidate account set up.
-                Once you're verified (which may take up to 24 hours),
-                you'll be allowed to upload your profile image and be featured on LHS Campaign.
+                Please fill out your candidate profile below. Once you have been verified (which may take up to 24 hours), you will be allowed to upload your picture(s) and be featured on LHS Campaign.
+                <br />
+                If you have any questions or need assistance with setting up your account, email us at <a href="mailto:vip@lhscampaign.cf">vip@lhscampaign.cf</a>.
             </span>
         }
         @if (ViewBag.Uploaded)
@@ -85,7 +85,7 @@
         </div>
 
         <div class="tab-content" data-tab="campaign">
-            Why should voters vote for you? Please enter your platform below explaining why you're the best candidate.
+            What would you like to share with voters?
             <br /><br />
             <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
             <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align: left; width: 90%; height: 300px; white-space: pre-wrap;">@Model.Platform</textarea>
@@ -94,14 +94,15 @@
         </div>
 
         <div class="tab-content" data-tab="social">
-            Facebook Link:<br /><br />
+            Facebook page/event link:
+            <br /><br />
             <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..." value="" />
             <br />
             <button class="default-btn standard-btn" id="save-social">Save</button>
             <br />
-            If you don't have a Facebook page or event, just click on 'Save' to continue.
-            <br/><br/>
-            If you have other links (ask.fm, YouTube, Snapchat, etc.) contact <a style="color: #1394ee;text-decoration: none;" href="mailto:vip@lhscampaign.cf">vip@lhscampaign.cf</a> &amp; we'll get them on your profile ASAP :)
+            If you don't have a Facebook page or event, just click on 'Save' to continue. You can always change this later.
+            <br /><br />
+            If you would like to add other links to your profile, email us at <a style="color: #1394ee;text-decoration: none;" href="mailto:vip@lhscampaign.cf">vip@lhscampaign.cf</a>.
         </div>
 
         <div class="tab-content" data-tab="picture">
@@ -206,6 +207,17 @@
                 }
             });
         });
+    </script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74831565-1', 'auto');
+  ga('send', 'pageview');
+
     </script>
 </body>
 </html>

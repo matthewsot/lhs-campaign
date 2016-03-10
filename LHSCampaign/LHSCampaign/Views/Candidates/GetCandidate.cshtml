@@ -4,14 +4,20 @@
     ViewBag.Description = (Model.Platform ?? "See " + Model.Name + "'s profile on LHSCampaign!");
     ViewBag.Description = ViewBag.Description.Substring(0, Math.Min(ViewBag.Description.Length, 300));
     Layout = null;
+
     var ASBText = "ASB ";
+    if (Model.Position.Contains("idc") || Model.Position.Contains("social manager"))
+    {
+        ASBText = " ";
+    }
+    Model.Position = Model.Position.Replace("idc", "IDC");
 }
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@(Model.Name) | LHSCampaign</title>
         <link href="~/Content/Styles/Site/footer-shared.css" rel="stylesheet" />
         <link href="~/Content/Styles/Site/candidate.css" rel="stylesheet" />
@@ -50,7 +56,7 @@
             @if (!string.IsNullOrWhiteSpace(Model.ProfilePicture))
             {
                 <div class="image-container">
-                    <img height="175" src="@(Model.ProfilePicture)" alt="@(Model.Name)" />
+                    <img height="175" id="profile-image" src="@(Model.ProfilePicture)" alt="@(Model.Initials)" />
                     <a href="@(Model.ProfilePicture)" target="_blank" download>DOWNLOAD</a>
                 </div>
             }
@@ -58,16 +64,20 @@
             @if (!string.IsNullOrWhiteSpace(Model.CoverPhoto))
             {
                 <div class="image-container" id="cover-container">
-                    <img id="cover-photo" width="175" src="@(Model.CoverPhoto)" alt="@(Model.Name)" />
+                    <img id="cover-photo" width="175" src="@(Model.CoverPhoto)" alt="@(Model.Initials)" />
                     <a href="@(Model.CoverPhoto)" target="_blank" download>DOWNLOAD</a>
                 </div>
             }
 
             <div class="fb-share-button" data-href="http://lhscampaign.cf/Candidates/@(Model.Id)" data-layout="button"></div>
 
-            <a id="add-pic-button">MASH PICTURE</a>
+            @if (!string.IsNullOrWhiteSpace(Model.ProfilePicture))
+            {
+                <a id="add-pic-button">MASH PICTURE</a>
+            }
             @foreach (var externalLink in Model.ExternalLinks)
             {
+                <br/>
                 <a target="_blank" href="@(externalLink.Link)">@(externalLink.Label)</a>
             }
         </div>
@@ -125,6 +135,17 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="~/Content/Scripts/update-cookies.js"></script>
     <script src="~/Content/Scripts/candidate.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74831565-1', 'auto');
+  ga('send', 'pageview');
+
+    </script>
 </body>
 
 </html>

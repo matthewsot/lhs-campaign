@@ -57,6 +57,10 @@ namespace LHSCampaign.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Candidate", "Manage");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -139,6 +143,10 @@ namespace LHSCampaign.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Candidate", "Manage");
+            }
             return View();
         }
 

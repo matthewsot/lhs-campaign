@@ -118,7 +118,7 @@ header {
             display: block;
             height: 175px;
 
-            line-height: 175px;
+            line-height: 180px;
             font-size: 50px;
             background-color: #d5d5d5;
             color: #1394ee;
@@ -195,3 +195,46 @@ header {
             background-color: #1394ee;
             color: #fff;
         }
+
+@media all and (max-width: 800px) {
+    header {
+        text-align: center;
+        width: 100%;
+        height: auto;
+        line-height: 30px;
+    }
+        header img {
+            margin: 15px auto 0 !important;
+            float: none;
+        }
+        header a:last-child {
+            display: block;
+            float: none;
+            position: static;
+            margin-left: 0;
+        }
+
+    #position-tabs {
+        display: block;
+        width: 100%;
+    }
+        #position-tabs div {
+            width: auto;
+            text-align: center;
+            padding: 0 !important;
+            margin: 15px auto;
+            display: block;
+            font-size: 20px;
+        }
+            #position-tabs div span {
+                font-size: 15px;
+                bottom: -20px;
+                left: -3px !important;
+            }
+        #position-tabs div:nth-child(2) {
+            margin-top: 30px;
+        }
+    .tab-content {
+        width: 100%;
+    }
+}

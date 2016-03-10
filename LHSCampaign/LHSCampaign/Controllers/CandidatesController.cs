@@ -17,11 +17,6 @@ namespace LHSCampaign.Controllers
             classOf = 0; //0 = ASB
             var model = new CandidatesViewModel();
 
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Candidate", "Welcome");
-            }
-
             classOf = classOf ??
                 (Request.Cookies.AllKeys.Contains("selected-class") ?
                 int.Parse(Request.Cookies["selected-class"].Value) : 2017);

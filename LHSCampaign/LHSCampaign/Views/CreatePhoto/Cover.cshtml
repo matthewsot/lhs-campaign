@@ -21,7 +21,7 @@
 
     <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.13/fabric.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
     <script src="~/bundles/filesaver"></script>
     <script type="text/javascript">
         //Thanks! http://stackoverflow.com/questions/280634/endswith-in-javascript
@@ -63,41 +63,73 @@
             return selected;
         }
 
+        var resizeType = "bilinear";
+        var lanczosLobes = 4;
         $("#reset-img").click(function() {
             var selected = getSelected();
 
             fab.clear();
             if (selected.length === 1 && selected[0]["cover"] != null) {
-                fabric.Image.fromURL(selected[0]["cover"], function (oImg) {
-                    oImg.setWidth(851);
-                    oImg.setHeight(315);
-                    fab.add(oImg);
-                });
-            } else {
-                for (var i = 0; i < selected.length; i++) {
-                    fabric.Image.fromURL(selected[i]["img"], function (oImg) {
-                        var index = 0;
-                        for (var z = 0; z < selected.length; z++) {
-                            if (oImg.getSrc().endsWith(selected[z]["img"])) {
-                                index = z;
-                                break;
-                            }
-                        }
-                        oImg.setWidth(170.6);
-                        oImg.setHeight(170.6);
-                        oImg.setLeft(170.6 * (index % 5));
-                        //0 -> 0 (0 * .5 = 0, rounds down to 0)
-                        //1 -> 0 (1 * .5 = .5, rounds down to 0)
-                        //2 -> 1 (2 * .5 = 1, rounds down to 1)
-                        //3 -> 1 (3 * .5 = 1.5, rounds down to 1)
-                        //4 -> 2, etc.
-                        oImg.setTop(170.6 * Math.floor(index * .2));
-                        if (index >= 10) { //just layer all other images in the center
-                            oImg.setTop(157.5);
-                            oImg.setLeft(425.5);
-                        }
+                if (selected[0]["img"] != "") {
+                    fabric.Image.fromURL(selected[0]["cover"], function (oImg) {
+                        oImg.resizeFilters.push(new fabric.Image.filters.Resize({ resizeType: resizeType, lanczosLobes: lanczosLobes }));
+                        oImg.setWidth(851);
+                        oImg.setHeight(315);
                         fab.add(oImg);
                     });
+                } else {
+                    var text = new fabric.Text(selected[0]["initials"], {
+                        left: 5,
+                        top: 5,
+                        fontFamily: 'Railway, Open Sans, Arial',
+                        fill: "#1394ee",
+                        fontSize: 75
+                    });
+                    fab.add(text);
+                }
+            } else {
+                for (var i = 0; i < selected.length; i++) {
+                    for (var i = 0; i < selected.length; i++) {
+
+                        if (selected[i]["img"] != "") {
+                            (function (index) {
+                                fabric.Image.fromURL(selected[i]["img"], function (oImg) {
+                                    oImg.resizeFilters.push(new fabric.Image.filters.Resize({ resizeType: resizeType, lanczosLobes: lanczosLobes }));
+                                    oImg.setWidth(170.6);
+                                    oImg.setHeight(170.6);
+                                    oImg.setLeft(170.6 * (index % 5));
+                                    //0 -> 0 (0 * .5 = 0, rounds down to 0)
+                                    //1 -> 0 (1 * .5 = .5, rounds down to 0)
+                                    //2 -> 1 (2 * .5 = 1, rounds down to 1)
+                                    //3 -> 1 (3 * .5 = 1.5, rounds down to 1)
+                                    //4 -> 2, etc.
+                                    oImg.setTop(170.6 * Math.floor(index * .2));
+                                    if (index >= 10) { //just layer all other images in the center
+                                        oImg.setTop(157.5);
+                                        oImg.setLeft(425.5);
+                                    }
+                                    fab.add(oImg);
+                                });
+                            })(i);
+                        } else {
+                            var text = new fabric.Text(selected[i]["initials"], {
+                                fontFamily: 'Railway, Open Sans, Arial',
+                                fill: "#1394ee",
+                                fontSize: 75
+                            });
+
+                            fab.add(text);
+
+                            text.setLeft((170.6 * (i % 5)) + (text.getBoundingRectWidth() / 2));
+                            text.setTop((170.6 * Math.floor(i * .2)) + (text.getBoundingRectHeight() / 2));
+                            if (i >= 4) {
+                                oImg.setTop(5);
+                                oImg.setLeft(5);
+                            }
+
+                            fab.renderAll();
+                        }
+                    }
                 }
             }
         });
@@ -107,7 +139,7 @@
 
         function handleCompat() {
             if ((!fileSaver || !Modernizr.canvas) && window.location.href.indexOf("bypassCompat") == -1) {
-                alert("Sorry, this probably won't work");
+                //alert("Sorry, this probably won't work");
             }
         }
 
@@ -127,6 +159,17 @@
                 saveAs(blob, "cover.png");
             });
         });
+    </script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74831565-1', 'auto');
+  ga('send', 'pageview');
+
     </script>
 </body>
 </html>
