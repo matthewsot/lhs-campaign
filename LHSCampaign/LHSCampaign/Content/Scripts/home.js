@@ -11,6 +11,11 @@ $("body").on("click", "#position-tabs div", function (e) {
     } else {
         $(".tab-content[data-tab=\"no-peeps\"]").show();
     }
+
+    $("#position-tabs div span").hide();
+    if ($(this).find("span").length != 0) {
+        $(this).find("span").show();
+    }
 });
 $("#position-tabs div").first().click();
 
