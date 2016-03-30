@@ -5,11 +5,11 @@
     ViewBag.Description = ViewBag.Description.Substring(0, Math.Min(ViewBag.Description.Length, 300));
     Layout = null;
 
-    var ASBText = "ASB ";
-    if (Model.Position.Contains("idc") || Model.Position.Contains("social manager"))
-    {
-        ASBText = " ";
-    }
+    //var ASBText = "ASB ";
+    //if (Model.Position.Contains("idc") || Model.Position.Contains("social manager"))
+    //{
+    //    ASBText = " ";
+    //}
     Model.Position = Model.Position.Replace("idc", "IDC");
 }
 
@@ -50,8 +50,7 @@
     <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
         <div id="info">
             <h1>@(Model.Name)</h1>
-            <h2>for@* @(Model.GraduationYear) *@ @(ASBText)@(Model.Position)</h2>
-            <h3>graduates in @(Model.GraduationYear)</h3>
+            <h2>for @(Model.GraduationYear)  @(Model.Position)</h2>
 
             @if (!string.IsNullOrWhiteSpace(Model.ProfilePicture))
             {

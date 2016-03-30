@@ -1,7 +1,7 @@
 ﻿@model LHSCampaign.Models.CandidatesViewModel
 @{
     Layout = null;
-    var ASB = true;
+    var ASB = false;
 }
 
 <!DOCTYPE html>
@@ -73,15 +73,16 @@
     </div>
 
     <div class="tab-content" data-tab="no-peeps">
-        <h1>No one has signed up for this position yet.</h1>
-        @*<h1>Campaigning hasn't started yet!</h1>*@
+        @*<h1>No one has signed up for this position yet.</h1>*@
+        @*<h1>Class office campaigning will begin on Monday, 3/28</h1>*@
+        <h1>Due to technical difficulties, some pages of LHS Campaign will not be available until Tuesday evening. Thank you for your patience!</h1>
     </div>
 
     @if (true)
     {
         foreach (var position in Model.Positions)
         {
-            //continue;
+            continue;
             <div class="tab-content" data-tab="@position.Name">
                 @foreach (var candidate in position.Candidates)
                     {
@@ -107,6 +108,21 @@
         <a href="~/CreatePhoto/Profile">profile picture</a>
         <a href="~/CreatePhoto/Cover">cover photo</a>
     </footer>
+
+    <div id="countdown">
+        <div>
+            <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" />
+            <h1 id="count"></h1>
+
+            <p>
+                We're currently working with all the candidates to get their information sorted.
+                <br />
+                Get ready for the LHSCampaign drop on Tuesday @("@") 9:00 PM!
+            </p>
+
+            <a href="~/Account/Register">Click here if you're a candidate</a>
+        </div>
+    </div>
 
     <div id="welcome-popup">
         <h1>Welcome Lynbrook Viking!</h1>
@@ -150,19 +166,22 @@
     </div>
 
     <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/matthewsot/wedge/64fac6093b2a954c08d2bfa01e50bbb05e76354d/wedge.min.js"></script>
     <script src="~/Content/Scripts/update-cookies.js"></script>
     <script src="~/Content/Scripts/home.js"></script>
 
     <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-74831565-1', 'auto');
-  ga('send', 'pageview');
+        ga('create', 'UA-74831565-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 </body>

@@ -39,7 +39,7 @@ namespace LHSCampaign.Controllers
         // Thanks! http://stackoverflow.com/questions/5193842/file-upload-asp-net-mvc-3-0
         private bool UploadPicture(HttpPostedFileBase file, Candidate candidate, string folderPath, bool isProfile)
         {
-            var allowedExts = new[] { ".jpg", ".png", ".gif" };
+            var allowedExts = new[] { ".jpg", ".png", ".gif", ".jpeg" };
 
             // Verify that the Candidate selected a file
             if (file == null || file.FileName == null || file.ContentLength <= 0)

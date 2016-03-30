@@ -92,7 +92,7 @@ $("body").on("click", ".add-pic-button", function() {
 
 var hasShown = $.cookie("has-shown");
 if (typeof hasShown === "undefined" || !hasShown) {
-    wedge.show("#welcome-popup", { allowExit: false });
+    //wedge.show("#welcome-popup", { allowExit: false });
 }
 
 //$("#close-wedge").click(function() {
@@ -105,3 +105,25 @@ $("#class-options a").click(function() {
     $.cookie("has-shown", true, { path: "/", expires: 100 });
     window.location.href = $(this).attr("data-href");
 });
+
+function updateCountdown() {
+    var now = moment();
+    var then = moment("March 29, 2016 9:00 PM");
+
+    var days = then.diff(now, "days");
+    var hours = then.diff(now, "hours") - (days * 24);
+    var minutes = then.diff(now, "minutes") - (days * 24 * 60) - (hours * 60);
+    var seconds = then.diff(now, "seconds") - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+
+    function format(num) {
+        if (num.toString().length < 2) {
+            num = "0" + num.toString();
+        }
+        return num;
+    }
+
+    $("#count").text(format(hours) + ":" + format(minutes) + ":" + format(seconds));
+}
+
+updateCountdown();
+setInterval(updateCountdown, 500);

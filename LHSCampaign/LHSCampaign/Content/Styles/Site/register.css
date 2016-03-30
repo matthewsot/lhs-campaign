@@ -72,7 +72,7 @@ input {
     }
     #remember-container input {
         position: absolute;
-        left: 175px;
+        left: 176px;
         top: 13px;
     }
 
@@ -87,7 +87,7 @@ input {
     #year-picker div {
         width: 30%;
         padding: 0;
-        border: 2px solid #44A0C8;
+        border: 2px solid #1394ee;
         cursor: pointer;
         height: 40px;
         line-height: 40px;
@@ -95,17 +95,18 @@ input {
     }
         #year-picker .selected,
         #year-picker div:hover {
-            background-color: #44A0C8;
+            background-color: #1394ee;
             color: #fff;
         }
 
 #register {
-    border: 2px solid #44A0C8;
-    background-color: #44A0C8;
+    border: 2px solid #1394ee;
+    background-color: #1394ee;
     color: #fff;
     margin-top: 25px;
     padding: 10px 20px;
     cursor: pointer;
+    margin-left: -28px;
 }
     #register:hover {
         background-color: #fff;

@@ -196,6 +196,42 @@ header {
             color: #fff;
         }
 
+html, body {
+    overflow: hidden;
+}
+#countdown {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999999999;
+    background-color: #fff;
+    text-align: center;
+}
+    #countdown div {
+        position: fixed;
+        top: 40%;
+        transform: translateY(-50%);
+        width: 100%;
+    }
+    #countdown img {
+        height: 40px;
+    }
+    #countdown h1 {
+        margin: 35px auto;
+        width: 100%;
+        text-align: center;
+        font-weight: 400;
+        font-size: 50px;
+    }
+    #countdown p {
+        font-size: 12px;
+    }
+    #countdown a {
+        color: #1394ee;
+    }
+
 @media all and (max-width: 800px) {
     header {
         text-align: center;

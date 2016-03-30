@@ -17,6 +17,7 @@
     </header>
     <div style="position: relative; width: 800px; margin: 0 auto;">
         <h1>Welcome Candidate!</h1>
+        <div>Currently, only individual candidate profiles are viewable, and they are only viewable by those who have the URL. We’ll launch the rest of the website Tuesday evening. Contact vip@lhscampaign.cf with questions!</div>
         @if (!Model.IsConfirmed)
         {
             <span>
@@ -68,8 +69,8 @@
             What position are you running for?
             <br />
             <select id="position" class="default-input standard-input" style="margin-top: 20px; width: 333px; height: 50px; padding-right: -50px;">
-                @*@foreach (var pos in new string[] { "Secretary", "Treasurer", "Vice President", "President" })*@
-                @foreach (var pos in new string[] { "Secretary", "IDC Representative", "Social Manager", "Treasurer", "Vice President", "President" })
+                @*@foreach (var pos in new string[] { "Secretary", "IDC Representative", "Social Manager", "Treasurer", "Vice President", "President" })*@
+                @foreach (var pos in new string[] { "Secretary", "Treasurer", "Vice President", "President" })
                 {
                     if (pos.ToLower() == Model.Position.ToLower())
                     {
