@@ -1,7 +1,7 @@
 ﻿@model LHSCampaign.Models.CandidatesViewModel
 @{
     Layout = null;
-    var ASB = false;
+    var ASB = true;
 }
 
 <!DOCTYPE html>
@@ -16,6 +16,11 @@
     <meta property="og:description"
           content="LHS Campaign is a platform for voters to compare candidates and mash together different profile pictures/cover photos with. The display order of candidates is randomized for each viewer. Our goal is to bring you a more convenient and equitable election." />
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+    <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="~/Content/Scripts/update-cookies.js"></script>
 </head>
 <body>
     <header>
@@ -24,7 +29,7 @@
         @if (!ASB)
         {
             <ul id="class-picker" data-selected="@(ViewBag.Year)">
-                @for (var i = 2019; i >= 2017; i--)
+                @for (var i = 2020; i >= 2018; i--)
                 {
                     if (Model.GraduationYear == i)
                     {
@@ -56,13 +61,13 @@
         <div>secretary</div>
         <div>
             vice president
-            @if (Model.GraduationYear == 2017)
+            @if (Model.GraduationYear == 2018)
             {
                 <span>
                     3 VPs will be elected
                 </span>
             }
-            @if (Model.GraduationYear == 2018)
+            @if (Model.GraduationYear == 2019)
             {
                 <span>
                     2 VPs will be elected
@@ -74,16 +79,14 @@
 
     <div class="tab-content" data-tab="no-peeps">
         @*<h1>No one has signed up for this position yet.</h1>*@
-        @*<h1>Class office campaigning will begin on Monday, 3/28</h1>*@
-        <h1>Due to technical difficulties, some pages of LHS Campaign will not be available until Tuesday evening. Thank you for your patience!</h1>
+        <h1>Campaigning will begin at the end of February</h1>
     </div>
 
     @if (true)
     {
         foreach (var position in Model.Positions)
         {
-            continue;
-            <div class="tab-content" data-tab="@position.Name">
+            <div class="tab-content" data-tab="@position.Name" data-count="@(position.Candidates.Count())">
                 @foreach (var candidate in position.Candidates)
                     {
                     <article class="candidate" data-id="@candidate.Id" data-cover="@(candidate.CoverPhoto ?? "")">
@@ -109,7 +112,7 @@
         <a href="~/CreatePhoto/Cover">cover photo</a>
     </footer>
 
-    <div id="countdown">
+    @*<div id="countdown">
         <div>
             <img src="~/Content/Images/logo.blue.png" alt="lhs|campaign" />
             <h1 id="count"></h1>
@@ -122,7 +125,7 @@
 
             <a href="~/Account/Register">Click here if you're a candidate</a>
         </div>
-    </div>
+    </div>*@
 
     <div id="welcome-popup">
         <h1>Welcome Lynbrook Viking!</h1>
@@ -142,7 +145,7 @@
         </p>
 
         <p>
-            We built this site to bring you a more organized, convenient, and equitable voting process.
+            We built this site to bring you a more organized, convenient, and equitable voting process. Please keep questions productive, on-topic, and civil.
         </p>
 
         <p>
@@ -156,20 +159,16 @@
             }
             else
             {
+                <a data-href="/Candidates?classOf=2020">2020</a>
                 <a data-href="/Candidates?classOf=2019">2019</a>
                 <a data-href="/Candidates?classOf=2018">2018</a>
-                <a data-href="/Candidates?classOf=2017">2017</a>
             }
         </div>
 
         @*<a id="close-wedge">Let's go!</a>*@
     </div>
 
-    <script src="~/Content/Scripts/jQuery/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/matthewsot/wedge/64fac6093b2a954c08d2bfa01e50bbb05e76354d/wedge.min.js"></script>
-    <script src="~/Content/Scripts/update-cookies.js"></script>
     <script src="~/Content/Scripts/home.js"></script>
 
     <script>

@@ -86,7 +86,7 @@ header {
             display: inline-block;
             margin: 0;
             position: absolute;
-            bottom: -25px;
+            bottom: 45px;
             left:0;
             width: 100%;
         }
@@ -94,12 +94,16 @@ header {
 
 .tab-content {
     width: 800px;
-    margin: 30px auto;
+    margin: 10px auto 50px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     /*display: none;*/
 }
+    .tab-content[data-count="5"],
+    .tab-content[data-count="6"] {
+        width: 735px;
+    }
     .tab-content[data-tab="no-peeps"] h1 {
         margin-top: 75px;
     }
@@ -196,7 +200,7 @@ header {
             color: #fff;
         }
 
-html, body {
+/*html, body {
     overflow: hidden;
 }
 #countdown {
@@ -230,7 +234,7 @@ html, body {
     }
     #countdown a {
         color: #1394ee;
-    }
+    }*/
 
 @media all and (max-width: 800px) {
     header {
@@ -249,6 +253,20 @@ html, body {
             position: static;
             margin-left: 0;
         }
+        header #class-picker {
+            position: static;
+            padding: 0;
+            height: 45px;
+            line-height: 45px;
+        }
+            header #class-picker li {
+                display: inline-block;
+                float: none;
+                width: 30%;
+            }
+                header #class-picker li::after {
+                    display: none;
+                }
 
     #position-tabs {
         display: block;

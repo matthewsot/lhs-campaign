@@ -14,7 +14,7 @@ namespace LHSCampaign.Controllers
         [Route("Candidates")]
         public ActionResult Class(int? classOf)
         {
-            //classOf = 0; //0 = ASB
+            classOf = 0; //0 = ASB
             var model = new CandidatesViewModel();
 
             classOf = classOf ??

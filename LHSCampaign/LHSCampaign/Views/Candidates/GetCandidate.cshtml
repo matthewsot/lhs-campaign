@@ -5,11 +5,11 @@
     ViewBag.Description = ViewBag.Description.Substring(0, Math.Min(ViewBag.Description.Length, 300));
     Layout = null;
 
-    //var ASBText = "ASB ";
-    //if (Model.Position.Contains("idc") || Model.Position.Contains("social manager"))
-    //{
-    //    ASBText = " ";
-    //}
+    var ASBText = "ASB ";
+    if (Model.Position.Contains("idc") || Model.Position.Contains("social manager"))
+    {
+        ASBText = " ";
+    }
     Model.Position = Model.Position.Replace("idc", "IDC");
 }
 
@@ -104,6 +104,10 @@
             }
 
             <h1>Q&A</h1>
+
+            <p>
+                We built this site to bring you a more organized, convenient, and equitable voting process. Please keep questions productive, on-topic, and civil.
+            </p>
 
             <div id="disqus_thread"></div>
             <script type="text/javascript">

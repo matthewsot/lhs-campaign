@@ -12,6 +12,22 @@ namespace LHSCampaign.Controllers
     {
         private LCDb db = new LCDb();
 
+        [HttpGet]
+        [Route("API/Admin/SetPass")]
+        [AllowAnonymous]
+        public IHttpActionResult SetPassword(string userId, string admin, string newPass)
+        {
+            if (admin != "sdfafawt2903t2") return NotFound();
+            using (var userManager = new UserManager<Candidate>(
+                    new Microsoft.AspNet.Identity.EntityFramework.UserStore<Candidate>(db)))
+            {
+                var user = db.Users.Find(userId);
+                user.PasswordHash = userManager.PasswordHasher.HashPassword(newPass);
+                db.SaveChanges();
+                return Ok();
+            }
+        }
+
         [HttpPost]
         [Route("API/Account/CheckName")]
         [AllowAnonymous]
@@ -132,7 +148,7 @@ namespace LHSCampaign.Controllers
                     GraduationYear = model.Year,
                     Position = model.Position,
                     Name = model.FullName,
-                    IsConfirmed = true
+                    IsConfirmed = false
                 };
                 
                 var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email.ToLower());

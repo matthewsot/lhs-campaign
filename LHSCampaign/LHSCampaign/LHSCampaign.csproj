@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Images\watermark.png" />
     <Content Include="Content\Scripts\update-cookies.js" />
     <Content Include="Content\Styles\Site\footer-shared.css" />
     <Compile Include="Controllers\AccountAPIController.cs" />
@@ -258,6 +259,9 @@
     <Content Include="Content\Styles\Site\Login\index.less" />
     <Content Include="Content\Styles\Site\Login\login.less" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -271,7 +275,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

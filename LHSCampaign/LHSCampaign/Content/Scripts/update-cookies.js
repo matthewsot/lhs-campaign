@@ -1,6 +1,6 @@
-﻿if ($.cookie("2016-class") === undefined) {
+﻿if ($.cookie("2017-asb") === undefined) {
     $.removeCookie("selected-attendees");
     $.removeCookie("has-shown");
-    $.removeCookie("2016-asb");
-    $.cookie("2016-class", true, { path: "/", expires: 365 });
+    $.removeCookie("2017-asb");
+    $.cookie("2017-asb", true, { path: "/", expires: 365 });
 }

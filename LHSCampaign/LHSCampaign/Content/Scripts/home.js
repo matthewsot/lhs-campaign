@@ -5,6 +5,7 @@ $("body").on("click", "#position-tabs div", function (e) {
     $(".tab-content").hide();
 
     var thisFirstText = $(this).clone().children().remove().end().text().trim(); //Thanks! http://viralpatel.net/blogs/jquery-get-text-element-without-child-element/
+    $.cookie("last-tab", $(this).index());
     thisFirstText = thisFirstText.replace("rep.", "representative");
     if ($(".tab-content[data-tab=\"" + thisFirstText + "\"]").length > 0 && $(".tab-content[data-tab=\"" + thisFirstText + "\"]").children("article").length > 0) {
         $(".tab-content[data-tab=\"" + thisFirstText + "\"]").show();
@@ -17,7 +18,12 @@ $("body").on("click", "#position-tabs div", function (e) {
         $(this).find("span").show();
     }
 });
-$("#position-tabs div").first().click();
+
+if ($.cookie("last-tab") !== undefined) {
+    $("#position-tabs div").get($.cookie("last-tab")).click();
+} else {
+    $("#position-tabs div").first().click();
+}
 
 $.cookie.json = true;
 function setSelected(val) {
@@ -92,38 +98,38 @@ $("body").on("click", ".add-pic-button", function() {
 
 var hasShown = $.cookie("has-shown");
 if (typeof hasShown === "undefined" || !hasShown) {
-    //wedge.show("#welcome-popup", { allowExit: false });
+    wedge.show("#welcome-popup", { allowExit: false });
 }
 
-//$("#close-wedge").click(function() {
-//    wedge.close(function() {
-//        $.cookie("has-shown", true, { path: "/", expires: 100 });
-//    });
-//});
+$("#close-wedge").click(function() {
+    wedge.close(function() {
+        $.cookie("has-shown", true, { path: "/", expires: 100 });
+    });
+});
 
 $("#class-options a").click(function() {
     $.cookie("has-shown", true, { path: "/", expires: 100 });
     window.location.href = $(this).attr("data-href");
 });
 
-function updateCountdown() {
-    var now = moment();
-    var then = moment("March 29, 2016 9:00 PM");
+//function updateCountdown() {
+//    var now = moment();
+//    var then = moment("March 29, 2016 9:00 PM");
 
-    var days = then.diff(now, "days");
-    var hours = then.diff(now, "hours") - (days * 24);
-    var minutes = then.diff(now, "minutes") - (days * 24 * 60) - (hours * 60);
-    var seconds = then.diff(now, "seconds") - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+//    var days = then.diff(now, "days");
+//    var hours = then.diff(now, "hours") - (days * 24);
+//    var minutes = then.diff(now, "minutes") - (days * 24 * 60) - (hours * 60);
+//    var seconds = then.diff(now, "seconds") - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
 
-    function format(num) {
-        if (num.toString().length < 2) {
-            num = "0" + num.toString();
-        }
-        return num;
-    }
+//    function format(num) {
+//        if (num.toString().length < 2) {
+//            num = "0" + num.toString();
+//        }
+//        return num;
+//    }
 
-    $("#count").text(format(hours) + ":" + format(minutes) + ":" + format(seconds));
-}
+//    $("#count").text(format(hours) + ":" + format(minutes) + ":" + format(seconds));
+//}
 
-updateCountdown();
-setInterval(updateCountdown, 500);
+//updateCountdown();
+//setInterval(updateCountdown, 500);

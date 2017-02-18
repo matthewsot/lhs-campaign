@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using LHSCampaign.Models;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace LHSCampaign
 {
