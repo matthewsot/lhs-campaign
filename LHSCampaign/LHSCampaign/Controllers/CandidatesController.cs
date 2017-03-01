@@ -19,11 +19,11 @@ namespace LHSCampaign.Controllers
 
             classOf = classOf ??
                 (Request.Cookies.AllKeys.Contains("selected-class") ?
-                int.Parse(Request.Cookies["selected-class"].Value) : 2017);
+                int.Parse(Request.Cookies["selected-class"].Value) : 2018);
 
-            if (classOf < 2017 || classOf > 2019)
+            if (classOf < 2018 || classOf > 2020)
             {
-                classOf = 2017;
+                classOf = 2018;
             }
 
             model.GraduationYear = classOf.Value;

@@ -130,7 +130,7 @@ namespace LHSCampaign.Controllers
 
                 // TODO: Should be validating with ModelState
                 if (model.Password.Length <= 6) errors.Add("Password");
-                if (!(model.Year <= 2019 && model.Year >= 2017)) errors.Add("Year");
+                if (!(model.Year <= 2020 && model.Year >= 2018)) errors.Add("Year");
                 if (string.IsNullOrWhiteSpace(model.Position) || model.Position.Length > 50) errors.Add("Position");
                 model.Position = model.Position.ToLower();
                 if (string.IsNullOrWhiteSpace(model.FullName) || model.FullName.Length > 50) errors.Add("FullName");
@@ -151,7 +151,7 @@ namespace LHSCampaign.Controllers
                     IsConfirmed = false
                 };
                 
-                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email.ToLower());
+                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email.ToLower() == model.Email.ToLower());
                 if (preConf != null)
                 {
                     candidate.IsConfirmed = true;

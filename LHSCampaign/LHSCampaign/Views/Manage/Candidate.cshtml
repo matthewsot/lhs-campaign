@@ -17,13 +17,13 @@
     </header>
     <div style="position: relative; width: 800px; margin: 0 auto;">
         <h1>Welcome Candidate!</h1>
-        <div>Currently, only individual candidate profiles are viewable, and they are only viewable by those who have the URL. We’ll launch the rest of the website Tuesday evening. Contact vip@lhscampaign.cf with questions!</div>
+        <div>Currently, only individual candidate profiles are viewable, and they are only viewable by those who have the URL. We’ll launch the rest of the website Tuesday evening. Contact vip@lhscampaign.ml with questions!</div>
         @if (!Model.IsConfirmed)
         {
             <span>
                 Please fill out your candidate profile below. Once you have been verified (which may take up to 24 hours), you will be allowed to upload your picture(s) and be featured on LHS Campaign.
                 <br />
-                If you have any questions or need assistance with setting up your account, email us at <a href="mailto:vip@lhscampaign.cf">vip@lhscampaign.cf</a>.
+                If you have any questions or need assistance with setting up your account, email us at <a href="mailto:vip@lhscampaign.ml">vip@lhscampaign.ml</a>.
             </span>
         }
         @if (ViewBag.Uploaded)
@@ -69,8 +69,8 @@
             What position are you running for?
             <br />
             <select id="position" class="default-input standard-input" style="margin-top: 20px; width: 333px; height: 50px; padding-right: -50px;">
-                @*@foreach (var pos in new string[] { "Secretary", "IDC Representative", "Social Manager", "Treasurer", "Vice President", "President" })*@
-                @foreach (var pos in new string[] { "Secretary", "Treasurer", "Vice President", "President" })
+                @*@foreach (var pos in new string[] { "Secretary", "Treasurer", "Vice President", "President" })*@
+                @foreach (var pos in new string[] { "Secretary", "IDC Representative", "Social Manager", "Treasurer", "Vice President", "President" })
                 {
                     if (pos.ToLower() == Model.Position.ToLower())
                     {
@@ -103,7 +103,7 @@
             <br />
             If you don't have a Facebook page or event, just click on 'Save' to continue. You can always change this later.
             <br /><br />
-            If you would like to add other links to your profile, email us at <a style="color: #1394ee;text-decoration: none;" href="mailto:vip@lhscampaign.cf">vip@lhscampaign.cf</a>.
+            If you would like to add other links to your profile, email us at <a style="color: #1394ee;text-decoration: none;" href="mailto:vip@lhscampaign.ml">vip@lhscampaign.ml</a>.
         </div>
 
         <div class="tab-content" data-tab="picture">
@@ -111,7 +111,7 @@
             {
                 @:Pictures must be less than 4MB in size and have a .jpg, .png, or .gif extension.
                 <br /><br />
-                @:If you have any problems, please don't hesitate to contact vip@lhscampaign.cf and we'll make it work.
+                @:If you have any problems, please don't hesitate to contact vip@lhscampaign.ml and we'll make it work.
                 <h2 style="margin-bottom: 0;">Profile Picture:</h2>
                 <form action="~/Manage/UploadProfile" method="POST" enctype="multipart/form-data">
                     <span>Square image - Required</span>
@@ -135,7 +135,7 @@
                 <br /><br />
                 @:You should get an email from someone on the LHS Campaign team within 24 hours to confirm your account.
                 <br /><br />
-                @:If you have any problems, feel free to email vip@lhscampaign.cf for personal help.
+                @:If you have any problems, feel free to email vip@lhscampaign.ml for personal help.
             }
         </div>
     </div>
