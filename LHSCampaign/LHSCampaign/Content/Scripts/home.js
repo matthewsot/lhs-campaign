@@ -1,4 +1,4 @@
-﻿$(".tab-content").hide();
+﻿//$(".tab-content").hide();
 
 $("body").on("click", "#position-tabs div", function (e) {
     $(this).addClass("selected").siblings(".selected").removeClass("selected");
@@ -28,7 +28,7 @@ if ($.cookie("last-tab") !== undefined) {
 $.cookie.json = true;
 function setSelected(val) {
     $.cookie("selected-attendees", val, { path: "/", expires: 365 });
-    $.cookie("asb-elections", true, { path: "/", expires: 365 });
+    $.cookie("class-elections", true, { path: "/", expires: 365 });
 }
 function getSelected() {
     var selected = $.cookie("selected-attendees");

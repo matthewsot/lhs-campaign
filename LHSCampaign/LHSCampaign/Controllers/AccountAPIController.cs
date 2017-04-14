@@ -92,6 +92,7 @@ namespace LHSCampaign.Controllers
         public IHttpActionResult SetSocial(SetSocialModel model)
         {
             model.facebook = string.IsNullOrWhiteSpace(model.facebook) ? null : model.facebook.Trim();
+            model.youtube = string.IsNullOrWhiteSpace(model.youtube) ? null : model.youtube.Trim();
 
             var candidate = db.Users.Find(User.Identity.GetUserId());
             if (candidate == null)
@@ -113,6 +114,21 @@ namespace LHSCampaign.Controllers
                     Link = model.facebook
                 });
             }
+
+            var existingYoutube = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "FB EVENT");
+            if (existingYoutube != null)
+            {
+                candidate.ExternalLinks.Remove(existingYoutube);
+            }
+
+            if (model.youtube != null)
+            {
+                candidate.ExternalLinks.Add(new ExternalLink()
+                {
+                    Label = "CAMPAIGN VIDEO",
+                    Link = model.youtube
+                });
+            }
             db.SaveChanges();
 
             return Ok("set");
@@ -130,7 +146,7 @@ namespace LHSCampaign.Controllers
 
                 // TODO: Should be validating with ModelState
                 if (model.Password.Length <= 6) errors.Add("Password");
-                if (!(model.Year <= 2019 && model.Year >= 2017)) errors.Add("Year");
+                //if (!(model.Year <= 2020 && model.Year >= 2018)) errors.Add("Year");
                 if (string.IsNullOrWhiteSpace(model.Position) || model.Position.Length > 50) errors.Add("Position");
                 model.Position = model.Position.ToLower();
                 if (string.IsNullOrWhiteSpace(model.FullName) || model.FullName.Length > 50) errors.Add("FullName");

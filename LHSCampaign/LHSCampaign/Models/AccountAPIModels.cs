@@ -23,6 +23,7 @@
     public class SetSocialModel
     {
         public string facebook { get; set; }
+        public string youtube { get; set; }
     }
 
     public class RegisterModel

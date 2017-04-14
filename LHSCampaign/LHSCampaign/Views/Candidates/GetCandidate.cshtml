@@ -50,7 +50,9 @@
     <main data-id="@(Model.Id)" data-cover="@(Model.CoverPhoto ?? "")">
         <div id="info">
             <h1>@(Model.Name)</h1>
-            <h2>for @(Model.GraduationYear)  @(Model.Position)</h2>
+            @*<h2>for @(Model.GraduationYear)  @(Model.Position)</h2>*@
+            <h2>for 2021 Class Office</h2>
+            @*<h2>for @(ASBText)@(Model.Position)</h2>*@
 
             @if (!string.IsNullOrWhiteSpace(Model.ProfilePicture))
             {
@@ -103,16 +105,16 @@
                 }
             }
 
-            <h1>Q&A</h1>
+            <h1>Q&amp;A</h1>
 
             <p>
-                We built this site to bring you a more organized, convenient, and equitable voting process. Please keep questions productive, on-topic, and civil.
+                We built this site to bring you a more organized, convenient, and equitable voting process. Please keep questions productive, on-topic, and civil. All comments go through an approval process before being shown publicly, if your question has not been approved within 24 hours please contact support@lhscampaign.ml
             </p>
 
             <div id="disqus_thread"></div>
             <script type="text/javascript">
                 /* * * CONFIGURATION VARIABLES * * */
-                var disqus_shortname = 'lhscampaign2016';
+                var disqus_shortname = 'lhscampaign2017';
                 var disqus_identifier = "candidateid:@(Model.Id)";
 
                 /* * * DON'T EDIT BELOW THIS LINE * * */

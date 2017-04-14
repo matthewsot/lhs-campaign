@@ -143,15 +143,15 @@
                 //text.setFontSize(30);
                 //fab.add(text);
                 //fab.bringToFront(text);
-
-                fabric.Image.fromURL("/Content/Images/watermark.png", function (oImg) {
-                    oImg.resizeFilters.push(new fabric.Image.filters.Resize({ resizeType: resizeType, lanczosLobes: lanczosLobes }));
-                    oImg.setWidth(size);
-                    oImg.setHeight(size);
-                    oImg.setLeft(0);
-                    oImg.setTop(0);
-                    fab.add(oImg);
-                    fab.bringToFront(oImg);
+                
+                fab.setOverlayImage('/Content/Images/watermark.cropped.png', fab.renderAll.bind(fab), {
+                    // Needed to position overlayImage at 0/0
+                    originX: 'left',
+                    originY: 'top',
+                    width: size * 0.158,
+                    height: size * 0.158,
+                    left: (size / 2) - (size * 0.158 * 0.5),
+                    top: (size / 2) - (size * 0.158 * 0.5)
                 });
             }, 500);
         });

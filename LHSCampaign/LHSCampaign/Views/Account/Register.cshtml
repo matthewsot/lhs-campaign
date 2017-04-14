@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "LHSCampaign - Register";
     Layout = null;
+    var Freshmen = true;
 }
 <!DOCTYPE html>
 <html>
@@ -27,8 +28,6 @@
         <a href="~/Account/LogIn" id="sign-up">have an account? log in</a>
         <br/>
 
-        <h2>Candidate signup is currently disabled. If you're an ASB candidate please sign up at <a href="http://tinyurl.com/lhs-co-2017">http://tinyurl.com/lhs-co-2017</a> and we'll get back to you very soon!</h2>
-        <div style="display: none;">
         <label for="username">username</label>
         <input type="text" id="username" />
 
@@ -86,12 +85,23 @@
 
         <div id="email-err" class="err-text"></div>
 
-        <label for="year-picker">class</label>
-        <div id="year-picker">
-            <div data-year="2017">2017</div>
-            <div data-year="2018">2018</div>
-            <div data-year="2019">2019</div>
-        </div>
+        @if (!Freshmen)
+        {
+            <label for="year-picker">class</label>
+            <div id="year-picker">
+                <div data-year="2018">2018</div>
+                <div data-year="2019">2019</div>
+                <div data-year="2020">2020</div>
+            </div>
+        }
+        else
+        {
+            <label for="year-picker">middle school</label>
+            <div id="year-picker">
+                <div data-year="0" style="width: 45%;">Miller</div>
+                <div data-year="1" style="width: 45%;">Other Schools</div>
+            </div>
+        }
 
         <button id="register">SIGN UP</button>
 
@@ -155,6 +165,5 @@
             }
         });
     </script>
-    </div>
 </body>
 </html>

@@ -39,7 +39,7 @@
         <br />
         <div id="tabs">
             <div class="@(ViewBag.Uploaded ? "" : "selected")">email</div>
-            <div>position</div>
+            @*<div>position</div>*@
             <div>campaign</div>
             <div>social</div>
             @if (ViewBag.Uploaded)
@@ -65,6 +65,8 @@
             }
         </div>
 
+        @if (false)
+        {
         <div class="tab-content" data-tab="position">
             What position are you running for?
             <br />
@@ -84,6 +86,7 @@
             </select>
             <button class="default-btn standard-btn" id="save-position">Confirm Position</button>
         </div>
+        }
 
         <div class="tab-content" data-tab="campaign">
             What would you like to share with voters?
@@ -95,6 +98,10 @@
         </div>
 
         <div class="tab-content" data-tab="social">
+            YouTube video:
+            <br /><br />
+            <input type="text" id="campaign-social-video" class="default-input standard-input" style="width: 400px;" placeholder="http://youtube.com/example..." value="" />
+            <br/>
             Facebook page/event link:
             <br /><br />
             <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..." value="" />
@@ -193,15 +200,24 @@
 
         $("#save-social").click(function () {
             var fb = $("#campaign-social").val().trim().toLowerCase();
+            var yt = $("#campaign-social-video").val().trim().toLowerCase();
             if (fb == $("#campaign-social").attr("placeholder")) {
                 fb = '';
             }
             if (fb != '' && fb.indexOf('http') != 0) {
                 fb = 'https://' + fb;
             }
+            if (yt == $("#campaign-social-video").attr("placeholder")) {
+                yt = '';
+            }
+            if (yt != '' && yt.indexOf('http') != 0) {
+                yt = 'https://' + yt;
+            }
             $("#campaign-social").val(fb);
+            $("#campaign-social-video").val(yt);
             $.post("/API/Account/SetSocial", {
-                "facebook": fb
+                "facebook": fb,
+                "youtube": yt
             }, function (data) {
                 if (data == "set") {
                     cont();

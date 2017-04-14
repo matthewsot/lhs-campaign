@@ -14,16 +14,16 @@ namespace LHSCampaign.Controllers
         [Route("Candidates")]
         public ActionResult Class(int? classOf)
         {
-            classOf = 0; //0 = ASB
+            //classOf = 0; //0 = ASB
             var model = new CandidatesViewModel();
 
             classOf = classOf ??
                 (Request.Cookies.AllKeys.Contains("selected-class") ?
-                int.Parse(Request.Cookies["selected-class"].Value) : 2017);
+                int.Parse(Request.Cookies["selected-class"].Value) : 0);
 
-            if (classOf < 2017 || classOf > 2019)
+            if (classOf < 0 || classOf > 1)
             {
-                classOf = 2017;
+                classOf = 0;
             }
 
             model.GraduationYear = classOf.Value;
@@ -38,7 +38,7 @@ namespace LHSCampaign.Controllers
             var rand = new Random();
             foreach (var position in positions)
             {
-                if (!(new[] { "secretary", "treasurer", "vice president", "president", "idc representative", "social manager" }.Contains(
+                if (!(new[] { "secretary", "treasurer", "vice president", "president" }.Contains(
                     position.Key.ToLower())))
                 {
                     continue;
@@ -69,6 +69,12 @@ namespace LHSCampaign.Controllers
         public ActionResult GetCandidate(string id)
         {
             var candidate = db.Users.Find(id);
+
+            if (candidate == null)
+            {
+                ViewBag.Id = id;
+                return View("Removed");
+            }
 
             candidate.ToString();
 

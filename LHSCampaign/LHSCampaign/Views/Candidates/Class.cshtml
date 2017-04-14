@@ -1,7 +1,8 @@
 ﻿@model LHSCampaign.Models.CandidatesViewModel
 @{
     Layout = null;
-    var ASB = true;
+    var ASB = false;
+    var Freshmen = true;
 }
 
 <!DOCTYPE html>
@@ -29,15 +30,20 @@
         @if (!ASB)
         {
             <ul id="class-picker" data-selected="@(ViewBag.Year)">
-                @for (var i = 2020; i >= 2018; i--)
+                @for (var i = 0; i <= 1; i++)
                 {
+                    var name = i == 0 ? "Miller" : "Other Schools";
+                    if (!Freshmen)
+                    {
+                        name = i.ToString();
+                    }
                     if (Model.GraduationYear == i)
                     {
-                        <li class="selected"><a href="/Candidates?classOf=@(i)">@(i)</a></li>
+                        <li class="selected"><a href="/Candidates?classOf=@(i)">@(name)</a></li>
                     }
                     else
                     {
-                        <li><a href="/Candidates?classOf=@(i)">@(i)</a></li>
+                        <li><a href="/Candidates?classOf=@(i)">@(name)</a></li>
                     }
                 }
             </ul>
@@ -46,7 +52,7 @@
         <a href="~/Account/LogIn">click here if you're a candidate</a>
     </header>
 
-    <div id="position-tabs">
+    @*<div id="position-tabs">
         @if (ASB)
         {
             <div class="selected" style="padding-right: 20px;">
@@ -61,28 +67,37 @@
         <div>secretary</div>
         <div>
             vice president
-            @if (Model.GraduationYear == 2018)
-            {
-                <span>
-                    3 VPs will be elected
-                </span>
-            }
-            @if (Model.GraduationYear == 2019)
+            @if (Freshmen)
             {
                 <span>
                     2 VPs will be elected
                 </span>
             }
+            @if (!ASB && !Freshmen)
+            {
+                if (Model.GraduationYear == 2018)
+                {
+                    <span>
+                        3 VPs will be elected
+                    </span>
+                }
+                if (Model.GraduationYear == 2019 || Model.GraduationYear == 2020)
+                {
+                    <span>
+                        2 VPs will be elected
+                    </span>
+                }
+            }
         </div>
         <div>president</div>
-    </div>
+    </div>*@
 
     <div class="tab-content" data-tab="no-peeps">
         @*<h1>No one has signed up for this position yet.</h1>*@
-        <h1>Campaigning will begin at the end of February</h1>
+        <h1>Campaigning will begin soon</h1>
     </div>
 
-    @if (true)
+    @if (false)
     {
         foreach (var position in Model.Positions)
         {
@@ -156,6 +171,11 @@
             @if (ASB)
             {
                 <a data-href="/Candidates">Get Started</a>
+            }
+            else if (Freshmen)
+            {
+                <a data-href="/Candidates?classOf=0">Miller</a>
+                <a data-href="/Candidates?classOf=1">Other Schools</a>
             }
             else
             {

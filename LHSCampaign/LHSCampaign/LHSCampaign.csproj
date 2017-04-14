@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Images\watermark.cropped.png" />
     <Content Include="Content\Images\watermark.png" />
     <Content Include="Content\Scripts\update-cookies.js" />
     <Content Include="Content\Styles\Site\footer-shared.css" />
@@ -259,6 +260,7 @@
     <Content Include="Content\Styles\Site\Login\index.less" />
     <Content Include="Content\Styles\Site\Login\login.less" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\2017co.lhscampaign.cf - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %284%29.pubxml" />
@@ -299,6 +301,7 @@
     <Content Include="Views\CreatePhoto\Profile.cshtml" />
     <Content Include="Views\Account\ForgotPass.cshtml" />
     <Content Include="Views\Shared\_HeroLayout.cshtml" />
+    <Content Include="Views\Candidates\Removed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

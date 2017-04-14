@@ -12,7 +12,7 @@ $("#tabs li").click(function () {
 $.cookie.json = true;
 function setSelected(val) {
     $.cookie("selected-attendees", val, { path: "/", expires: 365 });
-    $.cookie("asb-elections", true, { path: "/", expires: 365 });
+    $.cookie("class-elections", true, { path: "/", expires: 365 });
 }
 function getSelected() {
     var selected = $.cookie("selected-attendees");
