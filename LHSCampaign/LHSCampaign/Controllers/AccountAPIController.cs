@@ -167,7 +167,7 @@ namespace LHSCampaign.Controllers
                     IsConfirmed = false
                 };
                 
-                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email.ToLower());
+                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email.ToLower() == model.Email.ToLower());
                 if (preConf != null)
                 {
                     candidate.IsConfirmed = true;

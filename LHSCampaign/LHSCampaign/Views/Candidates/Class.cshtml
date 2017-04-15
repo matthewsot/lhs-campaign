@@ -13,7 +13,7 @@
     <link href="~/Content/Styles/Site/footer-shared.css" rel="stylesheet" />
     <link href="~/Content/Styles/Site/home.css" rel="stylesheet" />
     <meta property="og:title" content="LHSCampaign" />
-    <meta property="og:image" content="http://lhscampaign.cf/Content/Images/facebook.preview.jpg" />
+    <meta property="og:image" content="http://lhscampaign.ml/Content/Images/facebook.preview.jpg" />
     <meta property="og:description"
           content="LHS Campaign is a platform for voters to compare candidates and mash together different profile pictures/cover photos with. The display order of candidates is randomized for each viewer. Our goal is to bring you a more convenient and equitable election." />
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -103,7 +103,7 @@
         {
             <div class="tab-content" data-tab="@position.Name" data-count="@(position.Candidates.Count())">
                 @foreach (var candidate in position.Candidates)
-                    {
+                {
                     <article class="candidate" data-id="@candidate.Id" data-cover="@(candidate.CoverPhoto ?? "")">
                         <div class="hover-container">
                             <img height="175" src="@(candidate.ProfilePicture)" alt="@(candidate.Initials)" />
@@ -164,7 +164,7 @@
         </p>
 
         <p>
-            Have any questions or concerns? Reach out to us at <a href="mailto:support@lhscampaign.cf">support@lhscampaign.cf</a>.
+            Have any questions or concerns? Reach out to us at <a href="mailto:support@lhscampaign.ml">support@lhscampaign.ml</a>.
         </p>
 
         <div id="class-options">
