@@ -260,10 +260,6 @@
     <Content Include="Content\Styles\Site\Login\index.less" />
     <Content Include="Content\Styles\Site\Login\login.less" />
     <Content Include="Content\Scripts\jQuery\jquery-1.10.2.min.map" />
-    <None Include="Properties\PublishProfiles\2017co.lhscampaign.cf - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %283%29.pubxml" />
-    <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\lhscampaign.cf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
