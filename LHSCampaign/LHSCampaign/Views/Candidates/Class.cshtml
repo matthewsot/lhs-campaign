@@ -2,7 +2,7 @@
 @{
     Layout = null;
     var ASB = false;
-    var Freshmen = true;
+    var Freshmen = false;
 }
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
         @if (!ASB)
         {
             <ul id="class-picker" data-selected="@(ViewBag.Year)">
-                @for (var i = 0; i <= 1; i++)
+                @for (var i = 2020; i >= 2018; i--)
                 {
                     var name = i == 0 ? "Miller" : "Other Schools";
                     if (!Freshmen)
@@ -52,7 +52,7 @@
         <a href="~/Account/LogIn">click here if you're a candidate</a>
     </header>
 
-    @*<div id="position-tabs">
+    <div id="position-tabs">
         @if (ASB)
         {
             <div class="selected" style="padding-right: 20px;">
@@ -90,14 +90,13 @@
             }
         </div>
         <div>president</div>
-    </div>*@
-
-    <div class="tab-content" data-tab="no-peeps">
-        @*<h1>No one has signed up for this position yet.</h1>*@
-        <h1>Campaigning will begin soon</h1>
     </div>
 
-    @if (false)
+    <div class="tab-content" data-tab="no-peeps">
+        <h1>No one has signed up for this position yet.</h1>
+    </div>
+
+    @if (true)
     {
         foreach (var position in Model.Positions)
         {
@@ -165,6 +164,10 @@
 
         <p>
             Have any questions or concerns? Reach out to us at <a href="mailto:support@lhscampaign.ml">support@lhscampaign.ml</a>.
+        </p>
+
+        <p>
+            Finally, please note this is an archive of a previous campaign season and thus many features may not work correctly.
         </p>
 
         <div id="class-options">

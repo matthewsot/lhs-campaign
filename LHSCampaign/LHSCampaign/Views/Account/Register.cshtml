@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "LHSCampaign - Register";
     Layout = null;
-    var Freshmen = true;
+    var Freshmen = false;
 }
 <!DOCTYPE html>
 <html>
@@ -106,6 +106,8 @@
         <button id="register">SIGN UP</button>
 
             @*<p id="afterwards">We'll send you an email within 24 hours to activate your campaign account. This is to avoid spammers.</p>*@
+
+        <h2>Please note - this form does not work on the archive</h2>
     </main>
 
     <script type="text/javascript">
@@ -121,7 +123,7 @@
             var email = $("#email").val();
             var year = $("#year-picker .selected");
             if (year.length == 0) {
-                alert("Please select a class!");
+                alert("Please select a school!");
                 return;
             } else {
                 year = parseInt(year.attr("data-year"));

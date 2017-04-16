@@ -21,7 +21,7 @@ namespace LHSCampaign.Controllers
                 (Request.Cookies.AllKeys.Contains("selected-class") ?
                 int.Parse(Request.Cookies["selected-class"].Value) : 0);
 
-            if (classOf < 0 || classOf > 1)
+            if (classOf < 2018 || classOf > 2020)
             {
                 classOf = 0;
             }
