@@ -92,12 +92,12 @@
         <div>president</div>
     </div>*@
 
-    <div class="tab-content" data-tab="no-peeps">
-        @*<h1>No one has signed up for this position yet.</h1>*@
-        <h1>Campaigning will begin soon</h1>
+    <div class="tab-content" data-tab="no-peeps" style="display: none;">
+        <h1>No one has signed up for this position yet.</h1>
+        @*<h1>Campaigning will begin soon</h1>*@
     </div>
 
-    @if (false)
+    @if (true)
     {
         foreach (var position in Model.Positions)
         {

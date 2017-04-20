@@ -66,6 +66,7 @@ namespace LHSCampaign.Models
         public DbSet<Setting> Config { get; set; }
         public DbSet<LogEntry> Log { get; set; }
         public DbSet<PreConfirmation> PreConfs { get; set; }
+        public DbSet<ExternalLink> ExternalLinks { get; set; }
 
         public LCDb()
             : base("LCDb", throwIfV1Schema: false)

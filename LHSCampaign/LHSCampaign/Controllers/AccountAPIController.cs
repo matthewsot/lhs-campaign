@@ -82,8 +82,8 @@ namespace LHSCampaign.Controllers
                 return Ok("no user");
             }
 
-            candidate.Platform = model.reasons;
-            db.SaveChanges();
+            //candidate.Platform = model.reasons;
+            //db.SaveChanges();
             return Ok("set");
         }
 
@@ -104,6 +104,7 @@ namespace LHSCampaign.Controllers
             if (existingFacebook != null)
             {
                 candidate.ExternalLinks.Remove(existingFacebook);
+                db.ExternalLinks.Remove(existingFacebook);
             }
 
             if (model.facebook != null)
@@ -115,10 +116,11 @@ namespace LHSCampaign.Controllers
                 });
             }
 
-            var existingYoutube = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "FB EVENT");
+            var existingYoutube = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "CAMPAIGN VIDEO");
             if (existingYoutube != null)
             {
                 candidate.ExternalLinks.Remove(existingYoutube);
+                db.ExternalLinks.Remove(existingYoutube);
             }
 
             if (model.youtube != null)
@@ -157,6 +159,7 @@ namespace LHSCampaign.Controllers
                     return Ok(string.Join(",", errors) + ",");
                 }
 
+                model.Email = model.Email.ToLower();
                 var candidate = new Candidate
                 {
                     UserName = model.Username,
@@ -166,8 +169,8 @@ namespace LHSCampaign.Controllers
                     Name = model.FullName,
                     IsConfirmed = false
                 };
-                
-                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email.ToLower() == model.Email.ToLower());
+
+                var preConf = db.PreConfs.FirstOrDefault(conf => conf.Email == model.Email);
                 if (preConf != null)
                 {
                     candidate.IsConfirmed = true;

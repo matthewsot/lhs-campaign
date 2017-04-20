@@ -92,19 +92,19 @@
             What would you like to share with voters?
             <br /><br />
             <!-- Thanks! http://stackoverflow.com/questions/4220381/replace-line-break-characters-with-br-in-asp-net-mvc-razor-view -->
-            <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align: left; width: 90%; height: 300px; white-space: pre-wrap;">@Model.Platform</textarea>
+            <textarea id="campaign-reasons" class="small-font default-input standard-input" style="text-align: left; width: 90%; height: 300px; white-space: pre-wrap;" disabled>@Model.Platform</textarea>
             <br />
-            <button class="default-btn standard-btn" id="save-reasons">Save Reasons</button>
+            <button class="default-btn standard-btn" id="save-reasons">Continue</button>
         </div>
 
         <div class="tab-content" data-tab="social">
             YouTube video:
             <br /><br />
-            <input type="text" id="campaign-social-video" class="default-input standard-input" style="width: 400px;" placeholder="http://youtube.com/example..." value="" />
+            <input type="text" id="campaign-social-video" class="default-input standard-input" style="width: 400px;" placeholder="http://youtube.com/example..." value="@(ViewBag.YTLink)" />
             <br/>
             Facebook page/event link:
             <br /><br />
-            <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..." value="" />
+            <input type="text" id="campaign-social" class="default-input standard-input" style="width: 400px;" placeholder="http://facebook.com/example..." value="@(ViewBag.SocialLink)" />
             <br />
             <button class="default-btn standard-btn" id="save-social">Save</button>
             <br />
@@ -200,7 +200,7 @@
 
         $("#save-social").click(function () {
             var fb = $("#campaign-social").val().trim().toLowerCase();
-            var yt = $("#campaign-social-video").val().trim().toLowerCase();
+            var yt = $("#campaign-social-video").val().trim();
             if (fb == $("#campaign-social").attr("placeholder")) {
                 fb = '';
             }

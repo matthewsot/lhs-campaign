@@ -37,6 +37,11 @@
             $("#username").change(function () {
                 var nm = $(this).val();
                 if (nm != "") {
+                    if (nm.indexOf(" ") > -1) {
+                        $("#usernm-err").text("Usernames should not contain spaces.");
+                    } else if ($("usernm-err").text() == "Usernames should not contain spaces.") {
+                        $("#usernm-err").hide();
+                    }
                     $.post("/API/Account/CheckName", {
                         username: nm
                     }, function (data) {

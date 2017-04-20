@@ -24,6 +24,9 @@ namespace LHSCampaign.Controllers
             var existingFacebook = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "FB EVENT")?.Link;
             ViewBag.SocialLink = string.IsNullOrWhiteSpace(existingFacebook) ? "" : existingFacebook;
 
+            var existingYoutube = candidate.ExternalLinks.FirstOrDefault(link => link.Label == "CAMPAIGN VIDEO")?.Link;
+            ViewBag.YTLink = string.IsNullOrWhiteSpace(existingYoutube) ? "" : existingYoutube;
+
             if (TempData.ContainsKey("Uploaded"))
             {
                 ViewBag.Uploaded = (bool)TempData["Uploaded"];
